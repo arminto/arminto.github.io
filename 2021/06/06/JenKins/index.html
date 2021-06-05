@@ -1,173 +1,397 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="zh-CN">
 <head>
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-  <title>JenKins | Hexo</title>
-  <meta name="description" content="" />
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="MobileOptimized" content="320" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" type="text/css" href="/css/component.css" />
-  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
-  <meta name="generator" content="Hexo">
-  <script src="http://static.duoshuo.com/embed.js"></script>
-  
-  
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="JenKins">
+<meta property="og:url" content="http://example.com/2021/06/06/JenKins/index.html">
+<meta property="og:site_name" content="LEMON">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7vv7weaqj30m308ymyv.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7vvg7grrj60ms0g7whk02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7vvkgypqj30mx0gdq60.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7vvt4e62j31530o0e81.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7vywjp4tj313l0dbafh.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7vz486idj30y007badx.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7vzjg8mmj30ie06wadv.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7vzs4h4dj30rk09pdi7.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7vzy8xfqj30oc0710t1.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w055o5xj30oe0acgm1.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w0avel7j30mu09zgm0.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w0gw4avj30mx0a50t9.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w0lw9gfj30lr07cdg7.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w0s87nwj30mz022mx1.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w0ynh18j30ml00zdfu.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w14aq1sj30mq01p3yq.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w19vv3hj30n10crgok.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w1hdbi2j30n601o0sl.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w1pyvbyj30mt02tmxr.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w1v394pj30n00fswhx.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w26ibhnj60m10ccn0r02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w2cbcmij60n603zq2y02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w2hz156j30mv0h6wie.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w2nnn8uj30mz01sglh.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w2vmtctj60mr00ywea02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w315vmzj30ow00uq2s.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w379m75j30x50fk0zj.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w3dvznzj30zw0jmjt7.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w3izpebj30r50g1aab.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w3pzu1nj30zw0pcac6.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w3ust5mj310f0pcgnh.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w3zdwccj30zx0pc40r.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w46e5ksj30v60kagmz.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w4b3htuj30v60aegn3.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w4eu6hvj310c0m9abg.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w4ijac3j310f0mbac4.jpg">
+<meta property="og:image" content="http://example.com/2021/06/06/JenKins/GitLab%20+%20Jenkins%20+%20Sonar%20Qube.assets/image-20200520151538386.png">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w4nmahfj30oa03gglq.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w4ybekxj30v60a7zky.jpg">
+<meta property="og:image" content="http://example.com/2021/06/06/JenKins/GitLab%20+%20Jenkins%20+%20Sonar%20Qube.assets/image-20200520152258943.png">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w5bburej30v60j6taw.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w5ewlldj310f0jp405.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w5j109qj30v60iitaf.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w5nb5n2j30v606pmxo.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w5r00urj310f0drwfo.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w60ls62j30ri0c1wfb.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w6724phj60sx0i2dh802.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w6ehya8j30p80gmmx7.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w6mdkdvj30qk03c3yk.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w6rp65rj30p80c30u5.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w6wpgn7j30qu046wer.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w7293p1j30fe09hq3u.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w7acrn5j30pu0b9t9j.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w7gg6q8j30pu0bgwf9.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w7nh2ojj310z0hgabh.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w7rpppzj311y0amwex.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w7wp1u3j30my05atas.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w823n3ej30vo0auq3p.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w86o34mj30zb0m5mye.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w8bsvatj315q0lltat.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w8fy6rnj30tr07rjrr.jpg">
+<meta property="og:image" content="http://example.com/2021/06/06/JenKins/GitLab%20+%20Jenkins%20+%20Sonar%20Qube.assets/image-20200520164838332.png">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w8tqzznj30qr078aa1.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w91kjsej60un0akaaa02.jpg">
+<meta property="og:image" content="http://example.com/2021/06/06/JenKins/GitLab%20+%20Jenkins%20+%20Sonar%20Qube.assets/image-20200520165404742.png">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w99hpx5j30zn05jt8s.jpg">
+<meta property="og:image" content="http://example.com/2021/06/06/JenKins/GitLab%20+%20Jenkins%20+%20Sonar%20Qube.assets/image-20200505160239790.png">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w9f53ilj30yo01vt8i.jpg">
+<meta property="og:image" content="http://example.com/2021/06/06/JenKins/GitLab%20+%20Jenkins%20+%20Sonar%20Qube.assets/image-20200520165542652.png">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w9kqzn7j30r008zglt.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w9umg1fj30sh08p0t6.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7w9y7t5mj30yw0h13zq.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wa69ny7j30pe01bmwx.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wadp3h1j30vb05bjrr.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7waspon7j30qo0a175f.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wawzffoj30zk0b2q39.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wb75mrqj30pw0cbt9f.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wbg3lepj30x20fb0to.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wbo1y5vj30ri06zdga.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wbv5vcsj30pw0kbwfg.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wc3kn9bj30zn0cg750.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wc96s6rj30qy0jet9d.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wcnv69wj30a40eh74c.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wd6e4k7j30a90ejjrg.jpg">
+<meta property="og:image" content="http://example.com/2021/06/06/JenKins/GitLab%20+%20Jenkins%20+%20Sonar%20Qube.assets/image-20200520171340537.png">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wdly1sij312c0g63zo.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wdsdyikj30qo09zq3n.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7we1ebfaj315r0dw0tt.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7web7kmfj30zn062jrm.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7weejxbpj30z10hvta6.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wenapjcj30s201bq2p.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wesj1k6j30gv07x0tc.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7weyyzg5j30wi087dg6.jpg">
+<meta property="og:image" content="http://example.com/2021/06/06/JenKins/GitLab%20+%20Jenkins%20+%20Sonar%20Qube.assets/image-20200520175513606.png">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wf470x6j30yv08u0tm.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wf75k9dj612u08ht9f02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wfcylltj30pm07lq32.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wfiqzmdj315r0k5gnm.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wfqpmopj30ri08laa8.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wfxlu80j30rf0htmy5.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wg3d0u8j315r0kb40m.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wg66lj4j315r0kb40m.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wgcmda7j30z30940sv.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wgjq5psj30yb0dlgm0.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wgpt30pj315r0jtdi9.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wgva9g6j30po05qgly.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wh0ikuij30z30ob3ze.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7whbzlt1j30qb0l4q44.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7whnmsbvj314t08xdgk.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7whxy735j30rj090q37.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wi40347j314t0nw777.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wiad184j30x009xaae.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wifozu1j314t0b90to.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wik8trhj30y50h00tf.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wiq00akj30x70ej74t.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wivgf3bj30q309vjs3.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wj5gf13j314t08o750.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wjajvzkj30pd0ju0tz.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wjiczujj30oe04daa4.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wjowd86j30oe03xmx6.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wjw2d2pj30qm07caac.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wk8dfj0j30ri0npgmm.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wkfp027j30ri0odmz6.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wko5yn1j30ri0ob74q.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wkwzcf7j30ri0oct9g.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wl6eaocj30ri09wgm0.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wlbzuvjj60vp06idgl02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wlmvxgvj30um0na3z2.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wlvpc4mj30po0e4mxj.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wm3okwvj30v80ds0uf.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wm7acnzj30vp0aamxp.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wmddkzzj30ny063dfu.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wmmz3ckj30u90egq3d.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wmrlwv7j31160gn0u2.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wn5rpgzj31d00oenh3.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wngfg65j30u80m3tbx.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wnmejhwj30tz04rdfv.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wns3q76j30z50nqdhc.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wnwrj0sj30y40e9gsq.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wnzklkbj30vy0i40u3.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wo6z7ubj30sm0m5mzn.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7woct8rnj60sl0gfgm902.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wogdbu1j30te0783yz.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7woj4c18j30sn0mp0u6.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7worz5akj313c0lu0v5.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wovrd6kj30tj09674j.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wp2wr9kj313n0k5gnb.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wp74zkbj30sm0i6myb.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wpbaje8j60s002djre02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wphbqm9j313t0howg9.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wpoehy1j30tz0g3wfw.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wq1mqruj60qu0ijgn302.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wq91qa6j313t0ir40s.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wqe1wgjj30sf0mltbl.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wqiuz6dj30y80d6t9w.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wqrqpqxj30z20ao3zf.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wqv308bj30zp0akt9m.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wqydqqgj313s0q91kx.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wr4spf9j30ux0ik0un.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wradm4yj30rz0i73yy.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wrktsraj313t04bglo.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wrpf7g3j30ss0hdtah.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wrw3c3fj30pd0b10tf.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7ws6hj45j30sf0bvq43.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wsalqr0j313t0pfnpb.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wshh486j30we0gtmz0.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wslshm1j30sd0obabo.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wst8oioj30ma0bvdge.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wt0qol4j30ma0blmxt.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wt5zaatj30sm0o9t9y.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wtecmnyj30sf0dtwfn.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wthhnflj60sf0b1wfi02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wtkvveyj313t0kde2o.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wtpwwoqj30uh09yq4d.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wtsu67ij30th088t9t.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wtw47k3j30vj088ab6.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wtzqubmj30sf0dymy5.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wuadd2vj30q00auglx.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wuh8f1sj30w506jmya.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wukgpytj30tk04yq3e.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wuo6tr8j30u904wwey.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wusus6nj30s60o4myk.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wuzh3euj30x10hxjtt.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wv443abj30sf0m2tas.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wv7w5nvj30sf0e53zf.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wveu3huj30sf0luq4r.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wvs4yqtj30sf0f00tu.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wvvpqhaj30sf0f6t9v.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wvyxmsbj30sf0ftq46.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7ww38fy0j60u306kjs602.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7ww6x7b6j30th06mmxy.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wwb57d6j60sf0flwfi02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wwed4lhj60sf0a0gly02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wwi67i9j30tn04ywex.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wwlzzikj30tn04z3yy.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wwsxypdj313t052jri.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wwwr0i4j313t0hy40s.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wx4ormhj313c0c10u1.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wx46jl9j313t0c4ac7.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wx9v2i6j313c0no40s.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wxevzwrj60or01fdfm02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wxlgnnsj61050nkq4x02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wxpspj5j314b0b875d.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7wxve23zj30qu04rq2x.jpg">
+<meta property="article:published_time" content="2021-06-05T17:04:26.000Z">
+<meta property="article:modified_time" content="2021-06-05T17:44:34.775Z">
+<meta property="article:author" content="Armin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7vv7weaqj30m308ymyv.jpg">
+
+<link rel="canonical" href="http://example.com/2021/06/06/JenKins/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>JenKins | LEMON</title>
   
 
-  
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
 </head>
-<body>
-<div class="container">
-    <div class="mp-pusher" id="mp-pusher">
-        <i id="scroll-up" class="fa fa-angle-up"></i>
-        <nav id="mp-menu" class="mp-menu">
-            <div class="mp-level">
-                <a data-pjax class="back-home" style="font-size: 20px" href="/"><h2 ><i class="fa fa-home"></i>
-                        Home</h2></a>
-                <ul class="first-level">
-                    <li>
-                        <a class="fa fa-archive" href="#"><i class="fa fa-angle-left">
-                            </i>&nbsp;&nbsp;Archive</a>
-                        <div class="mp-level page-list">
-                            <h2 ><i class="fa fa-archive"></i>
-                                Archive</h2>
-                            <a class="mp-back" href="#">back</a>
-                            <form id="search-form" action="">
-                                <input type="text" class="search search-archive" placeholder="Search.."/>
-                            </form>
-                            <ul>
-                                <div class="mp-scroll">
-                                
-                                <li class="search-archive-li mp-pjax">
-                                    <a href="/2021/06/06/JenKins/">JenKins</a>
-                                </li>
-                                
-                                <li class="search-archive-li mp-pjax">
-                                    <a href="/2021/06/06/MySQL/">MySQL</a>
-                                </li>
-                                
-                                <li class="search-archive-li mp-pjax">
-                                    <a href="/2021/06/06/Kubernetes/">Kubernetes</a>
-                                </li>
-                                
-                                <li class="search-archive-li mp-pjax">
-                                    <a href="/2021/06/06/Nginx/">Nginx</a>
-                                </li>
-                                
-                                </div>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="fa fa-copy" href="#"><i class="fa fa-angle-left">
-                            </i>&nbsp;&nbsp;Categories</a>
 
-                        <div class="mp-level page-list">
-                            <h2 ><i class="fa fa-copy"></i>
-                                Categories</h2>
-                            <a class="mp-back" href="#">back</a>
-                            <form id="search-form" action="">
-                                <input type="text" class="search search-category" placeholder="Search.."/>
-                            </form>
-                            <ul>
-                                <div class="mp-scroll">
-                                
-                                </div>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="fa fa-tags" href="#"><i class="fa fa-angle-left">
-                            </i>&nbsp;&nbsp;Tags</a>
-                        <div class="mp-level page-list">
-                            <h2 ><i class="fa fa-tags"></i>
-                                Tags</h2>
-                            <a class="mp-back" href="#">back</a>
-                            <form id="search-form" action="">
-                                <input type="text" class="search search-tag" placeholder="Search.."/>
-                            </form>
-                            <ul>
-                                <div class="mp-scroll">
-                                
-                                </div>
-                            </ul>
-                        </div>
-                    </li>
-                    
-                    <li class="mp-pjax"><a class="fa fa-user" href="/about">&nbsp;&nbsp;&nbsp;About me</a></li>
-                    <li><a class="fa fa-github" href="#">&nbsp;&nbsp;&nbsp;Github</a></li>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
 
-                </ul>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
 
-            </div>
-        </nav>
-        <div id="pjax">
-            <div class="pjax-hidden" style="display: none">
-                
-                    <a  data-pjax href="/2021/06/06/JenKins/">JenKins</a>
-                
-                    <a  data-pjax href="/2021/06/06/MySQL/">MySQL</a>
-                
-                    <a  data-pjax href="/2021/06/06/Kubernetes/">Kubernetes</a>
-                
-                    <a  data-pjax href="/2021/06/06/Nginx/">Nginx</a>
-                
-                
-                
-                <a data-pjax class="fa fa-user" href="/about">&nbsp;&nbsp;&nbsp;About me</a>
-            </div>
-            <nav class="nexus">
-                <li  style="border-left: 1px solid #c6d0da;">
-                    <a id="trigger" href="#"><i class="fa fa-bars"></i></a>
-                </li>
-                <li ><a id="nexus-back" data-pjax href="/">Hexo</a></li>
-                
-                <div id="nav-container">
-                    <div class="post-navbar" style="line-height: 63px;display:none">
-                        <li id="navbar-title"><a href="#">JenKins</a></li>
-                        <li id="navbar-toc" style="border-left: none">
-                            <a style="padding-right: 15px">
-                                <span id="toc-content" >Introduction</span><i class="fa fa-chevron-down" ></i>
-                            </a>
-                            <div class="hidden-box">
-                                <ul id="toc"></ul>
-                            </div>
-                        </li>
-                    </div>
-                </div>
-                
-            </nav>
+  <div class="site-meta">
 
-            <div class="scroller">
-            <div class="scroller-inner">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LEMON</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">死记性不如烂笔头</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-<!-- -->
-<!--<body class="post-template">-->
-<!---->
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
   
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/06/JenKins/">
 
-<main class="content" role="main">
-    <article class="post" >
-    <span class="post-meta">
-                  <div class="tag-tile">
-                      
-                  </div>
-                <h1 class="post-title" style="margin: 14px 0;color:#50585D">JenKins</h1>
-
-                    <div class="post-meta">
-                        Post on<span class="fa fa-clock-o"></span>
-                        <time datetime="2021-06-05T17:04:26.000Z"
-                              itemprop="datePublished">2021-06-06</time>
-                    </div>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Armin">
+      <meta itemprop="description" content="记录生活中的点点滴滴">
     </span>
 
-        <section class="post-content">
-            <!--toc-->
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LEMON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JenKins
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-06-06 01:04:26 / 修改时间：01:44:34" itemprop="dateCreated datePublished" datetime="2021-06-06T01:04:26+08:00">2021-06-06</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+        <!--toc-->
 <span id="more"></span>
 
 <h1 id="GitLab-Jenkins-基本过程"><a href="#GitLab-Jenkins-基本过程" class="headerlink" title="GitLab + Jenkins 基本过程"></a>GitLab + Jenkins 基本过程</h1><h2 id="一、持续集成、持续交付、持续部署"><a href="#一、持续集成、持续交付、持续部署" class="headerlink" title="一、持续集成、持续交付、持续部署"></a>一、持续集成、持续交付、持续部署</h2><h3 id="1-概述："><a href="#1-概述：" class="headerlink" title="1. 概述："></a>1. 概述：</h3><ul>
@@ -1204,71 +1428,181 @@
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr7wxve23zj30qu04rq2x.jpg" alt="image-20200523105432256"></p>
 <p>==以上就是手动部署 java 代码的流程==</p>
 <h3 id="3-jenkins-自动化部署-java-项目至web集群"><a href="#3-jenkins-自动化部署-java-项目至web集群" class="headerlink" title="3. jenkins 自动化部署 java 项目至web集群"></a>3. jenkins 自动化部署 java 项目至web集群</h3>
-        </section>
-        <hr/>
-        <nav class="pagination" style="width:auto" role="pagination">
-            
-            <a style="cursor:default" class="newer-posts" href="#">This is the First Post</a>
-            
-            <a class="share-button" data-original-title title>Share this Post</a>
-            
-            <a data-pjax class="older-posts" href="/2021/06/06/MySQL/">Next Post →</a>
-            
-        </nav>
-        <br/>
-        <br/>
-        <section id="comment">
-            <div id="comment-box"></div>
-        </section>
+    </div>
 
-
-    </article>
-</main>
-
-
-  
-<footer class="site-footer">
     
-    <div class="inner">
-        <section class="copyright"><a href="/"></a> &copy; Hexo 2014</section>
-        <section class="poweredby">Published with <a target="_blank" href="http://hexo.io/">Hexo   </a> and Theme by <a target="_blank" href="https://github.com/yuche/hexo-theme-kael">Kael</a></section>
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/06/MySQL/" rel="prev" title="MySQL">
+      <i class="fa fa-chevron-left"></i> MySQL
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-</footer>
-</div>
-</div><!-- /scroller -->
-
-</div><!-- /pusher -->
-</div><!-- /container -->
-</div>
-
-<!-- Easter eggs -->
-
-<div class="egg animated">
-    <a id="close-button" href="#">X</a>
-    <div class="block">
-        <div class="loading">
-            <span class="ball1"></span>
-            <span class="ball2"></span>
-        </div>
-    </div>
-</div>
+      </footer>
+    
+  </article>
   
-<script src="//cdn.staticfile.org/jquery/1.11.0/jquery.min.js"></script>
+  
+  
+
+
+
+          </div>
+          
+
 <script>
-    if (!window.jQuery) {
-        var script = document.createElement('script');
-        script.src = "/js/jquery.min.js";
-        document.body.appendChild(script);
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
     }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
 </script>
-<script type="text/javascript" src="/js/lib.js"></script>
-<script type="text/javascript" src="/js/main.js"></script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GitLab-Jenkins-%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">GitLab + Jenkins 基本过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E3%80%81%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E3%80%81%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2"><span class="nav-number">1.1.</span> <span class="nav-text">一、持续集成、持续交付、持续部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0%EF%BC%9A"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 概述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-CI"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 持续集成(CI)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98-CD"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. 持续交付(CD)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2%EF%BC%88CD%EF%BC%89"><span class="nav-number">1.1.4.</span> <span class="nav-text">4. 持续部署（CD）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E9%9B%86%E6%88%90-amp-%E4%BA%A4%E4%BB%98%E8%BD%AF%E4%BB%B6"><span class="nav-number">1.1.5.</span> <span class="nav-text">5. 集成 &amp; 交付软件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="nav-number">1.2.</span> <span class="nav-text">二、Git版本控制器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Git%E6%9E%B6%E6%9E%84%E5%9B%BE"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. Git架构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%9B%9B%E4%B8%AA%E5%8C%BA%E5%9F%9F%E5%92%8C%E4%BA%94%E7%A7%8D%E7%8A%B6%E6%80%81"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 四个区域和五种状态</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E5%9B%9B%E4%B8%AA%E5%8C%BA%E5%9F%9F"><span class="nav-number">1.2.2.0.1.</span> <span class="nav-text">1. 四个区域</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E4%BA%94%E7%A7%8D%E7%8A%B6%E6%80%81"><span class="nav-number">1.2.2.0.2.</span> <span class="nav-text">2. 五种状态</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%85git"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. 安装git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%B8%B8%E8%A7%81%E7%9A%84-Git-%E5%91%BD%E4%BB%A4%EF%BC%9A"><span class="nav-number">1.2.4.</span> <span class="nav-text">4. 常见的 Git 命令：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E9%85%8D%E7%BD%AEgit"><span class="nav-number">1.2.5.</span> <span class="nav-text">5. 配置git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E6%A3%80%E6%9F%A5%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="nav-number">1.2.6.</span> <span class="nav-text">6. 检查配置信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%A1%88%E4%BE%8B"><span class="nav-number">1.2.7.</span> <span class="nav-text">7. 基本使用案例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%80%EF%BC%89git%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E7%9A%84%E6%8F%90%E4%BA%A4%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%EF%BC%9F"><span class="nav-number">1.2.7.0.1.</span> <span class="nav-text">实战（一）git如何快速的提交目录文件至本地仓库？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E6%88%98%EF%BC%88%E4%BA%8C%EF%BC%89git-%E5%A6%82%E4%BD%95%E5%B0%86%E6%96%87%E4%BB%B6%E6%94%B9%E5%90%8D%E5%B9%B6%E9%87%8D%E6%96%B0%E6%8F%90%E4%BA%A4%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%EF%BC%9F"><span class="nav-number">1.2.7.0.2.</span> <span class="nav-text">实战（二）git 如何将文件改名并重新提交到本地仓库？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%89%EF%BC%89%E5%A6%82%E4%BD%95%E6%AF%94%E5%AF%B9-%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E3%80%81%E6%9A%82%E5%AD%98%E5%8C%BA%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E3%80%81%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E4%B9%8B%E9%97%B4%E7%9A%84%E5%B7%AE%E5%BD%B9%EF%BC%9F"><span class="nav-number">1.2.7.0.3.</span> <span class="nav-text">实战（三）如何比对 工作目录文件内容、暂存区文件内容、本地仓库文件内容之间的差役？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E6%88%98%EF%BC%88%E5%9B%9B%EF%BC%89%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3git-commit-%E6%8F%90%E4%BA%A4%E6%93%8D%E4%BD%9C%EF%BC%9F"><span class="nav-number">1.2.7.0.4.</span> <span class="nav-text">实战（四）如何理解git  commit 提交操作？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E6%88%98%EF%BC%88%E4%BA%94%EF%BC%89git-%E4%BF%9D%E5%AD%98%E4%BA%86%E7%8A%B6%E6%80%81%E5%90%8E%EF%BC%8C%E6%83%B3%E5%9B%9E%E9%80%80%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="nav-number">1.2.7.0.5.</span> <span class="nav-text">实战（五）git 保存了状态后，想回退怎么办？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E6%88%98%EF%BC%88%E5%85%AD%EF%BC%89%E5%9B%9E%E6%BB%9A%E7%89%88%E6%9C%AC%EF%BC%8C%E5%9B%9E%E6%BB%9A%E4%B9%8B%E5%89%8D%E7%9A%84%E7%89%88%E6%9C%AC-%E5%92%8C-%E5%9B%9E%E6%BB%9A%E4%B9%8B%E5%90%8E%E7%9A%84%E7%89%88%E6%9C%AC"><span class="nav-number">1.2.7.0.6.</span> <span class="nav-text">实战（六）回滚版本，回滚之前的版本 和 回滚之后的版本</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Git-%E6%A0%87%E7%AD%BE%E7%9A%84-%E5%88%9B%E5%BB%BA-%E5%88%A0%E9%99%A4"><span class="nav-number">1.2.8.</span> <span class="nav-text">8. Git 标签的 创建 删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-Git-%E5%88%86%E6%94%AF"><span class="nav-number">1.2.9.</span> <span class="nav-text">9. Git 分支</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E6%A6%82%E5%BF%B5"><span class="nav-number">1.2.9.0.1.</span> <span class="nav-text">1. 概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E5%88%9B%E5%BB%BA%E4%B8%8E%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.9.0.2.</span> <span class="nav-text">2. 创建与合并分支原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E5%B8%B8%E8%A7%81%E7%9A%84%E5%88%86%E6%94%AF%E5%91%BD%E4%BB%A4"><span class="nav-number">1.2.9.0.3.</span> <span class="nav-text">3. 常见的分支命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E5%88%86%E6%94%AF%E7%9A%84%E4%BD%BF%E7%94%A8%E6%BC%94%E7%A4%BA"><span class="nav-number">1.2.9.0.4.</span> <span class="nav-text">4. 分支的使用演示</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-%E5%88%86%E6%94%AF%E5%86%B2%E7%AA%81"><span class="nav-number">1.2.9.0.5.</span> <span class="nav-text">5. 分支冲突</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-Git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93-%E2%80%93-github"><span class="nav-number">1.2.10.</span> <span class="nav-text">10. Git远程仓库 – github</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-github-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.2.10.0.1.</span> <span class="nav-text">1.  github 是什么</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E7%99%BB%E9%99%86-github"><span class="nav-number">1.2.10.0.2.</span> <span class="nav-text">2. 登陆 github</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E5%88%9B%E5%BB%BA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">1.2.10.0.3.</span> <span class="nav-text">3. 创建远程仓库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E4%BD%BF%E7%94%A8-github"><span class="nav-number">1.2.10.0.4.</span> <span class="nav-text">4. 使用 github</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-git-%E6%8E%A8%E9%80%81%E4%BB%A3%E7%A0%81%E7%9A%84%E6%95%B4%E4%BD%93%E8%BF%87%E7%A8%8B"><span class="nav-number">1.2.11.</span> <span class="nav-text">11. git 推送代码的整体过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81Gitlab-%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93"><span class="nav-number">1.3.</span> <span class="nav-text">三、Gitlab 代码仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%AE%80%E4%BB%8B%E6%A6%82%E8%BF%B0"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. 简介概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BB%80%E4%B9%88%E6%98%AF-Gitlab"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. 什么是 Gitlab</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-GitLab-%E4%B8%8E-GitHub-%E7%9A%84%E4%B8%8D%E5%90%8C"><span class="nav-number">1.3.3.</span> <span class="nav-text">3. GitLab 与 GitHub 的不同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Gitlab-%E7%9A%84%E4%BC%98%E5%8A%BF%E5%92%8C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.3.4.</span> <span class="nav-text">4. Gitlab 的优势和应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-GitLab-%E4%B8%BB%E8%A6%81%E6%9C%8D%E5%8A%A1%E6%9E%84%E6%88%90"><span class="nav-number">1.3.5.</span> <span class="nav-text">5. GitLab 主要服务构成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-GitLab-%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.3.6.</span> <span class="nav-text">6. GitLab 的工作流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E5%AE%89%E8%A3%85-Gitlab-%E4%BB%93%E5%BA%93%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.3.7.</span> <span class="nav-text">7. 安装 Gitlab 仓库系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0hosts%E8%A7%A3%E6%9E%90%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.7.1.</span> <span class="nav-text">添加hosts解析文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Gitlab-%E4%BE%9D%E8%B5%96"><span class="nav-number">1.3.7.2.</span> <span class="nav-text">安装 Gitlab 依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Gitlab-12-0-3-%E7%89%88%E6%9C%AC"><span class="nav-number">1.3.7.3.</span> <span class="nav-text">安装 Gitlab-12.0.3 版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Gitlab-%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4"><span class="nav-number">1.3.7.4.</span> <span class="nav-text">Gitlab 管理命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B9%B6%E5%90%AF%E5%8A%A8-Gitlab"><span class="nav-number">1.3.7.5.</span> <span class="nav-text">修改配置文件并启动 Gitlab</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%89%E5%8C%96-Gitlab"><span class="nav-number">1.3.7.6.</span> <span class="nav-text">汉化 Gitlab</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B5%8B%E8%AF%95"><span class="nav-number">1.3.7.7.</span> <span class="nav-text">访问浏览器测试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Gitlab-%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="nav-number">1.3.8.</span> <span class="nav-text">8. Gitlab 权限管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAGroup%EF%BC%8CUser%EF%BC%8CProject"><span class="nav-number">1.3.8.1.</span> <span class="nav-text">创建Group，User，Project</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BB%84%EF%BC%8C%E7%BB%84%E5%90%8D%E4%B8%BAjava"><span class="nav-number">1.3.8.2.</span> <span class="nav-text">创建一个组，组名为java</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAPM%E7%9A%84%E7%94%A8%E6%88%B7%E4%BD%9C%E4%B8%BA%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E8%80%85%E5%B9%B6%E5%8A%A0%E5%85%A5%E5%88%B0java%E7%BB%84%E5%86%85"><span class="nav-number">1.3.8.3.</span> <span class="nav-text">创建一个PM的用户作为项目管理者并加入到java组内</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86pm%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E5%8A%A0%E5%85%A5%E5%88%B0java%E7%BB%84%E5%86%85"><span class="nav-number">1.3.8.4.</span> <span class="nav-text">将pm管理用户加入到java组内</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8PM%E7%94%A8%E6%88%B7%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AEapp1"><span class="nav-number">1.3.8.5.</span> <span class="nav-text">用PM用户创建一个项目app1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8-gitlab-%E7%99%BB%E9%99%86%E9%A1%B5%E9%9D%A2%E4%B8%8B%E5%88%9B%E5%BB%BA-dev1-dev2-%E7%94%A8%E6%88%B7%EF%BC%8C%E5%B9%B6%E4%BD%9C%E4%B8%BA%E5%BC%80%E5%8F%91%E8%80%85%E5%8A%A0%E5%85%A5%E5%88%B0-app1-%E9%A1%B9%E7%9B%AE%E4%B8%AD"><span class="nav-number">1.3.8.6.</span> <span class="nav-text">在 gitlab 登陆页面下创建 dev1 dev2 用户，并作为开发者加入到 app1 项目中</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-gitlab-%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">1.3.9.</span> <span class="nav-text">9. gitlab 的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86-dev1-%E6%8C%81%E6%9C%89%E4%BA%BA%E7%9A%84%E5%85%AC%E9%92%A5%E6%94%BE%E5%88%B0-dev1-%E8%B4%A6%E5%8F%B7%E4%B8%8B"><span class="nav-number">1.3.9.1.</span> <span class="nav-text">将 dev1 持有人的公钥放到 dev1 账号下</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A5ssh%E5%8D%8F%E8%AE%AE%E6%8E%A8%E9%80%81%E4%BB%A3%E7%A0%81%E8%87%B3%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">1.3.9.2.</span> <span class="nav-text">以ssh协议推送代码至远程仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E9%9D%A2%E4%BB%A5PM%E7%94%A8%E6%88%B7%E8%BF%9B%E8%A1%8C%E5%88%9B%E5%BB%BA%E5%BC%80%E5%8F%91%E8%AE%A1%E5%88%92%E5%88%86%E9%85%8D%E7%BB%99dev2"><span class="nav-number">1.3.9.3.</span> <span class="nav-text">下面以PM用户进行创建开发计划分配给dev2</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA-%E5%AE%98%E7%BD%91-V1-0-%E7%89%88%E6%9C%AC%EF%BC%8C%E5%8C%85%E5%90%AB%E9%A6%96%E9%A1%B5%E5%92%8C%E6%96%B0%E9%97%BB"><span class="nav-number">1.3.9.3.1.</span> <span class="nav-text">开发一个 官网 V1.0 版本，包含首页和新闻</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8dev2%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%9F%A5%E7%9C%8B%EF%BC%8C%E4%BC%9A%E6%9C%89%E4%BB%BB%E5%8A%A1%E6%8F%90%E7%A4%BA"><span class="nav-number">1.3.9.3.2.</span> <span class="nav-text">使用dev2用户登录查看，会有任务提示</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#dev2-%E5%BC%80%E5%8F%91%E8%80%85%E6%94%B6%E5%88%B0%E4%BB%BB%E5%8A%A1%EF%BC%8C%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91"><span class="nav-number">1.3.9.3.3.</span> <span class="nav-text">dev2 开发者收到任务，进行开发</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B0%86%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%85%AC%E9%92%A5%EF%BC%88id-rsa-pub%EF%BC%89%E6%94%BE%E8%BF%9B-dev2-%E8%B4%A6%E6%88%B7%E4%B8%AD"><span class="nav-number">1.3.9.3.4.</span> <span class="nav-text">将客户端公钥（id_rsa.pub）放进 dev2 账户中</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91"><span class="nav-number">1.3.9.3.5.</span> <span class="nav-text">进行开发</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9B%9E%E5%88%B0-gitlab-%E4%B8%8A%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%E6%9C%89%E5%88%9A%E6%89%8D%E5%88%9B%E5%BB%BA%E7%9A%84%E5%88%86%E6%94%AF%EF%BC%8C%E7%82%B9%E5%87%BB%E2%80%9DMerge-request%E2%80%9D%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF%E8%AF%B7%E6%B1%82%EF%BC%8C%E4%B9%8B%E5%90%8EPM%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E5%A4%84%E7%90%86%E5%90%88%E5%B9%B6%E8%AF%B7%E6%B1%82%E3%80%82%E6%AD%A4%E6%97%B6%EF%BC%8C%E4%B8%80%E4%B8%AA%E5%8A%9F%E8%83%BD%E7%9A%84%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B%E5%B0%B1%E5%AE%8C%E6%88%90%E3%80%82"><span class="nav-number">1.3.9.3.6.</span> <span class="nav-text">回到 gitlab 上可以看到有刚才创建的分支，点击”Merge request”合并分支请求，之后PM用户登录处理合并请求。此时，一个功能的开发流程就完成。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%99%BB%E9%99%86PM%E7%94%A8%E6%88%B7%E5%90%88%E5%B9%B6%E8%AF%B7%E6%B1%82"><span class="nav-number">1.3.9.3.7.</span> <span class="nav-text">登陆PM用户合并请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E5%88%86%E6%94%AF%E6%98%AF%E5%90%A6%E5%90%88%E5%B9%B6"><span class="nav-number">1.3.9.3.8.</span> <span class="nav-text">验证分支是否合并</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-Gitlab-%E7%9A%84%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D"><span class="nav-number">1.3.10.</span> <span class="nav-text">10. Gitlab 的备份和恢复</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%A4%87%E4%BB%BD%E7%9B%AE%E5%BD%95%EF%BC%8C%E5%B9%B6%E6%8E%88%E6%9D%83"><span class="nav-number">1.3.10.0.1.</span> <span class="nav-text">创建备份目录，并授权</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-gitlab-%E9%85%8D%E7%BD%AE"><span class="nav-number">1.3.10.0.2.</span> <span class="nav-text">修改 gitlab 配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%87%E4%BB%BD"><span class="nav-number">1.3.10.0.3.</span> <span class="nav-text">备份</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-%E6%95%B4%E4%BD%93%E6%80%BB%E7%BB%93"><span class="nav-number">1.3.11.</span> <span class="nav-text">11. 整体总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%83%A8%E7%BD%B2-jenkins"><span class="nav-number">1.4.</span> <span class="nav-text">四、部署 jenkins</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85-JDK-%E5%92%8C-Maven"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">1. 安装 JDK 和 Maven</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%B8%8B%E8%BD%BD-jenkins-rpm-%E5%8C%85%E5%B9%B6%E5%AE%89%E8%A3%85"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">2. 下载 jenkins-rpm 包并安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-jenkins-%E7%9A%84%E7%9B%AE%E5%BD%95%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.4.0.3.</span> <span class="nav-text">3. jenkins 的目录介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E8%B7%B3%E8%BF%87-jenkins-%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="nav-number">1.4.0.4.</span> <span class="nav-text">4. 跳过 jenkins 插件安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E6%9B%B4%E6%8D%A2jenkins%E6%8F%92%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%BA%90"><span class="nav-number">1.4.0.5.</span> <span class="nav-text">5. 更换jenkins插件下载源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85-jenkins-%E6%8F%92%E4%BB%B6"><span class="nav-number">1.4.0.6.</span> <span class="nav-text">6.离线安装 jenkins 插件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81Jenkins-%E9%9B%86%E6%88%90-Gitlab%EF%BC%88%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%EF%BC%89"><span class="nav-number">1.5.</span> <span class="nav-text">五、Jenkins 集成 Gitlab（持续集成）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%9C%A8-gitlab-%E4%B8%8A%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%B9%B6%E5%B0%86%E4%BB%A3%E7%A0%81%E6%8E%A8%E9%80%81%E4%B8%8A%E5%8E%BB"><span class="nav-number">1.5.0.1.</span> <span class="nav-text">1. 在 gitlab 上创建项目并将代码推送上去</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%B8%8B%E8%BD%BD%E9%9B%86%E6%88%90-gitlab-%E7%9A%84%E6%8F%92%E4%BB%B6"><span class="nav-number">1.5.0.2.</span> <span class="nav-text">2. 下载集成 gitlab 的插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%9C%A8-jenkins-%E9%87%8C%E9%85%8D%E7%BD%AE%E5%AE%9E%E7%8E%B0%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90"><span class="nav-number">1.5.0.3.</span> <span class="nav-text">3. 在 jenkins 里配置实现持续集成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E7%82%B9%E5%87%BB%E7%AB%8B%E5%8D%B3%E6%9E%84%E5%BB%BA"><span class="nav-number">1.5.0.4.</span> <span class="nav-text">4. 点击立即构建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E6%9E%84%E5%BB%BA%E6%88%90%E5%8A%9F%E5%90%8E%E7%82%B9%E5%87%BB-%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%BE%93%E5%87%BA-%E5%92%8C-%E5%B7%A5%E4%BD%9C%E5%8C%BA"><span class="nav-number">1.5.0.5.</span> <span class="nav-text">5. 构建成功后点击 控制台输出 和 工作区</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E6%90%AD%E5%BB%BAweb%E9%9B%86%E7%BE%A4"><span class="nav-number">1.6.</span> <span class="nav-text">六、搭建web集群</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%9C%A8%E8%BF%99%E4%B8%89%E5%8F%B0%E8%8A%82%E7%82%B9%E4%B8%8A%E9%83%BD%E5%AE%89%E8%A3%85nginx%EF%BC%88%E6%93%8D%E4%BD%9C%E7%9B%B8%E5%90%8C%EF%BC%89"><span class="nav-number">1.6.0.1.</span> <span class="nav-text">1. 在这三台节点上都安装nginx（操作相同）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E9%85%8D%E7%BD%AE-lb-%E4%B8%BB%E6%9C%BA"><span class="nav-number">1.6.0.2.</span> <span class="nav-text">2. 配置 lb 主机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E9%85%8D%E7%BD%AE-web01-%E4%B8%BB%E6%9C%BA"><span class="nav-number">1.6.0.3.</span> <span class="nav-text">3. 配置 web01 主机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E9%85%8D%E7%BD%AE-web02-%E4%B8%BB%E6%9C%BA"><span class="nav-number">1.6.0.4.</span> <span class="nav-text">4. 配置 web02 主机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E5%B0%86-jenkins-%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84%E4%BB%A3%E7%A0%81%E6%8B%B7%E8%B4%9D%E5%88%B0%E4%B8%A4%E5%8F%B0web%E8%8A%82%E7%82%B9%E4%B8%8A"><span class="nav-number">1.6.0.5.</span> <span class="nav-text">5. 将 jenkins 服务器上的代码拷贝到两台web节点上</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E6%9F%A5%E7%9C%8B%E5%B9%B6%E8%AE%BF%E9%97%AE-http-lb-lemon-com"><span class="nav-number">1.6.0.6.</span> <span class="nav-text">6. 查看并访问 http:&#x2F;&#x2F;lb.lemon.com&#x2F;</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E9%85%8D%E7%BD%AEfreestyle-monitor%E4%BB%BB%E5%8A%A1-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2"><span class="nav-number">1.7.</span> <span class="nav-text">七、配置freestyle-monitor任务 持续集成 + 持续部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%B0%86%E6%89%8B%E5%8A%A8%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81%E7%9A%84%E6%93%8D%E4%BD%9C%E7%BC%96%E5%86%99%E6%88%90shell%E8%84%9A%E6%9C%AC%EF%BC%8C%E5%9C%A8%E7%94%B1-jenkins-%E8%B0%83%E5%BA%A6%E5%B0%86%E5%85%B6%E4%BB%A3%E7%A0%81%E6%8E%A8%E9%80%81%E8%87%B3web%E9%9B%86%E7%BE%A4"><span class="nav-number">1.7.0.1.</span> <span class="nav-text">1. 将手动部署代码的操作编写成shell脚本，在由 jenkins 调度将其代码推送至web集群</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E9%85%8D%E7%BD%AE-freestyle-monitor-%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.7.0.2.</span> <span class="nav-text">2. 配置 freestyle-monitor 项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%9E%84%E5%BB%BA%E6%AD%A4%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.7.0.3.</span> <span class="nav-text">3. 构建此项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E6%A8%A1%E6%8B%9F%E5%BC%80%E5%8F%91%E6%9B%B4%E6%96%B0%E4%BB%A3%E7%A0%81%E6%8E%A8%E9%80%81%E8%87%B3%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">1.7.0.4.</span> <span class="nav-text">4. 模拟开发更新代码推送至远程仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-jenkins%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.7.0.5.</span> <span class="nav-text">5. jenkins构建项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E7%84%B6%E5%90%8E%E5%9C%A8%E8%AE%BF%E9%97%AE%E4%B8%80%E4%B8%8Blb-lemon-com"><span class="nav-number">1.7.0.6.</span> <span class="nav-text">6. 然后在访问一下lb.lemon.com</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%E6%9F%A5%E7%9C%8B%E5%AF%B9%E5%BA%94%E7%9A%84%E7%9B%AE%E5%BD%95"><span class="nav-number">1.7.0.7.</span> <span class="nav-text">7. 查看对应的目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%EF%BC%9A"><span class="nav-number">1.7.0.8.</span> <span class="nav-text">8. 注意事项：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-%E7%8E%B0%E5%9C%A8%E8%BF%99%E4%B8%AA%E9%A1%B9%E7%9B%AE%E7%9A%84%E9%85%8D%E7%BD%AE%E8%BF%98%E5%AD%98%E5%9C%A8%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98"><span class="nav-number">1.7.0.9.</span> <span class="nav-text">9. 现在这个项目的配置还存在一些问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-%E8%A7%A3%E5%86%B3%E4%B8%8A%E9%9D%A2%E4%B8%A4%E4%B8%AA%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.7.0.10.</span> <span class="nav-text">10. 解决上面两个存在的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-%E5%AE%9E%E7%8E%B0tag%E7%89%88%E6%9C%AC%E4%B8%8A%E7%BA%BF%E7%9A%84%E6%80%9D%E8%B7%AF"><span class="nav-number">1.7.0.11.</span> <span class="nav-text">12. 实现tag版本上线的思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-jenkins%E9%85%8D%E7%BD%AEtag%E7%89%88%E6%9C%AC%E7%9A%84%E9%83%A8%E7%BD%B2"><span class="nav-number">1.7.0.12.</span> <span class="nav-text">13. jenkins配置tag版本的部署</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-%E8%A7%A3%E5%86%B3%E9%A1%B9%E7%9B%AE%E9%87%8D%E5%A4%8D%E6%9E%84%E5%BB%BA-%E5%92%8C-%E6%97%A0%E6%B3%95%E7%B2%BE%E7%A1%AE%E5%9B%9E%E6%BB%9A-%E7%9A%84%E9%97%AE%E9%A2%98-%E5%8F%AF%E5%9C%A8%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E4%BD%BF%E7%94%A8"><span class="nav-number">1.7.0.13.</span> <span class="nav-text">14. 解决项目重复构建 和 无法精确回滚 的问题 (可在生产环境使用)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81GitLab-Jenkins-Sonar-Qube-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90"><span class="nav-number">1.8.</span> <span class="nav-text">八、GitLab + Jenkins + Sonar Qube 持续集成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-java%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E8%BF%B0"><span class="nav-number">1.8.1.</span> <span class="nav-text">1. java项目部署的基本概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF-java-%E9%A1%B9%E7%9B%AE%EF%BC%9F"><span class="nav-number">1.8.1.1.</span> <span class="nav-text">1. 什么是 java 项目？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88java%E9%A1%B9%E7%9B%AE%E9%9C%80%E8%A6%81Maven%E7%BC%96%E8%AF%91%EF%BC%9F"><span class="nav-number">1.8.1.2.</span> <span class="nav-text">2. 为什么java项目需要Maven编译？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-jenkins%E6%89%8B%E5%8A%A8%E9%83%A8%E7%BD%B2java%E9%A1%B9%E7%9B%AE%E8%87%B3web%E9%9B%86%E7%BE%A4"><span class="nav-number">1.8.2.</span> <span class="nav-text">2. jenkins手动部署java项目至web集群</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%90%AD%E5%BB%BANginx-Tomcat-MySQL-Sonar-Qube-%E9%9B%86%E7%BE%A4"><span class="nav-number">1.8.2.1.</span> <span class="nav-text">1. 搭建Nginx + Tomcat + MySQL + Sonar Qube 集群</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AAgitlab%E7%9A%84-hello-world-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93"><span class="nav-number">1.8.2.2.</span> <span class="nav-text">2. 新建一个gitlab的 hello world 项目仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E4%BD%BF%E7%94%A8git%E5%B0%86%E5%85%B6java%E4%BB%A3%E7%A0%81%E4%B8%8A%E4%BC%A0%E5%88%B0hello-world%E4%BB%93%E5%BA%93"><span class="nav-number">1.8.2.3.</span> <span class="nav-text">3. 使用git将其java代码上传到hello-world仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%9C%A8jenkins%E4%B8%8A%E6%8B%89%E5%8F%96gitlab%E4%BB%A3%E7%A0%81%E5%90%8E%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91%E6%88%90war%E5%8C%85"><span class="nav-number">1.8.2.4.</span> <span class="nav-text">4. 在jenkins上拉取gitlab代码后手动编译成war包</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-jenkins-%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2-java-%E9%A1%B9%E7%9B%AE%E8%87%B3web%E9%9B%86%E7%BE%A4"><span class="nav-number">1.8.3.</span> <span class="nav-text">3. jenkins 自动化部署 java 项目至web集群</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Armin</p>
+  <div class="site-description" itemprop="description">记录生活中的点点滴滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Armin</span>
+</div>
+
+        
 
 
 
 
 
 
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
 
 </body>
 </html>

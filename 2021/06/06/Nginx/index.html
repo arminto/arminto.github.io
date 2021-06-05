@@ -1,173 +1,241 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="zh-CN">
 <head>
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-  <title>Nginx | Hexo</title>
-  <meta name="description" content="" />
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="MobileOptimized" content="320" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" type="text/css" href="/css/component.css" />
-  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
-  <meta name="generator" content="Hexo">
-  <script src="http://static.duoshuo.com/embed.js"></script>
-  
-  
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Nginx">
+<meta property="og:url" content="http://example.com/2021/06/06/Nginx/index.html">
+<meta property="og:site_name" content="LEMON">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7shti58wj30s60gyjxt.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sib6vh9j30xc05adgj.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sifs8jij30xc05a0tw.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sijfogoj30xc05amxs.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7siu0d8dj30xc05amy8.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sj2bd5mj30xc05amyb.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sj8btgnj30xc05adgq.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sjfsm2tj310c0fsk1o.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sjj2cpcj316w0cltaq.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sjrtucsj61c90su4qt02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sm56u9ej30rb0koju4.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7smqjjvnj31540lfnbl.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7smwit7rj31890emwjm.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sn678zxj311e0lsdip.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sni7ry5j314f0p94by.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7so7k5uij31b10pee84.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sod9i5yj319o0qtkjo.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7soiwo8hj31340hejyb.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sop7go5j315y0odas7.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sozuqmoj30pc0fwq3r.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7spblndjj30u10csaek.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7spiu5oej30on0bdwgx.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7spqmr40j30qr0cn41u.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7spyv97xj30to05mglw.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sq2htlfj30ww0jjtb8.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sq6u6r6j30tu0ea3zu.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sv34f1oj61hc0sinph02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7svbstuxj313z0l44qs.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7svgvf0tj30t80820t3.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7svmwy6hj30pu03d74x.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7svvyiutj31aj0sdu10.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sw0ycd2j61au0rfqv802.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sw5uzz7g310c0c7gm9.gif">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7swahpqrj31610qp4gv.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7swidxvcj319a0e97bj.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7swmxm9gj316f0qj4qs.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7swuhc5wj61a80pue8402.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sx06ldjj30tn0lv7wj.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sy86vfej30u404l74g.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sy27w9hj30qh03kgls.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sxfyj9hj31hc0bbgnr.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7syhozhaj30z30bq0y4.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sypy5lmj30yd0aw0uo.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7syvdbxpj30pi03mmxs.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sz2mjkyj31hc0rw7m5.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7szkq003j31hc0rth41.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7szpo4npj31gf0s077e.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7szvbsb9j31gf0rx77c.jpg">
+<meta property="article:published_time" content="2021-06-05T16:09:25.000Z">
+<meta property="article:modified_time" content="2021-06-05T16:49:29.706Z">
+<meta property="article:author" content="Armin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7shti58wj30s60gyjxt.jpg">
+
+<link rel="canonical" href="http://example.com/2021/06/06/Nginx/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Nginx | LEMON</title>
   
 
-  
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
 </head>
-<body>
-<div class="container">
-    <div class="mp-pusher" id="mp-pusher">
-        <i id="scroll-up" class="fa fa-angle-up"></i>
-        <nav id="mp-menu" class="mp-menu">
-            <div class="mp-level">
-                <a data-pjax class="back-home" style="font-size: 20px" href="/"><h2 ><i class="fa fa-home"></i>
-                        Home</h2></a>
-                <ul class="first-level">
-                    <li>
-                        <a class="fa fa-archive" href="#"><i class="fa fa-angle-left">
-                            </i>&nbsp;&nbsp;Archive</a>
-                        <div class="mp-level page-list">
-                            <h2 ><i class="fa fa-archive"></i>
-                                Archive</h2>
-                            <a class="mp-back" href="#">back</a>
-                            <form id="search-form" action="">
-                                <input type="text" class="search search-archive" placeholder="Search.."/>
-                            </form>
-                            <ul>
-                                <div class="mp-scroll">
-                                
-                                <li class="search-archive-li mp-pjax">
-                                    <a href="/2021/06/06/JenKins/">JenKins</a>
-                                </li>
-                                
-                                <li class="search-archive-li mp-pjax">
-                                    <a href="/2021/06/06/MySQL/">MySQL</a>
-                                </li>
-                                
-                                <li class="search-archive-li mp-pjax">
-                                    <a href="/2021/06/06/Kubernetes/">Kubernetes</a>
-                                </li>
-                                
-                                <li class="search-archive-li mp-pjax">
-                                    <a href="/2021/06/06/Nginx/">Nginx</a>
-                                </li>
-                                
-                                </div>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="fa fa-copy" href="#"><i class="fa fa-angle-left">
-                            </i>&nbsp;&nbsp;Categories</a>
 
-                        <div class="mp-level page-list">
-                            <h2 ><i class="fa fa-copy"></i>
-                                Categories</h2>
-                            <a class="mp-back" href="#">back</a>
-                            <form id="search-form" action="">
-                                <input type="text" class="search search-category" placeholder="Search.."/>
-                            </form>
-                            <ul>
-                                <div class="mp-scroll">
-                                
-                                </div>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="fa fa-tags" href="#"><i class="fa fa-angle-left">
-                            </i>&nbsp;&nbsp;Tags</a>
-                        <div class="mp-level page-list">
-                            <h2 ><i class="fa fa-tags"></i>
-                                Tags</h2>
-                            <a class="mp-back" href="#">back</a>
-                            <form id="search-form" action="">
-                                <input type="text" class="search search-tag" placeholder="Search.."/>
-                            </form>
-                            <ul>
-                                <div class="mp-scroll">
-                                
-                                </div>
-                            </ul>
-                        </div>
-                    </li>
-                    
-                    <li class="mp-pjax"><a class="fa fa-user" href="/about">&nbsp;&nbsp;&nbsp;About me</a></li>
-                    <li><a class="fa fa-github" href="#">&nbsp;&nbsp;&nbsp;Github</a></li>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
 
-                </ul>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
 
-            </div>
-        </nav>
-        <div id="pjax">
-            <div class="pjax-hidden" style="display: none">
-                
-                    <a  data-pjax href="/2021/06/06/JenKins/">JenKins</a>
-                
-                    <a  data-pjax href="/2021/06/06/MySQL/">MySQL</a>
-                
-                    <a  data-pjax href="/2021/06/06/Kubernetes/">Kubernetes</a>
-                
-                    <a  data-pjax href="/2021/06/06/Nginx/">Nginx</a>
-                
-                
-                
-                <a data-pjax class="fa fa-user" href="/about">&nbsp;&nbsp;&nbsp;About me</a>
-            </div>
-            <nav class="nexus">
-                <li  style="border-left: 1px solid #c6d0da;">
-                    <a id="trigger" href="#"><i class="fa fa-bars"></i></a>
-                </li>
-                <li ><a id="nexus-back" data-pjax href="/">Hexo</a></li>
-                
-                <div id="nav-container">
-                    <div class="post-navbar" style="line-height: 63px;display:none">
-                        <li id="navbar-title"><a href="#">Nginx</a></li>
-                        <li id="navbar-toc" style="border-left: none">
-                            <a style="padding-right: 15px">
-                                <span id="toc-content" >Introduction</span><i class="fa fa-chevron-down" ></i>
-                            </a>
-                            <div class="hidden-box">
-                                <ul id="toc"></ul>
-                            </div>
-                        </li>
-                    </div>
-                </div>
-                
-            </nav>
+  <div class="site-meta">
 
-            <div class="scroller">
-            <div class="scroller-inner">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LEMON</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">死记性不如烂笔头</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-<!-- -->
-<!--<body class="post-template">-->
-<!---->
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
   
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/06/Nginx/">
 
-<main class="content" role="main">
-    <article class="post" >
-    <span class="post-meta">
-                  <div class="tag-tile">
-                      
-                  </div>
-                <h1 class="post-title" style="margin: 14px 0;color:#50585D">Nginx</h1>
-
-                    <div class="post-meta">
-                        Post on<span class="fa fa-clock-o"></span>
-                        <time datetime="2021-06-05T16:09:25.000Z"
-                              itemprop="datePublished">2021-06-06</time>
-                    </div>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Armin">
+      <meta itemprop="description" content="记录生活中的点点滴滴">
     </span>
 
-        <section class="post-content">
-            <!--toc-->
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LEMON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Nginx
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-06-06 00:09:25 / 修改时间：00:49:29" itemprop="dateCreated datePublished" datetime="2021-06-06T00:09:25+08:00">2021-06-06</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+        <!--toc-->
 <span id="more"></span>
 
 <h1 id="Web网站概念"><a href="#Web网站概念" class="headerlink" title="Web网站概念"></a>Web网站概念</h1><h2 id="1-Web网站常识"><a href="#1-Web网站常识" class="headerlink" title="1. Web网站常识"></a>1. Web网站常识</h2><ol>
@@ -964,7 +1032,7 @@
 <p><strong>模块：</strong>error_page，作用是根据客户端的访问网站的返回状态码，为其指定到特定的错误页面</p>
 </blockquote>
 <p>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error_page code [ code... ] [ = | =answer-code ] uri | @named_location </span><br></pre></td></tr></table></figure>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error_page <span class="keyword">code</span> [ <span class="keyword">code</span>... ] [ = | =answer-<span class="keyword">code</span> ] uri | @named_location </span><br></pre></td></tr></table></figure>
 
 <p><strong>简单示例：</strong></p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 编写错误页面</span><br><span class="line"><span class="attribute">echo</span> <span class="string">&#x27;client_4xx_error&#x27;</span> &gt; /www/test/400_error.html</span><br><span class="line">echo <span class="string">&#x27;client_5xx_error&#x27;</span> &gt; /www/test/500_error.html</span><br><span class="line"></span><br><span class="line">// 定义客户端错误页面</span><br><span class="line">error_page <span class="number">400</span> <span class="number">401</span> <span class="number">402</span> <span class="number">403</span> <span class="number">404</span> /400_error.html;</span><br><span class="line"><span class="attribute">location</span> /400_error.html &#123;</span><br><span class="line">  <span class="attribute">root</span> /www/test;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 定义服务端错误页面</span><br><span class="line"><span class="attribute">error_page</span> <span class="number">500</span> <span class="number">501</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span> /500_error.html;</span><br><span class="line"><span class="attribute">location</span> /500_error.html &#123;</span><br><span class="line">  <span class="attribute">root</span> /www/test;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1189,69 +1257,181 @@
 
 <p><strong>4. 验证</strong></p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// 伪造协议头访问</span><br><span class="line">[root@C-<span class="attribute">Server</span> ~]<span class="comment"># curl -e &quot;http://www.baidu.com&quot; -I http://192.168.69.113/test.jpg</span></span><br><span class="line">HTTP/<span class="number">1</span>.<span class="number">1</span> <span class="number">403</span> Forbidden</span><br><span class="line">Server: nginx/<span class="number">1</span>.<span class="number">12</span>.<span class="number">2</span></span><br><span class="line">Date: Tue, <span class="number">17</span> Apr <span class="number">2018</span> <span class="number">04</span>:<span class="number">55</span>:<span class="number">18</span> GMT</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: <span class="number">169</span></span><br><span class="line">Connection: keep-alive</span><br><span class="line"></span><br><span class="line">// 伪造协议头访问</span><br><span class="line">[root@C-Server ~]<span class="comment"># curl -e &quot;http://www.xuliangwei.com&quot; -I http://192.168.69.113/tes</span></span><br><span class="line">t.jpg</span><br><span class="line">HTTP/<span class="number">1</span>.<span class="number">1</span> <span class="number">200</span> OK</span><br><span class="line">Server: nginx/<span class="number">1</span>.<span class="number">12</span>.<span class="number">2</span></span><br><span class="line">Date: Tue, <span class="number">17</span> Apr <span class="number">2018</span> <span class="number">04</span>:<span class="number">55</span>:<span class="number">27</span> GMT</span><br><span class="line">Content-Type: image/jpeg</span><br><span class="line">Content-Length: <span class="number">174315</span></span><br><span class="line">Last-Modified: Wed, <span class="number">29</span> Nov <span class="number">2017</span> <span class="number">03</span>:<span class="number">16</span>:<span class="number">08</span> GMT</span><br><span class="line">Connection: keep-alive</span><br><span class="line">ETag: <span class="string">&quot;5a1e2678-2a8eb&quot;</span></span><br><span class="line">Expires: Tue, <span class="number">17</span> Apr <span class="number">2018</span> <span class="number">16</span>:<span class="number">55</span>:<span class="number">27</span> GMT</span><br><span class="line">Cache-Control: max-age=<span class="number">43200</span></span><br><span class="line">Accept-Ranges: bytes</span><br></pre></td></tr></table></figure>
-        </section>
-        <hr/>
-        <nav class="pagination" style="width:auto" role="pagination">
-            
-            <a data-pjax class="newer-posts" href="/2021/06/06/Kubernetes/">← Prev Post</a>
-            
-            <a class="share-button" data-original-title title>Share this Post</a>
-            
-        </nav>
-        <br/>
-        <br/>
-        <section id="comment">
-            <div id="comment-box"></div>
-        </section>
+    </div>
 
-
-    </article>
-</main>
-
-
-  
-<footer class="site-footer">
     
-    <div class="inner">
-        <section class="copyright"><a href="/"></a> &copy; Hexo 2014</section>
-        <section class="poweredby">Published with <a target="_blank" href="http://hexo.io/">Hexo   </a> and Theme by <a target="_blank" href="https://github.com/yuche/hexo-theme-kael">Kael</a></section>
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/06/Kubernetes/" rel="next" title="Kubernetes">
+      Kubernetes <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-</footer>
-</div>
-</div><!-- /scroller -->
-
-</div><!-- /pusher -->
-</div><!-- /container -->
-</div>
-
-<!-- Easter eggs -->
-
-<div class="egg animated">
-    <a id="close-button" href="#">X</a>
-    <div class="block">
-        <div class="loading">
-            <span class="ball1"></span>
-            <span class="ball2"></span>
-        </div>
-    </div>
-</div>
+      </footer>
+    
+  </article>
   
-<script src="//cdn.staticfile.org/jquery/1.11.0/jquery.min.js"></script>
+  
+  
+
+
+
+          </div>
+          
+
 <script>
-    if (!window.jQuery) {
-        var script = document.createElement('script');
-        script.src = "/js/jquery.min.js";
-        document.body.appendChild(script);
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
     }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
 </script>
-<script type="text/javascript" src="/js/lib.js"></script>
-<script type="text/javascript" src="/js/main.js"></script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Web%E7%BD%91%E7%AB%99%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">Web网站概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Web%E7%BD%91%E7%AB%99%E5%B8%B8%E8%AF%86"><span class="nav-number">1.1.</span> <span class="nav-text">1. Web网站常识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-URL%E7%9A%84%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="nav-number">1.2.</span> <span class="nav-text">2. URL的组成部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%8D%8F%E8%AE%AE-Protocol"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 协议(Protocol)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%9F%9F%E5%90%8D-Domain"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 域名(Domain)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E7%AB%AF%E5%8F%A3-Port"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 端口(Port)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-URL%E6%96%87%E4%BB%B6%E8%B5%84%E6%BA%90"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4 URL文件资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E5%8F%82%E6%95%B0-query"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5 参数(query)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-%E7%89%87%E6%AE%B5-fragment"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.6 片段(fragment)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP%E5%8D%8F%E8%AE%AE%E6%A6%82%E5%BF%B5"><span class="nav-number">2.</span> <span class="nav-text">HTTP协议概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-HTTP%E5%8D%8F%E8%AE%AE%E7%AE%80%E4%BB%8B"><span class="nav-number">2.1.</span> <span class="nav-text">1. HTTP协议简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-HTTP%E8%AF%B7%E6%B1%82%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">2. HTTP请求的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-HTTP%E5%93%8D%E5%BA%94%E5%A4%B4%E4%BF%A1%E6%81%AF"><span class="nav-number">2.3.</span> <span class="nav-text">3. HTTP响应头信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-HTTP%E7%8A%B6%E6%80%81%E4%BB%A3%E7%A0%81"><span class="nav-number">2.4.</span> <span class="nav-text">4. HTTP状态代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-HTTP-content-type"><span class="nav-number">2.5.</span> <span class="nav-text">5. HTTP  content-type</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx%E5%8E%9F%E7%90%86%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.</span> <span class="nav-text">Nginx原理介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Nginx-%E6%A6%82%E8%BF%B0"><span class="nav-number">3.1.</span> <span class="nav-text">1.1 Nginx 概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Nginx%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">3.2.</span> <span class="nav-text">1.2 Nginx的优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Nginx%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">3.3.</span> <span class="nav-text">1.3 Nginx应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-Nginx%E7%9A%84%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.4.</span> <span class="nav-text">1.4 Nginx的进程模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-Nginx%E7%9A%84%E7%BB%84%E6%88%90%E9%80%BB%E8%BE%91%E5%9B%BE"><span class="nav-number">3.5.</span> <span class="nav-text">1.5 Nginx的组成逻辑图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-Nginx%E7%9A%84%E6%A8%A1%E5%9D%97%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">3.6.</span> <span class="nav-text">1.6 Nginx的模块是什么</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2"><span class="nav-number">4.</span> <span class="nav-text">Nginx应用部署</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E8%BF%9B%E5%85%A5-nginx-%E5%AE%98%E7%BD%91%EF%BC%8C%E4%B8%8B%E8%BD%BD"><span class="nav-number">4.1.</span> <span class="nav-text">1.1 进入 nginx 官网，下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E5%AE%89%E8%A3%85Nginx%E4%BE%9D%E8%B5%96"><span class="nav-number">4.2.</span> <span class="nav-text">1.2 安装Nginx依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E5%AE%89%E8%A3%85Nginx%E5%B9%B6%E4%BF%AE%E6%94%B9%E5%B1%9E%E4%B8%BB%E5%B1%9E%E7%A5%96"><span class="nav-number">4.3.</span> <span class="nav-text">1.3 安装Nginx并修改属主属祖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-%E8%AE%BE%E7%BD%AE%E9%98%B2%E7%81%AB%E5%A2%99%E8%A7%84%E5%88%99"><span class="nav-number">4.4.</span> <span class="nav-text">1.4 设置防火墙规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-Nginx%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-%E5%8F%8A-%E4%BF%A1%E5%8F%B7"><span class="nav-number">4.5.</span> <span class="nav-text">1.5 Nginx常用命令 及 信号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-%E4%BC%98%E5%8C%96Nginx%E4%B8%94%E7%BC%96%E5%86%99%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC"><span class="nav-number">4.6.</span> <span class="nav-text">1.6 优化Nginx且编写启动脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-%E5%90%AF%E5%8A%A8Nginx%E6%9C%8D%E5%8A%A1"><span class="nav-number">4.7.</span> <span class="nav-text">1.7 启动Nginx服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E5%8F%8A%E5%86%85%E7%BD%AE%E5%8F%98%E9%87%8F"><span class="nav-number">5.</span> <span class="nav-text">Nginx常用模块及内置变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Nginx%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97"><span class="nav-number">5.1.</span> <span class="nav-text">1.1 Nginx常用模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Nginx%E5%86%85%E7%BD%AE%E5%8F%98%E9%87%8F"><span class="nav-number">5.2.</span> <span class="nav-text">1.2 Nginx内置变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx-conf-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">Nginx.conf 配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%AD%E6%B3%95"><span class="nav-number">6.1.</span> <span class="nav-text">1.1 Nginx配置文件语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84"><span class="nav-number">6.2.</span> <span class="nav-text">1.2 配置文件整体结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-main%E5%85%A8%E5%B1%80%E5%9D%97"><span class="nav-number">6.2.1.</span> <span class="nav-text">1.2.1 main全局块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-events%E5%9D%97"><span class="nav-number">6.2.2.</span> <span class="nav-text">1.2.2 events块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-http%E5%9D%97"><span class="nav-number">6.2.3.</span> <span class="nav-text">1.2.3 http块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-4-server%E5%9D%97"><span class="nav-number">6.2.4.</span> <span class="nav-text">1.2.4 server块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-5-location%E5%9D%97"><span class="nav-number">6.2.5.</span> <span class="nav-text">1.2.5 location块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Nginx%E7%9A%84%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE"><span class="nav-number">6.3.</span> <span class="nav-text">1.3 Nginx的默认配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3"><span class="nav-number">7.</span> <span class="nav-text">Nginx日志文件详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Nginx%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE"><span class="nav-number">7.1.</span> <span class="nav-text">1.1 Nginx日志配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2%E8%AE%BF%E9%97%AE%E6%97%A5%E5%BF%97%E6%AE%B5%E5%88%86%E6%9E%90"><span class="nav-number">7.2.</span> <span class="nav-text">1.2访问日志段分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Nginx%E8%AE%BF%E9%97%AE%E6%97%A5%E5%BF%97%E7%BB%9F%E8%AE%A1"><span class="nav-number">7.3.</span> <span class="nav-text">1.3 Nginx访问日志统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-http-access-module%E5%B1%80%E9%99%90%E6%80%A7"><span class="nav-number">7.4.</span> <span class="nav-text">1.4 http_access_module局限性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx%E5%B8%B8%E7%94%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-number">8.</span> <span class="nav-text">Nginx常用的基本配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Nginx-%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA"><span class="nav-number">8.1.</span> <span class="nav-text">1.1 Nginx 虚拟主机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-%E9%85%8D%E7%BD%AE%E5%9F%BA%E4%BA%8E%E5%9F%9F%E5%90%8D%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%EF%BC%88%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%EF%BC%89"><span class="nav-number">8.1.1.</span> <span class="nav-text">1.1.1 配置基于域名虚拟主机（最常用的）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-%E9%85%8D%E7%BD%AE%EF%A5%A7%E5%90%8C%E7%AB%AF%E5%8F%A3%E8%AE%BF%E9%97%AE%EF%A5%A7%E5%90%8C%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA"><span class="nav-number">8.1.2.</span> <span class="nav-text">1.1.2 配置不同端口访问不同虚拟主机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-3-%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E5%88%AB%E5%90%8D"><span class="nav-number">8.1.3.</span> <span class="nav-text">1.1.3 配置虚拟主机别名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Nginx-%E7%8A%B6%E6%80%81%E7%9B%91%E6%8E%A7"><span class="nav-number">8.2.</span> <span class="nav-text">1.2 Nginx 状态监控</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Nginx%E4%B8%8B%E8%BD%BD%E7%AB%99%E7%82%B9"><span class="nav-number">8.3.</span> <span class="nav-text">1.3 Nginx下载站点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-Nginx-%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="nav-number">8.4.</span> <span class="nav-text">1.4 Nginx 访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1-%E5%9F%BA%E4%BA%8EIP%E7%9A%84%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="nav-number">8.4.1.</span> <span class="nav-text">1.4.1 基于IP的访问控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2-%E5%9F%BA%E4%BA%8E%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86%E8%AE%A4%E8%AF%81"><span class="nav-number">8.4.2.</span> <span class="nav-text">1.4.2 基于用户登陆认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-3-%E4%B8%8A%E9%9D%A2%E4%B8%A4%E8%80%85%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%B8%80%E8%B5%B7%E7%94%A8"><span class="nav-number">8.4.3.</span> <span class="nav-text">1.4.3 上面两者也可以一起用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-Nginx-%E8%AE%BF%E9%97%AE%E9%99%90%E5%88%B6"><span class="nav-number">8.5.</span> <span class="nav-text">1.5 Nginx 访问限制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1-http%E5%8D%8F%E8%AE%AE%E7%9A%84%E8%BF%9E%E6%8E%A5%E4%B8%8E%E8%AF%B7%E6%B1%82"><span class="nav-number">8.5.1.</span> <span class="nav-text">1.5.1 http协议的连接与请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-2-HTTP-%E5%8D%8F%E8%AE%AE%E7%9A%84%E8%BF%9E%E6%8E%A5%E4%B8%8E%E8%AF%B7%E6%B1%82"><span class="nav-number">8.5.2.</span> <span class="nav-text">1.5.2 HTTP 协议的连接与请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-3-Nginx-%E8%BF%9E%E6%8E%A5%E9%99%90%E5%88%B6"><span class="nav-number">8.5.3.</span> <span class="nav-text">1.5.3 Nginx 连接限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-4-Nginx-%E8%AF%B7%E6%B1%82%E9%99%90%E5%88%B6"><span class="nav-number">8.5.4.</span> <span class="nav-text">1.5.4 Nginx 请求限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-5-%E6%95%B4%E4%BD%93%E6%80%BB%E7%BB%93"><span class="nav-number">8.5.5.</span> <span class="nav-text">1.5.5 整体总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-Nginx%E6%97%A5%E5%BF%97%E5%88%86%E5%89%B2"><span class="nav-number">8.6.</span> <span class="nav-text">1.6 Nginx日志分割</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-1-%E6%89%8B%E5%8A%A8%E6%97%A5%E5%BF%97%E5%88%86%E5%89%B2"><span class="nav-number">8.6.1.</span> <span class="nav-text">1.6.1 手动日志分割</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-2-%E8%87%AA%E5%8A%A8%E6%97%A5%E5%BF%97%E5%88%86%E5%89%B2"><span class="nav-number">8.6.2.</span> <span class="nav-text">1.6.2 自动日志分割</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-Nginx%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7%E9%83%A8%E7%BD%B2"><span class="nav-number">8.7.</span> <span class="nav-text">1.7 Nginx平滑升级部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-index-%E5%92%8C-autoindex%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">8.8.</span> <span class="nav-text">1.8 index 和 autoindex的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-root-%E5%92%8C-alias-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-number">8.9.</span> <span class="nav-text">1.9 root 和 alias 的区别（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-9-1-root%E5%B1%9E%E6%80%A7"><span class="nav-number">8.9.1.</span> <span class="nav-text">1.9.1 root属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-9-2-alias%E5%B1%9E%E6%80%A7%EF%BC%88%E5%88%AB%E5%90%8D%EF%BC%89"><span class="nav-number">8.9.2.</span> <span class="nav-text">1.9.2 alias属性（别名）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-10-%E5%AE%9A%E4%B9%89%E9%94%99%E8%AF%AF%E9%A1%B5%E9%9D%A2"><span class="nav-number">8.10.</span> <span class="nav-text">1.10 定义错误页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-11-%E8%AE%BE%E7%BD%AENginx%E9%98%B2%E7%9B%97%E9%93%BE"><span class="nav-number">8.11.</span> <span class="nav-text">1.11 设置Nginx防盗链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-12-%E5%A6%82%E4%BD%95%E5%9C%A8%E5%B7%B2%E7%BB%8F%E5%AE%89%E8%A3%85%E5%A5%BD%E7%9A%84nginx%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97"><span class="nav-number">8.12.</span> <span class="nav-text">1.12 如何在已经安装好的nginx中添加模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-13-Nginx%E4%B8%AD%E7%9A%84location%E6%8C%87%E4%BB%A4%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-number">8.13.</span> <span class="nav-text">1.13 Nginx中的location指令（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-13-1-%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E7%9A%84%E6%A8%A1%E5%9D%97"><span class="nav-number">8.13.1.</span> <span class="nav-text">1.13.1 安装第三方的模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-13-2-location%E8%AF%AD%E6%B3%95-%E5%8F%8A-%E7%AC%A6%E5%8F%B7%E8%A7%84%E5%88%99"><span class="nav-number">8.13.2.</span> <span class="nav-text">1.13.2 location语法 及 符号规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-13-4-location%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%8A%E6%A1%88%E4%BE%8B"><span class="nav-number">8.13.3.</span> <span class="nav-text">1.13.4 location优先级及案例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%8E%A7%E5%88%B6"><span class="nav-number">9.</span> <span class="nav-text">Nginx静态资源控制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E7%B1%BB%E5%9E%8B"><span class="nav-number">9.1.</span> <span class="nav-text">1. 静态资源类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-number">9.2.</span> <span class="nav-text">2. 静态资源基本配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E9%AB%98%E6%95%88-sendfile"><span class="nav-number">9.2.1.</span> <span class="nav-text">2.1 文件读取高效 sendfile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%8F%90%E9%AB%98%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%E6%95%88%E7%8E%87-tcp-nopush"><span class="nav-number">9.2.2.</span> <span class="nav-text">2.2 提高网络传输效率 tcp_nopush</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E4%B8%8E-tcp-nopush-%E5%AF%B9%E5%BA%94%E7%9A%84%E9%85%8D%E7%BD%AE-tcp-nodelay"><span class="nav-number">9.2.3.</span> <span class="nav-text">2.3 与 tcp_nopush 对应的配置 tcp_nodelay</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">9.2.4.</span> <span class="nav-text">2.4 注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%8E%8B%E7%BC%A9%E9%85%8D%E7%BD%AE"><span class="nav-number">9.3.</span> <span class="nav-text">3. 静态资源文件压缩配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-gzip-%E5%8E%8B%E7%BC%A9%E9%85%8D%E7%BD%AE%E8%AF%AD%E6%B3%95"><span class="nav-number">9.3.1.</span> <span class="nav-text">3.1 gzip 压缩配置语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-gzip-%E5%8E%8B%E7%BC%A9%E6%AF%94%E7%8E%87%E9%85%8D%E7%BD%AE%E8%AF%AD%E6%B3%95"><span class="nav-number">9.3.2.</span> <span class="nav-text">3.2 gzip 压缩比率配置语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-gzip-%E5%8E%8B%E7%BC%A9%E5%8D%8F%E8%AE%AE%E7%89%88%E6%9C%AC"><span class="nav-number">9.3.3.</span> <span class="nav-text">3.3 gzip 压缩协议版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%E6%A1%88%E4%BE%8B%EF%BC%88%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%BC%80%E5%90%AF%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%EF%BC%89"><span class="nav-number">9.3.4.</span> <span class="nav-text">3.4 图片压缩案例（不建议开启图片压缩）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E6%96%87%E6%9C%AC%E5%8E%8B%E7%BC%A9%E6%A1%88%E4%BE%8B"><span class="nav-number">9.3.5.</span> <span class="nav-text">3.5 文本压缩案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%B5%8F%E8%A7%88%EF%A8%B8%E7%BC%93%E5%AD%98"><span class="nav-number">9.4.</span> <span class="nav-text">4. 静态资源浏览器缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%98%B2%E7%9B%97%E9%93%BE"><span class="nav-number">9.5.</span> <span class="nav-text">5. 静态资源防盗链</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Armin</p>
+  <div class="site-description" itemprop="description">记录生活中的点点滴滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Armin</span>
+</div>
+
+        
 
 
 
 
 
 
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
 
 </body>
 </html>

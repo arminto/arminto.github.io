@@ -1,173 +1,236 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="zh-CN">
 <head>
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-  <title>Kubernetes | Hexo</title>
-  <meta name="description" content="" />
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="MobileOptimized" content="320" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" type="text/css" href="/css/component.css" />
-  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
-  <meta name="generator" content="Hexo">
-  <script src="http://static.duoshuo.com/embed.js"></script>
-  
-  
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Kubernetes">
+<meta property="og:url" content="http://example.com/2021/06/06/Kubernetes/index.html">
+<meta property="og:site_name" content="LEMON">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7uo0jsryj60ys0md76e02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7uo5kl1gj31cc0ro466.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7uo9xan5j31090qztby.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7uohgqrvj30lu0gzgno.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7upe69bgj30w30g3gqb.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7upifvlkj319g0kznpg.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7upmukg7j30wp0hgmyd.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7upq32y4j30of0fqn0l.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7uptd7wbj30su0jcjya.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7ur6odhwj30fg0fzabf.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7utpkiy4j30of052aax.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7utsp2asj30nc03oglx.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7uw7j1trj30o808kta2.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7uwcz6dbj30o808kta2.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7uwy44bgj30vd0l93zq.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7uxxrfp3j30p704ojrx.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7uzrb0nrj30zh0mk3z9.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7uzvvy8tj30zg0d1wfg.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v01ysnzj30yw08otay.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v05lx1ej30zk0ehjsd.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v0cpenuj31020bgmxn.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v0od5jbj30zh0cyjs2.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v0wtpolj30ut03wmxk.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v12fx9qj30uq045mxk.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v182350j30uv04dwew.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v1bofyrj30uy03owew.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v1p27o3j30xd0g70u2.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v20t5rzj30v50gwtc0.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v25ddjsj30s50lnafb.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v2ayww4j30sx0jd11p.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v2gjt4wj30sw0it471.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v2lb7tmj30sv0irgwj.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v2owu0xj60s60fcacs02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v2ulrlwj30sa0ln76f.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v2zr3qej314c0ijah5.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v3b92l4j31720loh4b.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v3j0i4cj31on0u0e81.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v3mu4rwj31ny0u0e81.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v3vm0fdj31cu0p2n3w.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v47gg29j31mc0qeqhz.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v4bw64tj31720s0jw1.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v4fnrinj311o0okn8s.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v4kfopij31jw0cgq6z.jpg">
+<meta property="article:published_time" content="2021-06-05T16:40:46.000Z">
+<meta property="article:modified_time" content="2021-06-05T17:03:54.878Z">
+<meta property="article:author" content="Armin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7uo0jsryj60ys0md76e02.jpg">
+
+<link rel="canonical" href="http://example.com/2021/06/06/Kubernetes/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Kubernetes | LEMON</title>
   
 
-  
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
 </head>
-<body>
-<div class="container">
-    <div class="mp-pusher" id="mp-pusher">
-        <i id="scroll-up" class="fa fa-angle-up"></i>
-        <nav id="mp-menu" class="mp-menu">
-            <div class="mp-level">
-                <a data-pjax class="back-home" style="font-size: 20px" href="/"><h2 ><i class="fa fa-home"></i>
-                        Home</h2></a>
-                <ul class="first-level">
-                    <li>
-                        <a class="fa fa-archive" href="#"><i class="fa fa-angle-left">
-                            </i>&nbsp;&nbsp;Archive</a>
-                        <div class="mp-level page-list">
-                            <h2 ><i class="fa fa-archive"></i>
-                                Archive</h2>
-                            <a class="mp-back" href="#">back</a>
-                            <form id="search-form" action="">
-                                <input type="text" class="search search-archive" placeholder="Search.."/>
-                            </form>
-                            <ul>
-                                <div class="mp-scroll">
-                                
-                                <li class="search-archive-li mp-pjax">
-                                    <a href="/2021/06/06/JenKins/">JenKins</a>
-                                </li>
-                                
-                                <li class="search-archive-li mp-pjax">
-                                    <a href="/2021/06/06/MySQL/">MySQL</a>
-                                </li>
-                                
-                                <li class="search-archive-li mp-pjax">
-                                    <a href="/2021/06/06/Kubernetes/">Kubernetes</a>
-                                </li>
-                                
-                                <li class="search-archive-li mp-pjax">
-                                    <a href="/2021/06/06/Nginx/">Nginx</a>
-                                </li>
-                                
-                                </div>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="fa fa-copy" href="#"><i class="fa fa-angle-left">
-                            </i>&nbsp;&nbsp;Categories</a>
 
-                        <div class="mp-level page-list">
-                            <h2 ><i class="fa fa-copy"></i>
-                                Categories</h2>
-                            <a class="mp-back" href="#">back</a>
-                            <form id="search-form" action="">
-                                <input type="text" class="search search-category" placeholder="Search.."/>
-                            </form>
-                            <ul>
-                                <div class="mp-scroll">
-                                
-                                </div>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="fa fa-tags" href="#"><i class="fa fa-angle-left">
-                            </i>&nbsp;&nbsp;Tags</a>
-                        <div class="mp-level page-list">
-                            <h2 ><i class="fa fa-tags"></i>
-                                Tags</h2>
-                            <a class="mp-back" href="#">back</a>
-                            <form id="search-form" action="">
-                                <input type="text" class="search search-tag" placeholder="Search.."/>
-                            </form>
-                            <ul>
-                                <div class="mp-scroll">
-                                
-                                </div>
-                            </ul>
-                        </div>
-                    </li>
-                    
-                    <li class="mp-pjax"><a class="fa fa-user" href="/about">&nbsp;&nbsp;&nbsp;About me</a></li>
-                    <li><a class="fa fa-github" href="#">&nbsp;&nbsp;&nbsp;Github</a></li>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
 
-                </ul>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
 
-            </div>
-        </nav>
-        <div id="pjax">
-            <div class="pjax-hidden" style="display: none">
-                
-                    <a  data-pjax href="/2021/06/06/JenKins/">JenKins</a>
-                
-                    <a  data-pjax href="/2021/06/06/MySQL/">MySQL</a>
-                
-                    <a  data-pjax href="/2021/06/06/Kubernetes/">Kubernetes</a>
-                
-                    <a  data-pjax href="/2021/06/06/Nginx/">Nginx</a>
-                
-                
-                
-                <a data-pjax class="fa fa-user" href="/about">&nbsp;&nbsp;&nbsp;About me</a>
-            </div>
-            <nav class="nexus">
-                <li  style="border-left: 1px solid #c6d0da;">
-                    <a id="trigger" href="#"><i class="fa fa-bars"></i></a>
-                </li>
-                <li ><a id="nexus-back" data-pjax href="/">Hexo</a></li>
-                
-                <div id="nav-container">
-                    <div class="post-navbar" style="line-height: 63px;display:none">
-                        <li id="navbar-title"><a href="#">Kubernetes</a></li>
-                        <li id="navbar-toc" style="border-left: none">
-                            <a style="padding-right: 15px">
-                                <span id="toc-content" >Introduction</span><i class="fa fa-chevron-down" ></i>
-                            </a>
-                            <div class="hidden-box">
-                                <ul id="toc"></ul>
-                            </div>
-                        </li>
-                    </div>
-                </div>
-                
-            </nav>
+  <div class="site-meta">
 
-            <div class="scroller">
-            <div class="scroller-inner">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LEMON</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">死记性不如烂笔头</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-<!-- -->
-<!--<body class="post-template">-->
-<!---->
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
   
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/06/Kubernetes/">
 
-<main class="content" role="main">
-    <article class="post" >
-    <span class="post-meta">
-                  <div class="tag-tile">
-                      
-                  </div>
-                <h1 class="post-title" style="margin: 14px 0;color:#50585D">Kubernetes</h1>
-
-                    <div class="post-meta">
-                        Post on<span class="fa fa-clock-o"></span>
-                        <time datetime="2021-06-05T16:40:46.000Z"
-                              itemprop="datePublished">2021-06-06</time>
-                    </div>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Armin">
+      <meta itemprop="description" content="记录生活中的点点滴滴">
     </span>
 
-        <section class="post-content">
-            <!--toc-->
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LEMON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kubernetes
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-06-06 00:40:46 / 修改时间：01:03:54" itemprop="dateCreated datePublished" datetime="2021-06-06T00:40:46+08:00">2021-06-06</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+        <!--toc-->
 <span id="more"></span>
 
 <h1 id="一、K8S概念"><a href="#一、K8S概念" class="headerlink" title="一、K8S概念"></a>一、K8S概念</h1><h2 id="1-什么是Kubernetes"><a href="#1-什么是Kubernetes" class="headerlink" title="1. 什么是Kubernetes ?"></a>1. 什么是Kubernetes ?</h2><blockquote>
@@ -1753,71 +1816,184 @@
 <li>ResourceQuota：确保请求的资源不会超过资源的 ResourceQuota 限制。</li>
 </ul>
 
-        </section>
-        <hr/>
-        <nav class="pagination" style="width:auto" role="pagination">
-            
-            <a data-pjax class="newer-posts" href="/2021/06/06/MySQL/">← Prev Post</a>
-            
-            <a class="share-button" data-original-title title>Share this Post</a>
-            
-            <a data-pjax class="older-posts" href="/2021/06/06/Nginx/">Next Post →</a>
-            
-        </nav>
-        <br/>
-        <br/>
-        <section id="comment">
-            <div id="comment-box"></div>
-        </section>
+    </div>
 
-
-    </article>
-</main>
-
-
-  
-<footer class="site-footer">
     
-    <div class="inner">
-        <section class="copyright"><a href="/"></a> &copy; Hexo 2014</section>
-        <section class="poweredby">Published with <a target="_blank" href="http://hexo.io/">Hexo   </a> and Theme by <a target="_blank" href="https://github.com/yuche/hexo-theme-kael">Kael</a></section>
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/06/Nginx/" rel="prev" title="Nginx">
+      <i class="fa fa-chevron-left"></i> Nginx
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/06/MySQL/" rel="next" title="MySQL">
+      MySQL <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-</footer>
-</div>
-</div><!-- /scroller -->
-
-</div><!-- /pusher -->
-</div><!-- /container -->
-</div>
-
-<!-- Easter eggs -->
-
-<div class="egg animated">
-    <a id="close-button" href="#">X</a>
-    <div class="block">
-        <div class="loading">
-            <span class="ball1"></span>
-            <span class="ball2"></span>
-        </div>
-    </div>
-</div>
+      </footer>
+    
+  </article>
   
-<script src="//cdn.staticfile.org/jquery/1.11.0/jquery.min.js"></script>
+  
+  
+
+
+
+          </div>
+          
+
 <script>
-    if (!window.jQuery) {
-        var script = document.createElement('script');
-        script.src = "/js/jquery.min.js";
-        document.body.appendChild(script);
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
     }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
 </script>
-<script type="text/javascript" src="/js/lib.js"></script>
-<script type="text/javascript" src="/js/main.js"></script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81K8S%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">一、K8S概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFKubernetes"><span class="nav-number">1.1.</span> <span class="nav-text">1. 什么是Kubernetes ?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%AE%83%EF%BC%9F%E4%BB%96%E7%9A%84%E5%8A%9F%E8%83%BD%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">2. 为什么需要它？他的功能？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E6%88%91%E4%BF%AE%E5%A4%8D"><span class="nav-number">1.2.1.</span> <span class="nav-text">自我修复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9"><span class="nav-number">1.2.2.</span> <span class="nav-text">弹性伸缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E5%92%8C%E5%9B%9E%E6%BB%9A"><span class="nav-number">1.2.3.</span> <span class="nav-text">自动部署和回滚</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E7%BC%96%E6%8E%92"><span class="nav-number">1.2.4.</span> <span class="nav-text">存储编排</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%E5%92%8C%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">1.2.5.</span> <span class="nav-text">服务发现和负载均衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%BA%E5%AF%86%E5%92%8C%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86"><span class="nav-number">1.2.6.</span> <span class="nav-text">机密和配置管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7"><span class="nav-number">1.2.7.</span> <span class="nav-text">资源监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E4%BE%9B%E8%AE%A4%E8%AF%81%E5%92%8C%E6%8E%88%E6%9D%83"><span class="nav-number">1.2.8.</span> <span class="nav-text">提供认证和授权</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Kubernetes%E6%9E%B6%E6%9E%84"><span class="nav-number">1.3.</span> <span class="nav-text">3. Kubernetes架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Kubernetes%E7%BB%84%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">4. Kubernetes组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Master-%E7%BB%84%E4%BB%B6"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 Master 组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#API-Server"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">API Server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Scheduler"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">Scheduler</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Controller-manager"><span class="nav-number">1.4.1.3.</span> <span class="nav-text">Controller manager</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ETCD"><span class="nav-number">1.4.1.4.</span> <span class="nav-text">ETCD</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-Node%E7%BB%84%E4%BB%B6"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2 Node组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Kube-proxy"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">Kube-proxy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Flannel%E7%BD%91%E7%BB%9C"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">Flannel网络</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E9%87%8D%E8%A6%81%E7%BB%84%E4%BB%B6"><span class="nav-number">1.4.3.</span> <span class="nav-text">4.3 重要组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Coredns"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">Coredns</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dashboard"><span class="nav-number">1.4.3.2.</span> <span class="nav-text">Dashboard</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ingress-Controller"><span class="nav-number">1.4.3.3.</span> <span class="nav-text">Ingress Controller</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Federation"><span class="nav-number">1.4.3.4.</span> <span class="nav-text">Federation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Prometheus"><span class="nav-number">1.4.3.5.</span> <span class="nav-text">Prometheus</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ELK"><span class="nav-number">1.4.3.6.</span> <span class="nav-text">ELK</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-k8s%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.5.</span> <span class="nav-text">5. k8s网络架构概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Kubernetes%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-number">1.6.</span> <span class="nav-text">6. Kubernetes核心概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-container"><span class="nav-number">1.6.1.</span> <span class="nav-text">6.1 container</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-namespace"><span class="nav-number">1.6.2.</span> <span class="nav-text">6.2 namespace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-labels"><span class="nav-number">1.6.3.</span> <span class="nav-text">6.3 labels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-pod"><span class="nav-number">1.6.4.</span> <span class="nav-text">6.4 pod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-Controller-Manager"><span class="nav-number">1.6.5.</span> <span class="nav-text">6.5 Controller Manager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-services"><span class="nav-number">1.6.6.</span> <span class="nav-text">6.6 services</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%83%A8%E7%BD%B2K8S%E9%9B%86%E7%BE%A4%EF%BC%88kubeadm%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">二、部署K8S集群（kubeadm）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.1.</span> <span class="nav-text">1. 系统环境初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%8D%87%E7%BA%A7%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8%E5%B9%B6%E4%BC%98%E5%8C%96"><span class="nav-number">2.2.</span> <span class="nav-text">2. 升级系统内核并优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E9%83%A8%E7%BD%B2Docker%E3%80%81kubeadm%E3%80%81kubectl"><span class="nav-number">2.3.</span> <span class="nav-text">3. 部署Docker、kubeadm、kubectl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%BB%E8%8A%82%E7%82%B9"><span class="nav-number">2.4.</span> <span class="nav-text">4. 初始化主节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%8A%A0%E5%85%A5%E4%B8%BB%E8%8A%82%E7%82%B9%E4%BB%A5%E5%8F%8A%E5%85%B6%E4%BD%99%E5%B7%A5%E4%BD%9C%E8%8A%82%E7%82%B9"><span class="nav-number">2.5.</span> <span class="nav-text">5. 加入主节点以及其余工作节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E9%83%A8%E7%BD%B2-CNI-flannel%E7%BD%91%E7%BB%9C"><span class="nav-number">2.6.</span> <span class="nav-text">6. 部署 CNI - flannel网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E6%9F%A5%E7%9C%8B%E9%9B%86%E7%BE%A4%E7%8A%B6%E6%80%81-%E5%92%8C%E7%9B%B8%E5%85%B3%E7%9A%84%E5%AE%B9%E5%99%A8"><span class="nav-number">2.7.</span> <span class="nav-text">7. 查看集群状态 和相关的容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E6%90%AD%E5%BB%BA%E9%85%8D%E7%BD%AEharbor%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93"><span class="nav-number">2.8.</span> <span class="nav-text">8. 搭建配置harbor私有仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E5%9F%BA%E6%9C%AC%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8BK8S"><span class="nav-number">2.9.</span> <span class="nav-text">9. 基本的使用下K8S</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81Kubectl%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">三、Kubectl常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%9F%A5%E7%9C%8B%E9%9B%86%E7%BE%A4%E7%8A%B6%E6%80%81"><span class="nav-number">3.1.</span> <span class="nav-text">1. 查看集群状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%88%9B%E5%BB%BA%E8%B5%84%E6%BA%90%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.2.</span> <span class="nav-text">2. 创建资源对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E6%9F%A5%E7%9C%8B%E8%B5%84%E6%BA%90%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.3.</span> <span class="nav-text">3、查看资源对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E6%89%93%E5%8D%B0%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%97%A5%E5%BF%97%E4%BF%A1%E6%81%AF"><span class="nav-number">3.4.</span> <span class="nav-text">4、打印容器中日志信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E5%9C%A8%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4"><span class="nav-number">3.5.</span> <span class="nav-text">5、在容器中执行命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81%E5%88%A0%E9%99%A4%E8%B5%84%E6%BA%90%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.6.</span> <span class="nav-text">6、删除资源对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81%E6%9B%B4%E6%96%B0%E8%B5%84%E6%BA%90%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.7.</span> <span class="nav-text">7、更新资源对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8%E3%80%81%E5%B0%86%E6%9C%8D%E5%8A%A1%E6%9A%B4%E9%9C%B2%E5%87%BA%E5%8E%BB-%E5%88%9B%E5%BB%BAService"><span class="nav-number">3.8.</span> <span class="nav-text">8、将服务暴露出去(创建Service)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9%E3%80%81%E6%89%A9%E5%AE%B9%E5%92%8C%E7%BC%A9%E5%AE%B9"><span class="nav-number">3.9.</span> <span class="nav-text">9、扩容和缩容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10%E3%80%81%E6%9F%A5%E7%9C%8BAPI%E7%89%88%E6%9C%AC"><span class="nav-number">3.10.</span> <span class="nav-text">10、查看API版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11%E3%80%81%E5%9C%A8%E6%9C%AC%E5%9C%B0%E4%B8%BB%E6%9C%BA%E4%B8%8A%E4%B8%BAAPI-Server%E5%90%AF%E5%8A%A8%E4%B8%80%E4%B8%AA%E4%BB%A3%E7%90%86%E7%BD%91%E5%85%B3"><span class="nav-number">3.11.</span> <span class="nav-text">11、在本地主机上为API Server启动一个代理网关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12%E3%80%81%E5%BD%93%E5%AE%9A%E4%B9%89%E8%B5%84%E6%BA%90%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%97%B6%EF%BC%8C%E4%B8%8D%E7%9F%A5%E9%81%93%E6%80%8E%E4%B9%88%E5%AE%9A%E4%B9%89%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%9F%A5%E7%9C%8B%E6%9F%90%E7%B1%BB%E5%9E%8B%E8%B5%84%E6%BA%90%E7%9A%84%E9%85%8D%E7%BD%AE%E5%AD%97%E6%AE%B5%E8%A7%A3%E9%87%8A"><span class="nav-number">3.12.</span> <span class="nav-text">12、当定义资源配置文件时，不知道怎么定义的时候，可以查看某类型资源的配置字段解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13%E3%80%81%E6%9F%A5%E7%9C%8B%E6%9F%90%E8%B5%84%E6%BA%90%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">3.13.</span> <span class="nav-text">13、查看某资源对象的配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14%E3%80%81%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="nav-number">3.14.</span> <span class="nav-text">14、标签管理相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15%E3%80%81%E6%B3%A8%E8%A7%A3%E7%AE%A1%E7%90%86%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="nav-number">3.15.</span> <span class="nav-text">15、注解管理相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16%E3%80%81patch%E4%BF%AE%E6%94%B9Deployment%E6%8E%A7%E5%88%B6%E5%99%A8%E8%BF%9B%E8%A1%8C%E6%8E%A7%E5%88%B6%E5%99%A8%E5%8D%87%E7%BA%A7"><span class="nav-number">3.16.</span> <span class="nav-text">16、patch修改Deployment控制器进行控制器升级</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81k8s%E7%9A%84%E8%B5%84%E6%BA%90%E6%B8%85%E5%8D%95%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">四、k8s的资源清单（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%B5%84%E6%BA%90%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.1.</span> <span class="nav-text">1. 资源类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4%E7%BA%A7%E5%88%AB"><span class="nav-number">4.1.1.</span> <span class="nav-text">1.1 名称空间级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E9%9B%86%E7%BE%A4%E7%BA%A7%E8%B5%84%E6%BA%90%E7%BA%A7%E5%88%AB"><span class="nav-number">4.1.2.</span> <span class="nav-text">1.2 集群级资源级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E5%85%83%E6%95%B0%E6%8D%AE%E5%9E%8B%E8%B5%84%E6%BA%90"><span class="nav-number">4.1.3.</span> <span class="nav-text">1.3 元数据型资源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%B5%84%E6%BA%90%E6%B8%85%E5%8D%95"><span class="nav-number">4.2.</span> <span class="nav-text">2. 资源清单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-yaml%E8%AF%AD%E6%B3%95%E6%A0%BC%E5%BC%8F"><span class="nav-number">4.2.1.</span> <span class="nav-text">2.1 yaml语法格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-k8s%E5%89%A7%E6%9C%AC%E7%9A%84%E5%B8%B8%E7%94%A8%E5%AD%97%E6%AE%B5"><span class="nav-number">4.2.2.</span> <span class="nav-text">2.2 k8s剧本的常用字段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81pod%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">4.3.</span> <span class="nav-text">3、pod的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Init-C"><span class="nav-number">4.3.1.</span> <span class="nav-text">3.1 Init C</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%AE%B9%E5%99%A8%E6%8E%A2%E9%92%88"><span class="nav-number">4.3.2.</span> <span class="nav-text">3.2 容器探针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-Pod-hook"><span class="nav-number">4.3.3.</span> <span class="nav-text">3.3 Pod hook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-Init-C-amp-%E6%8E%A2%E9%92%88-%E6%95%B4%E5%90%88%E4%BD%BF%E7%94%A8"><span class="nav-number">4.3.4.</span> <span class="nav-text">3.4 Init C &amp; 探针 整合使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-Pod%E7%9A%84%E7%9B%B8%E4%BD%8D"><span class="nav-number">4.3.5.</span> <span class="nav-text">3.5 Pod的相位</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81controllers-%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="nav-number">4.4.</span> <span class="nav-text">4、controllers 控制器 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-ReplicationController"><span class="nav-number">4.4.1.</span> <span class="nav-text">1. ReplicationController</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-ReplicaSet"><span class="nav-number">4.4.2.</span> <span class="nav-text">2. ReplicaSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Deployment"><span class="nav-number">4.4.3.</span> <span class="nav-text">3. Deployment</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA-deployment-%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.4.3.1.</span> <span class="nav-text">3.1 创建一个 deployment 对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-Deployment-%E6%89%A9%E5%AE%B9%E7%BC%A9"><span class="nav-number">4.4.3.2.</span> <span class="nav-text">3.2 Deployment 扩容缩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-%E6%BB%9A%E5%8A%A8%E5%8D%87%E7%BA%A7%E5%92%8C%E5%9B%9E%E6%BB%9A"><span class="nav-number">4.4.3.3.</span> <span class="nav-text">3.3 滚动升级和回滚</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-DaemonSet"><span class="nav-number">4.4.4.</span> <span class="nav-text">4. DaemonSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Jobs-%EF%BC%9A%E4%B8%80%E6%AC%A1%E6%80%A7%E4%BB%BB%E5%8A%A1"><span class="nav-number">4.4.5.</span> <span class="nav-text">5. Jobs ：一次性任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-CronJob-%EF%BC%9A%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="nav-number">4.4.6.</span> <span class="nav-text">6. CronJob ：定时任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-StateFulSet"><span class="nav-number">4.4.7.</span> <span class="nav-text">7. StateFulSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Horizontal-Pod-Autoscaler"><span class="nav-number">4.4.8.</span> <span class="nav-text">8. Horizontal Pod Autoscaler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81Service"><span class="nav-number">4.5.</span> <span class="nav-text">5、Service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-Service-%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.5.1.</span> <span class="nav-text">5.1 Service 的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-VIP-%E5%92%8C-Service-%E4%BB%A3%E7%90%86"><span class="nav-number">4.5.2.</span> <span class="nav-text">5.2 VIP 和 Service 代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-ClusterIP"><span class="nav-number">4.5.3.</span> <span class="nav-text">5.3 ClusterIP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-Headless-Service"><span class="nav-number">4.5.4.</span> <span class="nav-text">5.4 Headless Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-NodePort"><span class="nav-number">4.5.5.</span> <span class="nav-text">5.5 NodePort</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-6-LoadBalancer"><span class="nav-number">4.5.6.</span> <span class="nav-text">5.6 LoadBalancer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-7-ExternalName"><span class="nav-number">4.5.7.</span> <span class="nav-text">5.7 ExternalName</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81Ingress"><span class="nav-number">4.6.</span> <span class="nav-text">6、Ingress</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E9%83%A8%E7%BD%B2-Ingress-Nginx"><span class="nav-number">4.6.1.</span> <span class="nav-text">6.1 部署 Ingress-Nginx</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81K8S-%E5%AD%98%E5%82%A8"><span class="nav-number">4.7.</span> <span class="nav-text">7、K8S - 存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-ConfigMap"><span class="nav-number">4.7.1.</span> <span class="nav-text">7.1 ConfigMap</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-1-ConfigMap-%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="nav-number">4.7.1.1.</span> <span class="nav-text">7.1.1 ConfigMap 的创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-2-Pod-%E4%B8%AD%E4%BD%BF%E7%94%A8-ConfigMap"><span class="nav-number">4.7.1.2.</span> <span class="nav-text">7.1.2 Pod 中使用 ConfigMap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-3-ConfigMap-%E7%9A%84%E7%83%AD%E6%9B%B4%E6%96%B0"><span class="nav-number">4.7.1.3.</span> <span class="nav-text">7.1.3 ConfigMap 的热更新</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-Secret"><span class="nav-number">4.7.2.</span> <span class="nav-text">7.2 Secret</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-1-Service-Account"><span class="nav-number">4.7.2.1.</span> <span class="nav-text">7.2.1 Service Account</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-2-Opaque-Secret"><span class="nav-number">4.7.2.2.</span> <span class="nav-text">7.2.2 Opaque Secret</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-3-dockerconfigjson"><span class="nav-number">4.7.2.3.</span> <span class="nav-text">7.2.3 dockerconfigjson</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-Volume"><span class="nav-number">4.7.3.</span> <span class="nav-text">7.3 Volume</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-3-1-emptyDir"><span class="nav-number">4.7.3.1.</span> <span class="nav-text">7.3.1 emptyDir</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-3-2-hostPath"><span class="nav-number">4.7.3.2.</span> <span class="nav-text">7.3.2 hostPath</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-Persistent-Volume%EF%BC%88PV%EF%BC%89"><span class="nav-number">4.7.4.</span> <span class="nav-text">7.4 Persistent Volume（PV）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-1-PV-%E5%92%8C-PVC%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">4.7.4.1.</span> <span class="nav-text">7.4.1 PV 和 PVC的生命周期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-2-%E8%B5%84%E6%BA%90%E4%BE%9B%E5%BA%94-Provisioning"><span class="nav-number">4.7.4.2.</span> <span class="nav-text">7.4.2 资源供应 (Provisioning)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-3-%E8%B5%84%E6%BA%90%E7%BB%91%E5%AE%9A-Binding"><span class="nav-number">4.7.4.3.</span> <span class="nav-text">7.4.3 资源绑定 (Binding)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-4-%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8-Using"><span class="nav-number">4.7.4.4.</span> <span class="nav-text">7.4.4 资源使用 (Using)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-5-%E8%B5%84%E6%BA%90%E9%87%8A%E6%94%BE-Releasing"><span class="nav-number">4.7.4.5.</span> <span class="nav-text">7.4.5 资源释放 (Releasing)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-6-%E8%B5%84%E6%BA%90%E5%9B%9E%E6%94%B6-Reclaiming"><span class="nav-number">4.7.4.6.</span> <span class="nav-text">7.4.6 资源回收 (Reclaiming)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-7-%E6%8C%81%E4%B9%85%E5%8C%96%E5%8D%B7%E5%A3%B0%E6%98%8E%E7%9A%84%E4%BF%9D%E6%8A%A4"><span class="nav-number">4.7.4.7.</span> <span class="nav-text">7.4.7 持久化卷声明的保护</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-8-PV-%E7%9A%84%E7%B1%BB%E5%9E%8B-%E5%8F%8A-%E8%AE%BF%E9%97%AE%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.7.4.8.</span> <span class="nav-text">7.4.8 PV 的类型 及 访问模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-9-PV-%E7%9A%84%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5-%E5%8F%8A-%E9%98%B6%E6%AE%B5%E7%8A%B6%E6%80%81"><span class="nav-number">4.7.4.9.</span> <span class="nav-text">7.4.9 PV 的回收策略 及 阶段状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-10-PV-%E7%9A%84%E5%AE%9E%E9%AA%8C%E6%BC%94%E7%BB%83-NFS"><span class="nav-number">4.7.4.10.</span> <span class="nav-text">7.4.10 PV 的实验演练 - NFS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-11-%E5%85%B3%E4%BA%8E-StatefulSet-%E7%9A%84%E8%AF%B4%E6%98%8E"><span class="nav-number">4.7.4.11.</span> <span class="nav-text">7.4.11 关于 StatefulSet 的说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-12-PV%E5%8D%B7-%E7%9A%84%E8%B5%84%E6%BA%90%E9%87%8A%E6%94%BE%E6%B5%81%E7%A8%8B"><span class="nav-number">4.7.4.12.</span> <span class="nav-text">7.4.12 PV卷 的资源释放流程</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81K8S%E9%9B%86%E7%BE%A4%E8%B0%83%E5%BA%A6"><span class="nav-number">5.</span> <span class="nav-text">五、K8S集群调度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E8%B0%83%E5%BA%A6%E8%AF%B4%E6%98%8E"><span class="nav-number">5.1.</span> <span class="nav-text">1、调度说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E5%BA%A6%E8%BF%87%E7%A8%8B"><span class="nav-number">5.1.1.</span> <span class="nav-text">调度过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B0%83%E5%BA%A6%E5%99%A8"><span class="nav-number">5.1.2.</span> <span class="nav-text">自定义调度器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E8%B0%83%E5%BA%A6%E4%BA%B2%E5%92%8C%E6%80%A7"><span class="nav-number">5.2.</span> <span class="nav-text">2、调度亲和性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E4%BA%B2%E5%92%8C%E6%80%A7%EF%BC%88nodeAffinity%EF%BC%89"><span class="nav-number">5.2.1.</span> <span class="nav-text">节点亲和性（nodeAffinity）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pod-%E4%BA%B2%E5%92%8C%E6%80%A7%EF%BC%88podAffinity%EF%BC%89"><span class="nav-number">5.2.2.</span> <span class="nav-text">Pod 亲和性（podAffinity）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E8%B0%83%E5%BA%A6%E6%B1%A1%E7%82%B9"><span class="nav-number">5.3.</span> <span class="nav-text">3、调度污点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%A1%E7%82%B9-Taint"><span class="nav-number">5.3.1.</span> <span class="nav-text">污点(Taint)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%BF%8D-Tolerations"><span class="nav-number">5.3.2.</span> <span class="nav-text">容忍(Tolerations)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E5%9B%BA%E5%AE%9A%E8%8A%82%E7%82%B9"><span class="nav-number">5.4.</span> <span class="nav-text">4、固定节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E8%B0%83%E5%BA%A6%E8%8A%82%E7%82%B9"><span class="nav-number">5.4.1.</span> <span class="nav-text">指定调度节点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81K8S-%E9%9B%86%E7%BE%A4%E5%AE%89%E5%85%A8"><span class="nav-number">6.</span> <span class="nav-text">六、K8S 集群安全</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E9%9B%86%E7%BE%A4%E8%AE%A4%E8%AF%81"><span class="nav-number">6.1.</span> <span class="nav-text">1、集群认证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Authentication"><span class="nav-number">6.1.1.</span> <span class="nav-text">Authentication</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS-%E8%AF%81%E4%B9%A6%E8%AE%A4%E8%AF%81"><span class="nav-number">6.1.2.</span> <span class="nav-text">HTTPS 证书认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E8%AE%A4%E8%AF%81%E7%9A%84%E8%8A%82%E7%82%B9"><span class="nav-number">6.1.3.</span> <span class="nav-text">需要认证的节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kubeconfig"><span class="nav-number">6.1.4.</span> <span class="nav-text">kubeconfig</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ServiceAccount"><span class="nav-number">6.1.5.</span> <span class="nav-text">ServiceAccount</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Secret-%E4%B8%8E-SA-%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">6.1.6.</span> <span class="nav-text">Secret 与 SA 的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.1.7.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E9%9B%86%E7%BE%A4%E9%89%B4%E6%9D%83"><span class="nav-number">6.2.</span> <span class="nav-text">2、集群鉴权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E5%87%86%E5%85%A5%E6%8E%A7%E5%88%B6"><span class="nav-number">6.3.</span> <span class="nav-text">3、准入控制</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Armin</p>
+  <div class="site-description" itemprop="description">记录生活中的点点滴滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Armin</span>
+</div>
+
+        
 
 
 
 
 
 
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
 
 </body>
 </html>
