@@ -1,148 +1,173 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  
-  
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
   <title>Nginx | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="Nginx">
-<meta property="og:url" content="http://example.com/2021/06/06/Nginx/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7shti58wj30s60gyjxt.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sib6vh9j30xc05adgj.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sifs8jij30xc05a0tw.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sijfogoj30xc05amxs.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7siu0d8dj30xc05amy8.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sj2bd5mj30xc05amyb.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sj8btgnj30xc05adgq.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sjfsm2tj310c0fsk1o.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sjj2cpcj316w0cltaq.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sjrtucsj61c90su4qt02.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sm56u9ej30rb0koju4.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7smqjjvnj31540lfnbl.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7smwit7rj31890emwjm.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sn678zxj311e0lsdip.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sni7ry5j314f0p94by.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7so7k5uij31b10pee84.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sod9i5yj319o0qtkjo.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7soiwo8hj31340hejyb.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sop7go5j315y0odas7.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sozuqmoj30pc0fwq3r.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7spblndjj30u10csaek.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7spiu5oej30on0bdwgx.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7spqmr40j30qr0cn41u.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7spyv97xj30to05mglw.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sq2htlfj30ww0jjtb8.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sq6u6r6j30tu0ea3zu.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sv34f1oj61hc0sinph02.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7svbstuxj313z0l44qs.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7svgvf0tj30t80820t3.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7svmwy6hj30pu03d74x.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7svvyiutj31aj0sdu10.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sw0ycd2j61au0rfqv802.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sw5uzz7g310c0c7gm9.gif">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7swahpqrj31610qp4gv.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7swidxvcj319a0e97bj.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7swmxm9gj316f0qj4qs.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7swuhc5wj61a80pue8402.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sx06ldjj30tn0lv7wj.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sy86vfej30u404l74g.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sy27w9hj30qh03kgls.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sxfyj9hj31hc0bbgnr.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7syhozhaj30z30bq0y4.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sypy5lmj30yd0aw0uo.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7syvdbxpj30pi03mmxs.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7sz2mjkyj31hc0rw7m5.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7szkq003j31hc0rth41.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7szpo4npj31gf0s077e.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7szvbsb9j31gf0rx77c.jpg">
-<meta property="article:published_time" content="2021-06-05T16:09:25.000Z">
-<meta property="article:modified_time" content="2021-06-05T16:49:29.706Z">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7shti58wj30s60gyjxt.jpg">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <meta name="description" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="/css/component.css" />
+  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+  <meta name="generator" content="Hexo">
+  <script src="http://static.duoshuo.com/embed.js"></script>
   
   
-    <link rel="shortcut icon" href="/favicon.png">
   
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
 
   
-  
-<link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
-<meta name="generator" content="Hexo 5.4.0"></head>
-
+</head>
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
+<div class="container">
+    <div class="mp-pusher" id="mp-pusher">
+        <i id="scroll-up" class="fa fa-angle-up"></i>
+        <nav id="mp-menu" class="mp-menu">
+            <div class="mp-level">
+                <a data-pjax class="back-home" style="font-size: 20px" href="/"><h2 ><i class="fa fa-home"></i>
+                        Home</h2></a>
+                <ul class="first-level">
+                    <li>
+                        <a class="fa fa-archive" href="#"><i class="fa fa-angle-left">
+                            </i>&nbsp;&nbsp;Archive</a>
+                        <div class="mp-level page-list">
+                            <h2 ><i class="fa fa-archive"></i>
+                                Archive</h2>
+                            <a class="mp-back" href="#">back</a>
+                            <form id="search-form" action="">
+                                <input type="text" class="search search-archive" placeholder="Search.."/>
+                            </form>
+                            <ul>
+                                <div class="mp-scroll">
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2021/06/06/JenKins/">JenKins</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2021/06/06/MySQL/">MySQL</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2021/06/06/Kubernetes/">Kubernetes</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2021/06/06/Nginx/">Nginx</a>
+                                </li>
+                                
+                                </div>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="fa fa-copy" href="#"><i class="fa fa-angle-left">
+                            </i>&nbsp;&nbsp;Categories</a>
 
-      <div class="outer">
-        <section id="main"><article id="post-Nginx" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/06/06/Nginx/" class="article-date">
-  <time class="dt-published" datetime="2021-06-05T16:09:25.000Z" itemprop="datePublished">2021-06-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      Nginx
-    </h1>
+                        <div class="mp-level page-list">
+                            <h2 ><i class="fa fa-copy"></i>
+                                Categories</h2>
+                            <a class="mp-back" href="#">back</a>
+                            <form id="search-form" action="">
+                                <input type="text" class="search search-category" placeholder="Search.."/>
+                            </form>
+                            <ul>
+                                <div class="mp-scroll">
+                                
+                                </div>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="fa fa-tags" href="#"><i class="fa fa-angle-left">
+                            </i>&nbsp;&nbsp;Tags</a>
+                        <div class="mp-level page-list">
+                            <h2 ><i class="fa fa-tags"></i>
+                                Tags</h2>
+                            <a class="mp-back" href="#">back</a>
+                            <form id="search-form" action="">
+                                <input type="text" class="search search-tag" placeholder="Search.."/>
+                            </form>
+                            <ul>
+                                <div class="mp-scroll">
+                                
+                                </div>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <li class="mp-pjax"><a class="fa fa-user" href="/about">&nbsp;&nbsp;&nbsp;About me</a></li>
+                    <li><a class="fa fa-github" href="#">&nbsp;&nbsp;&nbsp;Github</a></li>
+
+                </ul>
+
+            </div>
+        </nav>
+        <div id="pjax">
+            <div class="pjax-hidden" style="display: none">
+                
+                    <a  data-pjax href="/2021/06/06/JenKins/">JenKins</a>
+                
+                    <a  data-pjax href="/2021/06/06/MySQL/">MySQL</a>
+                
+                    <a  data-pjax href="/2021/06/06/Kubernetes/">Kubernetes</a>
+                
+                    <a  data-pjax href="/2021/06/06/Nginx/">Nginx</a>
+                
+                
+                
+                <a data-pjax class="fa fa-user" href="/about">&nbsp;&nbsp;&nbsp;About me</a>
+            </div>
+            <nav class="nexus">
+                <li  style="border-left: 1px solid #c6d0da;">
+                    <a id="trigger" href="#"><i class="fa fa-bars"></i></a>
+                </li>
+                <li ><a id="nexus-back" data-pjax href="/">Hexo</a></li>
+                
+                <div id="nav-container">
+                    <div class="post-navbar" style="line-height: 63px;display:none">
+                        <li id="navbar-title"><a href="#">Nginx</a></li>
+                        <li id="navbar-toc" style="border-left: none">
+                            <a style="padding-right: 15px">
+                                <span id="toc-content" >Introduction</span><i class="fa fa-chevron-down" ></i>
+                            </a>
+                            <div class="hidden-box">
+                                <ul id="toc"></ul>
+                            </div>
+                        </li>
+                    </div>
+                </div>
+                
+            </nav>
+
+            <div class="scroller">
+            <div class="scroller-inner">
+
+
+<!-- -->
+<!--<body class="post-template">-->
+<!---->
   
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!--toc-->
+<main class="content" role="main">
+    <article class="post" >
+    <span class="post-meta">
+                  <div class="tag-tile">
+                      
+                  </div>
+                <h1 class="post-title" style="margin: 14px 0;color:#50585D">Nginx</h1>
+
+                    <div class="post-meta">
+                        Post on<span class="fa fa-clock-o"></span>
+                        <time datetime="2021-06-05T16:09:25.000Z"
+                              itemprop="datePublished">2021-06-06</time>
+                    </div>
+    </span>
+
+        <section class="post-content">
+            <!--toc-->
 <span id="more"></span>
 
 <h1 id="Web网站概念"><a href="#Web网站概念" class="headerlink" title="Web网站概念"></a>Web网站概念</h1><h2 id="1-Web网站常识"><a href="#1-Web网站常识" class="headerlink" title="1. Web网站常识"></a>1. Web网站常识</h2><ol>
@@ -1164,125 +1189,69 @@
 
 <p><strong>4. 验证</strong></p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// 伪造协议头访问</span><br><span class="line">[root@C-<span class="attribute">Server</span> ~]<span class="comment"># curl -e &quot;http://www.baidu.com&quot; -I http://192.168.69.113/test.jpg</span></span><br><span class="line">HTTP/<span class="number">1</span>.<span class="number">1</span> <span class="number">403</span> Forbidden</span><br><span class="line">Server: nginx/<span class="number">1</span>.<span class="number">12</span>.<span class="number">2</span></span><br><span class="line">Date: Tue, <span class="number">17</span> Apr <span class="number">2018</span> <span class="number">04</span>:<span class="number">55</span>:<span class="number">18</span> GMT</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: <span class="number">169</span></span><br><span class="line">Connection: keep-alive</span><br><span class="line"></span><br><span class="line">// 伪造协议头访问</span><br><span class="line">[root@C-Server ~]<span class="comment"># curl -e &quot;http://www.xuliangwei.com&quot; -I http://192.168.69.113/tes</span></span><br><span class="line">t.jpg</span><br><span class="line">HTTP/<span class="number">1</span>.<span class="number">1</span> <span class="number">200</span> OK</span><br><span class="line">Server: nginx/<span class="number">1</span>.<span class="number">12</span>.<span class="number">2</span></span><br><span class="line">Date: Tue, <span class="number">17</span> Apr <span class="number">2018</span> <span class="number">04</span>:<span class="number">55</span>:<span class="number">27</span> GMT</span><br><span class="line">Content-Type: image/jpeg</span><br><span class="line">Content-Length: <span class="number">174315</span></span><br><span class="line">Last-Modified: Wed, <span class="number">29</span> Nov <span class="number">2017</span> <span class="number">03</span>:<span class="number">16</span>:<span class="number">08</span> GMT</span><br><span class="line">Connection: keep-alive</span><br><span class="line">ETag: <span class="string">&quot;5a1e2678-2a8eb&quot;</span></span><br><span class="line">Expires: Tue, <span class="number">17</span> Apr <span class="number">2018</span> <span class="number">16</span>:<span class="number">55</span>:<span class="number">27</span> GMT</span><br><span class="line">Cache-Control: max-age=<span class="number">43200</span></span><br><span class="line">Accept-Ranges: bytes</span><br></pre></td></tr></table></figure>
-      
+        </section>
+        <hr/>
+        <nav class="pagination" style="width:auto" role="pagination">
+            
+            <a data-pjax class="newer-posts" href="/2021/06/06/Kubernetes/">← Prev Post</a>
+            
+            <a class="share-button" data-original-title title>Share this Post</a>
+            
+        </nav>
+        <br/>
+        <br/>
+        <section id="comment">
+            <div id="comment-box"></div>
+        </section>
+
+
+    </article>
+</main>
+
+
+  
+<footer class="site-footer">
+    
+    <div class="inner">
+        <section class="copyright"><a href="/"></a> &copy; Hexo 2014</section>
+        <section class="poweredby">Published with <a target="_blank" href="http://hexo.io/">Hexo   </a> and Theme by <a target="_blank" href="https://github.com/yuche/hexo-theme-kael">Kael</a></section>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/06/06/Nginx/" data-id="ckpk1rl3h00009jg0a80rcav8" data-title="Nginx" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2021/06/06/Kubernetes/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Kubernetes
-        
-      </div>
-    </a>
-  
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2021/06/06/JenKins/">JenKins</a>
-          </li>
-        
-          <li>
-            <a href="/2021/06/06/MySQL/">MySQL</a>
-          </li>
-        
-          <li>
-            <a href="/2021/06/06/Kubernetes/">Kubernetes</a>
-          </li>
-        
-          <li>
-            <a href="/2021/06/06/Nginx/">Nginx</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2021 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
 </footer>
+</div>
+</div><!-- /scroller -->
 
+</div><!-- /pusher -->
+</div><!-- /container -->
+</div>
+
+<!-- Easter eggs -->
+
+<div class="egg animated">
+    <a id="close-button" href="#">X</a>
+    <div class="block">
+        <div class="loading">
+            <span class="ball1"></span>
+            <span class="ball2"></span>
+        </div>
     </div>
-    <nav id="mobile-nav">
+</div>
   
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.4.1.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
+<script src="//cdn.staticfile.org/jquery/1.11.0/jquery.min.js"></script>
+<script>
+    if (!window.jQuery) {
+        var script = document.createElement('script');
+        script.src = "/js/jquery.min.js";
+        document.body.appendChild(script);
+    }
+</script>
+<script type="text/javascript" src="/js/lib.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
 
 
 
 
 
-  </div>
+
+
 </body>
 </html>
