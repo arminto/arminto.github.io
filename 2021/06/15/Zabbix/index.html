@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Zabbix">
+<meta property="og:url" content="http://example.com/2021/06/15/Zabbix/index.html">
+<meta property="og:site_name" content="LEMON">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grib94u040j30fa056q35.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grib9qeotwj30al057dfu.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grib9kcr94j30fe0dudg8.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grib9z8m8sj30ab08jt8s.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1griba76a14j30b308jaa6.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribabqsmgj30fe05pmx5.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribai0mxvj30fe0c3gm5.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribaptw20j30fd08wjrl.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribat7n6xj30fe092wet.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribaz8rjcj30fe09at92.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribb5u3uoj30fe08wwes.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribbaggg2j30fe090weo.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribbg1305j30fe0an0sz.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribbqfufxj30fe09dgm0.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribbtnrdhj30fe0apq3b.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribc25jb0j30fe01uglh.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribc5rr8zj30fe05b3yg.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribc9zrrnj30fe060weh.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribckditlj60fe06x74e02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribcnp4ihj30fd06b0ss.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribdng88jj30fd08g0t8.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribdtd5i2j30fe08pdfx.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribdy208sj30fe05d0sq.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribe3oljwj30fe077q38.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribe9ysvpj60fe0370sv02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribegs7ulj30fe05zq2y.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribelxv2vj30fe05yjrb.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribeqmt1fj30fe07omxh.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribewp1bqj30fe02m3yj.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribf2abgij30fe06baa4.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribf7w94aj30fe0a63yv.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribfcnt0fj30fe08gaa9.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribfhs34dj30fe08cglq.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribfnql4gj30fe099q33.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribfsiutmj30fe06baa3.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribfy3ui6j30a607aglm.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribg3nb9gj30a40f0mxm.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribgac7jxj30fe07sq34.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribgf0lvnj30bj06iwej.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribgpfxtej30yx0fjmys.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribgwc5mcj30qx03bweh.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribgzzpyfj30wk02h74s.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribh3c5r9j30p302pglj.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribhftjq1j30p60foaai.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribhnjai1j30p90fqt9g.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribhufxy9j30op0f83z3.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribhzlae6j30od0fegm2.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribi643qtj30op0fbjs4.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribiacvozj30ol0fdwez.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribiflu1ej30rf0czjrg.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribim3vpwj313r0f1taf.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribiqd7j3j30tp0c90t2.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribitzgvij31420lamyn.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribixcvzcj31480lamyu.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribj14shij31480msq4v.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribj6a2tyj30s909i3yu.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribjadbkqj30r907gjru.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribjgl5j8j30u10a374q.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribjl7v0zj30u80btaam.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribjxjrltj31480hstaj.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribk0nf8pj314605jgmd.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribk6dwxcj61480d6wfs02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribk9marpj31480j175e.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribkddg23j30pv03djrd.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribkjg7ifj61480k3q4602.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribko53brj31460lbgnb.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribktb0nvj31310b7ach.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribkyyih5j31320c4q5e.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribl2nt1ej61430l840b02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribl4x5ofj31430l876c.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribl88jx5j31430n476u.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1griblddg0nj31430k3wfq.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1griblgm2arj31430letaw.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1griblldubkj31430lbwg8.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1griblq1d77j30td0mut9o.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribltsr41j30tv0a9gm0.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1griblwlaoaj31430mf0vc.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribm0c0nlj31430hz40m.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribm43vd1j31430btjsg.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribm6doawj313i0n7abw.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribmdfrt5j313i06k3yf.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribmg8zx6j313k0drdh1.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribmj3hjnj31430liq46.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribmp6c62j30j1075dfu.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribmtxlboj30ik05ut92.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribmyzoqdj30j3076q30.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribn3ox4fj31430lnwfr.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribn6xn7qj613k0je40t02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribnbne07j31430fp0uf.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribnevlnlj31430k33zr.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribnhpxy3j314308eaat.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribnkypk1j31430l940f.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribnr32m8j31430lbdhu.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribnurwiej31430ixjte.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribnz269zj311e0pi0zu.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribo2s2qvj311e0pr0z7.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribo7fe98j313m0f2405.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1griboaqi75j31430brt9o.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribohsk4rj30up0eit9p.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1griboklgtdj61430ett9y02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribopsn61j31430bv75a.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1griboucnaxj30t807jq39.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1griboy62xdj30io0a9jrk.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribp49odsj30tq0893yz.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribp6xpw1j31430b33z8.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribpbv0tpj30ty0c4aan.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribpfzi0yj31430egq46.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribpl384dj313k0gdgmc.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribpi7arjj31430f4jsk.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribpptijoj31430dcjsf.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribptk6urj31430d0759.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribpxbhjrj311e0f7q4j.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribpypl5hj311e0f6jt0.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribq2ehq7j311o0b8wf5.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribq57kfoj311o0m575h.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribq9yg51j311o0bydgp.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribqf2ijyj311o0ffjsa.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribqca9b0j30s60esmyc.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribqk7hqtj311o0f0q4a.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribqnuo7tj311e0cvq46.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribqqbuguj311o0i476c.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribqt60kzj311o0latal.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribqxrqmsj312a0ay74w.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribr1frzhj30rr09o74n.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribr7nokqj312a0c5dgm.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribrbizf0j312a0bywfi.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribre5bchj312a06lmxm.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribrh0rm2j312a0fjdgt.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribries3hj312a0f7gnk.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribrm60c9j311t0n9tc2.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribrqe3r1j315a0po77j.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribrv1v6aj311m0np3zr.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribrxw7ehj311m0nmgni.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribs0jquwj311m0nnta7.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribs3votjj30wa0f2myi.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribs7p6yhj30wa0j442g.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribsbfpqwj30wa0j2q47.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribsfnaw9j30wd0hk764.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribsjdyu9j30ur0mqjv7.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribsm6exkj30ol0o9go0.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribsrxi9hj30q70bwjsc.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribswjceyj30t50d9ab0.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribszc4uvj30t80fydgr.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribt23ixnj30wc0ktwhk.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribt4ypc7j30t60fq0uj.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gribt8n4wlj30wa0ad0tm.jpg">
+<meta property="article:published_time" content="2021-06-14T17:53:46.000Z">
+<meta property="article:modified_time" content="2021-06-14T17:54:24.215Z">
+<meta property="article:author" content="Armin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grib94u040j30fa056q35.jpg">
+
+<link rel="canonical" href="http://example.com/2021/06/15/Zabbix/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Zabbix | LEMON</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LEMON</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">死记性不如烂笔头</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/15/Zabbix/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/armin.png">
+      <meta itemprop="name" content="Armin">
+      <meta itemprop="description" content="记录生活中的点点滴滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LEMON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Zabbix
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+        <!--toc-->
+<span id="more"></span>
+
+<h1 id="一、监控生态"><a href="#一、监控生态" class="headerlink" title="一、监控生态"></a>一、监控生态</h1><h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>监控是整个运维乃至整个产品生命周期中最重要的一环，事前及时预警发现故障，事后提供详实的数据用于追查定位问题。目前业界有很多不错的开源产品可供选择。选择一款开源的监控系统，是一个省时省力、效率最高的方案。当然，对监控不是很明白的朋友们，看了以下文章可能会对监控整个体系有比较深刻的认识。</p>
+<h2 id="2-监控目标"><a href="#2-监控目标" class="headerlink" title="2. 监控目标"></a>2. 监控目标</h2><p>每个人由于所在的行业、公司、业务、岗位不同，对监控的理解也不尽相同，但是我们需要注意，监控是需要站在公司的业务角度去考虑，而不是针对某个监控技术的使用。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grib94u040j30fa056q35.jpg" alt="1"></p>
+<p><strong>对系统不间断的实时监控：</strong>实际上是对系统不间断的实时监控(这就是监控)；</p>
+<p><strong>实时反馈系统当前状态：</strong>我们监控某个硬件、或者某个系统，都是需要能实时看到当前系统的状态，是正常、异常、或者故障</p>
+<p><strong>保证服务可靠性安全性：</strong>我们监控的目的就是要保证系统、服务、业务正常运行</p>
+<p><strong>保证业务持续稳定运行：</strong>如果我们的监控做得很完善，即使出现故障，能第一时间接收到故障报警，在第一时间处理解决，从而保证业务持续性的稳定运行。</p>
+<h2 id="3-监控方法"><a href="#3-监控方法" class="headerlink" title="3. 监控方法"></a>3. 监控方法</h2><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grib9qeotwj30al057dfu.jpg"></p>
+<p><strong>发现问题：</strong>当系统发生故障报警，我们会收到故障报警的信息。</p>
+<p><strong>定位问题：</strong>故障邮件一般都会写某某主机故障、具体故障的内容，我们需要对报警内容进行分析。比如一台服务器连不上，我们就需要考虑是网络问题、还是负载太高导致长时间无法连接，又或者某开发触发了防火墙禁止的相关策略等，我们就需要去分析故障具体原因。</p>
+<p><strong>解决问题：</strong>当然我们了解到故障的原因后，就需要通过故障解决的优先级去解决该故障。</p>
+<p><strong>总结问题：</strong>当我们解决完重大故障后，需要对故障原因以及防范进行总结归纳，避免以后重复出现。</p>
+<h2 id="4-监控工具"><a href="#4-监控工具" class="headerlink" title="4. 监控工具"></a>4. 监控工具</h2><blockquote>
+<p>下面我们需要选择一款适合公司业务的监控工具进行监控,。这里我对监控工具进行了简单的分类。</p>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grib9kcr94j30fe0dudg8.jpg" alt="2"></p>
+<h3 id="4-1-老牌监控如下"><a href="#4-1-老牌监控如下" class="headerlink" title="4.1 老牌监控如下"></a>4.1 老牌监控如下</h3><p><strong>MRTG</strong>（Multi Route Trffic Grapher）是一套可用来绘制网络流量图的软件，由瑞士奥尔滕的Tobias Oetiker与Dave Rand所开发，以GPL授权。MRTG最好的版本是1995年推出的，用Perl语言写成，可跨平台使用，数据采集用SNMP协议，MRTG将手机到的数据通过Web页面以GIF或者PNG格式绘制出图像。</p>
+<p>**Ganglia **是一个跨平台的、可扩展的、高性能的分布式监控系统，如集群和网格。它基于分层设计，使用广泛的技术，用RRDtool存储数据。具有可视化界面，适合对集群系统的自动化监控。其精心设计的数据结构和算法使得监控端到被监控端的连接开销非常低。目前已有成千上万的集群正在使用这个监控系统，可以轻松地处理2000个节点的集群环境。</p>
+<p><strong>Cacti</strong>（英文含义为仙人掌）是一套基于PHP、MySQL、SNMP和RRDtool开发的网络流量监测图形分析工具，它通过snmpget来获取数据使用RRDtool绘图，但使用者无须了解RRDtool复杂的参数。提供了非常强大的数据和用户管理功能，可以指定每一个用户能查看树状结构、主机设备以及任何一张图，还可以与LDAP结合进行用户认证，同时也能自定义模板。在历史数据展示监控方面，其功能相当不错。Cacti通过添加模板，使不同设备的监控添加具有可复用性，并且具备可自定义绘图的功能，具有强大的运算能力（数据的叠加功能）</p>
+<p><strong>Nagios</strong>是一个企业级监控系统，可监控服务的运行状态和网络信息等，并能监视所指定的本地或远程主机状态以及服务，同时提供异常告警通知功能等。Nagios可运行在Linux和UNIX平台上。同时提供Web界面，以方便系统管理人员查看网络状态、各种系统问题、以及系统相关日志等。Nagios的功能侧重于监控服务的可用性，能根据监控指标状态触发告警。目前Nagios也占领了一定的市场份额，不过Nagios并没有与时俱进，已经不能满足于多变的监控需求，架构的扩展性和使用的便捷性有待增强，其高级功能集成在商业版Nagios XI中。</p>
+<p><strong>Smokeping</strong>主要用于监视网络性能，包括常规的ping、www服务器性能、DNS查询性能、SSH性能等。底层也是用RRDtool做支持，特点是绘制图非常漂亮，网络丢包和延迟用颜色和阴影来标示，支持将多张图叠放在一起，其作者还开发了MRTG和RRDtll等工具。 Smokeping的站点为：<a target="_blank" rel="noopener" href="http://tobi.oetiker.cn/hp%E3%80%82">http://tobi.oetiker.cn/hp。</a></p>
+<p><strong>开源监控系统</strong>OpenTSDB用HBase存储所有时序（无须采样）的数据，来构建一个分布式、可伸缩的时间序列数据库。它支持秒级数据采集，支持永久存储，可以做容量规划，并很容易地接入到现有的告警系统里。OpenTSDB可以从大规模的集群（包括集群中的网络设备、操作系统、应用程序）中获取相应的采集指标，并进行存储、索引和服务，从而使这些数据更容易让人理解，如Web化、图形化等。</p>
+<h3 id="4-2-王牌监控"><a href="#4-2-王牌监控" class="headerlink" title="4.2 王牌监控"></a>4.2 王牌监控</h3><p><strong>Zabbix</strong>是一个分布式监控系统，支持多种采集方式和采集客户端，有专用的Agent代理，也支持SNMP、IPMI、JMX、Telnet、SSH等多种协议，它将采集到的数据存放到数据库，然后对其进行分析整理，达到条件触发告警。其灵活的扩展性和丰富的功能是其他监控系统所不能比的。相对来说，它的总体功能做得非常优秀。从以上各种监控系统的对比来看，Zabbix都是具有优势的，其丰富的功能、可扩展的能力、二次开发的能力和简单易用的特点，读者只要稍加学习，即可构建自己的监控系统。</p>
+<p><strong>小米的监控系统：Open-Falcon</strong>。Open-Falcon的目标是做最开放、最好用的互联网企业级监控产品。</p>
+<h3 id="4-3-三方监控"><a href="#4-3-三方监控" class="headerlink" title="4.3 三方监控"></a>4.3 三方监控</h3><p>现在市场上有很多不错的第三方监控，比如：<strong>监控宝、监控易、听云</strong>、还有很多云厂商自带监控，但在这里我不打算着重介绍，如果想了解三方监控可自行上官网咨询。（避免说广告植入）。</p>
+<h2 id="5-监控流程"><a href="#5-监控流程" class="headerlink" title="5. 监控流程"></a>5. 监控流程</h2><blockquote>
+<p>上面介绍了这么多，到底选择什么监控工具最合适呢？我这里推荐几款开源监控工具：Zabbix、Open-Falcon、LEPUS天兔(专用于监控数据库)。但本文还是基于Zabbix来构建整个监控体系生态圈。 下面我们就来聊聊Zabbix的整个流程：</p>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grib9z8m8sj30ab08jt8s.jpg"></p>
+<p><strong>数据采集：</strong>Zabbix通过SNMP、Agent、ICMP、SSH、IPMI等对系统进行数据采集；</p>
+<p><strong>数据存储：</strong>Zabbix存储在MySQL上，也可以存储在其他数据库服务；</p>
+<p><strong>数据分析：</strong>当我们事后需要复盘分析故障时，Zabbix能给我们提供图形以及时间等相关信息，方面我们确定故障所在；</p>
+<p><strong>数据展示：</strong>Web界面展示、(移动APP、java_php开发一个Web界面也可以)；</p>
+<p><strong>监控报警：</strong>电话报警、邮件报警、微信报警、短信报警、报警升级机制等（无论什么报警都可以）；</p>
+<p><strong>报警处理：</strong>当接收到报警，我们需要根据故障的级别进行处理，比如:重要紧急、重要不紧急，等。根据故障的级别，配合相关的人员进行快速处理。</p>
+<h2 id="6-监控指标"><a href="#6-监控指标" class="headerlink" title="6. 监控指标"></a>6. 监控指标</h2><p>上面了解了监控方法、目标、流程、也了解了监控有哪些工具，可能有人会疑惑，我们具体要监控些什么东西，在这里我进行了分类整理，包含硬件监控、系统监控、应用监控、网络监控、流量分析、日志监控、安全监控、API监控、性能监控、业务监控。</p>
+<h3 id="6-1-硬件监控"><a href="#6-1-硬件监控" class="headerlink" title="6.1 硬件监控"></a>6.1 硬件监控</h3><p>早期我们通过机房巡检的方式，查看硬件设备灯光闪烁情况判断是否故障，这样非常浪费人力，并且是重复性无技术含量的工作，大家懂得。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1griba76a14j30b308jaa6.jpg" alt="55"></p>
+<p>当然我们现在可以通过IPMI对硬件详细情况进行监控，并对CPU、内存、磁盘、温度、风扇、电压等设置报警设置报警阈值(自行对监控报警内容编写合理的报警范围) 。</p>
+<p>IPMI监控硬件服务参考资料：Zabbix IPMI Interface</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribabqsmgj30fe05pmx5.jpg" alt="22"></p>
+<h3 id="6-2-系统监控"><a href="#6-2-系统监控" class="headerlink" title="6.2 系统监控"></a>6.2 系统监控</h3><p>中小型企业基本全是Linux服务器，那么我们肯定是要监控起系统资源的使用情况，系统监控是监控体系的基础。</p>
+<p>监控主要对象：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribai0mxvj30fe0c3gm5.jpg" alt="ss"></p>
+<p>CPU有几个重要的概念：上下文切换、运行队列和使用率。这也是我们CPU监控的几个重点指标。</p>
+<p>通常情况，每个处理器的运行队列不要高于3，CPU 利用率中用“户态/内核态”比例维持在70/30，空闲状态维持在50%，上下文切换要根据系统繁忙程度来综合考量。</p>
+<p>针对CPU常用的工具有：htop、top、vmstat、mpstat、dstat、glances。Zabbix提供系统监控模板：Zabbix Agent Interface。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribaptw20j30fd08wjrl.jpg" alt="ds"></p>
+<p><strong>CPU整体状态</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribat7n6xj30fe092wet.jpg" alt="ddds"></p>
+<p><strong>上下文切换</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribaz8rjcj30fe09at92.jpg" alt="ass"></p>
+<p><strong>负载状态</strong></p>
+<p>内存：通常我们需要监控内存的使用率、SWAP使用率、同时可以通过Zabbix描绘内存使用率的曲线图形发现某服务内存溢出等。</p>
+<p>针对内存常用的工具有：free、top、vmstat、glances。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribb5u3uoj30fe08wwes.jpg" alt="q"></p>
+<p><strong>内存使用率</strong></p>
+<p>IO分为磁盘IO和网络IO。除了在做性能调优我们要监控更详细的数据外，日常监控只关注磁盘使用率、磁盘吞吐量、磁盘写入繁忙程度，网络也是监控网卡流量即可。</p>
+<p>常用工具有：iostat、iotop、df、iftop、sar、glances。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribbaggg2j30fe090weo.jpg" alt="wq"></p>
+<p><strong>磁盘使用率</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribbg1305j30fe0an0sz.jpg" alt="ee"></p>
+<p><strong>磁盘读/写吞吐</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribbqfufxj30fe09dgm0.jpg" alt="ww"></p>
+<p><strong>网卡进出口流量</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribbtnrdhj30fe0apq3b.jpg" alt="3w"></p>
+<p><strong>TCP的11种状态信息</strong></p>
+<p>其它系统监控还有运行的进程端口、进程数、登陆用户、Open File等（详细查看Zabbix自带OS Linux模板）。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribc25jb0j30fe01uglh.jpg" alt="ac"></p>
+<h3 id="6-3-应用监控"><a href="#6-3-应用监控" class="headerlink" title="6.3 应用监控"></a>6.3 应用监控</h3><p>把硬件监控和系统监控研究明白后，我们进一步操作是需要登陆到服务器上查看服务器运行了哪些服务，都需要监控起来。</p>
+<p>应用服务监控也是监控体系中比较重要的内容，例如：LVS、HAProxy、Docker、Nginx、PHP、Memcached、Redis、MySQL等，相关的服务都需要使用zabbix监控起来。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribc5rr8zj30fe05b3yg.jpg" alt="ax"></p>
+<p><strong>nginx_status</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribc9zrrnj30fe060weh.jpg" alt="h"></p>
+<p><strong>PHP-FPM_status</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribckditlj60fe06x74e02.jpg" alt="m"></p>
+<p><strong>Redis_status</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribcnp4ihj30fd06b0ss.jpg" alt="v"></p>
+<p><strong>JVM监控</strong></p>
+<ul>
+<li>Zabbix提供应用服务监控：Zabbix Agent UserParameter</li>
+<li>Zabbix提供的Java监控：Zabbix     JMX Interface</li>
+<li>Percona提供MySQL数据库监控：percona-monitoring-plulgins</li>
+</ul>
+<h3 id="6-4-网络监控"><a href="#6-4-网络监控" class="headerlink" title="6.4 网络监控"></a>6.4 网络监控</h3><p>作为一个针对全国用户的电商网站，时刻掌握各地到机房的网络状态也是必须的。</p>
+<p>网络监控是我们构建监控平台是必须要考虑的，尤其是针对有多个机房的场景，各个机房之间的网络状态，机房和全国各地的网络状态都是我们需要重点关注的对象，那如何掌握这些状态信息呢？我们需要借助于网络监控工具Smokeping。 </p>
+<p>Smokeping 是rrdtool的作者Tobi Oetiker的作品，是用Perl写的，主要是监视网络性能，www服务器性能，DNS查询性能等，使用rrdtool绘图，而且支持分布式，直接从多个agent进行数据的汇总。</p>
+<p>同时，由于自己监控点比较少，还可以借助很多商业的监控工具，比如监控宝、基调、博瑞等。同时这些服务提供商还可以帮助你监控CDN的状态。</p>
+<p><strong>监控宝</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribdng88jj30fd08g0t8.jpg" alt="u"></p>
+<h3 id="6-5-流量分析"><a href="#6-5-流量分析" class="headerlink" title="6.5 流量分析"></a>6.5 流量分析</h3><p>网站流量分析对于运维人员来说，更是一门必须掌握的知识了。比如对于一家电商公司来说：通过对订单来源的统计和分析，可以了解我们在某个网站上的广告投入有没有收到预期的效果。 可以区分不同地区的访问人数、甚至商品交易额等。百度统计、Google分析、站长工具等，只需要在页面嵌入一个js即可。</p>
+<p>但是，数据始终是在对方手中，个性化定制不方便，于是Google出一个叫Piwik的开源分析工具。</p>
+<p><strong>Piwik</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribdtd5i2j30fe08pdfx.jpg" alt="fg"></p>
+<p><strong>百度统计</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribdy208sj30fe05d0sq.jpg" alt="xh"></p>
+<h3 id="6-6-日志监控"><a href="#6-6-日志监控" class="headerlink" title="6.6 日志监控"></a>6.6 日志监控</h3><p>通常情况下，随着系统的运行，操作系统会产生系统日志，应用程序会产生应用程序的访问日志、错误日志，运行日志，网络日志，我们可以使用ELK来进行日志监控。</p>
+<p>对于日志监控来说，最见的需求就是收集、存储、查询、展示，开源社区正好有相对应的开源项目：Logstash（收集）+ElasticSearch（存储+搜索）+Kibana（展示）。</p>
+<p>我们将这三个组合起来的技术称之为ELK Stack，所以说ELK Stack指的是Elasticsearch、Logstash、Kibana技术栈的结合。</p>
+<p>如果收集了日志信息，部署更新有异常出现，可以立即在Kibana上看到。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribe3oljwj30fe077q38.jpg" alt="nu"></p>
+<p><strong>ELK日志展示（当然也可以通过Zabbix过滤错误日志来进行告警。）</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribe9ysvpj60fe0370sv02.jpg" alt="op"></p>
+<h3 id="6-7-安全监控"><a href="#6-7-安全监控" class="headerlink" title="6.7 安全监控"></a>6.7 安全监控</h3><p>虽然Linux开源的安全产品不少，比如四层iptables，七层WEB防护Nginx+Lua实现WAF，最后将相关的日志都收至ELkstack，通过图形化进行不同的攻击类型展示。但是始终是一件比较耗费时间，并且个人效果并不是很好。这个时候我们可以选择接入第三方服务厂商。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribegs7ulj30fe05zq2y.jpg" alt="qxgh"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribelxv2vj30fe05yjrb.jpg" alt="0o"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribeqmt1fj30fe07omxh.jpg" alt="zqa"></p>
+<p><strong>某某三方安全</strong></p>
+<p>三方厂商提供全面的漏洞库，涵盖服务、后门、数据库、配置检测、CGI、SMTP等多种类型。</p>
+<p>全面检测主机、Web应用漏洞自主挖掘和行业共享相结合第一时间更新0-day漏洞，杜绝最新安全隐患。</p>
+<h3 id="6-8-API监控"><a href="#6-8-API监控" class="headerlink" title="6.8 API监控"></a>6.8 API监控</h3><p>由于API变得越来越重要，很显然我们也需要这样的数据来分辨我们提供的 API是否能够正常运作。</p>
+<p>监控API接口GET、POST、PUT、DELETE、HEAD、OPTIONS的请求。可用性、正确性、响应时间为三大重性能指标。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribewp1bqj30fe02m3yj.jpg" alt="sder"></p>
+<p><strong>API监控</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribf2abgij30fe06baa4.jpg" alt="pl"></p>
+<p><strong>三方API监控</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribf7w94aj30fe0a63yv.jpg" alt="jhk"></p>
+<p><strong>响应时间</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribfcnt0fj30fe08gaa9.jpg" alt="pkgh"></p>
+<h3 id="6-9-性能监控"><a href="#6-9-性能监控" class="headerlink" title="6.9 性能监控"></a>6.9 性能监控</h3><p>全面监控网页性能，DNS响应时间、HTTP建立连接时间、页面性能指数、响应时间、可用率、元素大小等。Zabbix提供URL监控：Zabbix Web 监控。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribfhs34dj30fe08cglq.jpg" alt="hfyu"></p>
+<p><strong>Zabbix站点监控</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribfnql4gj30fe099q33.jpg" alt="gvb"></p>
+<p><strong>终端响应时间</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribfsiutmj30fe06baa3.jpg" alt="ugfr"></p>
+<h3 id="6-10-业务监控"><a href="#6-10-业务监控" class="headerlink" title="6.10 业务监控"></a>6.10 业务监控</h3><p>没有业务指标监控的监控平台，不是一个完善的监控平台，通常在我们的监控系统中，必须将我们重要的业务指标进行监控，并设置阈值进行告警通知。比如电商行业：</p>
+<p>每分钟产生多少订单、每分钟注册多少用户、每天有多少活跃用户、每天有多少推广活动、推广活动引入多少用户、推广活动引入多少流量、推广活动引入多少利润等，重要指标都可以加入Zabbix上，然后通过Screen展示。</p>
+<p>注：由于业务监控图表，涉及到隐私的数据太多，就不截图了。</p>
+<h2 id="7-监控报警"><a href="#7-监控报警" class="headerlink" title="7. 监控报警"></a>7. 监控报警</h2><p>故障报警通知的方式有很多种，当然最常用的还是短信和邮件。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribfy3ui6j30a607aglm.jpg" alt="vdr"></p>
+<p><strong>短信报警</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribg3nb9gj30a40f0mxm.jpg" alt="shoyji"></p>
+<p><strong>邮件报警</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribgac7jxj30fe07sq34.jpg" alt="youjigh"></p>
+<h2 id="8-报警处理"><a href="#8-报警处理" class="headerlink" title="8. 报警处理"></a>8. 报警处理</h2><p>报警后故障如何处理？首先我们可以通过告警升级机制先自动处理，比如Nginx服务down了，可以设置告警升级自动启动Nginx。</p>
+<p>但是如果一般业务出现了严重故障，我们通常根据故障的级别、业务，来指派不同的运维人员进行处理。</p>
+<p>当然不同业务形态、不同架构、不同服务可能采用的方式都不同，这个没有一个固定的模式套用。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribgf0lvnj30bj06iwej.jpg" alt="gfvyt"></p>
+<h2 id="10-面试监控"><a href="#10-面试监控" class="headerlink" title="10. 面试监控"></a>10. 面试监控</h2><blockquote>
+<p>在运维面试中，常常会被问题监控相关的问题，这个问题到底该如何来回答，我针对本文给大家提供了一个简单的回答思路</p>
+</blockquote>
+<p>1、硬件监控</p>
+<p>通过SNMP来进行路由器交换机的监控(这些可以跟一些厂商沟通来了解如何做)、服务器的温度以及其它，可以通过IPMI来实现。当然如果没有硬件全都是云，直接跳过这一步骤。</p>
+<p>2、系统监控</p>
+<p>如CPU的负载，上下文切换、内存使用率、磁盘读写、磁盘使用率、磁盘inode使用率。当然这些都是需要配置触发器，因为默认太低会频繁报警。</p>
+<p>3、服务监控</p>
+<p>比如公司用的LNMP架构，Nginx自带Status模块、PHP也有相关的Status、MySQL的话可以通过Percona官方工具来进行监控。Redis这些通过自身的info获取信息进行过滤等。方法都类似。要么服务自带。要么通过脚本来实现想监控的内容，以及报警和图形功能。</p>
+<p>4、网络监控</p>
+<p>如果是云主机又不是跨机房，那么可以选择不监控网络。当然你说我们是跨机房以及如何如何，推荐使用smokeping来做网络相关的监控，或者直接交给你们的网络工程师来做，因为术业有专攻。</p>
+<p>5、安全监控</p>
+<p>如果是云主机可以考虑使用自带的安全防护。当然也可以使用iptables。如果是硬件，那么推荐使用硬件防火墙。使用云可以购买防DDOS，避免出现故障导致down机一天。如果是系统，那么权限、密码、备份、恢复等基础方案要做好。Web同时也可以使用Nginx+Lua来实现一个Web层面的防火墙。当然也可以使用集成好的OpenResty。</p>
+<p>6、Web监控</p>
+<p>Web监控的话题其实还是很多。比如可以使用自带的Web监控来监控页面相关的延迟、js响应时间、下载时间、等等。这里我推荐使用专业的商业软件监控宝或听云来实现。毕竟人家全国各地都有机房（如果本身是多机房那就另说了）。</p>
+<p>7、日志监控</p>
+<p>如果是Web的话可以使用监控Nginx的50x、40x的错误日志，PHP的ERROR日志。其实这些需求无非是，收集、存储、查询、展示，我们其实可以使用开源的ELKStack来实现。Logstash（收集）、Elasticsearch（存储+搜索）、Kibana（展示）。</p>
+<p>8、业务监控</p>
+<p>上面做了那么多，其实最终还是保证业务的运行。这样我们做的监控才有意义。所以业务层面这块的监控需要和开发以及总监开会讨论，监控比较重要的业务指标，（需要开会确认）然后通过简单的脚本就可以实现，最后设置触发器即可 。</p>
+<p>9、流量分析</p>
+<p>平时我们分析日志都是拿awk sed xxx一堆工具来实现。这样对我们统计IP、PV、UV不是很方便。那么可以使用百度统计、Google统计、商业，让开发嵌入代码即可。为了避免隐私也可以使用Piwik来做相关的流量分析。</p>
+<p>10、可视化</p>
+<p>通过Screen以及引入一些第三方的库来美化界面，同时我们也需要知道，订单量突然增加、突然减少。或者说突然来了一大波流量，这流量从哪儿来，是不是推广了，还是被攻击了。可以结合监控平来梳理各个系统之间的业务关系。</p>
+<p>11、自动化监控</p>
+<p>如上我们做了那么多的工作，当然不能是一台一台的来加key实现。可以通过Zabbix的主动模式以及被动模式来实现。当然最好还是通过API来实现。</p>
+<p>总结</p>
+<p>真正想做到更完整的监控体系，目前的开源软件确实无法很好地满足，有条件的公司都开始自己开发自己的监控系统，比如小米开源的Open-Falcon。</p>
+<p>也有比较好的开源的监控框架如Sensu等，再加上InfluxDB、Grafana可以用来定制符合自己企业的监控平台。</p>
+<h1 id="二、Zabbix配置文件详解"><a href="#二、Zabbix配置文件详解" class="headerlink" title="二、Zabbix配置文件详解"></a>二、Zabbix配置文件详解</h1><blockquote>
+<p>在zabbix服务(server)端、客户(agent)端、代理(proxy)端分别对应着一个配置文件。</p>
+<ul>
+<li>zabbix_server.conf（服务端）</li>
+<li>zabbix_agentd.conf（客户端）</li>
+<li>zabbix_proxy.conf （代理端）</li>
+</ul>
+</blockquote>
+<h2 id="1-zabbix-server-conf详解"><a href="#1-zabbix-server-conf详解" class="headerlink" title="1. zabbix_server.conf详解"></a>1. zabbix_server.conf详解</h2><ol>
+<li><p>NodeID=0            #分布式节点id号，0代表是独立服务器，默认是被注释掉的，不强制配置</p>
+</li>
+<li><p>ListenPort=10051         #zabbix server的端口，默认是10051，可以自行修改，范围是1024-32767 ，一般默认即可</p>
+</li>
+<li><p>SourceIP=          #连接的源ip地址（出口），默认为空，默认即可</p>
+</li>
+<li><p>LogFile=/tmp/zabbix_server.log  #日志文件的存放位置</p>
+</li>
+<li><p>LogFileSize=1          #说明：日志达到多少M里就轮转；若此参数值为0时，则不轮转，日志将不断变大，建议设置成轮转。</p>
+</li>
+<li><p>DebugLevel=3          #指定调试级别，默认即可</p>
+</li>
+<li><p>PidFile=/tmp/zabbix_server.pid  #pid文件的存放位置</p>
+</li>
+<li><p>DBHost=localhost        #数据库主机名，当设置为localhost时，连接mysql通过sock</p>
+</li>
+<li><p>DBName=zabbix        #指定存放zabbix数据数据库的名字</p>
+</li>
+<li><p>DBUser=zabbix         #指定连接数据库的用户名</p>
+</li>
+<li><p>DBPassword=123456      #用户连接数据库需要的密码</p>
+</li>
+<li><p>DBSocket=/var/lib/mysql/mysql.sock     #前文主机设置为localhost，用户连接数据库所用的sock位置</p>
+</li>
+<li><p>DBPort=3306        #数据库的端口号，当用sock连接时，无关紧要，当通过网络连接时需设置</p>
+</li>
+<li><p>StartPollers=5        #说明;初始化时，启动子进程数量，数量越多，则服务端吞吐能力越强，对系统资源消耗越大。</p>
+</li>
+<li><p>StartIPMIPollers=0      #说明:主要用于IPmi技术用于获取硬件状态场景。若无相关监控项，建议设置为0</p>
+</li>
+<li><p>StartTrappers=5       #用于设置诸如SNMP STRAPPER场景提交来的数据的接收进程数，若客户机SNMP TRAPPER技术较多，建议加大此参数值</p>
+</li>
+<li><p>StartPingers=1       #用于设置启用icmp协议PING主机方式启动线程数量，若单台代理所管理机器超过500台，建议加大此数值</p>
+</li>
+<li><p>StartDiscoverers=1        #用于设置自动发现主机的线程数量，若单台代理所管理机器超过500台，可以考虑加大此数值（仅适用于直接AGENT场景）</p>
+</li>
+<li><p>StartHTTPPollers=1        #说明：用于设置WEB拨测监控线程数，可视具体情况增加或减少此数值。</p>
+</li>
+<li><p>JavaGateway=127.0.0.1       #JavaGateway的ip地址或主机名</p>
+</li>
+<li><p>JavaGatewayPort=10052      #JavaGateway的端口号</p>
+</li>
+<li><p>StartJavaPollers=5         #开启连接javagatey的进程数</p>
+</li>
+<li><p>SNMPTrapperFile=/tmp/zabbix_traps.tmp    # SNMP trap发送到server的数据临时存放文件</p>
+</li>
+<li><p>StartSNMPTrapper=0       #如果设置为1，snmp trapper进程就会开启</p>
+</li>
+<li><p>ListenIP=0.0.0.0          #监听来自trapper的ip地址</p>
+</li>
+<li><p>HousekeepingFrequency=1     #说明：多少小时清理一次代理端数据库的history, alert, and alarms，以保持代理端数据库轻便，建议保持默认</p>
+</li>
+<li><p>MaxHousekeeperDelete=500    #每次轮询housekeeper这个任务的时候，超过这个阀值的行都会被清理。</p>
+</li>
+<li><p>SenderFrequency=30        #说明:多少秒后重试发送失败的报警信息</p>
+</li>
+<li><p>CacheSize=8M          #说明：zabbix初始化时占用多少系统共享内存用于存储配置信息，HOST,ITEM,TRIGGER数据，视监控主机数量和监控项调整，建议调整到32M或者更大</p>
+</li>
+<li><p>CacheUpdateFrequency=60     #说明：zabbix更新操作系统CACHE配置，若管理页面操作不频繁，可以考虑加大参数值</p>
+</li>
+<li><p>StartDBSyncers=4          #将采集数据从CACHE同步到数据库线程数量，视数据库服务器I/O繁忙情况，和数据库写能力调整。数值越大，写能力越强。对数据库服务器I/O压力越大。</p>
+</li>
+<li><p>HistoryCacheSize=8M       #说明：用于设置划分多少系统共享内存用于存储采集的历史数据，此数值越大，数据库读压力越小</p>
+</li>
+<li><p>TrendCacheSize=4M         #说明：用于设置划分多少系统共享内存用于存储计算出来的趋势数据，此参数值从一定程度上可影响数据库读压力</p>
+</li>
+<li><p>HistoryTextCacheSize=16M      #说明:指定划出多少系统共享内存用于存储 character, text or log history数据，若二级代理内存足够，建议可适当扩大此数值，可很大程度上解决系统I/O压力，和数据库读压力</p>
+</li>
+<li><p>ValueCacheSize=8M   #说明：划出系统多少共享内存用于已请求的存储监控项信息，若监控项较多，建议加大此数值</p>
+</li>
+<li><p>NodeNoEvents=0   #说明：若节点为子结点，是否允许本地事件（events表）发送到主节点，1为不发送，但不影响此节点以下的节点的传播能力，视ZABBIX分布式系统架构设计开启或关闭。在不明架构前提下，建议保持默认</p>
+</li>
+<li><p>NodeNoHistory=0      #说明：若节点为子结点，是否允许本地历史数据发送到主节点，1为不发送，但不影响此节点以下的节点的传播能力，视ZABBIX分布式系统架构设计开启或关闭，在不明架构前提下，建议保持默认</p>
+</li>
+<li><p>Timeout=3           #说明：与AGNET\SNMP设备和其它外部设备通信超时设置，单位为秒；若采集数据不完整或网络繁忙，或从管理页面发现客户端状态变化频繁，可以考虑加大此数值。注意若此数值加大，应该考虑参数 StartPollers 是否有相应加大的必要。</p>
+</li>
+<li><p>TrapperTimeout=300      #说明：启用 trapper功能，用于进程等待超时设置。根据需要调整</p>
+</li>
+<li><p>UnreachablePeriod=45     #说明：当AGNET端处于不可用状态下，间隔多少秒后，尝试重新连接。建议根据具体情况设置。注意，若此数值过小，右agent端业务系统繁忙时，有可能造成报警信息误报</p>
+</li>
+<li><p>UnavailableDelay=60      #说明:当AGENT端处于可用状态下，间隔多少秒后，进行状态检查。若出现可正常采集数据，但管理页面AGENT状态不正常；若在网络，端口等均通畅情况下，AGENT状态仍不正常，可以考虑加大此数值</p>
+</li>
+<li><p>UnreachableDelay=15    #说明：当agent端处于不可达状态下，延迟多少秒后，进行重新尝试，建议保持默认，在AGENT接入调试阶段，可考虑减少此数值</p>
+</li>
+<li><p>AlertScriptsPath=/usr/local/zabbix/shell    #监控报警脚本的存放路径</p>
+</li>
+<li><p>FpingLocation=/usr/local/sbin/fping     #说明：IPv4 FPING命令路径，仅ROOT可用。注意使用此命令时，应该确认此命令是否存在</p>
+</li>
+<li><p>SSHKeyLocation=    #说明：在服务端需要SSH到AGENT端且采用用KEY验证方式时使用，默认为空。</p>
+</li>
+<li><p>LogSlowQueries=3000  #说明:用于服务端数据库慢查询功能，单位是毫秒；1毫秒=0.001秒，若有服务端数据库监控慢查询的需求，可以视具体情况调整此数。</p>
+</li>
+<li><p>TmpDir=/tmp            #临时文件夹</p>
+</li>
+<li><p>Include=/usr/local/etc/zabbix_server.general.conf   #说明：include配置文件，可以使用正则表达式，例如：/usr/local/zabbix-2.4.4/conf/ttlsa.com/*.conf</p>
+</li>
+<li><p>Include=/usr/local/etc/zabbix_server.conf.d/      #子配置文件路径</p>
+</li>
+<li><p>StartProxyPollers=1       #在zabbix proxy被动模式下用此参数</p>
+</li>
+<li><p>ProxyConfigFrequency=3600   #取值范围：1-604800，默认值：3600，proxy被动模式下，server多少秒同步配置文件至proxy </p>
+</li>
+<li><p>ProxyDataFrequency=1      #取值范围：1-3600，默认值:1，被动模式下，zabbix server间隔多少秒向proxy请求历史数据</p>
+</li>
+</ol>
+<h2 id="2、zabbix-agentd-conf详解"><a href="#2、zabbix-agentd-conf详解" class="headerlink" title="2、zabbix_agentd.conf详解"></a>2、zabbix_agentd.conf详解</h2><ol>
+<li><p>PidFile=/tmp/zabbix_agentd.pid    #pid文件的存放位置</p>
+</li>
+<li><p>LogFile=/tmp/zabbix_agentd.log    #日志文件的位置</p>
+</li>
+<li><p>LogFileSize=1             #当日志文件达到多大时进行轮询操作</p>
+</li>
+<li><p>DebugLevel=3            #日志信息级别</p>
+</li>
+<li><p>SourceIP=          #连接的源ip地址（出口），默认为空，即可</p>
+</li>
+<li><p>EnableRemoteCommands=0  #是否允许zabbix server端的远程指令，0表示不允许，1表示允许</p>
+</li>
+<li><p>LogRemoteCommands=0   #是否开启日志记录shell命令作为警告 0表示不允许，1表示允许</p>
+</li>
+<li><p>Server=127.0.0.1       #zabbix server的ip地址或主机名，可同时列出多个，需要用逗号隔开</p>
+</li>
+<li><p>ListenPort=10050       #zabbix agent监听的端口</p>
+</li>
+<li><p>ListenIP=0.0.0.0       #zabbix agent监听的ip地址</p>
+</li>
+<li><p>StartAgents=3        #zabbix agent开启进程数</p>
+</li>
+<li><p>ServerActive=127.0.0.1    #开启主动检查</p>
+</li>
+<li><p>Hostname=Zabbix server   #在zabbix server前端配置时指定的主机名要相同，最重要的配置</p>
+</li>
+<li><p>RefreshActiveChecks=120   #主动检查刷新的时间，单位为秒数</p>
+</li>
+<li><p>BufferSend=5        #数据缓冲的时间</p>
+</li>
+<li><p>BufferSize=100       #zabbix agent数据缓冲区的大小，当达到该值便会发送所有的数据到zabbix server</p>
+</li>
+<li><p>MaxLinesPerSecond=100   #zabbix agent发送给zabbix server最大的数据行</p>
+</li>
+<li><p>AllowRoot=0        #是否允许zabbix agent 以root用户运行</p>
+</li>
+<li><p>Timeout=3         #设定处理超时的时间</p>
+</li>
+<li><p>Include=/usr/local/etc/zabbix_agentd.userparams.conf   #子配置文件路径</p>
+</li>
+<li><p>Include=/usr/local/etc/zabbix_agentd.conf.d/    #包含子配置文件的路径</p>
+</li>
+<li><p>UnsafeUserParameters=0   #是否允许所有字符参数的传递</p>
+</li>
+<li><p>UserParameter=       #指定用户自定义参数</p>
+</li>
+</ol>
+<h2 id="3、zabbix-proxy-conf详解"><a href="#3、zabbix-proxy-conf详解" class="headerlink" title="3、zabbix_proxy.conf详解"></a>3、zabbix_proxy.conf详解</h2><ol>
+<li><p>Server=192.168.70.133       #指定zabbix server的ip地址或主机名</p>
+</li>
+<li><p>Hostname=zabbix-proxy-1.35    #定义监控代理的主机名，需和zabbix server前端配置时指定的节点名相同</p>
+</li>
+<li><p>LogFile=/tmp/zabbix_proxy.log    #指定日志文件的位置</p>
+</li>
+<li><p>PidFile=/tmp/zabbix_proxy.pid    #pid文件的位置</p>
+</li>
+<li><p>DBName=zabbix_proxy       #数据库名</p>
+</li>
+<li><p>DBUser=zabbix          #连接数据库的用户</p>
+</li>
+<li><p>DBPassword=123456        #连接数据库用户的密码</p>
+</li>
+<li><p>ConfigFrequency=60        #zabbix proxy从zabbix server取得配置数据的频率</p>
+</li>
+<li><p>DataSenderFrequency=60     #zabbix proxy发送监控到的数据给zabbix server的频率</p>
+</li>
+</ol>
+<h1 id="三、Zabbix监控结合Grafana绘图"><a href="#三、Zabbix监控结合Grafana绘图" class="headerlink" title="三、Zabbix监控结合Grafana绘图"></a>三、Zabbix监控结合Grafana绘图</h1><h2 id="1-Zabbix概述"><a href="#1-Zabbix概述" class="headerlink" title="1. Zabbix概述"></a>1. Zabbix概述</h2><blockquote>
+<p>Zabbix是一个企业级的开源分布式监控解决方案，由C语言编写而成的底层架构（server端和agent端），由一个国外的团队持续维护更新，软件可以自由下载使用，运作团队靠提供收费的技术支持赢利。官方网站：<a target="_blank" rel="noopener" href="http://www.zabbix.com/">http://www.zabbix.com</a></p>
+</blockquote>
+<h2 id="2-Zabbixj架构图"><a href="#2-Zabbixj架构图" class="headerlink" title="2. Zabbixj架构图"></a>2. Zabbixj架构图</h2><blockquote>
+<p>zabbix根据网络环境、监控规模等，分了三种架构： server-client 、server-proxy-client、master-node-client 三种 。</p>
+</blockquote>
+<p><strong>server-client架构</strong></p>
+<p>也是zabbix的最简单的架构，监控机和被监控机之间不经过任何代理 ，直接由zabbix server和zabbix agentd之间进行数据交互。适用于网络比较简单，设备比较少的监控环境 。</p>
+<p><strong>master-node-client架构</strong></p>
+<p>该架构是zabbix最复杂的监控架构，适用于跨网络、跨机房、设备较多的大型环境 。每个node同时也是一个server端，node下面可以接proxy，也可以直接接client 。node有自已的配置文件和数据库，其要做的是将配置信息和监控数据向master同步，master的故障或损坏对node其下架构的完整性。</p>
+<p><strong>server-proxy-client架构</strong></p>
+<p>其中proxy是server、client之间沟通的一个桥梁，proxy本身没有前端，本身也并不存放数据，只是将agentd发来的数据暂时存放，然后再提交给server ；该架构经常是和master-node-client架构做比较的架构 ，一般适用跨机房、跨网络的中型网络架构的监控。</p>
+<p><strong>Zabbix基本机构图如下</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribgpfxtej30yx0fjmys.jpg"></p>
+<h2 id="3-Zabbix的优劣势"><a href="#3-Zabbix的优劣势" class="headerlink" title="3. Zabbix的优劣势"></a>3. Zabbix的优劣势</h2><p><strong>优点</strong></p>
+<ul>
+<li><p>支持设备多</p>
+</li>
+<li><p>支持分布式集中管理</p>
+</li>
+<li><p>开源，无软件成本投入</p>
+</li>
+<li><p>开放式接口，扩展性强</p>
+</li>
+<li><p>Server对设备性能要求低（实际测试：2个CPU 1G内存，监控5台设备，CPU使用率保持在10%以下，内存剩余400M以上）</p>
+</li>
+<li><p>当监控的项目比较多 服务器队列比较大的时候可以采用被动状态，被监控客户端主动从server端去下载需要监控的项目然后取数据上传到server端。这种方式对服务器的负载比较小。</p>
+</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>无厂家支持，出现问题解决比较麻烦</li>
+<li>需在被监控主机上安装agent，所有数据都存在数据库里，产生的数据据很大，瓶颈主要在数据库。</li>
+</ul>
+<h2 id="4-Zabbix组件说明"><a href="#4-Zabbix组件说明" class="headerlink" title="4. Zabbix组件说明"></a>4. Zabbix组件说明</h2><p>1）zabbix server：负责接收agent发送的报告信息的核心组件，所有配置、统计数据及操作数据都由它组织进行；</p>
+<p>2）database storage：专用于存储所有配置信息，以及由zabbix收集的数据；</p>
+<p>3）web interface：zabbix的GUI接口；</p>
+<p>4）proxy：可选组件，常用于监控节点很多的分布式环境中，代理server收集部分数据转发到server，可以减轻server的压力；</p>
+<p>5）agent：部署在被监控的主机上，负责收集主机本地数据如cpu、内存、数据库等数据发往server端或proxy端；</p>
+<h2 id="5-Zabbix监控流程"><a href="#5-Zabbix监控流程" class="headerlink" title="5. Zabbix监控流程"></a>5. Zabbix监控流程</h2><blockquote>
+<p>agentd需要安装到被监控的主机上，它负责定期收集各项数据，并发送到zabbix server端，zabbix server将数据存储到数据库中，zabbix web根据数据在前端进行展现和绘图。</p>
+</blockquote>
+<p><strong>这里agentd收集数据分为主动和被动两种模式：</strong></p>
+<ul>
+<li><p>主动：agent请求server获取主动的监控项列表，并主动将监控项内需要检测的数据提交给server/proxy</p>
+</li>
+<li><p>被动：server向agent请求获取监控项的数据，agent返回数据。</p>
+</li>
+</ul>
+<h2 id="6-客户端守护进程"><a href="#6-客户端守护进程" class="headerlink" title="6. 客户端守护进程"></a>6. 客户端守护进程</h2><blockquote>
+<p>此进程收集客户端数据，例如cpu负载、内存、硬盘使用情况等。</p>
+</blockquote>
+<p><strong>zabbix_get</strong></p>
+<p>zabbix工具，单独使用的命令，通常在server或者proxy端执行获取远程客户端信息的命令。通常用户排错。例如在server端获取不到客户端的内存数据，我们可以使用zabbix_get获取客户端的内容的方式来做故障排查。</p>
+<p><strong>zabbix_sender</strong></p>
+<p>zabbix工具，用于发送数据给server或者proxy，通常用于耗时比较长的检查。很多检查非常耗时间，导致zabbix超时。于是我们在脚本执行完毕之后，使用sender主动提交数据。</p>
+<p><strong>zabbix_server</strong></p>
+<p>zabbix服务端守护进程。zabbix_agentd、zabbix_get、zabbix_sender、zabbix_proxy、zabbix_java_gateway的数据最终都是提交到server。(备注：当然不是数据都是主动提交给zabbix_server，也有的是server主动去取数据)</p>
+<p><strong>zabbix_proxy</strong></p>
+<p>zabbix代理守护进程。功能类似server，唯一不同的是它只是一个中转站，它需要把收集到的数据提交/被提交到server里。为什么要用代理？代理是做什么的？卖个关子，请继续关注运维生存时间zabbix教程系列。</p>
+<p><strong>zabbix_java_gateway</strong></p>
+<p>zabbix2.0之后引入的一个功能。顾名思义：Java网关，类似agentd，但是只用于Java方面。需要特别注意的是，它只能主动去获取数据，而不能被动获取数据。它的数据最终会给到server或者proxy。</p>
+<h2 id="7-Zabbix项目实战"><a href="#7-Zabbix项目实战" class="headerlink" title="7. Zabbix项目实战"></a>7. Zabbix项目实战</h2><p><strong>环境：</strong></p>
+<table>
+<thead>
+<tr>
+<th>主机</th>
+<th>操作系统</th>
+<th>ip地址</th>
+<th>主要软件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>server.zabbix</td>
+<td>Centos 7.4.1708 64</td>
+<td>192.168.2.1/24</td>
+<td>Lamp、mailx、zabbix-4.2.7、grafana-4.6.1-1</td>
+</tr>
+<tr>
+<td>agent01.zabbix</td>
+<td>Centos 7.4.1708 64</td>
+<td>192.168.2.2/24</td>
+<td>zabbix-4.2.7</td>
+</tr>
+<tr>
+<td>agent02.zabbix</td>
+<td>Centos 7.4.1708 64</td>
+<td>192.168.2.3/24</td>
+<td>zabbix-4.2.7</td>
+</tr>
+</tbody></table>
+<p><strong>环境配置</strong></p>
+<blockquote>
+<p>修改三台主机名</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hostnamectl set-hostname server.zabbix &amp;&amp; <span class="built_in">logout</span></span><br><span class="line">hostnamectl set-hostname agent01.zabbix &amp;&amp; <span class="built_in">logout</span></span><br><span class="line">hostnamectl set-hostname agent02.zabbix &amp;&amp; <span class="built_in">logout</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在 hosts文件里追加以下配置(配置相同)</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">END&gt;&gt; /etc/hosts</span></span><br><span class="line"><span class="string">192.168.2.1 server.zabbix</span></span><br><span class="line"><span class="string">192.168.2.2 agent01.zabbix</span></span><br><span class="line"><span class="string">192.168.2.3 agent02.zabbix</span></span><br><span class="line"><span class="string">END</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>时间同步</p>
+</blockquote>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum -y install ntpdate</span><br><span class="line">ntpdate ntp1.aliyun.com</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;ntpdate ntp1.aliyun.com&quot;</span> &gt;&gt;/etc/rc.local</span><br><span class="line">chmod u+x /etc/rc.d/rc.local</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>关闭防火墙 及 selinux配置</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">setenforce 0</span><br></pre></td></tr></table></figure>
+
+<p><strong>实施步骤：</strong></p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第一步</td>
+<td>1.安装zabbix server服务端</td>
+</tr>
+<tr>
+<td>第二步</td>
+<td>2.配置优化zabbix服务的web页面</td>
+</tr>
+<tr>
+<td>第三步</td>
+<td>3.实现监控server.zabbix端自身的OS、mysql、httpd</td>
+</tr>
+<tr>
+<td>第四步</td>
+<td>4.自定义Zabbix监控项（重点）</td>
+</tr>
+<tr>
+<td>第五步</td>
+<td>5.实现Zabbix邮件报警功能</td>
+</tr>
+<tr>
+<td>第六步</td>
+<td>6.自动发现—自动添加服务器监控</td>
+</tr>
+<tr>
+<td>第七步</td>
+<td>7.Zabbix聚合图形</td>
+</tr>
+<tr>
+<td>第八步</td>
+<td>8.安装并配置Grafana的web界面（呈现效果）</td>
+</tr>
+</tbody></table>
+<h3 id="7-1-安装zabbix-server服务端"><a href="#7-1-安装zabbix-server服务端" class="headerlink" title="7.1 安装zabbix server服务端"></a>7.1 安装zabbix server服务端</h3><blockquote>
+<p>上传Lamp和Zabbix相关依赖的软件包</p>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribgwc5mcj30qx03bweh.jpg" alt="image-20200619120232323"></p>
+<blockquote>
+<p>配置 server 端的本地 lamp yum源</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="comment"># cat &lt;&lt;END&gt;&gt; /etc/yum.repos.d/yum.repo </span></span><br><span class="line">[zabbix]</span><br><span class="line">baseurl=file:///opt/zabbix</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>server端上安装lamp和依赖包；<strong>注：最好多安几遍，包太多，可能安不全</strong></p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="comment"># yum -y install net-snmp net-snmp-devel libxml2 libxml2-devel libcurl-devel libevent libevent libevent-devel curl curl-devel mysql-devel snmp perl-DBI php-xml php-bcmath php-mbstring php-ldap php-xmlrpc httpd php php-mysql php-common php-gd php-odbc php-pear gcc* net-snmp libssh2 libssh2-devel mariadb-server mariadb mariadb-devel</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribgzzpyfj30wk02h74s.jpg" alt="image-20200619121029385"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribh3c5r9j30p302pglj.jpg" alt="image-20200619120850161"></p>
+<blockquote>
+<p>启动 mariadb、httpd 服务 并 设置mariadb数据库密码</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="comment"># for i in mariadb httpd;do systemctl start $i;done</span></span><br><span class="line">[root@server ~]<span class="comment"># for i in mariadb httpd;do systemctl enable $i;done</span></span><br><span class="line">[root@server ~]<span class="comment"># mysqladmin -u root -p password &quot;123123&quot;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>源码安装Zabbix服务端</p>
+</blockquote>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 创建zabbix运行用户</span></span><br><span class="line">[root@server ~]<span class="comment"># useradd zabbix -M -s /sbin/nologin</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 创建zabbix日志存放目录</span></span><br><span class="line">[root@server ~]<span class="comment"># mkdir -p /usr/local/zabbix/logs</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 更改属主数组</span></span><br><span class="line">[root@server ~]<span class="comment"># chown -R zabbix:zabbix /usr/local/zabbix/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 解压</span></span><br><span class="line">[root@server ~]<span class="comment"># tar xf zabbix-4.2.7.tar.gz -C /usr/src/ &amp;&amp; cd /usr/src/zabbix-4.2.7</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 配置</span></span><br><span class="line">[root@server zabbix-4.2.7]<span class="comment"># ./configure --prefix=/usr/local/zabbix --enable-server --enable-agent --with-mysql --enable-ipv6 --with-net-snmp --with-libcurl --with-libxml2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 编译、安装</span></span><br><span class="line">[root@server zabbix-4.2.7]<span class="comment"># make &amp;&amp; make install &amp;&amp; cd</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 配置解释</span></span><br><span class="line">--enable-server      //启动服务端</span><br><span class="line">--enable-agent       //启动客户端</span><br><span class="line">--enable-ipv6        //启动ipv6</span><br><span class="line">--with-net-snmp      //路由交换</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>登陆数据库创建保存监控模板的数据库，并导入数据模板以及授权zabbix用户连接数据库</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="comment"># mysql -uroot -p123123</span></span><br><span class="line">create database <span class="keyword">if</span> not exists zabbix default character <span class="built_in">set</span> utf8 collate utf8_general_ci;</span><br><span class="line">use zabbix;</span><br><span class="line"><span class="built_in">source</span> /usr/src/zabbix-4.2.7/database/mysql/schema.sql;</span><br><span class="line"><span class="built_in">source</span> /usr/src/zabbix-4.2.7/database/mysql/images.sql;</span><br><span class="line"><span class="built_in">source</span> /usr/src/zabbix-4.2.7/database/mysql/data.sql;</span><br><span class="line">grant all on zabbix.* to zabbix@<span class="string">&#x27;192.168.2.1&#x27;</span> identified by <span class="string">&#x27;zabbix&#x27;</span>;</span><br><span class="line">flush privileges;</span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>修改服务zabbix_server.conf 端及客户端zabbix_agentd.conf的配置文件</p>
+</blockquote>
+<p><strong>zabbix_server.conf</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 备份</span></span><br><span class="line">[root@server ~]<span class="comment"># cp /usr/local/zabbix/etc/zabbix_server.conf /opt/zabbix_server.conf.bak</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 编辑配置文件</span></span><br><span class="line">[root@server ~]<span class="comment"># vim /usr/local/zabbix/etc/zabbix_server.conf</span></span><br><span class="line">:%g/^<span class="comment">#/d</span></span><br><span class="line">:%g/^$/d</span><br><span class="line"></span><br><span class="line">LogFile=/usr/<span class="built_in">local</span>/zabbix/logs/zabbix_server.log</span><br><span class="line">PidFile=/usr/<span class="built_in">local</span>/zabbix/logs/zabbix_server.pid</span><br><span class="line">Timeout=4</span><br><span class="line">DBHost=192.168.2.1</span><br><span class="line">DBName=zabbix</span><br><span class="line">DBUser=zabbix</span><br><span class="line">DBPassword=zabbix</span><br><span class="line">DBSocket=/var/lib/mysql/mysql.sock</span><br><span class="line">Include=/usr/<span class="built_in">local</span>/zabbix/etc/zabbix_server.conf.d/*.conf</span><br><span class="line"></span><br><span class="line"><span class="comment">## 配置解释</span></span><br><span class="line">DBHost=192.168.2.1                    <span class="comment"># 指定数据库的ip地址</span></span><br><span class="line">DBName=zabbix                         <span class="comment"># 数据库的名字</span></span><br><span class="line">DBUser=zabbix                         <span class="comment"># 指定连接数据库的用户名</span></span><br><span class="line">DBPassword=zabbix                     <span class="comment"># 用户连接数据库需要的密码</span></span><br><span class="line">DBSocket=/var/lib/mysql/mysql.sock    <span class="comment"># 指定mysql mysql.sock文件路径；ps -aux|grep mysql</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>zabbix_agentd.conf</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 备份</span></span><br><span class="line">[root@server ~]<span class="comment"># cp /usr/local/zabbix/etc/zabbix_agentd.conf /opt/zabbix_agentd.conf.bak</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 编辑配置文件</span></span><br><span class="line">[root@server ~]<span class="comment"># vim /usr/local/zabbix/etc/zabbix_agentd.conf</span></span><br><span class="line">:%g/^<span class="comment">#/d</span></span><br><span class="line">:%g/^$/d</span><br><span class="line"></span><br><span class="line">LogFile=/usr/<span class="built_in">local</span>/zabbix/logs/zabbix_agentd.log</span><br><span class="line">PidFile=/usr/<span class="built_in">local</span>/zabbix/logs/zabbix_agentd.pid</span><br><span class="line">Server=192.168.2.1</span><br><span class="line">ServerActive=192.168.2.1</span><br><span class="line">Hostname=server.zabbix                  <span class="comment"># 这里一定要和本机的名称一致</span></span><br><span class="line">Include=/usr/<span class="built_in">local</span>/zabbix/etc/zabbix_agentd.conf.d/*.conf</span><br><span class="line"></span><br><span class="line"><span class="comment">## 配置解释</span></span><br><span class="line">PidFile=/tmp/zabbix_agentd.pid          <span class="comment"># 运行的PID文件</span></span><br><span class="line">Server=127.0.0.1,192.168.2.1            <span class="comment"># 输入zabbix_server主机的ip地址，可以指定多个</span></span><br><span class="line">ServerActive=192.168.2.1                <span class="comment"># 输入agent主机采集到数据发送到的server端&#123;主动&#125;</span></span><br><span class="line">Hostname=server.zabbix                  <span class="comment"># 输入agent本机的主机名</span></span><br><span class="line">LogFile=/usr/<span class="built_in">local</span>/zabbix/logs/zabbix_agentd.log             <span class="comment"># 指定日志文件</span></span><br><span class="line">Include=/usr/<span class="built_in">local</span>/zabbix/etc/zabbix_agentd.conf.d/*.conf    <span class="comment"># 开启附加配置文件目录</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>启动server(监控端) 及 agent(被监控端)</p>
+</blockquote>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 加入开机启动项</span></span><br><span class="line">[root@server ~]<span class="comment"># cat &lt;&lt;END&gt;&gt; /etc/rc.local</span></span><br><span class="line">/usr/<span class="built_in">local</span>/zabbix/sbin/zabbix_server</span><br><span class="line">/usr/<span class="built_in">local</span>/zabbix/sbin/zabbix_agentd</span><br><span class="line">END</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动server</span></span><br><span class="line">[root@server ~]<span class="comment"># /usr/local/zabbix/sbin/zabbix_server</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动agent</span></span><br><span class="line">[root@server ~]<span class="comment"># /usr/local/zabbix/sbin/zabbix_agentd</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 检查是否启动</span></span><br><span class="line">[root@server ~]<span class="comment"># netstat -utpln |grep 1005</span></span><br><span class="line">tcp        0      0 0.0.0.0:10050           0.0.0.0:*            LISTEN      12454/zabbix_agentd </span><br><span class="line">tcp        0      0 0.0.0.0:10051           0.0.0.0:*            LISTEN      12387/zabbix_server </span><br><span class="line">tcp6       0      0 :::10050                :::*                 LISTEN      12454/zabbix_agentd </span><br><span class="line">tcp6       0      0 :::10051                :::*                 LISTEN      12387/zabbix_server</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>将Zabbix自带的web页面添加到httpd的网页存放目录中，并修改php的配置文件，然后重启httpd服务</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 拷贝Zabbix自带的php页面到apache网站存放目录中</span></span><br><span class="line">[root@server ~]<span class="comment"># cp -r /usr/src/zabbix-4.2.7/frontends/php/ /var/www/html/zabbix</span></span><br><span class="line">[root@server ~]<span class="comment"># chown -R apache:apache /var/www/html/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 编辑php配置文件</span></span><br><span class="line">[root@server ~]<span class="comment"># vim /etc/php.ini</span></span><br><span class="line">date.timezone = Asia/Shanghai</span><br><span class="line">max_execution_time = 300</span><br><span class="line">max_input_time = 300</span><br><span class="line">post_max_size = 32M</span><br><span class="line">memory_limit = 128M</span><br><span class="line">extension = bcmath.so</span><br><span class="line"></span><br><span class="line"><span class="comment">## 配置解释</span></span><br><span class="line">date.timezone = Asia/Shanghai     <span class="comment"># 时区</span></span><br><span class="line">max_execution_time = 300          <span class="comment"># 单位秒，通过POST、GET以及PUT方式接收数据时间进行限制</span></span><br><span class="line">max_input_time = 300              <span class="comment"># php程序上传文件解析数据时的时间限制</span></span><br><span class="line">post_max_size = 32M               <span class="comment"># POST 方式请求数据所允许的最大大小</span></span><br><span class="line">memory_limit = 128M               <span class="comment"># 设置php程序的内存限制</span></span><br><span class="line">extension=bcmath.so               <span class="comment"># 加载zabbix程序需要加载的扩展模块bcmath.so</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 重启apache</span></span><br><span class="line">[root@server ~]<span class="comment"># systemctl restart httpd</span></span><br><span class="line">[root@server ~]<span class="comment"># netstat -anptu|grep httpd</span></span><br><span class="line">tcp6       0      0 :::80            :::*           LISTEN      31106/httpd</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-2-配置优化zabbix服务的web页面"><a href="#7-2-配置优化zabbix服务的web页面" class="headerlink" title="7.2 配置优化zabbix服务的web页面"></a>7.2 配置优化zabbix服务的web页面</h3><blockquote>
+<p>访问安装 <a target="_blank" rel="noopener" href="http://192.168.2.1/zabbix/">http://192.168.2.1/zabbix/</a></p>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribhftjq1j30p60foaai.jpg" alt="image-20200619125158344"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribhnjai1j30p90fqt9g.jpg" alt="image-20200619125237448"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribhufxy9j30op0f83z3.jpg" alt="image-20200619125349757"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribhzlae6j30od0fegm2.jpg" alt="image-20200619125601330"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribi643qtj30op0fbjs4.jpg" alt="image-20200619125634128"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribiacvozj30ol0fdwez.jpg" alt="image-20200619125711508"></p>
+<blockquote>
+<p>登陆Zabbix页面并进行一些简单优化，默认用户名admin，密码zabbix</p>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribiflu1ej30rf0czjrg.jpg" alt="image-20200619130143925"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribim3vpwj313r0f1taf.jpg" alt="image-20200619130337305"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribiqd7j3j30tp0c90t2.jpg" alt="image-20200619130437102"></p>
+<p><strong>解决zabbix显示图像下边文字乱码情况：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribitzgvij31420lamyn.jpg" alt="image-20200619130638409"></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="comment"># mv simkai.ttf /var/www/html/zabbix/assets/fonts/</span></span><br><span class="line">[root@server ~]<span class="comment"># cd /var/www/html/zabbix/assets/fonts/ &amp;&amp; ls</span></span><br><span class="line">DejaVuSans.ttf  simkai.ttf</span><br><span class="line"></span><br><span class="line">[root@server fonts]<span class="comment"># mv DejaVuSans.ttf DejaVuSans.ttf.bak</span></span><br><span class="line">[root@server fonts]<span class="comment"># mv simkai.ttf DejaVuSans.ttf</span></span><br><span class="line">[root@server fonts]<span class="comment"># chown -R apache:apache ./ &amp;&amp; ll</span></span><br><span class="line">总用量 12252</span><br><span class="line">-rw-r--r-- 1 apache apache 11785184 6月  19 12:05 DejaVuSans.ttf</span><br><span class="line">-rw-r--r-- 1 apache apache   756072 6月  19 12:41 DejaVuSans.ttf.bak</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribixcvzcj31480lamyu.jpg" alt="image-20200619130834248"></p>
+<h3 id="7-3-实现监控server-zabbix端自身的OS、mysql、httpd"><a href="#7-3-实现监控server-zabbix端自身的OS、mysql、httpd" class="headerlink" title="7.3 实现监控server.zabbix端自身的OS、mysql、httpd"></a>7.3 实现监控server.zabbix端自身的OS、mysql、httpd</h3><blockquote>
+<p>添加主机：配置—主机—创建主机</p>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribj14shij31480msq4v.jpg" alt="image-20200619135116794"></p>
+<ul>
+<li><strong>选择OS、mysql、httpd模板</strong></li>
+</ul>
+<blockquote>
+<p>这些模板都是官方默认提供的，里面包含了所有，比如：监控项、触发器、触发器、图形、自动发现等所有的配置，不需要再手动编写，但是一般在公司都是自己编写这些个配置。</p>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribj6a2tyj30s909i3yu.jpg" alt="image-20200619135826322"></p>
+<p><strong>勾选以下三个监控模板，点击选择按钮</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribjadbkqj30r907gjru.jpg" alt="image-20200619135446081"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribjgl5j8j30u10a374q.jpg" alt="image-20200619140058514"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribjl7v0zj30u80btaam.jpg" alt="image-20200619140128762"></p>
+<blockquote>
+<p><strong>他们的对应关系：</strong></p>
+<ul>
+<li>应用集 针对 监控项</li>
+<li>监控项 针对 触发器</li>
+</ul>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribjxjrltj31480hstaj.jpg" alt="image-20200619140310324"></p>
+<ul>
+<li><strong>创建MySQL图形</strong></li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribk0nf8pj314605jgmd.jpg" alt="image-20200619141052844"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribk6dwxcj61480d6wfs02.jpg" alt="image-20200619141210596"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribk9marpj31480j175e.jpg" alt="image-20200619141354833"></p>
+<p><strong>选择监控项，点击选择</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribkddg23j30pv03djrd.jpg" alt="image-20200619141506204"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribkjg7ifj61480k3q4602.jpg" alt="image-20200619141607265"></p>
+<p><strong>查看监控主机的图形；</strong></p>
+<p><strong>但是意外出现了，关于Mysql数据库的所有监控项没有图形，如图所示；</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribko53brj31460lbgnb.jpg" alt="image-20200619141733803"></p>
+<p><strong>经过查看，问题如下图，监控Mysql服务器的键值不支持</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribktb0nvj31310b7ach.jpg" alt="image-20200619141835550"></p>
+<p><strong>解决方案如下；</strong></p>
+<ul>
+<li>打开zabbix_server服务器，同时在此也是被监控端，设置MySQL监控项失效的键值</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 注意：下面标红的$1要手写进去，直接粘贴，粘不进去的！！！</span></span><br><span class="line">[root@server ~]<span class="comment"># cat &lt;&lt;END&gt;&gt;/usr/local/zabbix/etc/zabbix_agentd.conf</span></span><br><span class="line">UnsafeUserParameters=1</span><br><span class="line">UserParameter=mysql.version,mysql -V</span><br><span class="line">UserParameter=mysql.status[*],/usr/<span class="built_in">local</span>/zabbix/etc/chk_mysql.sh <span class="variable">$1</span></span><br><span class="line">UserParameter=mysql.ping, mysqladmin -uroot -p123123 -P3306 ping | grep -c alive</span><br><span class="line">END</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 内容解释</span></span><br><span class="line"><span class="comment">#允许key键能够接收任何类型的value值；必写！</span></span><br><span class="line">UnsafeUserParameters=1</span><br><span class="line"><span class="comment">#定义键值, mysql.version键, 以及键的值mysql –V; 会将mysql –V赋值给mysql.version键&#123;MySQL版本&#125;</span></span><br><span class="line">UserParameter=mysql.version,mysql –V   </span><br><span class="line"><span class="comment">#定义键mysql.status[*]，值/usr/local/zabbix/etc/chk_mysql.sh $1；&#123;脚本&#125;</span></span><br><span class="line">UserParameter=mysql.status[*],/usr/<span class="built_in">local</span>/zabbix/etc/chk_mysql.sh <span class="variable">$1</span></span><br><span class="line"><span class="comment">#定义键mysql.ping，值mysqladmin -uroot -p123123 -P3306 ping | grep -c alive；&#123;mysql存活&#125;</span></span><br><span class="line">UserParameter=mysql.ping, mysqladmin -uroot -p123123 -P3306 ping | grep -c alive</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 在脚本中指定agent端的mysql 的ip地址，连接的用户名密码等</span></span><br><span class="line">[root@server ~]<span class="comment"># vim /usr/local/zabbix/etc/chk_mysql.sh</span></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 用户名</span></span><br><span class="line">MYSQL_USER=<span class="string">&#x27;root&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 密码</span></span><br><span class="line">MYSQL_PWD=<span class="string">&#x27;123123&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 端口</span></span><br><span class="line">MYSQL_PORT=<span class="string">&#x27;3306&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 数据连接</span></span><br><span class="line">MYSQL_CONN=<span class="string">&quot;/usr/bin/mysqladmin -u<span class="variable">$&#123;MYSQL_USER&#125;</span> -p<span class="variable">$&#123;MYSQL_PWD&#125;</span> -P<span class="variable">$&#123;MYSQL_PORT&#125;</span>&quot;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 参数是否正确</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$#</span> -ne <span class="string">&quot;1&quot;</span> ];<span class="keyword">then</span> </span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;arg error!&quot;</span> </span><br><span class="line"><span class="keyword">fi</span> </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 获取数据</span></span><br><span class="line"><span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span> </span><br><span class="line">    Uptime) </span><br><span class="line">        result=`<span class="variable">$&#123;MYSQL_CONN&#125;</span> status|cut -f2 -d<span class="string">&quot;:&quot;</span>|cut -f1 -d<span class="string">&quot;T&quot;</span>` </span><br><span class="line">        <span class="built_in">echo</span> <span class="variable">$result</span> </span><br><span class="line">        ;; </span><br><span class="line">    Com_update) </span><br><span class="line">        result=`<span class="variable">$&#123;MYSQL_CONN&#125;</span> extended-status |grep -w <span class="string">&quot;Com_update&quot;</span>|cut -d<span class="string">&quot;|&quot;</span> -f3` </span><br><span class="line">        <span class="built_in">echo</span> <span class="variable">$result</span> </span><br><span class="line">        ;; </span><br><span class="line">    Slow_queries) </span><br><span class="line">        result=`<span class="variable">$&#123;MYSQL_CONN&#125;</span> status |cut -f5 -d<span class="string">&quot;:&quot;</span>|cut -f1 -d<span class="string">&quot;O&quot;</span>` </span><br><span class="line">        <span class="built_in">echo</span> <span class="variable">$result</span> </span><br><span class="line">        ;; </span><br><span class="line">    Com_select) </span><br><span class="line">        result=`<span class="variable">$&#123;MYSQL_CONN&#125;</span> extended-status |grep -w <span class="string">&quot;Com_select&quot;</span>|cut -d<span class="string">&quot;|&quot;</span> -f3` </span><br><span class="line">        <span class="built_in">echo</span> <span class="variable">$result</span> </span><br><span class="line">                ;; </span><br><span class="line">    Com_rollback) </span><br><span class="line">        result=`<span class="variable">$&#123;MYSQL_CONN&#125;</span> extended-status |grep -w <span class="string">&quot;Com_rollback&quot;</span>|cut -d<span class="string">&quot;|&quot;</span> -f3` </span><br><span class="line">                <span class="built_in">echo</span> <span class="variable">$result</span> </span><br><span class="line">                ;; </span><br><span class="line">    Questions) </span><br><span class="line">        result=`<span class="variable">$&#123;MYSQL_CONN&#125;</span> status|cut -f4 -d<span class="string">&quot;:&quot;</span>|cut -f1 -d<span class="string">&quot;S&quot;</span>` </span><br><span class="line">                <span class="built_in">echo</span> <span class="variable">$result</span> </span><br><span class="line">                ;; </span><br><span class="line">    Com_insert) </span><br><span class="line">        result=`<span class="variable">$&#123;MYSQL_CONN&#125;</span> extended-status |grep -w <span class="string">&quot;Com_insert&quot;</span>|cut -d<span class="string">&quot;|&quot;</span> -f3` </span><br><span class="line">                <span class="built_in">echo</span> <span class="variable">$result</span> </span><br><span class="line">                ;; </span><br><span class="line">    Com_delete) </span><br><span class="line">        result=`<span class="variable">$&#123;MYSQL_CONN&#125;</span> extended-status |grep -w <span class="string">&quot;Com_delete&quot;</span>|cut -d<span class="string">&quot;|&quot;</span> -f3` </span><br><span class="line">                <span class="built_in">echo</span> <span class="variable">$result</span> </span><br><span class="line">                ;; </span><br><span class="line">    Com_commit) </span><br><span class="line">        result=`<span class="variable">$&#123;MYSQL_CONN&#125;</span> extended-status |grep -w <span class="string">&quot;Com_commit&quot;</span>|cut -d<span class="string">&quot;|&quot;</span> -f3` </span><br><span class="line">                <span class="built_in">echo</span> <span class="variable">$result</span> </span><br><span class="line">                ;; </span><br><span class="line">    Bytes_sent) </span><br><span class="line">        result=`<span class="variable">$&#123;MYSQL_CONN&#125;</span> extended-status |grep -w <span class="string">&quot;Bytes_sent&quot;</span> |cut -d<span class="string">&quot;|&quot;</span> -f3` </span><br><span class="line">                <span class="built_in">echo</span> <span class="variable">$result</span> </span><br><span class="line">                ;; </span><br><span class="line">    Bytes_received) </span><br><span class="line">        result=`<span class="variable">$&#123;MYSQL_CONN&#125;</span> extended-status |grep -w <span class="string">&quot;Bytes_received&quot;</span> |cut -d<span class="string">&quot;|&quot;</span> -f3` </span><br><span class="line">                <span class="built_in">echo</span> <span class="variable">$result</span> </span><br><span class="line">                ;; </span><br><span class="line">    Com_begin) </span><br><span class="line">        result=`<span class="variable">$&#123;MYSQL_CONN&#125;</span> extended-status |grep -w <span class="string">&quot;Com_begin&quot;</span>|cut -d<span class="string">&quot;|&quot;</span> -f3` </span><br><span class="line">                <span class="built_in">echo</span> <span class="variable">$result</span> </span><br><span class="line">                ;; </span><br><span class="line">                        </span><br><span class="line">    *) </span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;Usage:<span class="variable">$0</span>(Uptime|Com_update|Slow_queries|Com_select|Com_rollback|Questions|Com_insert|Com_delete|Com_commit|Bytes_sent|Bytes_received|Com_begin)&quot;</span> </span><br><span class="line">        ;; </span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 给予脚本执行权限</span></span><br><span class="line">[root@server ~]<span class="comment"># chmod a+x /usr/local/zabbix/etc/chk_mysql.sh</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 重启zabbix_agentd服务</span></span><br><span class="line">[root@server ~]<span class="comment"># yum -y install psmisc                 #安装killall命令</span></span><br><span class="line">[root@server ~]<span class="comment"># killall -9 zabbix_agentd</span></span><br><span class="line">[root@server ~]<span class="comment"># /usr/local/zabbix/sbin/zabbix_agentd</span></span><br><span class="line">[root@server ~]<span class="comment"># netstat -utpln |grep 10050</span></span><br><span class="line">tcp        0      0 0.0.0.0:10050           0.0.0.0:*         LISTEN      32092/zabbix_agentd </span><br><span class="line">tcp6       0      0 :::10050                :::*              LISTEN      32092/zabbix_agentd</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 检查MySQL是否激活</span></span><br><span class="line">[root@server ~]<span class="comment"># mysqladmin -uroot -p123123 -P 3306 ping</span></span><br><span class="line">mysqld is alive</span><br><span class="line"></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------</span><br><span class="line">检测mysql状态时会使用zabbix_get命令：在此可以通过zabbix_get命令进行获取服务器监控项的具体键值，mysql.ping是在zabbix_agentd.conf配置文件中的键值名称，通过此名称可以查看键值，通常能够获取到键值，获取监控数据就是没问题的；只要zabbix_get能获取到的数据，那图形也就一定能获取并显示，否则图形绝对获取不到数据并显示。</span><br><span class="line">--------------------------------------------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"><span class="comment">## 使用zabbix_get工具测试脚本中的键值</span></span><br><span class="line">[root@server ~]<span class="comment"># ln -s /usr/local/zabbix/bin/* /usr/local/bin/        # 为zabbix_get的命令做软链接</span></span><br><span class="line"></span><br><span class="line">[root@server ~]<span class="comment"># zabbix_get -s 192.168.2.1 -k mysql.ping</span></span><br><span class="line">1</span><br><span class="line"></span><br><span class="line">[root@server ~]<span class="comment"># zabbix_get -s 192.168.2.1 -k mysql.status[Com_update]</span></span><br><span class="line">588</span><br><span class="line"></span><br><span class="line">[root@server ~]<span class="comment"># zabbix_get -s 192.168.2.1 -k mysql.version</span></span><br><span class="line">mysql  Ver 15.1 Distrib 5.5.65-MariaDB, <span class="keyword">for</span> Linux (x86_64) using readline 5.1</span><br></pre></td></tr></table></figure>
+
+<p><strong>再次打开zabbix的web界面，查看mysql监控项界面</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribkyyih5j31320c4q5e.jpg" alt="image-20200619143939270"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribl2nt1ej61430l840b02.jpg" alt="image-20200619143849601"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribl4x5ofj31430l876c.jpg" alt="image-20200619144050951"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribl88jx5j31430n476u.jpg" alt="image-20200619144118893"></p>
+<ul>
+<li><strong>创建httpd服务的图形</strong></li>
+</ul>
+<blockquote>
+<p>这和MySQL的过程是一样的，而且它比MySQL还要省事，因为OS和HTTPD模板的键值默认就是支持的，不需要在取值了</p>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1griblddg0nj31430k3wfq.jpg" alt="image-20200619150724807"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1griblgm2arj31430letaw.jpg" alt="image-20200619150757318"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1griblldubkj31430lbwg8.jpg" alt="image-20200619150847855"></p>
+<h3 id="7-4-自定义Zabbix监控项（重点）"><a href="#7-4-自定义Zabbix监控项（重点）" class="headerlink" title="7.4 自定义Zabbix监控项（重点）"></a>7.4 自定义Zabbix监控项（重点）</h3><blockquote>
+<ul>
+<li><p>以上关联的 Template OS Linux 模板基本涵盖了所有系统层面的监控，包括了我们最关注的几项：ping、load、cpu使用率、memory、disk、网卡流量等等，当然有些触发器的阀值可能需要根据服务器的自身情况进行修改。</p>
+</li>
+<li><p>下面添加自定义服务器内存使用检测项，在此配置一个监控项为：内存使用70M进行警告提醒：</p>
+</li>
+<li><p>修改客户端zabbix_agentd.conf配置文件，最后一行添加：</p>
+<ul>
+<li>UserParameter=memory_used,free -m|grep Mem|awk ‘{print $3}’</li>
+</ul>
+</li>
+<li><p>语法：UserParameter=key,shell command</p>
+<ul>
+<li>监控key值：memory_userd，key值可以随意编写，但是一会需要在web页面创建监控项时指定key值</li>
+<li>Shell命令或脚本：free -m|grep Mem|awk ‘{print $3}’</li>
+</ul>
+</li>
+<li><p>注：在zabbix_server端可以使用zabbix_get -s agent端ip地址 -p 10050 -k key名通过此命令可以查看agent端key的监控值</p>
+</li>
+</ul>
+</blockquote>
+<p><strong>在此之前，先将agent01.zabbix主机的zabbix客户端软件安装好，并加入至Linux Servers组中</strong></p>
+<p>1、安装并配置zabbix客户端，只安装agent端，不装server端</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 安装所需依赖包</span></span><br><span class="line">[root@agent01 ~]<span class="comment"># yum -y install libxml2-devel libcurl-devel pcre-devel</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 创建zabbix运行用户</span></span><br><span class="line">[root@agent01 ~]<span class="comment"># useradd zabbix -M -s /sbin/nologin</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 创建zabbix日志存放目录</span></span><br><span class="line">[root@agent01 ~]<span class="comment"># mkdir -p /usr/local/zabbix/logs</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 更改属主数组</span></span><br><span class="line">[root@agent01 ~]<span class="comment"># chown -R zabbix:zabbix /usr/local/zabbix/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 解压</span></span><br><span class="line">[root@agent01 ~]<span class="comment"># tar xf zabbix-4.2.7.tar.gz -C /usr/src/ &amp;&amp; cd /usr/src/zabbix-4.2.7</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 配置</span></span><br><span class="line">[root@agent01 zabbix-4.2.7]<span class="comment"># ./configure --prefix=/usr/local/zabbix --enable-agent --enable-ipv6 --with-net-snmp --with-libcurl --with-libxml2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 编译、安装</span></span><br><span class="line">[root@agent01 zabbix-4.2.7]<span class="comment"># make &amp;&amp; make install &amp;&amp; cd</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 备份文件</span></span><br><span class="line">[root@agent01 ~]<span class="comment"># cp /usr/local/zabbix/etc/zabbix_agentd.conf /opt/zabbix_agentd.conf.bak</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 编辑配置文件</span></span><br><span class="line">[root@agent01 ~]<span class="comment"># vim /usr/local/zabbix/etc/zabbix_agentd.conf</span></span><br><span class="line">LogFile=/usr/<span class="built_in">local</span>/zabbix/logs/zabbix_agent.log</span><br><span class="line">PidFile=/usr/<span class="built_in">local</span>/zabbix/logs/zabbix_agent.pid</span><br><span class="line">Server=192.168.2.1</span><br><span class="line">ServerActive=192.168.2.1</span><br><span class="line">Hostname=agent01.zabbix          <span class="comment"># 这里一定要和本机的名称一致</span></span><br><span class="line">Include=/usr/<span class="built_in">local</span>/zabbix/etc/zabbix_agentd.conf.d/*.conf</span><br><span class="line"></span><br><span class="line"><span class="comment">## 启动agent端</span></span><br><span class="line">[root@agent01 ~]<span class="comment"># /usr/local/zabbix/sbin/zabbix_agentd</span></span><br><span class="line">[root@agent01 ~]<span class="comment"># netstat -utpln |grep zabbix</span></span><br><span class="line">tcp        0      0 0.0.0.0:10050           0.0.0.0:*         LISTEN      27693/zabbix_agentd </span><br><span class="line">tcp6       0      0 :::10050                :::*              LISTEN      27693/zabbix_agentd</span><br><span class="line"></span><br><span class="line"><span class="comment">## 加入开机启动项</span></span><br><span class="line">[root@agent01 ~]<span class="comment"># chmod a+x /etc/rc.d/rc.local</span></span><br><span class="line">[root@agent01 ~]<span class="comment"># echo &#x27;/usr/local/zabbix/sbin/zabbix_agentd&#x27; &gt;&gt; /etc/rc.local</span></span><br></pre></td></tr></table></figure>
+
+<p>2、将其agent01主机加入至Linux Servers组中，至于模板的话就选择一个Template OS Linux系统的就行了</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1griblq1d77j30td0mut9o.jpg" alt="image-20200619155353287"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribltsr41j30tv0a9gm0.jpg" alt="image-20200619155555878"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1griblwlaoaj31430mf0vc.jpg" alt="image-20200619155614944"></p>
+<p><strong>自定义监控具体实现方式如下，在agent.zabbix主机的配置文件中来定义监控项</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 定义系统所用的物理内存大小</span></span><br><span class="line">[root@agent01 ~]<span class="comment"># vim /usr/local/zabbix/etc/zabbix_agentd.conf</span></span><br><span class="line">UserParameter=memory_used,free -m|grep Mem|awk <span class="string">&#x27;&#123;print $3&#125;&#x27;</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">## 重启zabbix_agent端</span></span><br><span class="line">[root@agent01 ~]<span class="comment"># killall -9 zabbix_agentd</span></span><br><span class="line">[root@agent01 ~]<span class="comment"># /usr/local/zabbix/sbin/zabbix_agentd</span></span><br><span class="line">[root@agent01 ~]<span class="comment"># netstat -anptu|grep &quot;agentd&quot;</span></span><br><span class="line">tcp        0      0 0.0.0.0:10050           0.0.0.0:*          LISTEN      27789/zabbix_agentd </span><br><span class="line">tcp6       0      0 :::10050                :::*               LISTEN      27789/zabbix_agentd</span><br><span class="line"></span><br><span class="line"><span class="comment">## 再去server.zabbix.com主机上测试能否查看其监控项键值</span></span><br><span class="line">[root@server ~]<span class="comment"># zabbix_get -s 192.168.2.2 -k memory_used</span></span><br><span class="line">129</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用web界面添加此监控项</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribm0c0nlj31430hz40m.jpg" alt="image-20200619160519496"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribm43vd1j31430btjsg.jpg" alt="image-20200619160627909"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribm6doawj313i0n7abw.jpg" alt="image-20200619161155740"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribmdfrt5j313i06k3yf.jpg" alt="image-20200619161233426"></p>
+<p><strong>监控项添加完成后，创建触发器（根据条件进行触发某个告警操作）</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribmg8zx6j313k0drdh1.jpg" alt="image-20200619161434762"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribmj3hjnj31430liq46.jpg" alt="image-20200619161633476"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribmp6c62j30j1075dfu.jpg" alt="image-20200619161713696"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribmtxlboj30ik05ut92.jpg" alt="image-20200619161748261"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribmyzoqdj30j3076q30.jpg" alt="image-20200619161922879"></p>
+<p>插入后，手动修改表达式为 &gt;200 作为条件，然后添加就行了</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribn3ox4fj31430lnwfr.jpg" alt="image-20200619162135220"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribn6xn7qj613k0je40t02.jpg" alt="image-20200619162327374"></p>
+<p><strong>触发器创建完成后，创建监控显示的图形</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribnbne07j31430fp0uf.jpg" alt="image-20200619162417014"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribnevlnlj31430k33zr.jpg" alt="image-20200619162531482"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribnhpxy3j314308eaat.jpg" alt="image-20200619162649078"></p>
+<p><strong>查看这个图形</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribnkypk1j31430l940f.jpg" alt="image-20200619162737392"></p>
+<p><strong>模拟内存使用超过200M触动触发器</strong></p>
+<p>[root@agent01 ~]# dd if=/dev/zero of=/opt/lemon.txt bs=1G count=5 &amp;</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribnr32m8j31430lbdhu.jpg" alt="image-20200619162958307"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribnurwiej31430ixjte.jpg" alt="image-20200619163030339"></p>
+<h3 id="7-5-实现Zabbix邮件报警功能"><a href="#7-5-实现Zabbix邮件报警功能" class="headerlink" title="7.5 实现Zabbix邮件报警功能"></a>7.5 实现Zabbix邮件报警功能</h3><p><strong>首先配置server.zabbix端的邮件</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 安装邮箱应用</span></span><br><span class="line">[root@server ~]<span class="comment"># yum -y install mailx dos2unix</span></span><br><span class="line">[root@server ~]<span class="comment"># mailx -V</span></span><br><span class="line">12.5 7/5/10</span><br><span class="line"></span><br><span class="line"><span class="comment">## 配置mail.rc</span></span><br><span class="line">[root@server ~]<span class="comment"># vim /etc/mail.rc	   //在此文件末尾添加，指定接收邮件邮箱地址，指定邮箱服务器地址，指定接收邮件邮箱地址的授权码，并非163邮箱的密码，而是授权码，登陆163邮箱地址后，--设置--开启smtp和pop3--点击客户端生成授权码--使用此授权码进行指定到此配置文件。</span></span><br><span class="line"><span class="built_in">set</span> from=lemon_row@163.com smtp=smtp.163.com</span><br><span class="line"><span class="built_in">set</span> smtp-auth-user=lemon_row@163.com smtp-auth-password=TZVLGNYMVOEWCIHR</span><br><span class="line"><span class="built_in">set</span> smtp-auth=login</span><br><span class="line"></span><br><span class="line"><span class="comment">## 测试</span></span><br><span class="line">[root@server ~]<span class="comment"># echo &quot;测试1&quot; |mail -s &quot;good1&quot; lemon_row@163.com         //测试邮件接收情况</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribnz269zj311e0pi0zu.jpg" alt="image-20200619164159730"></p>
+<p><strong>配置zabbix_server.conf配置文件</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="comment"># vim /usr/local/zabbix/etc/zabbix_server.conf</span></span><br><span class="line">AlertScriptsPath=/usr/<span class="built_in">local</span>/zabbix/share/zabbix/alertscripts       //邮件报警的脚本存放位置</span><br><span class="line">:wq</span><br><span class="line"></span><br><span class="line"><span class="comment">## 编写报警邮件脚本，调整mail命令语法位置，使用dos2unix命令转换字符，避免收到邮件不显示正常邮件内容而出现ATT00001.bin的错误；</span></span><br><span class="line">[root@server ~]<span class="comment"># vim /usr/local/zabbix/share/zabbix/alertscripts/mailbox.sh</span></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"><span class="comment">#export.UTF-8</span></span><br><span class="line">bt=<span class="variable">$2</span>      <span class="comment">#邮件标题</span></span><br><span class="line">sjr=<span class="variable">$1</span>     <span class="comment">#发送给谁</span></span><br><span class="line">FILE=/tmp/mailtmp.txt</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$3</span>&quot;</span> &gt;<span class="variable">$FILE</span></span><br><span class="line">/usr/bin/dos2unix -k <span class="variable">$FILE</span></span><br><span class="line">/bin/mail -s <span class="string">&quot;<span class="variable">$bt</span>&quot;</span> <span class="string">&quot;<span class="variable">$sjr</span>&quot;</span> &lt;<span class="variable">$FILE</span></span><br><span class="line">:wq</span><br><span class="line"></span><br><span class="line"><span class="comment">## 注意文件以及报警脚本的归属以及权限，注：脚本文件和存放邮件消息文件属主必须是zabbix</span></span><br><span class="line">[root@server ~]<span class="comment"># chmod a+x /usr/local/zabbix/share/zabbix/alertscripts/mailbox.sh </span></span><br><span class="line">[root@server ~]<span class="comment"># chown zabbix:zabbix /usr/local/zabbix/share/zabbix/alertscripts/mailbox.sh </span></span><br><span class="line">[root@server ~]<span class="comment"># touch /tmp/mailtmp.txt &amp;&amp; chmod a+x /tmp/mailtmp.txt</span></span><br><span class="line">[root@server ~]<span class="comment"># chown zabbix:zabbix /tmp/mailtmp.txt</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 测试脚本邮件接收情况</span></span><br><span class="line">[root@server ~]<span class="comment"># /usr/local/zabbix/share/zabbix/alertscripts/mailbox.sh lemon_row@163.com &quot;good2&quot; &quot;测试2&quot;</span></span><br><span class="line">dos2unix: converting file /tmp/mailtmp.txt to Unix format ...     </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribo2s2qvj311e0pr0z7.jpg" alt="image-20200619164749416"></p>
+<p><strong>配置zabbix web网站进行监控项的邮件报警，每一张图片后附带解释和注意事项，大体步骤分为 监控–创建报警媒介类型–更新用户使用的报警媒介类型–创建动作（根据触发器触发）–验证</strong></p>
+<blockquote>
+<p><strong>创建报警媒介类型：</strong></p>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribo7fe98j313m0f2405.jpg" alt="image-20200619165010104"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1griboaqi75j31430brt9o.jpg" alt="image-20200619165048174"></p>
+<p><strong>输入创建的报警媒介类型的名称，指定类型为脚本的方式，并且输入zabbix_server端/usr/local/zabbix/share/zabbix/alertscripts目录下的脚本名称，确保脚本的归属是zabbix，并且脚本的权限是777，下边设置脚本参数，也就是发送邮件的语法：脚本收件人标题内容，必须严格按照此标准填写；</strong></p>
+<p>脚本参数： {ALERT.SENDTO}                         {ALERT.SUBJECT}                             {ALERT.MESSAGE}</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribohsk4rj30up0eit9p.jpg" alt="image-20200619165804032"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1griboklgtdj61430ett9y02.jpg" alt="image-20200619165917407"></p>
+<p><strong>配置zabbix中的用户所使用的报警媒介类型以及接收邮件的邮箱</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribopsn61j31430bv75a.jpg" alt="image-20200619170022217"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1griboucnaxj30t807jq39.jpg" alt="image-20200619170311840"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1griboy62xdj30io0a9jrk.jpg" alt="image-20200619173024229"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribp49odsj30tq0893yz.jpg" alt="image-20200619173046667"></p>
+<p><strong>创建动作，也就是发送邮件的动作</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribp6xpw1j31430b33z8.jpg" alt="image-20200619170557684"></p>
+<p><strong>输入动作名，动作名最好为英文，可以选择触发这个动作的条件（可以选择触发器=触发器的名称或者选择触发器似触发器名称），作为条件，如若如图不选择触发器的条件，那么任何消息都会提示到邮箱</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribpbv0tpj30ty0c4aan.jpg" alt="image-20200619170759716"></p>
+<p><strong>添加报警动作，一旦此触发器添加触发，添加报警邮件的标题和内容，默认操作步骤持续时间（修改持续时间为60秒 (一分钟发送一次邮件)），添加操作（添加接收邮件的用户）</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">故障&#123;TRIGGER.STATUS&#125;,服务器:&#123;HOSTNAME1&#125;发生: &#123;TRIGGER.NAME&#125;故障!</span><br><span class="line"></span><br><span class="line">告警主机:&#123;HOSTNAME1&#125;</span><br><span class="line"></span><br><span class="line">告警时间:&#123;EVENT.DATE&#125; &#123;EVENT.TIME&#125;</span><br><span class="line"></span><br><span class="line">告警等级:&#123;TRIGGER.SEVERITY&#125;</span><br><span class="line"></span><br><span class="line">告警信息: &#123;TRIGGER.NAME&#125;</span><br><span class="line"></span><br><span class="line">告警项目:&#123;TRIGGER.KEY1&#125;</span><br><span class="line"></span><br><span class="line">问题详情:&#123;ITEM.NAME&#125;:&#123;ITEM.VALUE&#125;</span><br><span class="line"></span><br><span class="line">当前状态:&#123;TRIGGER.STATUS&#125;:&#123;ITEM.VALUE1&#125;</span><br><span class="line"></span><br><span class="line">事件ID:&#123;EVENT.ID&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribpfzi0yj31430egq46.jpg" alt="image-20200619171145098"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribpl384dj313k0gdgmc.jpg" alt="image-20200619171327264"></p>
+<p><strong>添加恢复操作（指故障恢复之后发送邮件的动作），具体步骤和添加操作相同；</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribpi7arjj31430f4jsk.jpg" alt="image-20200619171618945"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribpptijoj31430dcjsf.jpg" alt="image-20200619171822179"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribptk6urj31430d0759.jpg" alt="image-20200619171847166"></p>
+<p><strong>开始模拟内存使用超过200M后邮件报警</strong></p>
+<p><strong>测试：agent01.zabbix主机测试邮件报警情况</strong></p>
+<p>[root@agent01 ~]# dd if=/dev/zero of=/opt/lemon.txt bs=1G count=10 &amp;</p>
+<p><strong>这时会超过在上面表达式中写的200M，接着就会邮件警报、向<a href="mailto:&#108;&#x65;&#109;&#x6f;&#x6e;&#95;&#x72;&#111;&#119;&#64;&#x31;&#x36;&#x33;&#46;&#99;&#111;&#109;">&#108;&#x65;&#109;&#x6f;&#x6e;&#95;&#x72;&#111;&#119;&#64;&#x31;&#x36;&#x33;&#46;&#99;&#111;&#109;</a>发送邮件警报信息，每隔60秒发送一次，直到故障修复完成</strong></p>
+<ul>
+<li>故障报警邮件</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribpxbhjrj311e0f7q4j.jpg" alt="image-20200619222346519"></p>
+<ul>
+<li>恢复报警邮件</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribpypl5hj311e0f6jt0.jpg" alt="image-20200619222554131"></p>
+<h3 id="7-6-自动发现—自动添加服务器监控"><a href="#7-6-自动发现—自动添加服务器监控" class="headerlink" title="7.6 自动发现—自动添加服务器监控"></a>7.6 自动发现—自动添加服务器监控</h3><blockquote>
+<p><strong>什么是自动发现？</strong></p>
+<ul>
+<li>会自动添加主机或监控项等等的规则动作</li>
+</ul>
+</blockquote>
+<p>1、配置自动发现</p>
+<p>配置–&gt;自动发现–&gt;创建发现规则</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribq2ehq7j311o0b8wf5.jpg" alt="image-20200619223035841"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribq57kfoj311o0m575h.jpg" alt="image-20200619223456878"></p>
+<p>2、添加动作：发现主机后需要执行的操作</p>
+<p>配置–&gt;动作–&gt;事件源选：自动发现–&gt;创建动作：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribq9yg51j311o0bydgp.jpg" alt="image-20200619223621979"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribqf2ijyj311o0ffjsa.jpg" alt="image-20200619224021925"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribqca9b0j30s60esmyc.jpg" alt="image-20200619224642774"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribqk7hqtj311o0f0q4a.jpg" alt="image-20200619225315284"></p>
+<p>3、在agent02.zabbix主机上安装zabbix.agentd</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 安装所需依赖包</span></span><br><span class="line">[root@agent02 ~]<span class="comment"># yum -y install libxml2-devel libcurl-devel pcre-devel</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 创建zabbix运行用户</span></span><br><span class="line">[root@agent02 ~]<span class="comment"># useradd zabbix -M -s /sbin/nologin</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 创建zabbix日志存放目录</span></span><br><span class="line">[root@agent02 ~]<span class="comment"># mkdir -p /usr/local/zabbix/logs</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 更改属主数组</span></span><br><span class="line">[root@agent02 ~]<span class="comment"># chown -R zabbix:zabbix /usr/local/zabbix/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 解压</span></span><br><span class="line">[root@agent02 ~]<span class="comment"># tar xf zabbix-4.2.7.tar.gz -C /usr/src/ &amp;&amp; cd /usr/src/zabbix-4.2.7</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 配置</span></span><br><span class="line">[root@agent02 zabbix-4.2.7]<span class="comment"># ./configure --prefix=/usr/local/zabbix --enable-agent --enable-ipv6 --with-net-snmp --with-libcurl --with-libxml2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 编译、安装</span></span><br><span class="line">[root@agent02 zabbix-4.2.7]<span class="comment"># make &amp;&amp; make install &amp;&amp; cd</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 备份文件</span></span><br><span class="line">[root@agent02 ~]<span class="comment"># cp /usr/local/zabbix/etc/zabbix_agentd.conf /opt/zabbix_agentd.conf.bak</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 编辑配置文件</span></span><br><span class="line">[root@agent02 ~]<span class="comment"># vim /usr/local/zabbix/etc/zabbix_agentd.conf</span></span><br><span class="line">LogFile=/usr/<span class="built_in">local</span>/zabbix/logs/zabbix_agent.log</span><br><span class="line">PidFile=/usr/<span class="built_in">local</span>/zabbix/logs/zabbix_agent.pid</span><br><span class="line">Server=192.168.2.1</span><br><span class="line">ServerActive=192.168.2.1</span><br><span class="line">Hostname=agent02.zabbix          <span class="comment"># 这里一定要和本机的名称一致</span></span><br><span class="line">Include=/usr/<span class="built_in">local</span>/zabbix/etc/zabbix_agentd.conf.d/*.conf</span><br><span class="line"></span><br><span class="line"><span class="comment">## 启动agent端</span></span><br><span class="line">[root@agent02 ~]<span class="comment"># /usr/local/zabbix/sbin/zabbix_agentd</span></span><br><span class="line">[root@agent02 ~]<span class="comment"># netstat -utpln |grep zabbix</span></span><br><span class="line">tcp        0      0 0.0.0.0:10050           0.0.0.0:*          LISTEN      24736/zabbix_agentd </span><br><span class="line">tcp6       0      0 :::10050                :::*               LISTEN      24736/zabbix_agentd</span><br><span class="line"></span><br><span class="line"><span class="comment">## 加入开机启动项</span></span><br><span class="line">[root@agent02 ~]<span class="comment"># chmod a+x /etc/rc.d/rc.local</span></span><br><span class="line">[root@agent02 ~]<span class="comment"># echo &#x27;/usr/local/zabbix/sbin/zabbix_agentd&#x27; &gt;&gt; /etc/rc.local</span></span><br></pre></td></tr></table></figure>
+
+<p>4、耐心等待一段时间验证就OK了</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribqnuo7tj311e0cvq46.jpg" alt="image-20200619231534483"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribqqbuguj311o0i476c.jpg" alt="image-20200619230335497"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribqt60kzj311o0latal.jpg" alt="image-20200619230516373"></p>
+<h3 id="7-7-Zabbix聚合图形"><a href="#7-7-Zabbix聚合图形" class="headerlink" title="7.7 Zabbix聚合图形"></a>7.7 Zabbix聚合图形</h3><p>检测–&gt;聚合图形–&gt;创建聚合图形</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribqxrqmsj312a0ay74w.jpg" alt="image-20200619231148577"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribr1frzhj30rr09o74n.jpg" alt="image-20200619231234106"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribr7nokqj312a0c5dgm.jpg" alt="image-20200619231329998"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribrbizf0j312a0bywfi.jpg" alt="image-20200619231425604"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribre5bchj312a06lmxm.jpg" alt="image-20200619232128949"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribrh0rm2j312a0fjdgt.jpg" alt="image-20200619232240570"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribries3hj312a0f7gnk.jpg" alt="image-20200619232254439"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribrm60c9j311t0n9tc2.jpg" alt="image-20200619232521828"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribrqe3r1j315a0po77j.jpg" alt="image-20200619232714454"></p>
+<h3 id="7-8-安装并配置Grafana的web界面"><a href="#7-8-安装并配置Grafana的web界面" class="headerlink" title="7.8 安装并配置Grafana的web界面"></a>7.8 安装并配置Grafana的web界面</h3><blockquote>
+<p><strong>Grafana简介</strong></p>
+<p><strong>官网：</strong><a target="_blank" rel="noopener" href="https://grafana.com/">https://grafana.com</a></p>
+<p>Grafana是一个可视化面板（Dashboard）有着非常漂亮的图表和布局展示，功能齐全的度量仪表盘和图形编辑器，支持Graphite、zabbix、InfluxDB、Prometheus和OpenTSDB作为数据源。以InfluxDB（由go语言编写，是一个开源，分布式，时间序列，事件，可度量和无外部依赖的数据库）作为底层数据库；</p>
+<p>Grafana主要特性：灵活丰富的图形化选项；可以混合多种风格；支持白天和夜间模式；多个数据源。</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="comment"># yum -y install fontconfig freetype* urw-fonts               //安装grafana依赖</span></span><br><span class="line">[root@server ~]<span class="comment"># wget https://dl.grafana.com/oss/release/grafana-7.0.1-1.x86_64.rpm</span></span><br><span class="line">[root@server ~]<span class="comment"># yum install grafana-7.0.1-1.x86_64.rpm                      //安装grafana</span></span><br><span class="line">[root@server ~]<span class="comment"># grafana-cli plugins install alexanderzobnin-zabbix-app      //安装zabbix驱动插件;很慢</span></span><br><span class="line">installing alexanderzobnin-zabbix-app @ 3.12.2</span><br><span class="line">from url: https://grafana.com/api/plugins/alexanderzobnin-zabbix-app/versions/3.12.2/download</span><br><span class="line">into: /var/lib/grafana/plugins</span><br><span class="line"></span><br><span class="line">✔ Installed alexanderzobnin-zabbix-app successfully </span><br><span class="line"></span><br><span class="line">Restart grafana after installing plugins . &lt;service grafana-server restart&gt;</span><br><span class="line">[root@server ~]<span class="comment"># mkdir -p /opt/grafana/data/plugins/</span></span><br><span class="line">[root@server ~]<span class="comment"># cp -r /var/lib/grafana/plugins/alexanderzobnin-zabbix-app/ /opt/grafana/data/plugins/</span></span><br><span class="line">[root@server ~]<span class="comment"># ls /opt/grafana/data/plugins/</span></span><br><span class="line">alexanderzobnin-zabbix-app</span><br><span class="line">[root@server ~]<span class="comment"># chmod 777 /opt/grafana/data/plugins/ -R</span></span><br><span class="line">[root@server ~]<span class="comment"># systemctl start grafana-server</span></span><br><span class="line">[root@server ~]<span class="comment"># systemctl enable grafana-server</span></span><br><span class="line">[root@server ~]<span class="comment"># netstat -utpln |grep 3000</span></span><br><span class="line">tcp6       0      0 :::3000        :::*          LISTEN      42924/grafana-serve</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>访问测试<a href="http://192.168.2.1:3000，默认用户名admin，密码admin，在此是谷歌浏览器翻译过后的界面，大家可以自行下载谷歌浏览器，下载翻译插件，在此不做过多介绍；安装grafana；http://192.168.2.1:3000/login">http://192.168.2.1:3000，默认用户名admin，密码admin，在此是谷歌浏览器翻译过后的界面，大家可以自行下载谷歌浏览器，下载翻译插件，在此不做过多介绍；安装grafana；http://192.168.2.1:3000/login</a></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribrv1v6aj311m0np3zr.jpg" alt="image-20200619234606770"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribrxw7ehj311m0nmgni.jpg" alt="image-20200619234700036"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribs0jquwj311m0nnta7.jpg" alt="image-20200619234812921"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribs3votjj30wa0f2myi.jpg" alt="image-20200929143318582"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribs7p6yhj30wa0j442g.jpg" alt="image-20200929143339590"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribsbfpqwj30wa0j2q47.jpg" alt="image-20200929143357541"></p>
+<p><strong>添加数据源</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribsfnaw9j30wd0hk764.jpg" alt="image-20200929143425562"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribsjdyu9j30ur0mqjv7.jpg" alt="image-20200929143444556"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribsm6exkj30ol0o9go0.jpg" alt="image-20200929143518789"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribsrxi9hj30q70bwjsc.jpg" alt="image-20200929143545762"></p>
+<p><strong>创建仪表盘</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribswjceyj30t50d9ab0.jpg" alt="image-20200929143634589"></p>
+<p><strong>创建仪表盘时指定显示的图形</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribszc4uvj30t80fydgr.jpg" alt="image-20200929143715473"></p>
+<p><strong>选择数据源和图中需要显示的主机和主机的监控项</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribt23ixnj30wc0ktwhk.jpg" alt="image-20200929143752184"></p>
+<p><strong>创建完，保存此仪表盘，输入仪表盘的名称</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribt4ypc7j30t60fq0uj.jpg" alt="image-20200929143840271"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gribt8n4wlj30wa0ad0tm.jpg" alt="image-20200929143856933"></p>
+
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+      </div>
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/15/Keepalived/" rel="prev" title="Keepalived">
+      <i class="fa fa-chevron-left"></i> Keepalived
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%9B%91%E6%8E%A7%E7%94%9F%E6%80%81"><span class="nav-text">一、监控生态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="nav-text">1. 概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%9B%91%E6%8E%A7%E7%9B%AE%E6%A0%87"><span class="nav-text">2. 监控目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E7%9B%91%E6%8E%A7%E6%96%B9%E6%B3%95"><span class="nav-text">3. 监控方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7"><span class="nav-text">4. 监控工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E8%80%81%E7%89%8C%E7%9B%91%E6%8E%A7%E5%A6%82%E4%B8%8B"><span class="nav-text">4.1 老牌监控如下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E7%8E%8B%E7%89%8C%E7%9B%91%E6%8E%A7"><span class="nav-text">4.2 王牌监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E4%B8%89%E6%96%B9%E7%9B%91%E6%8E%A7"><span class="nav-text">4.3 三方监控</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E7%9B%91%E6%8E%A7%E6%B5%81%E7%A8%8B"><span class="nav-text">5. 监控流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E7%9B%91%E6%8E%A7%E6%8C%87%E6%A0%87"><span class="nav-text">6. 监控指标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E7%A1%AC%E4%BB%B6%E7%9B%91%E6%8E%A7"><span class="nav-text">6.1 硬件监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7"><span class="nav-text">6.2 系统监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-%E5%BA%94%E7%94%A8%E7%9B%91%E6%8E%A7"><span class="nav-text">6.3 应用监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-%E7%BD%91%E7%BB%9C%E7%9B%91%E6%8E%A7"><span class="nav-text">6.4 网络监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90"><span class="nav-text">6.5 流量分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7"><span class="nav-text">6.6 日志监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-%E5%AE%89%E5%85%A8%E7%9B%91%E6%8E%A7"><span class="nav-text">6.7 安全监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-8-API%E7%9B%91%E6%8E%A7"><span class="nav-text">6.8 API监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-9-%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7"><span class="nav-text">6.9 性能监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-10-%E4%B8%9A%E5%8A%A1%E7%9B%91%E6%8E%A7"><span class="nav-text">6.10 业务监控</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E7%9B%91%E6%8E%A7%E6%8A%A5%E8%AD%A6"><span class="nav-text">7. 监控报警</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E6%8A%A5%E8%AD%A6%E5%A4%84%E7%90%86"><span class="nav-text">8. 报警处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E9%9D%A2%E8%AF%95%E7%9B%91%E6%8E%A7"><span class="nav-text">10. 面试监控</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Zabbix%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3"><span class="nav-text">二、Zabbix配置文件详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-zabbix-server-conf%E8%AF%A6%E8%A7%A3"><span class="nav-text">1. zabbix_server.conf详解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81zabbix-agentd-conf%E8%AF%A6%E8%A7%A3"><span class="nav-text">2、zabbix_agentd.conf详解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81zabbix-proxy-conf%E8%AF%A6%E8%A7%A3"><span class="nav-text">3、zabbix_proxy.conf详解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81Zabbix%E7%9B%91%E6%8E%A7%E7%BB%93%E5%90%88Grafana%E7%BB%98%E5%9B%BE"><span class="nav-text">三、Zabbix监控结合Grafana绘图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Zabbix%E6%A6%82%E8%BF%B0"><span class="nav-text">1. Zabbix概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Zabbixj%E6%9E%B6%E6%9E%84%E5%9B%BE"><span class="nav-text">2. Zabbixj架构图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Zabbix%E7%9A%84%E4%BC%98%E5%8A%A3%E5%8A%BF"><span class="nav-text">3. Zabbix的优劣势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Zabbix%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E"><span class="nav-text">4. Zabbix组件说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Zabbix%E7%9B%91%E6%8E%A7%E6%B5%81%E7%A8%8B"><span class="nav-text">5. Zabbix监控流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B"><span class="nav-text">6. 客户端守护进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Zabbix%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98"><span class="nav-text">7. Zabbix项目实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-%E5%AE%89%E8%A3%85zabbix-server%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="nav-text">7.1 安装zabbix server服务端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-%E9%85%8D%E7%BD%AE%E4%BC%98%E5%8C%96zabbix%E6%9C%8D%E5%8A%A1%E7%9A%84web%E9%A1%B5%E9%9D%A2"><span class="nav-text">7.2 配置优化zabbix服务的web页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-%E5%AE%9E%E7%8E%B0%E7%9B%91%E6%8E%A7server-zabbix%E7%AB%AF%E8%87%AA%E8%BA%AB%E7%9A%84OS%E3%80%81mysql%E3%80%81httpd"><span class="nav-text">7.3 实现监控server.zabbix端自身的OS、mysql、httpd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-%E8%87%AA%E5%AE%9A%E4%B9%89Zabbix%E7%9B%91%E6%8E%A7%E9%A1%B9%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-text">7.4 自定义Zabbix监控项（重点）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-5-%E5%AE%9E%E7%8E%B0Zabbix%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E5%8A%9F%E8%83%BD"><span class="nav-text">7.5 实现Zabbix邮件报警功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-6-%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0%E2%80%94%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%91%E6%8E%A7"><span class="nav-text">7.6 自动发现—自动添加服务器监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-7-Zabbix%E8%81%9A%E5%90%88%E5%9B%BE%E5%BD%A2"><span class="nav-text">7.7 Zabbix聚合图形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-8-%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEGrafana%E7%9A%84web%E7%95%8C%E9%9D%A2"><span class="nav-text">7.8 安装并配置Grafana的web界面</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Armin"
+      src="/uploads/armin.png">
+  <p class="site-author-name" itemprop="name">Armin</p>
+  <div class="site-description" itemprop="description">记录生活中的点点滴滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/" title="GitHub → https:&#x2F;&#x2F;github.com" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://aws.amazon.com/cn/" title="AWS → https:&#x2F;&#x2F;aws.amazon.com&#x2F;cn&#x2F;" rel="noopener" target="_blank"><i class="fab fa-aws fa-fw"></i>AWS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.processon.com/" title="processon → https:&#x2F;&#x2F;www.processon.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-accusoft fa-fw"></i>processon</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cn-ki.net/" title="知识库 → https:&#x2F;&#x2F;www.cn-ki.net&#x2F;" rel="noopener" target="_blank"><i class="fas fa-book-open fa-fw"></i>知识库</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tophub.today/" title="看新闻 → https:&#x2F;&#x2F;tophub.today&#x2F;" rel="noopener" target="_blank"><i class="far fa-newspaper fa-fw"></i>看新闻</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://m.zxjsq.net/" title="计算器 → http:&#x2F;&#x2F;m.zxjsq.net" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计算器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://shijisuishu.bmcx.com/20010314__shijisuishu/" title="计龄器 → https:&#x2F;&#x2F;shijisuishu.bmcx.com&#x2F;20010314__shijisuishu&#x2F;" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计龄器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tool.oschina.net/hexconvert" title="进制转换 → https:&#x2F;&#x2F;tool.oschina.net&#x2F;hexconvert" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>进制转换</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.sojson.com/convert/subnetmask.html" title="子网计算 → https:&#x2F;&#x2F;www.sojson.com&#x2F;convert&#x2F;subnetmask.html" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>子网计算</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.baidu.com/" title="度娘 → https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank"><i class="fas fa-search fa-fw"></i>度娘</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/yourname" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/yourname" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://youtube.com/yourname" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>YouTube</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Armin</span>
+</div>
+
+<div class="powered-by">
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
