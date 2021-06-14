@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="JavaSe基础">
+<meta property="og:url" content="http://example.com/2021/06/15/JavaSe%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="LEMON">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grickb287bj30go0a0762.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grickfb0l7j30hg09twjd.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grickletfqj30ga096adm.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grickr29enj310h0qbwto.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grickurvgoj314i0gz4bs.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grickyhw4xj314q0le14q.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricl51i88j30zs0q2qby.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricl8gwqdj30xn08saaq.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1griclbn1h1j30y00cuwfq.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricldtr46j30y10jz0ur.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1griclkiolyj30nt07l748.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1griclpkk8cj60jg0agmxm02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricltqof0j30dw0aldg6.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1griclzwmx6j30dw0aj74e.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricm4nw6bj30dw0al3yr.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricm9sqe7j30y00fgabi.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricmehiltj30v50d4gtn.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricmhahuvj30v90hm0ul.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricmmdn91j30in0i73z7.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricmud0pwj30pl0nwtam.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricn00m6jj30pl0nt3zi.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricn6fvl0j60tj049t8x02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricn9drjhj30rp0hqtak.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricnczvrrj30q305m0sx.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricngcdxbj30pn05dglw.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricnk5eepj30r9091js3.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricnmxc2uj30pt03fa9v.jpg">
+<meta property="og:image" content="http://example.com/2021/06/15/JavaSe%E5%9F%BA%E7%A1%80/1.%20JavaSe%E5%9F%BA%E7%A1%80.assets/image-20200614224810498.png">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricnq8jfgj30y006y3z0.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricntzfdwj30y0057glt.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricny5uuoj30y004laaf.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grico0ve3vj30xc09egmd.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grico3cdqrj30xc08taav.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grico7er9mj30mn01pglf.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricoej7egj30k701amx3.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricopnsjrj30jb03uaba.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricou19z8j30k305qdh8.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricp0manmj310h0mi4ak.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricp3eakbj310h0pn7gp.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricp67vxkj310h0n2mzs.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricp9x934j31000ogdhe.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricpcq0i2j30mo06r0sm.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricpgzue4j30dv0as0th.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricpwfnv0j30dv0as3yp.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricq0nzuzj30dv0asjrl.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricq4pnb5j30dv0as0sy.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricq8zn0mj30dv0asdgl.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricqdqhqmj30bs04ra9y.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricqif1qhj30r00gyq3c.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricqkq7azj311w0ptq3e.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricqoix4uj311w0ptmxl.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricqraqh1j30vb0md3zs.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricqu5fkpj30vc0d175b.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricr14xqkj31210ptt9h.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricr3ie61j31210pt74n.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricraiumzj30vj0nstau.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricrdcp97j30qe0bj74f.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricrg58pzj314a0rkacz.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grick2u50tj30q70esmxb.jpg">
+<meta property="article:published_time" content="2021-06-14T18:26:31.000Z">
+<meta property="article:modified_time" content="2021-06-14T18:27:22.259Z">
+<meta property="article:author" content="Armin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grickb287bj30go0a0762.jpg">
+
+<link rel="canonical" href="http://example.com/2021/06/15/JavaSe%E5%9F%BA%E7%A1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>JavaSe基础 | LEMON</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LEMON</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">死记性不如烂笔头</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/15/JavaSe%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/armin.png">
+      <meta itemprop="name" content="Armin">
+      <meta itemprop="description" content="记录生活中的点点滴滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LEMON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaSe基础
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+        <!--toc-->
+<span id="more"></span>
+
+<h1 id="一、Java-语言概述"><a href="#一、Java-语言概述" class="headerlink" title="一、Java 语言概述"></a>一、Java 语言概述</h1><h2 id="1-什么是Java语言"><a href="#1-什么是Java语言" class="headerlink" title="1. 什么是Java语言"></a>1. 什么是Java语言</h2><p>Java语言是美国Sun公司（Stanford University Network），在1995年推出的高级的编程语言。所谓编程语言，是计算机的语言，人们可以使用编程语言对计算机下达命令，让计算机完成人们需要的功能。</p>
+<h2 id="2-Java语言发展历史"><a href="#2-Java语言发展历史" class="headerlink" title="2. Java语言发展历史"></a>2. Java语言发展历史</h2><ul>
+<li>1995 年Sun公司发布Java1.0版本</li>
+<li>1997 年发布Java 1.1版本</li>
+<li>1998 年发布Java 1.2版本</li>
+<li>2000 年发布Java 1.3版本</li>
+<li>2002 年发布Java 1.4版本</li>
+<li>2004 年发布Java 1.5版本</li>
+<li>2006 年发布Java 1.6版本</li>
+<li><em><strong>2009 年Oracle甲骨文公司收购Sun公司，并于2011发布Java 1.7版本</strong></em></li>
+<li>2014 年发布Java 1.8版本</li>
+<li>2017 年发布Java 9.0版本</li>
+</ul>
+<h2 id="3-JAVA的优势"><a href="#3-JAVA的优势" class="headerlink" title="3. JAVA的优势"></a>3. JAVA的优势</h2><ul>
+<li><p><em><strong>可移植性</strong></em></p>
+<ul>
+<li>跨平台，linux、windown、mac，JAVA程序流传一句话：一次编写，到处运行</li>
+</ul>
+</li>
+<li><p><em><strong>面向对象</strong></em></p>
+<ul>
+<li>模拟人的思维写程序，JAVA里面俗称：万物皆对象</li>
+</ul>
+</li>
+<li><p><em><strong>动态性</strong></em></p>
+<ul>
+<li>但是JAVA本身是不具有动态性的，单可以利用反射机制来让JAVA有动态性</li>
+</ul>
+</li>
+<li><p><em><strong>多线程</strong></em></p>
+<ul>
+<li>比如：在现实生活中我们使用笔记本电脑既可以打游戏的同时也能够听音乐</li>
+</ul>
+</li>
+<li><p><em><strong>安全性</strong></em></p>
+<ul>
+<li>可以构建一些能防病毒、防篡改的系统</li>
+</ul>
+</li>
+<li><p><em><strong>健壮性</strong></em></p>
+<ul>
+<li>生态圈丰富</li>
+</ul>
+</li>
+<li><p><em><strong>等等等等……</strong></em></p>
+</li>
+</ul>
+<h2 id="4-Java语言能做什么"><a href="#4-Java语言能做什么" class="headerlink" title="4. Java语言能做什么"></a>4. Java语言能做什么</h2><ul>
+<li><em><strong>移动应用开发</strong></em></li>
+</ul>
+<blockquote>
+<p>现在最大的移动设备操作系统安卓的App开发语言就是java，随便打开一个App他们就是用的java语言。在安卓没有出现之前我们玩的手机上的游戏大多是java开发的，是否还记得进入游戏的时候一个java图标的游戏呢。</p>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grickb287bj30go0a0762.jpg" alt="image-20200614204816463"></p>
+<ul>
+<li><em><strong>嵌入式</strong></em></li>
+</ul>
+<blockquote>
+<p>我们经常用的电饭煲、微波炉、录像机、汽车等都是使用嵌入式系统。java在嵌入式领域处着重要的地位，有着很大的发展空间。</p>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grickfb0l7j30hg09twjd.jpg" alt="image-20200614205444139"></p>
+<ul>
+<li><em><strong>大数据</strong></em></li>
+</ul>
+<blockquote>
+<p>火爆高薪的大数据领域，java也能接入，大数据技术都在不同程度使用着java。</p>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grickletfqj30ga096adm.jpg" alt="image-20200614205721941"></p>
+<ul>
+<li><em><strong>网站领域</strong></em></li>
+</ul>
+<blockquote>
+<p>大型的电子商务平台就是使用java开发的。例如有名的淘宝网、京东。java可以运用许多不同框架创建web项目，从而有开发大型网站的基础。</p>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grickr29enj310h0qbwto.jpg" alt="image-20200614204705497"></p>
+<h2 id="5-JAVA的三大版本"><a href="#5-JAVA的三大版本" class="headerlink" title="5. JAVA的三大版本"></a>5. JAVA的三大版本</h2><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grickurvgoj314i0gz4bs.jpg" alt="image-20200614212335661"></p>
+<h2 id="6-JDK-amp-JRE-amp-JVM"><a href="#6-JDK-amp-JRE-amp-JVM" class="headerlink" title="6. JDK &amp; JRE &amp; JVM"></a>6. JDK &amp; JRE &amp; JVM</h2><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grickyhw4xj314q0le14q.jpg" alt="image-20200614214326270"></p>
+<blockquote>
+<p>jdk：java development kit          java开发工具包</p>
+<p>jre：java runtime enviroment     java运行时环境</p>
+<p>jvm：java virtual machine          java虚拟机</p>
+<p>三者之间是包含关系，jdk包含jre，jre包含jvm</p>
+</blockquote>
+<h1 id="二、Java开发环境搭建"><a href="#二、Java开发环境搭建" class="headerlink" title="二、Java开发环境搭建"></a>二、Java开发环境搭建</h1><blockquote>
+<p><strong>搭建步骤</strong></p>
+<ol>
+<li>JDK下载与安装</li>
+<li>配置JDK环境变量</li>
+<li>JDK目录介绍</li>
+<li>编写第一个Java程序</li>
+</ol>
+<p><strong>安装JDK需要注意的事项</strong></p>
+<ol>
+<li>安装路径中不要包含中文</li>
+<li>安装路径中不要包含空格</li>
+</ol>
+</blockquote>
+<h2 id="1-JDK下载与安装"><a href="#1-JDK下载与安装" class="headerlink" title="1. JDK下载与安装"></a>1. JDK下载与安装</h2><ul>
+<li><em><strong>下载JDK</strong></em></li>
+</ul>
+<p>JDK下载地址：<a target="_blank" rel="noopener" href="https://www.oracle.com/">https://www.oracle.com/</a></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricl51i88j30zs0q2qby.jpg" alt="image-20200614215449515"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricl8gwqdj30xn08saaq.jpg" alt="image-20200614215610643"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1griclbn1h1j30y00cuwfq.jpg" alt="image-20200614215721104"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricldtr46j30y10jz0ur.jpg" alt="image-20200614215815555"></p>
+<ul>
+<li><em><strong>安装JDK</strong></em></li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1griclkiolyj30nt07l748.jpg" alt="image-20200614220017404"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1griclpkk8cj60jg0agmxm02.jpg" alt="image-20200614220056955"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricltqof0j30dw0aldg6.jpg" alt="image-20200614220806395"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1griclzwmx6j30dw0aj74e.jpg" alt="image-20200614220828697"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricm4nw6bj30dw0al3yr.jpg" alt="image-20200614221115423"></p>
+<h2 id="2-配置JDK环境变量"><a href="#2-配置JDK环境变量" class="headerlink" title="2. 配置JDK环境变量"></a>2. 配置JDK环境变量</h2><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricm9sqe7j30y00fgabi.jpg" alt="image-20200614221313204"></p>
+<ul>
+<li>右击此电脑 — 点击属性</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricmehiltj30v50d4gtn.jpg" alt="image-20200614221505992"></p>
+<ul>
+<li>点击高级系统设置 — 点击环境变量</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricmhahuvj30v90hm0ul.jpg" alt="image-20200614221619959"></p>
+<ul>
+<li>新建系统变量 — 创建JAVA_HOME变量</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricmmdn91j30in0i73z7.jpg" alt="image-20200614222007977"></p>
+<ul>
+<li>配置系统path变量</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricmud0pwj30pl0nwtam.jpg" alt="image-20200614222756658"></p>
+<ul>
+<li>保存以上配置</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricn00m6jj30pl0nt3zi.jpg" alt="image-20200614222834639"></p>
+<ul>
+<li>打开cmd终端，使用DOS命令验证是否安装成功</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricn6fvl0j60tj049t8x02.jpg" alt="image-20200614223013939"></p>
+<h2 id="3-JDK目录介绍"><a href="#3-JDK目录介绍" class="headerlink" title="3. JDK目录介绍"></a>3. JDK目录介绍</h2><ul>
+<li><strong>bin目录</strong></li>
+</ul>
+<p>其中bin目录里面存放了JDK的各种工具命令，即JDK开发工具的可执行文件。其中这些可执行文件都是二进制的，其中包括编译器、解释器以及其他一些工具，比如我们刚开始用的Javac、Java命令去检查JDK是否安装配置正确就是在这个目录下面的命令。bin目录下的内容如下图：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricn9drjhj30rp0hqtak.jpg" alt="image-20200614224010085"></p>
+<ul>
+<li><strong>include目录</strong></li>
+</ul>
+<p>其中include目录里面是一些供C语言使用的标题文件，其中C语言的头文件支持Java本地接口和Java虚拟机调试程序接口的本地编程技术。这里头文件的作用是让Java调用C/C++实现的函数功能。include目录下的内容如下：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricnczvrrj30q305m0sx.jpg" alt="image-20200614224112646"></p>
+<ul>
+<li><strong>jre目录</strong></li>
+</ul>
+<p>其中jre(Java runtime  environment即Java运行时环境)目录路径下安装的就是运行Java程序所必须的JRE环境。我们可以看到在jre目录下的bin里面有java.exe、javaws.exe，但没有javac.exe。jre目录下的内容如下：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricngcdxbj30pn05dglw.jpg" alt="image-20200614224201279"></p>
+<ul>
+<li><strong>lib目录</strong></li>
+</ul>
+<p>其中lib目录：该路径下存放的是JDK工具命令的实际执行程序。lib目录下的内容如下：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricnk5eepj30r9091js3.jpg" alt="image-20200614224254211"></p>
+<ul>
+<li><strong>src.zip 和 javafx-src.zip目录</strong></li>
+</ul>
+<p>该压缩文件里面存放的就是Java所有核心类库的源代码。src.zip目录解压内容如下：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricnmxc2uj30pt03fa9v.jpg" alt="image-20200614224832009"></p>
+<p><img src="1.%20JavaSe%E5%9F%BA%E7%A1%80.assets/image-20200614224810498.png" alt="image-20200614224810498"></p>
+<h2 id="4-编写第一个Java程序"><a href="#4-编写第一个Java程序" class="headerlink" title="4. 编写第一个Java程序"></a>4. 编写第一个Java程序</h2><blockquote>
+<ol>
+<li>新建一个存放源代码的目录</li>
+<li>然后再创建一个java类型文件（Hello.java）</li>
+<li>使用Notepad++文本工具编写Hello.java程序文件</li>
+<li>进入cmd终端，使用javac命令将其写好的java程序文件编译成一个.class文件</li>
+<li>执行编译后的.class文件；注：运行时不要加上.class后缀！！！</li>
+</ol>
+</blockquote>
+<ul>
+<li>创建代码存放目录</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricnq8jfgj30y006y3z0.jpg" alt="image-20200614225755533"></p>
+<ul>
+<li>新建一个Hello.java程序文件</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricntzfdwj30y0057glt.jpg" alt="image-20200614225911637"></p>
+<ul>
+<li>使用Notepad++文本工具编写Hello.java程序文件<ul>
+<li>注意事项：<ul>
+<li>每个字母和符号必须与示例代码一模一样。</li>
+<li>保证文件名和类的名字是一致的，注意大小写。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// public class后面代表定义一个类的名称，类是Java当中所有源代码的基本组织单位。</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hello</span></span>&#123;</span><br><span class="line">    <span class="comment">// 第二行的内容是万年不变的固定写法，代表main方法，这一行代表程序执行的起点</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 第三行代表打印输出语句（其实就是屏幕显示），希望显示什么，就在小括号当中填写什么内容</span></span><br><span class="line">		System.out.print(<span class="string">&quot;Hello worlld!&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>关于main方法：</strong>称为主方法。写法是固定格式不可以更改。main方法是程序的入口点或起始点，无论我们编写多少程序，JVM在运行的时候，都会从main方法这里开始执行。</li>
+</ul>
+<blockquote>
+<p>第一个 Hello 源程序就编写完成了，但是这个文件是程序员编写的，JVM是看不懂的，也就不能运行，因此我们必须将编写好的 Java 源文件 编译成JVM可以看懂的字节码文件。</p>
+</blockquote>
+<ul>
+<li>进入cmd终端，使用javac命令将其写好的Hello.java编译成可执行文件</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricny5uuoj30y004laaf.jpg" alt="image-20200614230922528"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grico0ve3vj30xc09egmd.jpg" alt="image-20200614230955791"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grico3cdqrj30xc08taav.jpg" alt="image-20200614231153893"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grico7er9mj30mn01pglf.jpg" alt="image-20200614231311802"></p>
+<blockquote>
+<p><strong>注意事项：</strong>执行时不要加上程序的.class后缀，不然会报错</p>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricoej7egj30k701amx3.jpg" alt="image-20200614231418652"></p>
+<h1 id="三、编译型-和-解释型"><a href="#三、编译型-和-解释型" class="headerlink" title="三、编译型 和 解释型"></a>三、编译型 和 解释型</h1><blockquote>
+<p><strong>Java这两种都有</strong></p>
+<p>你可以说它是编译型的。因为所有的Java代码都是要编译的，.java不经过编译就什么用都没有。</p>
+<p>你可以说它是解释型的。因为java代码编译后不能直接运行，它是解释运行在JVM上的，所以它是解释运行的，那也就算是解释的了。  </p>
+<p>但是，现在的JVM为了效率，都有一些JIT优化。它又会把.class的二进制代码编译为本地的代码直接运行，所以，又是编译的。</p>
+<p>像C、C++ 他们经过一次编译之后直接可以编译成操作系统了解的类型，可以直接执行的 所以他们是编译型的语言。没有经过第二次的处理  而Java不一样他首先由编译器编译成.class类型的文件，这个是java自己类型的文件  然后在通过虚拟机(JVM)从.class文件中读一行解释执行一行，所以他是解释型的语言，而由于java对于多种不同的操作系统有不同的JVM所以 Java实现了真正意义上的跨平台！ </p>
+</blockquote>
+<h2 id="1-编译型"><a href="#1-编译型" class="headerlink" title="1. 编译型"></a>1. 编译型</h2><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricopnsjrj30jb03uaba.jpg" alt="image-20200615082821326"></p>
+<p>编译型语言是指使用专门的编译器，针对特定平台（操作系统）将某种高级语言源代码一次性“翻译”成可被该平台硬件执行的机器码（包括机器指令和操作数），并包装成该平台所能识别的可执行性程序的格式，这个转换过程称为“编译”。编译生成的可执行性程序可以脱离开发环境，在特定的平台上独立运行。</p>
+<p>因为编译型语言是一次性低编译成机器码，所以可以脱离开发环境独立运行，而且通过运行效率较高；但因为编译型语言的程序被编译成特定平台上的机器码，因为编译生成的可执行性程序通常无法移植到其他平台上运行；如果需要移植，则必须将源代码复制到特定平台上，针对特定平台进行修改，至少也需要采用特定平台上的编译器重新编译。</p>
+<h2 id="2-解释型"><a href="#2-解释型" class="headerlink" title="2. 解释型"></a>2. 解释型</h2><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricou19z8j30k305qdh8.jpg" alt="image-20200615082845181"></p>
+<p>解释性语言是指使用专门的解释器对源程序逐行解释成特定平台的机器码并立即执行的语言。解释性语言通常不会进行整体性的编译和链接处理，解释型语言相当于把编译型语言中的编译和解释过程混合到一起同时完成。</p>
+<p>可以认为：每次执行解释型语言的程序都需要进行一次编译，因此解释型语言的程序运行效率通常较低，而且不能脱离解释器独立运行。但解释型语言有一个优势：跨平台比较容易，只需提供特定平台的解释器即可，每个特定平台上的解释器负责将源程序解释成特定平台的机器指令即可。解释型语言可以方便地实现源程序级的移植，但这是以牺牲程序执行效率为代价的。</p>
+<h2 id="3-个人总结"><a href="#3-个人总结" class="headerlink" title="3. 个人总结"></a>3. 个人总结</h2><ul>
+<li><p>编译型语言<strong>一次性</strong>将源码进行编译完成并生成可执行性程序（比如.exe程序）</p>
+</li>
+<li><p>解释型语言<strong>逐行</strong>进行编译并且解释执行（比如Python从上往下逐条解释执行）</p>
+</li>
+</ul>
+<h1 id="四、IDEA开发工具"><a href="#四、IDEA开发工具" class="headerlink" title="四、IDEA开发工具"></a>四、IDEA开发工具</h1><h2 id="1-什么是IDE？"><a href="#1-什么是IDE？" class="headerlink" title="1. 什么是IDE？"></a>1. 什么是IDE？</h2><blockquote>
+<p>集成开发环境（IDE，Integrated Development Environment ）是用于提供程序开发环境的应用程序，一般包括代码编辑器、编译器、调试器和图形用户界面等工具。</p>
+</blockquote>
+<h2 id="2-下载IntelliJ-IDEA"><a href="#2-下载IntelliJ-IDEA" class="headerlink" title="2. 下载IntelliJ IDEA"></a>2. 下载IntelliJ IDEA</h2><ul>
+<li>进入官网</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricp0manmj310h0mi4ak.jpg" alt="image-20200615084832868"></p>
+<ul>
+<li>下载IntelliJ IDEA</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricp3eakbj310h0pn7gp.jpg" alt="image-20200615084619196"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricp67vxkj310h0n2mzs.jpg" alt="image-20200615084931566"></p>
+<ul>
+<li>下载社区版</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricp9x934j31000ogdhe.jpg" alt="image-20200615085106430"></p>
+<h2 id="3-安装IntelliJ-IDEA"><a href="#3-安装IntelliJ-IDEA" class="headerlink" title="3. 安装IntelliJ IDEA"></a>3. 安装IntelliJ IDEA</h2><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricpcq0i2j30mo06r0sm.jpg" alt="image-20200615093911486"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricpgzue4j30dv0as0th.jpg" alt="image-20200615093948160"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricpwfnv0j30dv0as3yp.jpg" alt="image-20200615094053818"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricq0nzuzj30dv0asjrl.jpg" alt="image-20200615094210602"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricq4pnb5j30dv0as0sy.jpg" alt="image-20200615094225111"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricq8zn0mj30dv0asdgl.jpg" alt="image-20200615094401543"></p>
+<h2 id="4-简单使用IntelliJ-IDEA"><a href="#4-简单使用IntelliJ-IDEA" class="headerlink" title="4. 简单使用IntelliJ IDEA"></a>4. 简单使用IntelliJ IDEA</h2><ul>
+<li>选择不导入设置</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricqdqhqmj30bs04ra9y.jpg" alt="image-20200615094454294"></p>
+<ul>
+<li>创建新的项目</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricqif1qhj30r00gyq3c.jpg" alt="image-20200615102325213"></p>
+<ul>
+<li>创建一个空的项目</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricqkq7azj311w0ptq3e.jpg" alt="image-20200615102425436"></p>
+<ul>
+<li>创建项目 及 指定位置</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricqoix4uj311w0ptmxl.jpg" alt="image-20200615102718837"></p>
+<ul>
+<li>配置好java环境</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricqraqh1j30vb0md3zs.jpg" alt="image-20200615102856483"></p>
+<ul>
+<li>新建一个模块</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricqu5fkpj30vc0d175b.jpg" alt="image-20200615104143425"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricr14xqkj31210ptt9h.jpg" alt="image-20200615113928834"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricr3ie61j31210pt74n.jpg" alt="image-20200615114016199"></p>
+<ul>
+<li>使用 IDEA 创建第一个java的.class文件</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricraiumzj30vj0nstau.jpg" alt="image-20200615114231808"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricrdcp97j30qe0bj74f.jpg" alt="image-20200615095622292"></p>
+<ul>
+<li>编写java程序 并 运行.class程序文件</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricrg58pzj314a0rkacz.jpg" alt="image-20200615115540657"></p>
+<h1 id="五、Java基础"><a href="#五、Java基础" class="headerlink" title="五、Java基础"></a>五、Java基础</h1><h2 id="1-注释comment"><a href="#1-注释comment" class="headerlink" title="1. 注释comment"></a>1. 注释comment</h2><p><em><strong>概述</strong></em></p>
+<blockquote>
+<ul>
+<li>在代码量少的情况时，我们还能够看懂里面的代码，但是当项目打码量多或者复杂的时候就需要注释了</li>
+<li>注释并不会被当作程序来执行，注释是给程序员来看的</li>
+<li>所以编写代码时，打注释是一个非常好的习惯</li>
+</ul>
+</blockquote>
+<p><em><strong>Java注释有三种：</strong></em></p>
+<ul>
+<li><p>单行注释</p>
+<ul>
+<li>格式如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 单行注释</span></span><br></pre></td></tr></table></figure></li>
+<li><p>多行注释</p>
+<ul>
+<li>格式如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">多行注释</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></li>
+<li><p>javaDoc文档注释</p>
+<ul>
+<li>格式如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Dev</span> lemon</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><em><strong>有趣的代码注释</strong></em></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grick2u50tj30q70esmxb.jpg" alt="image-20200615120021625"></p>
+<h2 id="2-关键字"><a href="#2-关键字" class="headerlink" title="2. 关键字"></a>2. 关键字</h2><blockquote>
+<ul>
+<li><strong>关键字 ：是指在程序中，Java已经定义好的单词，具有特殊含义。</strong><ul>
+<li>关键字比较多，不能死记硬背，学到哪里记到哪里即可。</li>
+<li>Hello 案例中，出现的关键字有 public 、 class 、 static 、 void 等，这些单词已经被Java定义好，全部都是小写字母，notepad++中颜色特殊。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>关键字总览</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>abstract</td>
+<td>表明类或者成员方法具有抽象属性</td>
+</tr>
+<tr>
+<td>assert</td>
+<td>用来进行程序调试</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>基本数据类型之一，布尔类型</td>
+</tr>
+<tr>
+<td>break</td>
+<td>提前跳出一个块</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>基本数据类型之一，字节类型</td>
+</tr>
+<tr>
+<td>case</td>
+<td>用在switch语句之中，表示其中的一个分支</td>
+</tr>
+<tr>
+<td>catch</td>
+<td>用在异常处理中，用来捕捉异常</td>
+</tr>
+<tr>
+<td>char</td>
+<td>基本数据类型之一，字符类型</td>
+</tr>
+<tr>
+<td>class</td>
+<td>类</td>
+</tr>
+<tr>
+<td>const</td>
+<td>保留关键字，没有具体含义</td>
+</tr>
+<tr>
+<td>continue</td>
+<td>回到一个块的开始处</td>
+</tr>
+<tr>
+<td>default</td>
+<td>默认，例如，用在switch语句中，表明一个默认的分支</td>
+</tr>
+<tr>
+<td>do</td>
+<td>用在do-while循环结构中</td>
+</tr>
+<tr>
+<td>double</td>
+<td>基本数据类型之一，双精度浮点数类型</td>
+</tr>
+<tr>
+<td>else</td>
+<td>用在条件语句中，表明当条件不成立时的分支</td>
+</tr>
+<tr>
+<td>enum</td>
+<td>枚举</td>
+</tr>
+<tr>
+<td>extends</td>
+<td>表明一个类型是另一个类型的子类型，这里常见的类型有类和接口</td>
+</tr>
+<tr>
+<td>final</td>
+<td>用来说明最终属性，表明一个类不能派生出子类，或者成员方法不能被覆盖，或者成员域的值不能被改变</td>
+</tr>
+<tr>
+<td>finally</td>
+<td>用于处理异常情况，用来声明一个基本肯定会被执行到的语句块</td>
+</tr>
+<tr>
+<td>float</td>
+<td>基本数据类型之一，单精度浮点数类型</td>
+</tr>
+<tr>
+<td>for</td>
+<td>一种循环结构的引导词</td>
+</tr>
+<tr>
+<td>goto</td>
+<td>保留关键字，没有具体含义</td>
+</tr>
+<tr>
+<td>if</td>
+<td>条件语句的引导词</td>
+</tr>
+<tr>
+<td>implements</td>
+<td>表明一个类实现了给定的接口</td>
+</tr>
+<tr>
+<td>import</td>
+<td>表明要访问指定的类或包</td>
+</tr>
+<tr>
+<td>instanceof</td>
+<td>用来测试一个对象是否是指定类型的实例对象</td>
+</tr>
+<tr>
+<td>int</td>
+<td>基本数据类型之一，整数类型</td>
+</tr>
+<tr>
+<td>interface</td>
+<td>接口</td>
+</tr>
+<tr>
+<td>long</td>
+<td>基本数据类型之一，长整数类型</td>
+</tr>
+<tr>
+<td>native</td>
+<td>用来声明一个方法是由与计算机相关的语言（如C/C++/FORTRAN语言）实现的</td>
+</tr>
+<tr>
+<td>new</td>
+<td>用来创建新实例对象</td>
+</tr>
+<tr>
+<td>package</td>
+<td>包</td>
+</tr>
+<tr>
+<td>private</td>
+<td>一种访问控制方式：私用模式</td>
+</tr>
+<tr>
+<td>protected</td>
+<td>一种访问控制方式：保护模式</td>
+</tr>
+<tr>
+<td>public</td>
+<td>一种访问控制方式：共用模式</td>
+</tr>
+<tr>
+<td>return</td>
+<td>从成员方法中返回数据</td>
+</tr>
+<tr>
+<td>short</td>
+<td>基本数据类型之一,短整数类型</td>
+</tr>
+<tr>
+<td>static</td>
+<td>表明具有静态属性</td>
+</tr>
+<tr>
+<td>strictfp</td>
+<td>用来声明FP_strict（单精度或双精度浮点数）表达式遵循IEEE 754算术规范</td>
+</tr>
+<tr>
+<td>super</td>
+<td>表明当前对象的父类型的引用或者父类型的构造方法</td>
+</tr>
+<tr>
+<td>switch</td>
+<td>分支语句结构的引导词</td>
+</tr>
+<tr>
+<td>synchronized</td>
+<td>表明一段代码需要同步执行</td>
+</tr>
+<tr>
+<td>this</td>
+<td>指向当前实例对象的引用</td>
+</tr>
+<tr>
+<td>throw</td>
+<td>抛出一个异常</td>
+</tr>
+<tr>
+<td>throws</td>
+<td>声明在当前定义的成员方法中所有需要抛出的异常</td>
+</tr>
+<tr>
+<td>transient</td>
+<td>声明不用序列化的成员域</td>
+</tr>
+<tr>
+<td>try</td>
+<td>尝试一个可能抛出异常的程序块</td>
+</tr>
+<tr>
+<td>void</td>
+<td>声明当前成员方法没有返回值</td>
+</tr>
+<tr>
+<td>volatile</td>
+<td>表明两个或者多个变量必须同步地发生变化</td>
+</tr>
+<tr>
+<td>while</td>
+<td>用在循环结构中</td>
+</tr>
+</tbody></table>
+<h2 id="3-标识符"><a href="#3-标识符" class="headerlink" title="3. 标识符"></a>3. 标识符</h2><blockquote>
+<p><em><strong>标识符：是指在程序中，我们自己定义内容。比如类的名字、方法的名字和变量的名字等等，都是标识符。</strong></em></p>
+</blockquote>
+<ul>
+<li><strong>命名规则：</strong> <code>硬性要求</code><ul>
+<li>标识符可以包含 英文字母 26个(区分大小写) 、 0 -9数字 、 $ （美元符号） 和 _ （下划线） 。</li>
+<li>标识符不能以数字开头。</li>
+<li>标识符不能是关键字。</li>
+</ul>
+</li>
+<li><strong>命名规范：</strong> <code>软性建议</code><ul>
+<li>类名规范：首字母大写，后面每个单词首字母大写（大驼峰式）。<ul>
+<li>写法：MyFirstName</li>
+</ul>
+</li>
+<li>方法名规范： 首字母小写，后面每个单词首字母大写（小驼峰式）。<ul>
+<li>写法：myFirstName</li>
+</ul>
+</li>
+<li>变量名规范：全部小写。<ul>
+<li>写法：name</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-常量概述"><a href="#4-常量概述" class="headerlink" title="4. 常量概述"></a>4. 常量概述</h2><blockquote>
+<p><strong>常量 是指在Java程序中固定不变的数据。</strong></p>
+</blockquote>
+<p><em><strong>常量的分类：</strong></em></p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+<th>数据举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>整数常量</td>
+<td>所有的整数</td>
+<td>0，1， 567， -9</td>
+</tr>
+<tr>
+<td>小数常量</td>
+<td>所有的小数</td>
+<td>0.0， -0.1， 2.55</td>
+</tr>
+<tr>
+<td>字符常量</td>
+<td>单引号引起来, 只能写一个字符, 必须有内容</td>
+<td>‘a’ ， ‘空格’， ‘好’</td>
+</tr>
+<tr>
+<td>字符串常量</td>
+<td>双引号引起来,可以写多个字符, 也可以不写</td>
+<td>“A” ，”Hello” ，”你好” ，””</td>
+</tr>
+<tr>
+<td>布尔常量</td>
+<td>只有两个值</td>
+<td>true ， false</td>
+</tr>
+<tr>
+<td>空常量</td>
+<td>只有一个值</td>
+<td>null</td>
+</tr>
+</tbody></table>
+<p><strong>字符常量和字符串常量的区别</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">形式上： </span></span><br><span class="line"><span class="comment">    字符常量是单引号引起的一个字符；</span></span><br><span class="line"><span class="comment">    字符串常量是双引号引起的若干个字符；</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">含义上：</span></span><br><span class="line"><span class="comment">	字符常量相当于一个整型值，可以参加表达式的运算；</span></span><br><span class="line"><span class="comment">	字符串常量代表一个地址值（该字符串在内存中存放的位置）；</span></span><br><span class="line"><span class="comment">	占内存大小：字符常量只占一个字节；</span></span><br><span class="line"><span class="comment">	字符串常量占若干个字节，（至少一个字符结束标志）</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p><em><strong>练习</strong></em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hello</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 输出整数常量</span></span><br><span class="line">        System.out.println(<span class="number">666</span>);</span><br><span class="line">        <span class="comment">// 输出小数常量</span></span><br><span class="line">        System.out.println(<span class="number">6.6</span>);</span><br><span class="line">        <span class="comment">// 输出字符常量</span></span><br><span class="line">        System.out.println(<span class="string">&#x27;A&#x27;</span>);</span><br><span class="line">        <span class="comment">// 输出字符串变量</span></span><br><span class="line">        System.out.println(<span class="string">&quot;lemon&quot;</span>);</span><br><span class="line">        <span class="comment">//输出布尔常量</span></span><br><span class="line">        System.out.println(<span class="keyword">true</span>);</span><br><span class="line">        System.out.println(<span class="keyword">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-数据类型-和-变量"><a href="#5-数据类型-和-变量" class="headerlink" title="5. 数据类型 和 变量"></a>5. 数据类型 和 变量</h2><blockquote>
+<p>Java是一种强类型语言：他要求对变量的使用要严格符合规定</p>
+</blockquote>
+<h3 id="数据类型分类"><a href="#数据类型分类" class="headerlink" title="数据类型分类"></a>数据类型分类</h3><ul>
+<li><strong>Java的数据类型分为两大类：</strong><ul>
+<li>基本数据类型 ：包括 <code>整数</code>  <code>浮点数</code>  <code>字符</code>  <code>布尔</code> </li>
+<li>引用数据类型 ：包括 <code>类</code>  <code>数组</code>  <code>接口 </code></li>
+</ul>
+</li>
+</ul>
+<h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><ul>
+<li><p>Java中有8种基本类型，分为4类，分别为：</p>
+<ul>
+<li>整数型：byte 、 short、 int 、 long</li>
+<li>浮点型：float、double</li>
+<li>字符型：char</li>
+<li>布尔型：boolean</li>
+</ul>
+</li>
+<li><p>八种基本数据类型</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>关键字</th>
+<th>内存占用</th>
+<th>取值范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>字节型</td>
+<td>byte</td>
+<td>1个字节</td>
+<td>-128 ~ 127</td>
+</tr>
+<tr>
+<td>短整型</td>
+<td>short</td>
+<td>2个字节</td>
+<td>-32768 ~ 32767</td>
+</tr>
+<tr>
+<td>整型</td>
+<td>int（默认）</td>
+<td>4个字节</td>
+<td>-2147483648 ~ 2147483647</td>
+</tr>
+<tr>
+<td>长整型</td>
+<td>long</td>
+<td>8个字节</td>
+<td>-9223372036854775808 ~ 9223372036854775807</td>
+</tr>
+<tr>
+<td>单精度浮点数</td>
+<td>float</td>
+<td>4个字节</td>
+<td>1.4013E-45~3.4028E+38</td>
+</tr>
+<tr>
+<td>双精度浮点数</td>
+<td>double（默认）</td>
+<td>8个字节</td>
+<td>4.9E-324~1.7977E+308</td>
+</tr>
+<tr>
+<td>字符型</td>
+<td>char</td>
+<td>2个字节</td>
+<td>0-65535</td>
+</tr>
+<tr>
+<td>布尔类型</td>
+<td>boolean</td>
+<td>1个字节</td>
+<td>true，false</td>
+</tr>
+</tbody></table>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><blockquote>
+<p><strong>常量是固定不变的数据，那么在程序中可以变化的量就称为变量。</strong></p>
+<ul>
+<li>Java中要求一个变量每次只能保存一个数据，必须要明确保存的数据类型。</li>
+<li>数学中，可以使用字母代替数字运算,例如 x=1+5 或者 6=x+5。</li>
+<li>程序中，可以使用字母保存数字的方式进行运算，提高计算能力，可以解决更多的问题。比如x保存5，x也可以保存6，这样x保存的数据是可以改变的，也就是我们所讲解的变量。</li>
+</ul>
+</blockquote>
+<h3 id="变量的定义"><a href="#变量的定义" class="headerlink" title="变量的定义"></a>变量的定义</h3><ul>
+<li>格式：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数据类型 变量名 = 数据值;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>练习:</li>
+</ul>
+<blockquote>
+<p>变量名称：在同一个大括号范围内，变量的名字不可以相同。</p>
+<p>变量赋值：定义的变量，不赋值不能使用。</p>
+<p>long类型：建议数据后加L表示。</p>
+<p>float类型：建议数据后加F表示。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hello</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 定义字节型变量</span></span><br><span class="line">        <span class="keyword">byte</span> b = <span class="number">127</span>;</span><br><span class="line">        System.out.println(b);</span><br><span class="line">        <span class="comment">// 定义短整型变量</span></span><br><span class="line">        <span class="keyword">short</span> s = <span class="number">32767</span>;</span><br><span class="line">        System.out.println(s);</span><br><span class="line">        <span class="comment">// 定义整型变量</span></span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">2147483647</span>;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">        <span class="comment">// 定义长整形变量；</span></span><br><span class="line">        <span class="keyword">long</span> l = <span class="number">9223372036854775807L</span>;</span><br><span class="line">        System.out.println(l);</span><br><span class="line">        <span class="comment">// 定义单精度浮点数变量</span></span><br><span class="line">        <span class="keyword">float</span> f = <span class="number">5.5F</span>;</span><br><span class="line">        System.out.println(f);</span><br><span class="line">        <span class="comment">// 定义双精度浮点型变量</span></span><br><span class="line">        <span class="keyword">double</span> d = <span class="number">8.5</span>;</span><br><span class="line">        System.out.println(d);</span><br><span class="line">        <span class="comment">// 定义布尔型变量</span></span><br><span class="line">        <span class="keyword">boolean</span> bool = <span class="keyword">false</span>;</span><br><span class="line">        System.out.println(bool);</span><br><span class="line">        <span class="comment">// 定义字符型变量</span></span><br><span class="line">        <span class="keyword">char</span> c = <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">        System.out.println(c);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+      </div>
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/15/KVM%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="prev" title="KVM虚拟化">
+      <i class="fa fa-chevron-left"></i> KVM虚拟化
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81Java-%E8%AF%AD%E8%A8%80%E6%A6%82%E8%BF%B0"><span class="nav-text">一、Java 语言概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFJava%E8%AF%AD%E8%A8%80"><span class="nav-text">1. 什么是Java语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Java%E8%AF%AD%E8%A8%80%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2"><span class="nav-text">2. Java语言发展历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-JAVA%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-text">3. JAVA的优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Java%E8%AF%AD%E8%A8%80%E8%83%BD%E5%81%9A%E4%BB%80%E4%B9%88"><span class="nav-text">4. Java语言能做什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-JAVA%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%88%E6%9C%AC"><span class="nav-text">5. JAVA的三大版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-JDK-amp-JRE-amp-JVM"><span class="nav-text">6. JDK &amp; JRE &amp; JVM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-text">二、Java开发环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-JDK%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85"><span class="nav-text">1. JDK下载与安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%85%8D%E7%BD%AEJDK%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-text">2. 配置JDK环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-JDK%E7%9B%AE%E5%BD%95%E4%BB%8B%E7%BB%8D"><span class="nav-text">3. JDK目录介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%BC%96%E5%86%99%E7%AC%AC%E4%B8%80%E4%B8%AAJava%E7%A8%8B%E5%BA%8F"><span class="nav-text">4. 编写第一个Java程序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%BC%96%E8%AF%91%E5%9E%8B-%E5%92%8C-%E8%A7%A3%E9%87%8A%E5%9E%8B"><span class="nav-text">三、编译型 和 解释型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%BC%96%E8%AF%91%E5%9E%8B"><span class="nav-text">1. 编译型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%A7%A3%E9%87%8A%E5%9E%8B"><span class="nav-text">2. 解释型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93"><span class="nav-text">3. 个人总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81IDEA%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="nav-text">四、IDEA开发工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFIDE%EF%BC%9F"><span class="nav-text">1. 什么是IDE？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%B8%8B%E8%BD%BDIntelliJ-IDEA"><span class="nav-text">2. 下载IntelliJ IDEA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%85IntelliJ-IDEA"><span class="nav-text">3. 安装IntelliJ IDEA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8IntelliJ-IDEA"><span class="nav-text">4. 简单使用IntelliJ IDEA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81Java%E5%9F%BA%E7%A1%80"><span class="nav-text">五、Java基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%B3%A8%E9%87%8Acomment"><span class="nav-text">1. 注释comment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-text">2. 关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="nav-text">3. 标识符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%B8%B8%E9%87%8F%E6%A6%82%E8%BF%B0"><span class="nav-text">4. 常量概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E5%92%8C-%E5%8F%98%E9%87%8F"><span class="nav-text">5. 数据类型 和 变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%88%86%E7%B1%BB"><span class="nav-text">数据类型分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-text">基本数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-text">变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-text">变量的定义</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Armin"
+      src="/uploads/armin.png">
+  <p class="site-author-name" itemprop="name">Armin</p>
+  <div class="site-description" itemprop="description">记录生活中的点点滴滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/" title="GitHub → https:&#x2F;&#x2F;github.com" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://aws.amazon.com/cn/" title="AWS → https:&#x2F;&#x2F;aws.amazon.com&#x2F;cn&#x2F;" rel="noopener" target="_blank"><i class="fab fa-aws fa-fw"></i>AWS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.processon.com/" title="processon → https:&#x2F;&#x2F;www.processon.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-accusoft fa-fw"></i>processon</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cn-ki.net/" title="知识库 → https:&#x2F;&#x2F;www.cn-ki.net&#x2F;" rel="noopener" target="_blank"><i class="fas fa-book-open fa-fw"></i>知识库</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tophub.today/" title="看新闻 → https:&#x2F;&#x2F;tophub.today&#x2F;" rel="noopener" target="_blank"><i class="far fa-newspaper fa-fw"></i>看新闻</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://m.zxjsq.net/" title="计算器 → http:&#x2F;&#x2F;m.zxjsq.net" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计算器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://shijisuishu.bmcx.com/20010314__shijisuishu/" title="计龄器 → https:&#x2F;&#x2F;shijisuishu.bmcx.com&#x2F;20010314__shijisuishu&#x2F;" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计龄器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tool.oschina.net/hexconvert" title="进制转换 → https:&#x2F;&#x2F;tool.oschina.net&#x2F;hexconvert" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>进制转换</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.sojson.com/convert/subnetmask.html" title="子网计算 → https:&#x2F;&#x2F;www.sojson.com&#x2F;convert&#x2F;subnetmask.html" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>子网计算</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.baidu.com/" title="度娘 → https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank"><i class="fas fa-search fa-fw"></i>度娘</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/yourname" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/yourname" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://youtube.com/yourname" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>YouTube</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Armin</span>
+</div>
+
+<div class="powered-by">
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
