@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Linux系统调用列表">
+<meta property="og:url" content="http://example.com/2021/06/15/Linux%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%88%97%E8%A1%A8/index.html">
+<meta property="og:site_name" content="LEMON">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-14T18:28:23.000Z">
+<meta property="article:modified_time" content="2021-06-14T18:33:31.374Z">
+<meta property="article:author" content="Armin">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/06/15/Linux%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%88%97%E8%A1%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux系统调用列表 | LEMON</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LEMON</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">死记性不如烂笔头</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/15/Linux%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%88%97%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/armin.png">
+      <meta itemprop="name" content="Armin">
+      <meta itemprop="description" content="记录生活中的点点滴滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LEMON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux系统调用列表
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+        <!--toc-->
+<span id="more"></span>
+
+<h1 id="Linux系统调用列表"><a href="#Linux系统调用列表" class="headerlink" title="Linux系统调用列表"></a>Linux系统调用列表</h1><blockquote>
+<p>1、按照惯例，这个列表以man pages第2节，即系统调用节为蓝本。按照笔者的理解，对其作了大致的分类，同时也作了一些小小的修改，删去了几个仅供内核使用，不允许用户调用的系统调用，对个别本人稍觉不妥的地方作了一些小的修改，并对所有列出的系统调用附上简要注释。</p>
+<p>2、其中有一些函数的作用完全相同，只是参数不同。（可能很多熟悉C++朋友马上就能联想起函数重载，但是别忘了Linux核心是用C语言写的，所以只能取成不同的函数名）。还有一些函数已经过时，被新的更好的函数所代替了（gcc在链接这些函数时会发出警告），但因为兼容的原因还保留着，这些函数我会在前面标上“*”号以示区别。</p>
+</blockquote>
+<h2 id="一、进程控制"><a href="#一、进程控制" class="headerlink" title="一、进程控制"></a>一、进程控制</h2><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">fork</td>
+<td>创建一个新进程</td>
+</tr>
+<tr>
+<td align="left">clone</td>
+<td>按指定条件创建子进程</td>
+</tr>
+<tr>
+<td align="left">execve</td>
+<td>运行可执行文件</td>
+</tr>
+<tr>
+<td align="left">exit</td>
+<td>中止进程</td>
+</tr>
+<tr>
+<td align="left">_exit</td>
+<td>立即中止当前进程</td>
+</tr>
+<tr>
+<td align="left">getdtablesize</td>
+<td>进程所能打开的最大文件数</td>
+</tr>
+<tr>
+<td align="left">getpgid</td>
+<td>获取指定进程组标识号</td>
+</tr>
+<tr>
+<td align="left">setpgid</td>
+<td>设置指定进程组标志号</td>
+</tr>
+<tr>
+<td align="left">getpgrp</td>
+<td>获取当前进程组标识号</td>
+</tr>
+<tr>
+<td align="left">setpgrp</td>
+<td>设置当前进程组标志号</td>
+</tr>
+<tr>
+<td align="left">getpid</td>
+<td>获取进程标识号</td>
+</tr>
+<tr>
+<td align="left">getppid</td>
+<td>获取父进程标识号</td>
+</tr>
+<tr>
+<td align="left">getpriority</td>
+<td>获取调度优先级</td>
+</tr>
+<tr>
+<td align="left">setpriority</td>
+<td>设置调度优先级</td>
+</tr>
+<tr>
+<td align="left">modify_ldt</td>
+<td>读写进程的本地描述表</td>
+</tr>
+<tr>
+<td align="left">nanosleep</td>
+<td>使进程睡眠指定的时间</td>
+</tr>
+<tr>
+<td align="left">nice</td>
+<td>改变分时进程的优先级</td>
+</tr>
+<tr>
+<td align="left">pause</td>
+<td>挂起进程，等待信号</td>
+</tr>
+<tr>
+<td align="left">personality</td>
+<td>设置进程运行域</td>
+</tr>
+<tr>
+<td align="left">prctl</td>
+<td>对进程进行特定操作</td>
+</tr>
+<tr>
+<td align="left">ptrace</td>
+<td>进程跟踪</td>
+</tr>
+<tr>
+<td align="left">sched_get_priority_max</td>
+<td>取得静态优先级的上限</td>
+</tr>
+<tr>
+<td align="left">sched_get_priority_min</td>
+<td>取得静态优先级的下限</td>
+</tr>
+<tr>
+<td align="left">sched_getparam</td>
+<td>取得进程的调度参数</td>
+</tr>
+<tr>
+<td align="left">sched_getscheduler</td>
+<td>取得指定进程的调度策略</td>
+</tr>
+<tr>
+<td align="left">sched_rr_get_interval</td>
+<td>取得按RR算法调度的实时进程的时间片长度</td>
+</tr>
+<tr>
+<td align="left">sched_setparam</td>
+<td>设置进程的调度参数</td>
+</tr>
+<tr>
+<td align="left">sched_setscheduler</td>
+<td>设置指定进程的调度策略和参数</td>
+</tr>
+<tr>
+<td align="left">sched_yield</td>
+<td>进程主动让出处理器,并将自己等候调度队列队尾</td>
+</tr>
+<tr>
+<td align="left">vfork</td>
+<td>创建一个子进程，以供执行新程序，常与execve等同时使用</td>
+</tr>
+<tr>
+<td align="left">wait</td>
+<td>等待子进程终止</td>
+</tr>
+<tr>
+<td align="left">wait3</td>
+<td>参见wait</td>
+</tr>
+<tr>
+<td align="left">waitpid</td>
+<td>等待指定子进程终止</td>
+</tr>
+<tr>
+<td align="left">wait4</td>
+<td>参见waitpid</td>
+</tr>
+<tr>
+<td align="left">capget</td>
+<td>获取进程权限</td>
+</tr>
+<tr>
+<td align="left">capset</td>
+<td>设置进程权限</td>
+</tr>
+<tr>
+<td align="left">getsid</td>
+<td>获取会晤标识号</td>
+</tr>
+<tr>
+<td align="left">setsid</td>
+<td>设置会晤标识号</td>
+</tr>
+</tbody></table>
+<h2 id="二、文件系统控制"><a href="#二、文件系统控制" class="headerlink" title="二、文件系统控制"></a>二、文件系统控制</h2><h3 id="1、文件读写操作"><a href="#1、文件读写操作" class="headerlink" title="1、文件读写操作"></a>1、文件读写操作</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">fcntl</td>
+<td>文件控制</td>
+</tr>
+<tr>
+<td align="left">open</td>
+<td>打开文件</td>
+</tr>
+<tr>
+<td align="left">creat</td>
+<td>创建新文件</td>
+</tr>
+<tr>
+<td align="left">close</td>
+<td>关闭文件描述字</td>
+</tr>
+<tr>
+<td align="left">read</td>
+<td>读文件</td>
+</tr>
+<tr>
+<td align="left">write</td>
+<td>写文件</td>
+</tr>
+<tr>
+<td align="left">readv</td>
+<td>从文件读入数据到缓冲数组中</td>
+</tr>
+<tr>
+<td align="left">writev</td>
+<td>将缓冲数组里的数据写入文件</td>
+</tr>
+<tr>
+<td align="left">pread</td>
+<td>对文件随机读</td>
+</tr>
+<tr>
+<td align="left">pwrite</td>
+<td>对文件随机写</td>
+</tr>
+<tr>
+<td align="left">lseek</td>
+<td>移动文件指针</td>
+</tr>
+<tr>
+<td align="left">_llseek</td>
+<td>在64位地址空间里移动文件指针</td>
+</tr>
+<tr>
+<td align="left">dup</td>
+<td>复制已打开的文件描述字</td>
+</tr>
+<tr>
+<td align="left">dup2</td>
+<td>按指定条件复制文件描述字</td>
+</tr>
+<tr>
+<td align="left">flock</td>
+<td>文件加/解锁</td>
+</tr>
+<tr>
+<td align="left">poll</td>
+<td>I/O多路转换</td>
+</tr>
+<tr>
+<td align="left">truncate</td>
+<td>截断文件</td>
+</tr>
+<tr>
+<td align="left">ftruncate</td>
+<td>参见truncate</td>
+</tr>
+<tr>
+<td align="left">umask</td>
+<td>设置文件权限掩码</td>
+</tr>
+<tr>
+<td align="left">fsync</td>
+<td>把文件在内存中的部分写回磁盘</td>
+</tr>
+</tbody></table>
+<h3 id="2、文件系统操作"><a href="#2、文件系统操作" class="headerlink" title="2、文件系统操作"></a>2、文件系统操作</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">access</td>
+<td>确定文件的可存取性</td>
+</tr>
+<tr>
+<td align="left">chdir</td>
+<td>改变当前工作目录</td>
+</tr>
+<tr>
+<td align="left">fchdir</td>
+<td>参见chdir</td>
+</tr>
+<tr>
+<td align="left">chmod</td>
+<td>改变文件方式</td>
+</tr>
+<tr>
+<td align="left">fchmod</td>
+<td>参见chmod</td>
+</tr>
+<tr>
+<td align="left">chown</td>
+<td>改变文件的属主或用户组</td>
+</tr>
+<tr>
+<td align="left">fchown</td>
+<td>参见chown</td>
+</tr>
+<tr>
+<td align="left">lchown</td>
+<td>参见chown</td>
+</tr>
+<tr>
+<td align="left">chroot</td>
+<td>改变根目录</td>
+</tr>
+<tr>
+<td align="left">stat</td>
+<td>取文件状态信息</td>
+</tr>
+<tr>
+<td align="left">lstat</td>
+<td>参见stat</td>
+</tr>
+<tr>
+<td align="left">fstat</td>
+<td>参见stat</td>
+</tr>
+<tr>
+<td align="left">statfs</td>
+<td>取文件系统信息</td>
+</tr>
+<tr>
+<td align="left">fstatfs</td>
+<td>参见statfs</td>
+</tr>
+<tr>
+<td align="left">readdir</td>
+<td>读取目录项</td>
+</tr>
+<tr>
+<td align="left">getdents</td>
+<td>读取目录项</td>
+</tr>
+<tr>
+<td align="left">mkdir</td>
+<td>创建目录</td>
+</tr>
+<tr>
+<td align="left">mknod</td>
+<td>创建索引节点</td>
+</tr>
+<tr>
+<td align="left">rmdir</td>
+<td>删除目录</td>
+</tr>
+<tr>
+<td align="left">rename</td>
+<td>文件改名</td>
+</tr>
+<tr>
+<td align="left">link</td>
+<td>创建链接</td>
+</tr>
+<tr>
+<td align="left">symlink</td>
+<td>创建符号链接</td>
+</tr>
+<tr>
+<td align="left">unlink</td>
+<td>删除链接</td>
+</tr>
+<tr>
+<td align="left">readlink</td>
+<td>读符号链接的值</td>
+</tr>
+<tr>
+<td align="left">mount</td>
+<td>安装文件系统</td>
+</tr>
+<tr>
+<td align="left">umount</td>
+<td>卸下文件系统</td>
+</tr>
+<tr>
+<td align="left">ustat</td>
+<td>取文件系统信息</td>
+</tr>
+<tr>
+<td align="left">utime</td>
+<td>改变文件的访问修改时间</td>
+</tr>
+<tr>
+<td align="left">utimes</td>
+<td>参见utime</td>
+</tr>
+<tr>
+<td align="left">quotactl</td>
+<td>控制磁盘配额</td>
+</tr>
+</tbody></table>
+<h2 id="三、系统控制"><a href="#三、系统控制" class="headerlink" title="三、系统控制"></a>三、系统控制</h2><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ioctl</td>
+<td>I/O总控制函数</td>
+</tr>
+<tr>
+<td align="left">_sysctl</td>
+<td>读/写系统参数</td>
+</tr>
+<tr>
+<td align="left">acct</td>
+<td>启用或禁止进程记账</td>
+</tr>
+<tr>
+<td align="left">getrlimit</td>
+<td>获取系统资源上限</td>
+</tr>
+<tr>
+<td align="left">setrlimit</td>
+<td>设置系统资源上限</td>
+</tr>
+<tr>
+<td align="left">getrusage</td>
+<td>获取系统资源使用情况</td>
+</tr>
+<tr>
+<td align="left">uselib</td>
+<td>选择要使用的二进制函数库</td>
+</tr>
+<tr>
+<td align="left">ioperm</td>
+<td>设置端口I/O权限</td>
+</tr>
+<tr>
+<td align="left">iopl</td>
+<td>改变进程I/O权限级别</td>
+</tr>
+<tr>
+<td align="left">outb</td>
+<td>低级端口操作</td>
+</tr>
+<tr>
+<td align="left">reboot</td>
+<td>重新启动</td>
+</tr>
+<tr>
+<td align="left">swapon</td>
+<td>打开交换文件和设备</td>
+</tr>
+<tr>
+<td align="left">swapoff</td>
+<td>关闭交换文件和设备</td>
+</tr>
+<tr>
+<td align="left">bdflush</td>
+<td>控制bdflush守护进程</td>
+</tr>
+<tr>
+<td align="left">sysfs</td>
+<td>取核心支持的文件系统类型</td>
+</tr>
+<tr>
+<td align="left">sysinfo</td>
+<td>取得系统信息</td>
+</tr>
+<tr>
+<td align="left">adjtimex</td>
+<td>调整系统时钟</td>
+</tr>
+<tr>
+<td align="left">alarm</td>
+<td>设置进程的闹钟</td>
+</tr>
+<tr>
+<td align="left">getitimer</td>
+<td>获取计时器值</td>
+</tr>
+<tr>
+<td align="left">setitimer</td>
+<td>设置计时器值</td>
+</tr>
+<tr>
+<td align="left">gettimeofday</td>
+<td>取时间和时区</td>
+</tr>
+<tr>
+<td align="left">settimeofday</td>
+<td>设置时间和时区</td>
+</tr>
+<tr>
+<td align="left">stime</td>
+<td>设置系统日期和时间</td>
+</tr>
+<tr>
+<td align="left">time</td>
+<td>取得系统时间</td>
+</tr>
+<tr>
+<td align="left">times</td>
+<td>取进程运行时间</td>
+</tr>
+<tr>
+<td align="left">uname</td>
+<td>获取当前UNIX系统的名称、版本和主机等信息</td>
+</tr>
+<tr>
+<td align="left">vhangup</td>
+<td>挂起当前终端</td>
+</tr>
+<tr>
+<td align="left">nfsservctl</td>
+<td>对NFS守护进程进行控制</td>
+</tr>
+<tr>
+<td align="left">vm86</td>
+<td>进入模拟8086模式</td>
+</tr>
+<tr>
+<td align="left">create_module</td>
+<td>创建可装载的模块项</td>
+</tr>
+<tr>
+<td align="left">delete_module</td>
+<td>删除可装载的模块项</td>
+</tr>
+<tr>
+<td align="left">init_module</td>
+<td>初始化模块</td>
+</tr>
+<tr>
+<td align="left">query_module</td>
+<td>查询模块信息</td>
+</tr>
+<tr>
+<td align="left">*get_kernel_syms</td>
+<td>取得核心符号,已被query_module代替</td>
+</tr>
+</tbody></table>
+<h2 id="四、内存管理"><a href="#四、内存管理" class="headerlink" title="四、内存管理"></a>四、内存管理</h2><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">brk</td>
+<td>改变数据段空间的分配</td>
+</tr>
+<tr>
+<td align="left">sbrk</td>
+<td>参见brk</td>
+</tr>
+<tr>
+<td align="left">mlock</td>
+<td>内存页面加锁</td>
+</tr>
+<tr>
+<td align="left">munlock</td>
+<td>内存页面解锁</td>
+</tr>
+<tr>
+<td align="left">mlockall</td>
+<td>调用进程所有内存页面加锁</td>
+</tr>
+<tr>
+<td align="left">munlockall</td>
+<td>调用进程所有内存页面解锁</td>
+</tr>
+<tr>
+<td align="left">mmap</td>
+<td>映射虚拟内存页</td>
+</tr>
+<tr>
+<td align="left">munmap</td>
+<td>去除内存页映射</td>
+</tr>
+<tr>
+<td align="left">mremap</td>
+<td>重新映射虚拟内存地址</td>
+</tr>
+<tr>
+<td align="left">msync</td>
+<td>将映射内存中的数据写回磁盘</td>
+</tr>
+<tr>
+<td align="left">mprotect</td>
+<td>设置内存映像保护</td>
+</tr>
+<tr>
+<td align="left">getpagesize</td>
+<td>获取页面大小</td>
+</tr>
+<tr>
+<td align="left">sync</td>
+<td>将内存缓冲区数据写回硬盘</td>
+</tr>
+<tr>
+<td align="left">cacheflush</td>
+<td>将指定缓冲区中的内容写回磁盘</td>
+</tr>
+</tbody></table>
+<h2 id="五、网络管理"><a href="#五、网络管理" class="headerlink" title="五、网络管理"></a>五、网络管理</h2><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">getdomainname</td>
+<td>取域名</td>
+</tr>
+<tr>
+<td align="left">setdomainname</td>
+<td>设置域名</td>
+</tr>
+<tr>
+<td align="left">gethostid</td>
+<td>获取主机标识号</td>
+</tr>
+<tr>
+<td align="left">sethostid</td>
+<td>设置主机标识号</td>
+</tr>
+<tr>
+<td align="left">gethostname</td>
+<td>获取本主机名称</td>
+</tr>
+<tr>
+<td align="left">sethostname</td>
+<td>设置主机名称</td>
+</tr>
+</tbody></table>
+<h2 id="六、socket控制"><a href="#六、socket控制" class="headerlink" title="六、socket控制"></a>六、socket控制</h2><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">socketcall</td>
+<td>socket系统调用</td>
+</tr>
+<tr>
+<td align="left">socket</td>
+<td>建立socket</td>
+</tr>
+<tr>
+<td align="left">bind</td>
+<td>绑定socket到端口</td>
+</tr>
+<tr>
+<td align="left">connect</td>
+<td>连接远程主机</td>
+</tr>
+<tr>
+<td align="left">accept</td>
+<td>响应socket连接请求</td>
+</tr>
+<tr>
+<td align="left">send</td>
+<td>通过socket发送信息</td>
+</tr>
+<tr>
+<td align="left">sendto</td>
+<td>发送UDP信息</td>
+</tr>
+<tr>
+<td align="left">sendmsg</td>
+<td>参见send</td>
+</tr>
+<tr>
+<td align="left">recv</td>
+<td>通过socket接收信息</td>
+</tr>
+<tr>
+<td align="left">recvfrom</td>
+<td>接收UDP信息</td>
+</tr>
+<tr>
+<td align="left">recvmsg</td>
+<td>参见recv</td>
+</tr>
+<tr>
+<td align="left">listen</td>
+<td>监听socket端口</td>
+</tr>
+<tr>
+<td align="left">select</td>
+<td>对多路同步I/O进行轮询</td>
+</tr>
+<tr>
+<td align="left">shutdown</td>
+<td>关闭socket上的连接</td>
+</tr>
+<tr>
+<td align="left">getsockname</td>
+<td>取得本地socket名字</td>
+</tr>
+<tr>
+<td align="left">getpeername</td>
+<td>获取通信对方的socket名字</td>
+</tr>
+<tr>
+<td align="left">getsockopt</td>
+<td>取端口设置</td>
+</tr>
+<tr>
+<td align="left">setsockopt</td>
+<td>设置端口参数</td>
+</tr>
+<tr>
+<td align="left">sendfile</td>
+<td>在文件或端口间传输数据</td>
+</tr>
+<tr>
+<td align="left">socketpair</td>
+<td>创建一对已联接的无名socket</td>
+</tr>
+</tbody></table>
+<h2 id="七、用户管理"><a href="#七、用户管理" class="headerlink" title="七、用户管理"></a>七、用户管理</h2><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">getuid</td>
+<td>获取用户标识号</td>
+</tr>
+<tr>
+<td align="left">setuid</td>
+<td>设置用户标志号</td>
+</tr>
+<tr>
+<td align="left">getgid</td>
+<td>获取组标识号</td>
+</tr>
+<tr>
+<td align="left">setgid</td>
+<td>设置组标志号</td>
+</tr>
+<tr>
+<td align="left">getegid</td>
+<td>获取有效组标识号</td>
+</tr>
+<tr>
+<td align="left">setegid</td>
+<td>设置有效组标识号</td>
+</tr>
+<tr>
+<td align="left">geteuid</td>
+<td>获取有效用户标识号</td>
+</tr>
+<tr>
+<td align="left">seteuid</td>
+<td>设置有效用户标识号</td>
+</tr>
+<tr>
+<td align="left">setregid</td>
+<td>分别设置真实和有效的的组标识号</td>
+</tr>
+<tr>
+<td align="left">setreuid</td>
+<td>分别设置真实和有效的用户标识号</td>
+</tr>
+<tr>
+<td align="left">getresgid</td>
+<td>分别获取真实的,有效的和保存过的组标识号</td>
+</tr>
+<tr>
+<td align="left">setresgid</td>
+<td>分别设置真实的,有效的和保存过的组标识号</td>
+</tr>
+<tr>
+<td align="left">getresuid</td>
+<td>分别获取真实的,有效的和保存过的用户标识号</td>
+</tr>
+<tr>
+<td align="left">setresuid</td>
+<td>分别设置真实的,有效的和保存过的用户标识号</td>
+</tr>
+<tr>
+<td align="left">setfsgid</td>
+<td>设置文件系统检查时使用的组标识号</td>
+</tr>
+<tr>
+<td align="left">setfsuid</td>
+<td>设置文件系统检查时使用的用户标识号</td>
+</tr>
+<tr>
+<td align="left">getgroups</td>
+<td>获取后补组标志清单</td>
+</tr>
+<tr>
+<td align="left">setgroups</td>
+<td>设置后补组标志清单</td>
+</tr>
+</tbody></table>
+<h2 id="八、进程间通信"><a href="#八、进程间通信" class="headerlink" title="八、进程间通信"></a>八、进程间通信</h2><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ipc</td>
+<td>进程间通信总控制调用</td>
+</tr>
+</tbody></table>
+<h3 id="1、信号"><a href="#1、信号" class="headerlink" title="1、信号"></a>1、信号</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">sigaction</td>
+<td>设置对指定信号的处理方法</td>
+</tr>
+<tr>
+<td align="left">sigprocmask</td>
+<td>根据参数对信号集中的信号执行阻塞/解除阻塞等操作</td>
+</tr>
+<tr>
+<td align="left">sigpending</td>
+<td>为指定的被阻塞信号设置队列</td>
+</tr>
+<tr>
+<td align="left">sigsuspend</td>
+<td>挂起进程等待特定信号</td>
+</tr>
+<tr>
+<td align="left">signal</td>
+<td>参见signal</td>
+</tr>
+<tr>
+<td align="left">kill</td>
+<td>向进程或进程组发信号</td>
+</tr>
+<tr>
+<td align="left">*sigblock</td>
+<td>向被阻塞信号掩码中添加信号,已被sigprocmask代替</td>
+</tr>
+<tr>
+<td align="left">*siggetmask</td>
+<td>取得现有阻塞信号掩码,已被sigprocmask代替</td>
+</tr>
+<tr>
+<td align="left">*sigsetmask</td>
+<td>用给定信号掩码替换现有阻塞信号掩码,已被sigprocmask代替</td>
+</tr>
+<tr>
+<td align="left">*sigmask</td>
+<td>将给定的信号转化为掩码,已被sigprocmask代替</td>
+</tr>
+<tr>
+<td align="left">*sigpause</td>
+<td>作用同sigsuspend,已被sigsuspend代替</td>
+</tr>
+<tr>
+<td align="left">sigvec</td>
+<td>为兼容BSD而设的信号处理函数,作用类似sigaction</td>
+</tr>
+<tr>
+<td align="left">ssetmask</td>
+<td>ANSI C的信号处理函数,作用类似sigaction</td>
+</tr>
+</tbody></table>
+<h3 id="2、消息"><a href="#2、消息" class="headerlink" title="2、消息"></a>2、消息</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">msgctl</td>
+<td>消息控制操作</td>
+</tr>
+<tr>
+<td align="left">msgget</td>
+<td>获取消息队列</td>
+</tr>
+<tr>
+<td align="left">msgsnd</td>
+<td>发消息</td>
+</tr>
+<tr>
+<td align="left">msgrcv</td>
+<td>取消息</td>
+</tr>
+</tbody></table>
+<h3 id="3、管道"><a href="#3、管道" class="headerlink" title="3、管道"></a>3、管道</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">pipe</td>
+<td>创建管道</td>
+</tr>
+</tbody></table>
+<h3 id="4、信号量"><a href="#4、信号量" class="headerlink" title="4、信号量"></a>4、信号量</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">semctl</td>
+<td>信号量控制</td>
+</tr>
+<tr>
+<td align="left">semget</td>
+<td>获取一组信号量</td>
+</tr>
+<tr>
+<td align="left">semop</td>
+<td>信号量操作</td>
+</tr>
+</tbody></table>
+<h3 id="5、共享内存"><a href="#5、共享内存" class="headerlink" title="5、共享内存"></a>5、共享内存</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">shmctl</td>
+<td>控制共享内存</td>
+</tr>
+<tr>
+<td align="left">shmget</td>
+<td>获取共享内存</td>
+</tr>
+<tr>
+<td align="left">shmat</td>
+<td>连接共享内存</td>
+</tr>
+<tr>
+<td align="left">shmdt</td>
+<td>拆卸共享内存</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+      </div>
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/15/JavaSe%E5%9F%BA%E7%A1%80/" rel="prev" title="JavaSe基础">
+      <i class="fa fa-chevron-left"></i> JavaSe基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/15/Nginx/" rel="next" title="Nginx">
+      Nginx <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%88%97%E8%A1%A8"><span class="nav-text">Linux系统调用列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6"><span class="nav-text">一、进程控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%8E%A7%E5%88%B6"><span class="nav-text">二、文件系统控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E6%93%8D%E4%BD%9C"><span class="nav-text">1、文件读写操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%93%8D%E4%BD%9C"><span class="nav-text">2、文件系统操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%B3%BB%E7%BB%9F%E6%8E%A7%E5%88%B6"><span class="nav-text">三、系统控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-text">四、内存管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86"><span class="nav-text">五、网络管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81socket%E6%8E%A7%E5%88%B6"><span class="nav-text">六、socket控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="nav-text">七、用户管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="nav-text">八、进程间通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E4%BF%A1%E5%8F%B7"><span class="nav-text">1、信号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E6%B6%88%E6%81%AF"><span class="nav-text">2、消息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E7%AE%A1%E9%81%93"><span class="nav-text">3、管道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E4%BF%A1%E5%8F%B7%E9%87%8F"><span class="nav-text">4、信号量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98"><span class="nav-text">5、共享内存</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Armin"
+      src="/uploads/armin.png">
+  <p class="site-author-name" itemprop="name">Armin</p>
+  <div class="site-description" itemprop="description">记录生活中的点点滴滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/" title="GitHub → https:&#x2F;&#x2F;github.com" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://aws.amazon.com/cn/" title="AWS → https:&#x2F;&#x2F;aws.amazon.com&#x2F;cn&#x2F;" rel="noopener" target="_blank"><i class="fab fa-aws fa-fw"></i>AWS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.processon.com/" title="processon → https:&#x2F;&#x2F;www.processon.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-accusoft fa-fw"></i>processon</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cn-ki.net/" title="知识库 → https:&#x2F;&#x2F;www.cn-ki.net&#x2F;" rel="noopener" target="_blank"><i class="fas fa-book-open fa-fw"></i>知识库</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tophub.today/" title="看新闻 → https:&#x2F;&#x2F;tophub.today&#x2F;" rel="noopener" target="_blank"><i class="far fa-newspaper fa-fw"></i>看新闻</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://m.zxjsq.net/" title="计算器 → http:&#x2F;&#x2F;m.zxjsq.net" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计算器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://shijisuishu.bmcx.com/20010314__shijisuishu/" title="计龄器 → https:&#x2F;&#x2F;shijisuishu.bmcx.com&#x2F;20010314__shijisuishu&#x2F;" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计龄器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tool.oschina.net/hexconvert" title="进制转换 → https:&#x2F;&#x2F;tool.oschina.net&#x2F;hexconvert" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>进制转换</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.sojson.com/convert/subnetmask.html" title="子网计算 → https:&#x2F;&#x2F;www.sojson.com&#x2F;convert&#x2F;subnetmask.html" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>子网计算</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.baidu.com/" title="度娘 → https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank"><i class="fas fa-search fa-fw"></i>度娘</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/yourname" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/yourname" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://youtube.com/yourname" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>YouTube</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Armin</span>
+</div>
+
+<div class="powered-by">
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
