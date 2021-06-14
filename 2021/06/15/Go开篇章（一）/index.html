@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Go开篇章（一）">
+<meta property="og:url" content="http://example.com/2021/06/15/Go%E5%BC%80%E7%AF%87%E7%AB%A0%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="LEMON">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr9drrt5rvj30go0bkmzo.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr9dtzo21ej31am0m6jus.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr9dug6j1jj31ps0gaahj.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr9dwea64mj30s20gymyh.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr9dxhkj7rj30jn0dhk0v.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr9eyyp8ygj31gy0tkn43.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr9ev9q4txj30ya0oa0w2.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr9evruk6ij30y00nu782.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr9ewamjwyj30y80ocad2.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr9ewnobn0j30yc0octca.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr9f0zkl9vj318m06qacz.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr9f88g4hij616q04gwgy02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr9faqe0unj319c0pgae7.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr9fmuuh7dj31gf0u0jxg.jpg">
+<meta property="og:image" content="https://www.liwenzhou.com/images/Go/install_go_dev/vscode_menu.png">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr9fri0dcej313z0u0afp.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr9ft23li8j619i0qc43802.jpg">
+<meta property="article:published_time" content="2021-06-14T19:18:22.000Z">
+<meta property="article:modified_time" content="2021-06-14T19:19:06.032Z">
+<meta property="article:author" content="Armin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr9drrt5rvj30go0bkmzo.jpg">
+
+<link rel="canonical" href="http://example.com/2021/06/15/Go%E5%BC%80%E7%AF%87%E7%AB%A0%EF%BC%88%E4%B8%80%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Go开篇章（一） | LEMON</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LEMON</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">死记性不如烂笔头</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/15/Go%E5%BC%80%E7%AF%87%E7%AB%A0%EF%BC%88%E4%B8%80%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/armin.png">
+      <meta itemprop="name" content="Armin">
+      <meta itemprop="description" content="记录生活中的点点滴滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LEMON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Go开篇章（一）
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+        <!--toc-->
+<span id="more"></span>
+
+<h1 id="Go语言介绍"><a href="#Go语言介绍" class="headerlink" title="Go语言介绍"></a>Go语言介绍</h1><blockquote>
+<p>前言：世界上已经有太多太多的编程语言了，为什么又出来一个Go语言？</p>
+</blockquote>
+<p>硬件限制：摩尔定律已然失效</p>
+<p>摩尔定律：当价格不变时，集成电路上可容纳的元器件的数目，约每隔18-24个月便会增加一倍，性能也将提升一倍。 换言之，每一美元所能买到的电脑性能，将每隔18-24个月翻一倍以上。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr9drrt5rvj30go0bkmzo.jpg"></p>
+<p>从上面的图表可以看出，近十年单线程性能和处理器频率保持稳定。我们不能像之前一样把添加更多晶体管当成是解决方案，因为在较小规模上一些量子特性开始出现（如隧道效应），并且因为在同样小的空间里放置更多晶体管的代价非常昂贵，每1美元可以添加的晶体管数量开始下降。</p>
+<p>制造商开始从其他方面提高处理器的性能：</p>
+<ol>
+<li>向处理器添加越来越多的内核，如四核和八核CPU。</li>
+<li>发明了超线程技术。</li>
+<li>为处理器添加了更多缓存以提高性能。</li>
+</ol>
+<p>但上述解决方案也有其自身的局限性。因为成本原因我们不能无限制的为计算机添加内核，也无法无限制的添加缓存来提高性能，因为缓存越大，取值的性能越低。</p>
+<p>我们没有办法在硬件上一直取得突破，我们需要提高软件的性能或者说我们需要高性能的软件。</p>
+<h2 id="Go语言为并发而生"><a href="#Go语言为并发而生" class="headerlink" title="Go语言为并发而生"></a>Go语言为并发而生</h2><p>如上所述，硬件制造商正在为处理器添加越来越多的内核以提高性能。所有数据中心都在这些处理器上运行，更重要的是，今天的应用程序使用多个微服务来维护数据库连接，消息队列和维护缓存。因此，开发的软件和编程语言应该可以轻松地支持并发性，并且应该能够随着CPU核心数量的增加而可扩展。</p>
+<p>但是，大多数现代编程语言（如Java，Python等）都来自90年代的单线程环境。虽然一些编程语言的框架在不断地提高多核资源使用效率，例如 Java 的 Netty 等，但仍然需要开发人员花费大量的时间和精力搞懂这些框架的运行原理后才能熟练掌握。</p>
+<p>Go于2009年发布，当时多核处理器已经上市。Go语言在多核并发上拥有原生的设计优势，Go语言从底层原生支持并发，无须第三方库、开发者的编程技巧和开发经验。</p>
+<p>很多公司，特别是中国的互联网公司，即将或者已经完成了使用 Go 语言改造旧系统的过程。经过 Go 语言重构的系统能使用更少的硬件资源获得更高的并发和I/O吞吐表现。充分挖掘硬件设备的潜力也满足当前精细化运营的市场大环境。</p>
+<p>Go语言的并发是基于 <code>goroutine</code> 的，<code>goroutine</code> 类似于线程，但并非线程。可以将 <code>goroutine</code> 理解为一种虚拟线程。Go 语言运行时会参与调度 <code>goroutine</code>，并将 <code>goroutine</code> 合理地分配到每个 CPU 中，最大限度地使用CPU性能。开启一个<code>goroutine</code>的消耗非常小（大约2KB的内存），你可以轻松创建数百万个<code>goroutine</code>。</p>
+<p><code>goroutine</code>的特点：</p>
+<ol>
+<li><code>goroutine</code>具有可增长的分段堆栈。这意味着它们只在需要时才会使用更多内存。</li>
+<li><code>goroutine</code>的启动时间比线程快。</li>
+<li><code>goroutine</code>原生支持利用channel安全地进行通信。</li>
+<li><code>goroutine</code>共享数据结构时无需使用互斥锁。</li>
+</ol>
+<h2 id="Go性能强悍"><a href="#Go性能强悍" class="headerlink" title="Go性能强悍"></a>Go性能强悍</h2><p>与其他现代高级语言（如Java/Python）相比，使用C，C++的最大好处是它们的性能。因为C/ C++是编译型语言而不是解释的语言。 处理器只能理解二进制文件，Java和Python这种高级语言在运行的时候需要先将人类可读的代码翻译成字节码，然后由专门的解释器再转变成处理器可以理解的二进制文件。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr9dtzo21ej31am0m6jus.jpg"></p>
+<p>同C,C++一样，Go语言也是编译型的语言，它直接将人类可读的代码编译成了处理器可以直接运行的二进制文件，执行效率更高，性能更好。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr9dug6j1jj31ps0gaahj.jpg"></p>
+<p>数据来源：<a target="_blank" rel="noopener" href="https://benchmarksgame-team.pages.debian.net/benchmarksgame/">https://benchmarksgame-team.pages.debian.net/benchmarksgame/</a></p>
+<p>可以看出，Go 语言在性能上更接近于 Java 语言，虽然在某些测试用例上不如经过多年优化的 Java 语言，但毕竟 Java 语言已经经历了多年的积累和优化。Go 语言在未来的版本中会通过不断的版本优化提高单核运行性能。</p>
+<h2 id="Go语言简单易学"><a href="#Go语言简单易学" class="headerlink" title="Go语言简单易学"></a>Go语言简单易学</h2><blockquote>
+<p>语法简洁</p>
+</blockquote>
+<p>Go 语言简单易学，学习曲线平缓，不需要像 C/C++ 语言动辄需要两到三年的学习期。Go 语言被称为“互联网时代的C语言”。Go 语言的风格类似于C语言。其语法在C语言的基础上进行了大幅的简化，去掉了不需要的表达式括号，循环也只有 for 一种表示方法，就可以实现数值、键值等各种遍历。</p>
+<blockquote>
+<p>代码风格统一</p>
+</blockquote>
+<p>Go 语言提供了一套格式化工具——<code>go fmt</code>。一些 Go 语言的开发环境或者编辑器在保存时，都会使用格式化工具进行修改代码的格式化，这样就保证了不同开发者提交的代码都是统一的格式。(吐槽下：再也不用担心那些看不懂的黑魔法了…)</p>
+<blockquote>
+<p>开发效率高</p>
+</blockquote>
+<p>Go语言实现了开发效率与执行效率的完美结合，让你像写Python代码（效率）一样编写C代码（性能）。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr9dwea64mj30s20gymyh.jpg"></p>
+<h2 id="Go语言的前景"><a href="#Go语言的前景" class="headerlink" title="Go语言的前景"></a>Go语言的前景</h2><p>目前Go语言已经⼴泛应用于人工智能、云计算开发、容器虚拟化、⼤数据开发、数据分析及科学计算、运维开发、爬虫开发、游戏开发等领域。</p>
+<p>Go语言简单易学，天生支持并发，完美契合当下高并发的互联网生态。Go语言的岗位需求持续高涨，目前的Go程序员数量少，待遇好。</p>
+<p>抓住趋势，要学会做一个领跑者而不是跟随者。</p>
+<p>国内Go语言的需求潜力巨大，目前无论是国内大厂还是新兴互联网公司基本上都会有Go语言的岗位需求。</p>
+<p>下图是应用Go语言的公司举例：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr9dxhkj7rj30jn0dhk0v.jpg"></p>
+<p>除了上面列出的大厂外，很多小型公司或创业公司也开始使用Go语言，并且很多公司把Go语言作为其主要开发语言。</p>
+<p>现在就开始你的Go语言学习之旅吧！人生苦短，let’s Go.</p>
+<p><a target="_blank" rel="noopener" href="https://medium.com/@kevalpatel2106/why-should-you-learn-go-f607681fad65">参考链接</a></p>
+<h1 id="Go开发环境"><a href="#Go开发环境" class="headerlink" title="Go开发环境"></a>Go开发环境</h1><p>Go1.16.5 版本。</p>
+<p>PS：Go语言1.14版本之后推荐使用go modules管理以来，也不再需要把代码写在GOPATH目录下了，搭建1.14版本之前的<a target="_blank" rel="noopener" href="https://www.liwenzhou.com/posts/Go/install_go_dev_old/">链接</a>。</p>
+<h2 id="Golang-Download"><a href="#Golang-Download" class="headerlink" title="Golang Download"></a>Golang Download</h2><blockquote>
+<p>下载地址</p>
+</blockquote>
+<p>Go官网下载地址：<a target="_blank" rel="noopener" href="https://golang.org/dl/">https://golang.org/dl/</a></p>
+<p>Go官方镜像站（推荐）：<a target="_blank" rel="noopener" href="https://golang.google.cn/dl/">https://golang.google.cn/dl/</a></p>
+<h2 id="Install-Go"><a href="#Install-Go" class="headerlink" title="Install Go"></a>Install Go</h2><blockquote>
+<p>版本的选择</p>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr9eyyp8ygj31gy0tkn43.jpg"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr9ev9q4txj30ya0oa0w2.jpg"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr9evruk6ij30y00nu782.jpg"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr9ewamjwyj30y80ocad2.jpg"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr9ewnobn0j30yc0octca.jpg"></p>
+<p>上一步安装过程执行完毕后，可以打开终端窗口，输入<code>go version</code>命令，查看安装的Go版本。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr9f0zkl9vj318m06qacz.jpg"></p>
+<h2 id="GOROOT-amp-GOPATH"><a href="#GOROOT-amp-GOPATH" class="headerlink" title="GOROOT &amp; GOPATH"></a>GOROOT &amp; GOPATH</h2><p>GOROOT 和 GOPATH 都是环境变量，其中 <code>GOROOT</code> 是我们安装go开发包的路径，而从Go 1.8版本开始，Go开发包在安装完成后会为 <code>GOPATH</code> 设置一个默认目录，并且在Go1.14及之后的版本中启用了Go Module模式之后，不一定非要将代码写到GOPATH目录下，所以也就<strong>不需要我们再自己配置GOPATH</strong>了，使用默认的即可。</p>
+<h2 id="GOPROXY"><a href="#GOPROXY" class="headerlink" title="GOPROXY"></a>GOPROXY</h2><blockquote>
+<p>Go1.14版本之后，都推荐使用 <code>go mod</code> 模式来管理依赖环境了，也不再强制我们把代码必须写在<code>GOPATH</code>下面的src目录了，你可以在你电脑的任意位置编写go代码。</p>
+</blockquote>
+<p>默认GoPROXY配置是：<code>GOPROXY=https://proxy.golang.org,direct</code>，由于国内访问不到<code>https://proxy.golang.org</code>，所以我们需要换一个PROXY，这里推荐使用<code>https://goproxy.io</code>或<code>https://goproxy.cn</code>。</p>
+<p>可以执行下面的命令修改GOPROXY：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> env -w GOPROXY=https:<span class="comment">//goproxy.cn,direct</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr9f88g4hij616q04gwgy02.jpg"></p>
+<h1 id="Go开发编辑器"><a href="#Go开发编辑器" class="headerlink" title="Go开发编辑器"></a>Go开发编辑器</h1><p>Go采用的是UTF-8编码的文本文件存放源代码，理论上使用任何一款文本编辑器都可以做Go语言开发，这里推荐使用<code>VS Code</code> 和 <code>Goland</code>。 <code>VS Code</code> 是微软开源的编辑器，而 <code>Goland</code> 是jetbrains出品的付费IDE。</p>
+<p>这里使用 <code>VS Code</code> 加插件做为go语言的开发工具。</p>
+<h2 id="VS-Code-介绍"><a href="#VS-Code-介绍" class="headerlink" title="VS Code 介绍"></a>VS Code 介绍</h2><p><code>VS Code</code> 官方下载地址：<a target="_blank" rel="noopener" href="https://code.visualstudio.com/Download">https://code.visualstudio.com/Download</a></p>
+<p>三大主流平台都支持，请根据自己的电脑平台选择对应的安装包。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr9faqe0unj319c0pgae7.jpg"></p>
+<p>双击下载好的安装文件，双击安装即可。</p>
+<h2 id="VS-Code-配置"><a href="#VS-Code-配置" class="headerlink" title="VS Code 配置"></a>VS Code 配置</h2><blockquote>
+<p>中文简体插件</p>
+</blockquote>
+<p>点击左侧菜单栏最后一项<code>管理扩展</code>，在<code>搜索框</code>中输入<code>chinese</code> ，选中结果列表第一项，点击<code>install</code>安装。</p>
+<p>安装完毕后右下角会提示<code>重启VS Code</code>，重启之后你的VS Code就显示中文啦！</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr9fmuuh7dj31gf0u0jxg.jpg"></p>
+<p><code>VSCode</code>主界面介绍：</p>
+<ul>
+<li>Windows</li>
+</ul>
+<p><img src="https://www.liwenzhou.com/images/Go/install_go_dev/vscode_menu.png"></p>
+<ul>
+<li>mac</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr9fri0dcej313z0u0afp.jpg"></p>
+<p>安装go扩展</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr9ft23li8j619i0qc43802.jpg"></p>
+<h1 id="第一个Go程序"><a href="#第一个Go程序" class="headerlink" title="第一个Go程序"></a>第一个Go程序</h1><h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><p>现在我们来创建第一个Go项目—— <code>hello</code>。创建一个 <code>hello</code> 目录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir hello</span><br></pre></td></tr></table></figure>
+
+<p>使用 go module 模式新建项目时，需要通过 <code>go mod init 项目名</code> 命令对项目进行初始化，该命令会在项目根目录下生成 <code>go.mod</code>文件。例如，使用 <code>hello</code> 作为第一个Go项目的名称，执行如下命令。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> mod init hello</span><br></pre></td></tr></table></figure>
+
+<h2 id="编写代码"><a href="#编写代码" class="headerlink" title="编写代码"></a>编写代码</h2><p>接下来在该目录中创建一个 <code>main.go</code> 文件：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main  <span class="comment">// 声明 main 包，表明当前是一个可执行程序</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span>  <span class="comment">// 导入内置 fmt 包</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;  <span class="comment">// main函数，是程序执行的入口</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;Hello World!&quot;</span>)  <span class="comment">// 在终端打印 Hello World!</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>非常重要！！！ 如果此时 VS Code 右下角弹出提示让你安装插件，务必点 <strong>install all</strong> 进行安装。</p>
+<h2 id="编译代码"><a href="#编译代码" class="headerlink" title="编译代码"></a>编译代码</h2><p><code>go build</code> 命令表示将源代码编译成可执行文件。</p>
+<p>在hello目录下执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go build</span><br></pre></td></tr></table></figure>
+
+<p>或者在其他目录执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go build hello</span><br></pre></td></tr></table></figure>
+
+<p>go编译器会去 <code>GOPATH</code> 的src目录下查找你要编译的 <code>hello</code> 项目.</p>
+<p>编译得到的可执行文件会保存在执行编译命令的当前目录下，如果是windows平台会在当前目录下找到 <code>hello</code> 可执行文件。</p>
+<p>可在终端直接执行该 <code>hello</code> 文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">limin@armin hello % ls -lrth</span><br><span class="line">total 3976</span><br><span class="line">-rw-r--r--  1 limin  staff    22B  6  7 09:45 go.mod</span><br><span class="line">-rw-r--r--  1 limin  staff   231B  6  7 09:46 hello.go</span><br><span class="line">-rwxr-xr-x  1 limin  staff   1.9M  6  7 09:48 hello</span><br><span class="line"></span><br><span class="line">limin@armin hello % ./hello </span><br><span class="line">Hello World!</span><br></pre></td></tr></table></figure>
+
+<p>还可以使用<code>-o</code>参数来指定编译后得到的可执行文件的名字。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">limin@armin hello % go build -o hellolemon</span><br><span class="line">limin@armin hello % ls -lrth</span><br><span class="line">total 7936</span><br><span class="line">-rw-r--r--  1 limin  staff    22B  6  7 09:45 go.mod</span><br><span class="line">-rw-r--r--  1 limin  staff   231B  6  7 09:46 hello.go</span><br><span class="line">-rwxr-xr-x  1 limin  staff   1.9M  6  7 09:48 hello</span><br><span class="line">-rwxr-xr-x  1 limin  staff   1.9M  6  7 09:54 hellolemon</span><br></pre></td></tr></table></figure>
+
+<h2 id="go-run"><a href="#go-run" class="headerlink" title="go run"></a>go run</h2><p><code>go run main.go</code> 也可以执行程序，该命令本质上也是先编译再执行。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">limin@armin hello % <span class="keyword">go</span> run hello.<span class="keyword">go</span></span><br><span class="line">Hello World!</span><br></pre></td></tr></table></figure>
+
+<h2 id="go-install"><a href="#go-install" class="headerlink" title="go install"></a>go install</h2><p><code>go install </code> 表示安装的意思，它先编译源代码得到可执行文件，然后将可执行文件移动到 <code>GOPATH</code> 的bin目录下。因为我们的环境变量中配置了 <code>GOPATH </code> 下的bin目录，所以我们就可以在任意地方直接执行可执行文件了。</p>
+<h2 id="跨平台编译"><a href="#跨平台编译" class="headerlink" title="跨平台编译"></a>跨平台编译</h2><p>默认 <code>go build</code> 的可执行文件都是当前操作系统可执行的文件，如果我想在windows下编译一个linux下可执行文件，那需要怎么做呢？</p>
+<p>只需要指定目标操作系统的平台和处理器架构即可，例如Windows平台cmd下按如下方式指定环境变量。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SET CGO_ENABLED=0  // 禁用CGO</span><br><span class="line">SET GOOS=linux  // 目标平台是linux</span><br><span class="line">SET GOARCH=amd64  // 目标处理器架构是amd64</span><br></pre></td></tr></table></figure>
+
+<p>注意：如果使用的是PowerShell终端，那么设置环境变量的语法为<code>$ENV:CGO_ENABLED=0</code>。</p>
+<p>然后再执行<code>go build</code>命令，得到的就是能够在Linux平台运行的可执行文件了。</p>
+<p>Mac 下编译 Linux 和 Windows平台 64位 可执行程序：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build</span><br><span class="line">CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build</span><br></pre></td></tr></table></figure>
+
+<p>Linux 下编译 Mac 和 Windows 平台64位可执行程序：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build</span><br><span class="line">CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build</span><br></pre></td></tr></table></figure>
+
+<p>Windows下编译Mac平台64位可执行程序：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SET CGO_ENABLED=0</span><br><span class="line">SET GOOS=darwin</span><br><span class="line">SET GOARCH=amd64</span><br><span class="line">go build</span><br></pre></td></tr></table></figure>
+
+<p>现在，开启你的Go语言学习之旅吧。人生苦短，let’s Go.</p>
+
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+      </div>
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/15/Tomcat/" rel="prev" title="Tomcat">
+      <i class="fa fa-chevron-left"></i> Tomcat
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Go%E8%AF%AD%E8%A8%80%E4%BB%8B%E7%BB%8D"><span class="nav-text">Go语言介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Go%E8%AF%AD%E8%A8%80%E4%B8%BA%E5%B9%B6%E5%8F%91%E8%80%8C%E7%94%9F"><span class="nav-text">Go语言为并发而生</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go%E6%80%A7%E8%83%BD%E5%BC%BA%E6%82%8D"><span class="nav-text">Go性能强悍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go%E8%AF%AD%E8%A8%80%E7%AE%80%E5%8D%95%E6%98%93%E5%AD%A6"><span class="nav-text">Go语言简单易学</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go%E8%AF%AD%E8%A8%80%E7%9A%84%E5%89%8D%E6%99%AF"><span class="nav-text">Go语言的前景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Go%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="nav-text">Go开发环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Golang-Download"><span class="nav-text">Golang Download</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-Go"><span class="nav-text">Install Go</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GOROOT-amp-GOPATH"><span class="nav-text">GOROOT &amp; GOPATH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GOPROXY"><span class="nav-text">GOPROXY</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Go%E5%BC%80%E5%8F%91%E7%BC%96%E8%BE%91%E5%99%A8"><span class="nav-text">Go开发编辑器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#VS-Code-%E4%BB%8B%E7%BB%8D"><span class="nav-text">VS Code 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VS-Code-%E9%85%8D%E7%BD%AE"><span class="nav-text">VS Code 配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AAGo%E7%A8%8B%E5%BA%8F"><span class="nav-text">第一个Go程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-World"><span class="nav-text">Hello World</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81"><span class="nav-text">编写代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E4%BB%A3%E7%A0%81"><span class="nav-text">编译代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#go-run"><span class="nav-text">go run</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#go-install"><span class="nav-text">go install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%BC%96%E8%AF%91"><span class="nav-text">跨平台编译</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Armin"
+      src="/uploads/armin.png">
+  <p class="site-author-name" itemprop="name">Armin</p>
+  <div class="site-description" itemprop="description">记录生活中的点点滴滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/" title="GitHub → https:&#x2F;&#x2F;github.com" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://aws.amazon.com/cn/" title="AWS → https:&#x2F;&#x2F;aws.amazon.com&#x2F;cn&#x2F;" rel="noopener" target="_blank"><i class="fab fa-aws fa-fw"></i>AWS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.processon.com/" title="processon → https:&#x2F;&#x2F;www.processon.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-accusoft fa-fw"></i>processon</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cn-ki.net/" title="知识库 → https:&#x2F;&#x2F;www.cn-ki.net&#x2F;" rel="noopener" target="_blank"><i class="fas fa-book-open fa-fw"></i>知识库</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tophub.today/" title="看新闻 → https:&#x2F;&#x2F;tophub.today&#x2F;" rel="noopener" target="_blank"><i class="far fa-newspaper fa-fw"></i>看新闻</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://m.zxjsq.net/" title="计算器 → http:&#x2F;&#x2F;m.zxjsq.net" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计算器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://shijisuishu.bmcx.com/20010314__shijisuishu/" title="计龄器 → https:&#x2F;&#x2F;shijisuishu.bmcx.com&#x2F;20010314__shijisuishu&#x2F;" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计龄器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tool.oschina.net/hexconvert" title="进制转换 → https:&#x2F;&#x2F;tool.oschina.net&#x2F;hexconvert" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>进制转换</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.sojson.com/convert/subnetmask.html" title="子网计算 → https:&#x2F;&#x2F;www.sojson.com&#x2F;convert&#x2F;subnetmask.html" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>子网计算</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.baidu.com/" title="度娘 → https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank"><i class="fas fa-search fa-fw"></i>度娘</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/yourname" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/yourname" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://youtube.com/yourname" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>YouTube</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Armin</span>
+</div>
+
+<div class="powered-by">
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
