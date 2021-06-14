@@ -228,7 +228,7 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gri9z0gu5xj312f0a6tf6.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gri9z4nd75j312h083gou.jpg">
 <meta property="article:published_time" content="2021-06-14T16:54:48.000Z">
-<meta property="article:modified_time" content="2021-06-14T16:56:15.852Z">
+<meta property="article:modified_time" content="2021-06-14T19:48:06.027Z">
 <meta property="article:author" content="Armin">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grgo1fk5sgj30u60gwgna.jpg">
@@ -1315,7 +1315,7 @@
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grh0513lkcj60w703qta102.jpg" alt="image-20200815222141369"></p>
 <p>如果希望批量删除所有已经退出的容器，可以执行如下命令：</p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grh052k0dij30xs066763.jpg" alt="image-20200815222218154"></p>
-<p>==顺便说一句：<code>docker rm</code> 是删除容器，而 <code>docker rmi</code> 是删除镜像。==</p>
+<p>顺便说一句：<code>docker rm</code> 是删除容器，而 <code>docker rmi</code> 是删除镜像。</p>
 <h2 id="5-限制容器的操作"><a href="#5-限制容器的操作" class="headerlink" title="5. 限制容器的操作"></a>5. 限制容器的操作</h2><blockquote>
 <p><strong>限制容器对内存的使用</strong></p>
 </blockquote>
@@ -1337,7 +1337,7 @@
 <ul>
 <li>–vm 1：启动 1 个内存工作线程。</li>
 <li>–vm-bytes 280M：每个线程分配 280M 内存。</li>
-<li>==注：在真正分配内存时，是没必要使用 –vm 和 –vm-bytes参数的==</li>
+<li>注：在真正分配内存时，是没必要使用 –vm 和 –vm-bytes参数的</li>
 </ul>
 <p><strong>运行结果如下：</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grh0569ja5j30ro09haer.jpg" alt="image-20200815222937376"></p>
@@ -1358,7 +1358,7 @@
 <p>Docker 可以通过 <code>-c</code> 或 <code>--cpu-shares</code> 设置容器使用 CPU 的权重。如果不指定，默认值为 1024。</p>
 <p>与内存限额不同，通过 <code>-c</code> 设置的 cpu share 并不是 CPU 资源的绝对数量，而是一个相对的权重值。</p>
 <p>某个容器最终能分配到的 CPU 资源取决于它的 cpu share 占所有容器 cpu share 总和比例。</p>
-<p>==<strong>换句话说：通过 cpu share 可以设置容器使用 CPU 的优先级</strong>。==</p>
+<p><strong>换句话说：通过 cpu share 可以设置容器使用 CPU 的优先级</strong>。</p>
 <p>比如在 docker host 中启动了两个容器：</p>
 <ul>
 <li><p><code>docker run --name &quot;container_A&quot; -c 1024 centos</code></p>
@@ -1372,7 +1372,7 @@
 <p>1、启动 lemon1，cpu share 为 1024</p>
 <p><code>docker run --name lemon1 -it -c 1024 progrium/stress --cpu 4</code></p>
 <p><code>--cpu</code> 用来设置工作线程的数量。因为当前 host 有 4 颗 CPU，所以需要4个工作线程才能将 CPU 压满。如果 host 有多颗 CPU，则需要相应增加 –cpu 的数量。</p>
-<p>==注：在真正环境中 <code>--cpu</code> 选项是不需要使用的，这里使用是为了方便实验测试==</p>
+<p>注：在真正环境中 <code>--cpu</code> 选项是不需要使用的，这里使用是为了方便实验测试</p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grh05ddildj30rl08mjv6.jpg" alt="image-20200815223919949"></p>
 <p>2、启动 lemon2，cpu share 为 512</p>
 <p><code>docker run --name lemon2 -it -c 512 progrium/stress --cpu 4</code></p>
@@ -1407,10 +1407,10 @@
 </ul>
 <p>可通过以下参数控制容器的 bps 和 iops：</p>
 <ul>
-<li>–device-read-bps，限制==读==某个设备的 bps。</li>
-<li>–device-write-bps，限制==写==某个设备的 bps。</li>
-<li>–device-read-iops，限制==读==某个设备的 iops。</li>
-<li>–device-write-iops，限制==写==某个设备的 iops。 </li>
+<li>–device-read-bps，限制读某个设备的 bps。</li>
+<li>–device-write-bps，限制写某个设备的 bps。</li>
+<li>–device-read-iops，限制读某个设备的 iops。</li>
+<li>–device-write-iops，限制写某个设备的 iops。 </li>
 </ul>
 <p>下面这个例子限制容器写 /dev/sda 的速率为20 MB/s</p>
 <p><code>docker run -it --device-write-bps /dev/sda:20MB centos</code></p>
@@ -1501,7 +1501,7 @@
 </ul>
 <h2 id="3-Bridge网络（重点）"><a href="#3-Bridge网络（重点）" class="headerlink" title="3. Bridge网络（重点）"></a>3. Bridge网络（重点）</h2><blockquote>
 <p>Docker 安装时会在host上创建一个命名为 docker0 的 linux bridge。如果不指定 –network，创建的容器默认都会挂到 docker0 上。</p>
-<p>==<strong>本小节比较重要，所以这里就是用阿里云服务器来演示了</strong>==</p>
+<p><strong>本小节比较重要，所以这里就是用阿里云服务器来演示了</strong></p>
 </blockquote>
 <p>查看 host 全部网卡</p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gri9ozdslpj30th0h7tah.jpg" alt="image-20200816000543757"></p>
@@ -1546,7 +1546,7 @@
 
 <p>原理模型图</p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gri9q28a7zj30sa0ii74x.jpg" alt="image-20200816023126642"></p>
-<p>==<strong>这个问题一会还会在下小节 容器如何访问的外部世界 中继续深度探究~~</strong>==</p>
+<p><strong>这个问题一会还会在下小节 容器如何访问的外部世界 中继续深度探究~~</strong></p>
 <blockquote>
 <p><strong>删除上面的两个容器那这个veth-pair接口会不会消失？</strong></p>
 </blockquote>
@@ -1688,7 +1688,7 @@
 <p>前面已经学习了 Docker 的几种网络方案：none、host、bridge 和 joined 容器，它们解决了单个 Docker Host 内容器通信的问题。本章的重点则是讨论跨主机容器间通信的方案。</p>
 </blockquote>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gri9ryrohyj30w90ge7ju.jpg" alt="image-20200816144049001"></p>
-<p>==Overlay 和 macvlan属于不同主机之间的容器互相访问==</p>
+<p>Overlay 和 macvlan属于不同主机之间的容器互相访问</p>
 <blockquote>
 <p><strong>跨主机网络方案包括</strong></p>
 </blockquote>
@@ -1971,7 +1971,7 @@
 <li>修改现有数据会先从镜像层将数据复制到容器层，修改后的数据直接保存在容器层中，镜像层保持不变。</li>
 </ul>
 <p>分层结构使镜像和容器的创建、共享以及分发变得非常高效，而这些都要归功于 Docker storage driver。正是 storage driver 实现了多层数据的堆叠并为用户提供一个单一的合并之后的统一视图。</p>
-<p>Docker 支持多种 storage driver，有 ==AUFS、Device Mapper、Btrfs、OverlayFS、VFS 和 ZFS。==它们都能实现分层的架构，同时又有各自的特性。对于 Docker 用户来说，具体选择使用哪个 storage driver 是一个难题，因为：</p>
+<p>Docker 支持多种 storage driver，有 AUFS、Device Mapper、Btrfs、OverlayFS、VFS 和 ZFS。它们都能实现分层的架构，同时又有各自的特性。对于 Docker 用户来说，具体选择使用哪个 storage driver 是一个难题，因为：</p>
 <ul>
 <li>没有哪个 driver 能够适应所有的场景。</li>
 <li>driver 本身在快速发展和迭代。</li>
@@ -1983,10 +1983,10 @@
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gri9vltkakj30t70g778t.jpg" alt="image-20200828152307083"></p>
 <p>Centos7 用的 overlay2，底层文件系统是 xfs，各层数据存放在 /var/lib/docker。</p>
 <p>对于某些容器，直接将数据放在由 storage driver 维护的层中是很好的选择，比如那些无状态的应用。无状态意味着容器没有需要持久化的数据，随时可以从镜像直接创建。</p>
-<p>==<strong>一句话描述：storage driver 就是将应用或数据打包到镜像层里，从而启动容器后直接使用。</strong>==</p>
+<p><strong>一句话描述：storage driver 就是将应用或数据打包到镜像层里，从而启动容器后直接使用。</strong></p>
 <p>比如 busybox镜像，它是一个工具箱，我们启动 busybox 是为了执行诸如 wget，ping 之类的命令，不需要保存数据供以后使用，使用完直接退出，容器删除时存放在容器层中的工作数据也一起被删除，这没问题，下次再启动新容器即可。</p>
 <p>但对于另一类应用这种方式就不合适了，它们有持久化数据的需求，容器启动时需要加载已有的数据，容器销毁时希望保留产生的新数据，也就是说，这类容器是有状态的。</p>
-<p>==<strong>一句话描述：就是容器中的数据不会随着容器的删除而被删除，这一类数据需要持久化</strong>==</p>
+<p><strong>一句话描述：就是容器中的数据不会随着容器的删除而被删除，这一类数据需要持久化</strong></p>
 <p>这就要用到 Docker 的另一种存储机制：Data Volume</p>
 <h2 id="2-Data-Volume"><a href="#2-Data-Volume" class="headerlink" title="2. Data Volume"></a>2. Data Volume</h2><blockquote>
 <p>storage driver 和 data volume 是容器存放数据的两种方式，上一节学习了 storage driver，本节开始讨论 Data Volume。</p>
@@ -2023,7 +2023,7 @@
 <li><strong>docker managed volume</strong>。 </li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gri9vreedmj30uv0d0n1n.jpg" alt="image-20200828153411370"></p>
-<p>==<strong>这两种类型最大的区别就是：bind mount是将宿主机的目录数据共享给容器，而docker managed volume是相反的</strong>==</p>
+<p><strong>这两种类型最大的区别就是：bind mount是将宿主机的目录数据共享给容器，而docker managed volume是相反的</strong></p>
 <h3 id="bind-mount"><a href="#bind-mount" class="headerlink" title="bind mount"></a>bind mount</h3><blockquote>
 <p>bind mount 是将 host 上已存在的目录或文件 mount 到容器。 </p>
 </blockquote>
@@ -2086,7 +2086,7 @@
 <p><strong>除了通过 <code>docker inspect</code> 查看 volume，我们也可以用 <code>docker volume</code> 命令：</strong> </p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gri9wyh9uij312f0czn1w.jpg" alt="image-20200829130523502"></p>
 <p>目前，<code>docker volume</code> 只能查看 docker managed volume，还看不到 bind mount；同时也无法知道 volume 对应的容器，这些信息还得靠<code>docker inspect</code>。 </p>
-<p>==<strong>上面的就属于匿名挂在，能看到宿主机的目录名是很长的字串，非常不好记，那么就可以具名挂在volume了（推荐使用）</strong>==</p>
+<p><strong>上面的就属于匿名挂在，能看到宿主机的目录名是很长的字串，非常不好记，那么就可以具名挂在volume了（推荐使用）</strong></p>
 <p>很简单，如下：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@docker ~]<span class="comment"># docker run -itd --name web2 -p 88:80 -v html:/usr/local/apache2/htdocs httpd:latest</span></span><br></pre></td></tr></table></figure>
 
