@@ -34,6 +34,8 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7upmukg7j30wp0hgmyd.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7upq32y4j30of0fqn0l.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7uptd7wbj30su0jcjya.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grndlevtw8j30ey09yaab.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grndmm5ymqj30fc07swer.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7ur6odhwj30fg0fzabf.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7utpkiy4j30of052aax.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7utsp2asj30nc03oglx.jpg">
@@ -69,7 +71,7 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v4fnrinj311o0okn8s.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7v4kfopij31jw0cgq6z.jpg">
 <meta property="article:published_time" content="2021-06-05T16:40:46.000Z">
-<meta property="article:modified_time" content="2021-06-14T19:30:51.995Z">
+<meta property="article:modified_time" content="2021-06-19T02:43:17.112Z">
 <meta property="article:author" content="Armin">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7uo0jsryj60ys0md76e02.jpg">
@@ -382,9 +384,9 @@
 <p><strong>K8S-Service类型：</strong></p>
 </blockquote>
 <p>ClusterIp：默认类型，自动分配一个仅Cluster内部可以访问的虚拟IP</p>
-<p>![](Kubernetes 个人笔记.assets/008i3skNly1gr7uq021bqj30ey09yjrw-20210606002546373.jpg)</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grndlevtw8j30ey09yaab.jpg"></p>
 <p>NodePort：在ClusterIP基础上为Service在每台机器上绑定一个端口，这样可以通过NodeIP:NodePort来访问服务</p>
-<p>![](Kubernetes 个人笔记.assets/008i3skNly1gr7uqvnov8j30fc07saal.jpg)</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grndmm5ymqj30fc07swer.jpg"></p>
 <p>LoadBalancer：在NodePort基础上，借助cloud provider创建一个外部负载均衡器，并将请求转发到NodeIP:NodePort</p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr7ur6odhwj30fg0fzabf.jpg"></p>
 <h1 id="二、部署K8S集群（kubeadm）"><a href="#二、部署K8S集群（kubeadm）" class="headerlink" title="二、部署K8S集群（kubeadm）"></a>二、部署K8S集群（kubeadm）</h1><blockquote>
