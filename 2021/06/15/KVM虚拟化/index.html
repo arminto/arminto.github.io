@@ -235,34 +235,42 @@
       
         <!--toc-->
 <span id="more"></span>
-
-<h1 id="一、虚拟化技术简介"><a href="#一、虚拟化技术简介" class="headerlink" title="一、虚拟化技术简介"></a>一、虚拟化技术简介</h1><blockquote>
+<h1>一、虚拟化技术简介</h1>
+<blockquote>
 <p>服务器虚拟化是指将一台计算机（称为物理服务器）通过 hypervisor 虚拟为多台逻辑计算机的技术，这些逻辑计算机又被称为虚拟机（VM，全称：Virtual  Machine），每台虚拟机都拥有独立的“硬件”。虽然你可以在虚拟机的操作系统中看到这些“硬件”，不过它们并不是真实存在的，而是通过 hypervisor 将物理机的硬件虚拟而来。虚拟机运行时，虚拟机硬件的工作实际是由物理机的硬件完成的。</p>
 </blockquote>
-<h2 id="1-Hypervisor-的作用"><a href="#1-Hypervisor-的作用" class="headerlink" title="1. Hypervisor 的作用"></a>1. Hypervisor 的作用</h2><p><strong>hypervisor 又被称为虚拟机监视器（ VMM，全称：Virtual Machine Monitor），是实现物理机虚拟为虚拟机的操作系统或者软件，它为虚拟机提供虚拟的硬件资源，负责管理和分配这些资源，并确保上层虚拟机之间的相互隔离。</strong></p>
-<h2 id="2-Hypervisor-有两种类型"><a href="#2-Hypervisor-有两种类型" class="headerlink" title="2. Hypervisor 有两种类型"></a>2. Hypervisor 有两种类型</h2><ul>
+<h2 id="1-Hypervisor-的作用">1. Hypervisor 的作用</h2>
+<p><strong>hypervisor 又被称为虚拟机监视器（ VMM，全称：Virtual Machine Monitor），是实现物理机虚拟为虚拟机的操作系统或者软件，它为虚拟机提供虚拟的硬件资源，负责管理和分配这些资源，并确保上层虚拟机之间的相互隔离。</strong></p>
+<h2 id="2-Hypervisor-有两种类型">2. Hypervisor 有两种类型</h2>
+<ul>
 <li>一种是操作系统，直接安装在物理机上；</li>
 <li>另一种是应用程序，需要先在物理机上安装操作系统，再在操作系统中安装 hypervisor。</li>
 </ul>
-<h1 id="二、虚拟化的分类"><a href="#二、虚拟化的分类" class="headerlink" title="二、虚拟化的分类"></a>二、虚拟化的分类</h1><blockquote>
+<h1>二、虚拟化的分类</h1>
+<blockquote>
 <p>服务器虚拟化的有多种划分方式，可以根据虚拟化架构划分为裸金属/寄居，根据虚拟化层次硬件辅助虚拟化/软件辅助虚拟化，根据虚拟化平台划分为全虚拟化/半虚拟化。</p>
 </blockquote>
-<h2 id="1-裸金属（原生）-寄居"><a href="#1-裸金属（原生）-寄居" class="headerlink" title="1. 裸金属（原生）/寄居"></a>1. 裸金属（原生）/寄居</h2><blockquote>
+<h2 id="1-裸金属（原生）-寄居">1. 裸金属（原生）/寄居</h2>
+<blockquote>
 <p>判断虚拟化类型是裸金属还是寄居架构，取决于虚拟化层，也就是 hypervisor 所处的位置。寄居架构将虚拟化层（hypervisor）以一个应用程序的方式安装运行于操作系统之上，支持最为广泛的各种硬件配置（只要HOST  OS支持该硬件即可）。裸金属架构将虚拟化层（ hypervisor）直接安装到干净的 x86 服务器上，裸金属架构相对于寄居架构效率更高（少了Host OS这一层），且具有更好的可扩展性、健壮性和性能。</p>
 <p>企业级服务器虚拟化都是裸金属架构（效率更高），像主流的企业级服务器虚拟化 ESXi   KVM  Xen  Hyper-v都是裸金属架构。</p>
 </blockquote>
 <ul>
-<li><p>未虚拟化的 x86 服务器架构，自下而上是物理硬件（Hardware）、操作系统（OS），应用程序（ APP ）</p>
+<li>
+<p>未虚拟化的 x86 服务器架构，自下而上是物理硬件（Hardware）、操作系统（OS），应用程序（ APP ）</p>
 </li>
-<li><p>这和我们个人计算机一样，就是在计算机上装操作系统，再在操作系统里面安装应用程序。</p>
+<li>
+<p>这和我们个人计算机一样，就是在计算机上装操作系统，再在操作系统里面安装应用程序。</p>
 </li>
-<li><p>架构图如下：</p>
+<li>
+<p>架构图如下：</p>
 <ul>
 <li>未做虚拟化的 x86 服务器</li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gric808gt3j308c08cq2s.jpg" alt="image-20200613090458360"></p>
 <ul>
-<li><p>做完裸金属的 x86 服务器</p>
+<li>
+<p>做完裸金属的 x86 服务器</p>
 <ul>
 <li>裸金属（bare-metal）架构也叫 bare-metal hypervisor、Ⅰ型，最有代表性就是 VMware ESX（i）。</li>
 <li>ESXi 是 VMware 的企业级服务器虚拟化技术，本身是一个操作系统，直接安装的物理服务器上。</li>
@@ -275,34 +283,47 @@
 </ul>
 </li>
 </ul>
-<h2 id="2-有点特殊的裸金属-KVM"><a href="#2-有点特殊的裸金属-KVM" class="headerlink" title="2. 有点特殊的裸金属 KVM"></a>2. 有点特殊的裸金属 KVM</h2><ul>
-<li><p>部署 KVM ，首先需要在物理服务器上安装Linux系统，再在Linux中“安装 KVM ”。通常所说的 KVM 实际上是KVM 和 qemu 两种技术的结合，qemu 本身是一种完整的寄居架构软件，采用二进制翻译的方式虚拟化CPU， KVM 则采用效率更高的硬件辅助虚拟化CPU。由于 KVM 只能虚拟化CPU、内存，其它硬件（网卡、硬盘）的虚拟化则是由 qemu 来负责。</p>
+<h2 id="2-有点特殊的裸金属-KVM">2. 有点特殊的裸金属 KVM</h2>
+<ul>
+<li>
+<p>部署 KVM ，首先需要在物理服务器上安装Linux系统，再在Linux中“安装 KVM ”。通常所说的 KVM 实际上是KVM 和 qemu 两种技术的结合，qemu 本身是一种完整的寄居架构软件，采用二进制翻译的方式虚拟化CPU， KVM 则采用效率更高的硬件辅助虚拟化CPU。由于 KVM 只能虚拟化CPU、内存，其它硬件（网卡、硬盘）的虚拟化则是由 qemu 来负责。</p>
 </li>
-<li><p>qemu 是寄居架构，通俗来讲就是 qemu 是个工作在Linux上的软件。而 KVM 则相当于“给Linux内核打了一个补丁”，将Linux部分内核转换为 hypervisor ，Linux内核自然属于操作系统，这样看来 KVM的 hypervisor既有寄居（qemu）又有裸金属（kvm），是一种比较特殊的裸金属。</p>
+<li>
+<p>qemu 是寄居架构，通俗来讲就是 qemu 是个工作在Linux上的软件。而 KVM 则相当于“给Linux内核打了一个补丁”，将Linux部分内核转换为 hypervisor ，Linux内核自然属于操作系统，这样看来 KVM的 hypervisor既有寄居（qemu）又有裸金属（kvm），是一种比较特殊的裸金属。</p>
 </li>
-<li><p>架构图如下：</p>
+<li>
+<p>架构图如下：</p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gric8wgsgcj30b40b4glr.jpg" alt="image-20200613092310606"></p>
 </li>
 </ul>
-<h1 id="三、虚拟化原理简介"><a href="#三、虚拟化原理简介" class="headerlink" title="三、虚拟化原理简介"></a>三、虚拟化原理简介</h1><h2 id="1-用户-内核空间"><a href="#1-用户-内核空间" class="headerlink" title="1. 用户/内核空间"></a>1. 用户/内核空间</h2><ul>
+<h1>三、虚拟化原理简介</h1>
+<h2 id="1-用户-内核空间">1. 用户/内核空间</h2>
+<ul>
 <li>Windows和Linux都将内存分为内核空间和用户空间，操作系统内核代码运行在内核空间，应用程序代码运行在用户空间。</li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gric8zla2jj30dw05kmx0.jpg" alt="image-20200613093239698"></p>
-<h2 id="2-特权级"><a href="#2-特权级" class="headerlink" title="2. 特权级"></a>2. 特权级</h2><blockquote>
+<h2 id="2-特权级">2. 特权级</h2>
+<blockquote>
 <p><strong>CPU清除内存数据、设置时钟等指令是非常危险的，如果用错了会导致系统崩溃。通过特权级这一机制，区分内核代码和应用程序代码权限，保证操作系统正常运行。</strong></p>
 </blockquote>
 <ul>
-<li><p>特权级是一种用来保护数据和阻止恶意行为的机制，x86 计算机的CPU提供4个特权级：ring0~3 ，ring0权限最高，ring3 权限最低</p>
+<li>
+<p>特权级是一种用来保护数据和阻止恶意行为的机制，x86 计算机的CPU提供4个特权级：ring0~3 ，ring0权限最高，ring3 权限最低</p>
 </li>
-<li><p>ring0 提供给操作系统内核(内核空间代码)使用，可以使用所有CPU指令，可以直接操作硬件(如CPU、内存)</p>
+<li>
+<p>ring0 提供给操作系统内核(内核空间代码)使用，可以使用所有CPU指令，可以直接操作硬件(如CPU、内存)</p>
 </li>
-<li><p>ring3 提供给应用程序（用户空间代码）使用的，只可以调用基本的CPU指令</p>
+<li>
+<p>ring3 提供给应用程序（用户空间代码）使用的，只可以调用基本的CPU指令</p>
 </li>
-<li><p>ring1  ring2 被设计为运行驱动程序，但Windows、Linux将驱动程序运行在 ring0，未使用这两个特权级</p>
+<li>
+<p>ring1  ring2 被设计为运行驱动程序，但Windows、Linux将驱动程序运行在 ring0，未使用这两个特权级</p>
 </li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gric930g11j30mc0g3459.jpg" alt="image-20200613093436217"></p>
-<h2 id="3-指令类型"><a href="#3-指令类型" class="headerlink" title="3. 指令类型"></a>3. 指令类型</h2><h3 id="3-1-未虚拟化时，CPU的指令分为特权指令和非特权指令。"><a href="#3-1-未虚拟化时，CPU的指令分为特权指令和非特权指令。" class="headerlink" title="3.1 未虚拟化时，CPU的指令分为特权指令和非特权指令。"></a>3.1 未虚拟化时，CPU的指令分为特权指令和非特权指令。</h3><blockquote>
+<h2 id="3-指令类型">3. 指令类型</h2>
+<h3 id="3-1-未虚拟化时，CPU的指令分为特权指令和非特权指令。">3.1 未虚拟化时，CPU的指令分为特权指令和非特权指令。</h3>
+<blockquote>
 <p><strong>Tips：特权指令必须以 ring0 运行，否则会产生异常，将控制权交还 ring0，非特权指令有的需要以  ring0运行，有的不需要。</strong></p>
 </blockquote>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gric99fpnwj30dw08cwes.jpg" alt="image-20200613093917522"></p>
@@ -315,11 +336,14 @@
 <p>（4）其他指令</p>
 <p><strong>非特权指令</strong></p>
 <p>非特权指令有的需要以 ring0 运行，有的可以任意ring运行。操作系统内核以 ring0 运行，可以使用所有指令；应用程序以 ring3 运行，所以不能使用特权指令和部分非特权指令。</p>
-<h3 id="3-2-虚拟化后，CPU的指令分为特权指令，敏感指令，普通指令。"><a href="#3-2-虚拟化后，CPU的指令分为特权指令，敏感指令，普通指令。" class="headerlink" title="3.2 虚拟化后，CPU的指令分为特权指令，敏感指令，普通指令。"></a>3.2 虚拟化后，CPU的指令分为特权指令，敏感指令，普通指令。</h3><blockquote>
+<h3 id="3-2-虚拟化后，CPU的指令分为特权指令，敏感指令，普通指令。">3.2 虚拟化后，CPU的指令分为特权指令，敏感指令，普通指令。</h3>
+<blockquote>
 <ul>
-<li><p><strong>Tips：特权指令只有 ring0  才能执行，当非 ring0 执行时会产生异常，非特权指令有的也需要 ring0 才能运行，但是它们非 ring0 运行不会产生异常。</strong></p>
+<li>
+<p><strong>Tips：特权指令只有 ring0  才能执行，当非 ring0 执行时会产生异常，非特权指令有的也需要 ring0 才能运行，但是它们非 ring0 运行不会产生异常。</strong></p>
 </li>
-<li><p><strong>Tips：敏感指令 = 特权指令 + 部分非特权指令，也就是说特权指令一定是敏感指令。</strong></p>
+<li>
+<p><strong>Tips：敏感指令 = 特权指令 + 部分非特权指令，也就是说特权指令一定是敏感指令。</strong></p>
 </li>
 </ul>
 </blockquote>
@@ -330,47 +354,49 @@
 <p>2.企图访问或修改敏感寄存器或存储单元，如时钟寄存器、中断寄存器等的指令。</p>
 <p>3.企图访问存储保护系统或内存、地址分配系统的指令。</p>
 <p>4.所有I/O指令。</p>
-<h1 id="四、KVM-虚拟化演练"><a href="#四、KVM-虚拟化演练" class="headerlink" title="四、KVM 虚拟化演练"></a>四、KVM 虚拟化演练</h1><blockquote>
+<h1>四、KVM 虚拟化演练</h1>
+<blockquote>
 <p>如果系统使用物理机，需要在BIOS里面开启 Intel VT-x 或 AMD-V，如果是 VMware workstation，还须将处理器的虚拟化引擎中的三项开启。</p>
 </blockquote>
 <ul>
 <li>本机主要硬件配置（使用 VMware workstation 模拟）</li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CPU：i5-6200U(8核）</span><br><span class="line"></span><br><span class="line">内存：8G</span><br><span class="line"></span><br><span class="line">硬盘：SATA 500G</span><br></pre></td></tr></table></figure>
-
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gric9l88n6j30k90jnjrs.jpg" alt="image-20200613173836183"></p>
-<h2 id="1-部署-KVM"><a href="#1-部署-KVM" class="headerlink" title="1. 部署 KVM"></a>1. 部署 KVM</h2><blockquote>
+<h2 id="1-部署-KVM">1. 部署 KVM</h2>
+<blockquote>
 <p>安装 KVM 有多种方式可供选择，下面列出：</p>
 </blockquote>
-<h3 id="1-1-安装系统时-生产环境推荐"><a href="#1-1-安装系统时-生产环境推荐" class="headerlink" title="1.1 安装系统时(生产环境推荐)"></a>1.1 安装系统时(生产环境推荐)</h3><ul>
-<li>在基础环境中选择 Virtualization Host，附加环境中选择 Virtualization Platform(虚拟化平台)，这将仅安装基础虚拟化环境和命令行工具。           </li>
-<li>这种方式只能通过命令行管理虚拟机                    </li>
+<h3 id="1-1-安装系统时-生产环境推荐">1.1 安装系统时(生产环境推荐)</h3>
+<ul>
+<li>在基础环境中选择 Virtualization Host，附加环境中选择 Virtualization Platform(虚拟化平台)，这将仅安装基础虚拟化环境和命令行工具。</li>
+<li>这种方式只能通过命令行管理虚拟机</li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gric9rctc3j60m80gon2702.jpg" alt="image-20200613103936918"></p>
-<h3 id="1-2-安装系统时-学习环境推荐"><a href="#1-2-安装系统时-学习环境推荐" class="headerlink" title="1.2 安装系统时(学习环境推荐)"></a>1.2 安装系统时(学习环境推荐)</h3><ul>
-<li><p>在基础环境中选择 Server with GUI，附加环境选择 Virtualization Client， Virtualization Hypervisor ， and Virtualization Tools，除了将安装虚拟化环境和命令行工具，还将安装一个管理虚拟机的图形工具（virt-manager）。</p>
+<h3 id="1-2-安装系统时-学习环境推荐">1.2 安装系统时(学习环境推荐)</h3>
+<ul>
+<li>
+<p>在基础环境中选择 Server with GUI，附加环境选择 Virtualization Client， Virtualization Hypervisor ， and Virtualization Tools，除了将安装虚拟化环境和命令行工具，还将安装一个管理虚拟机的图形工具（virt-manager）。</p>
 </li>
-<li><p>这种方式既可以用图形界面，也可以用命令行来管理虚拟机，推荐用这种方法</p>
+<li>
+<p>这种方式既可以用图形界面，也可以用命令行来管理虚拟机，推荐用这种方法</p>
 </li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gric9wiogzj30m80go43n.jpg" alt="image-20200613110028406"></p>
-<h3 id="1-3-手动安装"><a href="#1-3-手动安装" class="headerlink" title="1.3 手动安装"></a>1.3 手动安装</h3><p><strong>验证CPU是否支持 KVM 虚拟化</strong></p>
+<h3 id="1-3-手动安装">1.3 手动安装</h3>
+<p><strong>验证CPU是否支持 KVM 虚拟化</strong></p>
 <blockquote>
 <p>如果结果中有 vmx（Intel）或 svm(AMD) 字样，就说明CPU的支持</p>
 <p>其中 intel cpu 支持会有 vmx ， AMD cpu 会支持 svm</p>
 </blockquote>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -E --color <span class="string">&#x27;(vmx|svm)&#x27;</span> /proc/cpuinfo</span><br></pre></td></tr></table></figure>
-
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grica0m6tij31gv0ewwgw.jpg" alt="image-20200613121007577"></p>
 <p><strong>通过yum安装虚拟化的软件包</strong></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##配置系统光盘的本地yum源</span></span><br><span class="line">mount /dev/sr0 /mnt/</span><br><span class="line">cat &lt;&lt;<span class="string">END&gt;&gt; /etc/yum.repos.d/yum.repo</span></span><br><span class="line"><span class="string">[lemon]</span></span><br><span class="line"><span class="string">baseurl=file:///mnt</span></span><br><span class="line"><span class="string">enabled=1</span></span><br><span class="line"><span class="string">gpgcheck=0</span></span><br><span class="line"><span class="string">END</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##安装</span></span><br><span class="line">yum -y groupinstall <span class="string">&quot;GNOME Desktop&quot;</span>        <span class="comment">#图形界面，可装可不装</span></span><br><span class="line"></span><br><span class="line">yum -y install libvirt* virt-* qemu-kvm* bridge-utils      <span class="comment">#KVM相关软件包，必装</span></span><br></pre></td></tr></table></figure>
-
 <p>说明：libvirtd 服务非常重要，必须确保该服务能够正常运行，才能使用各种管理工具。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">bridge-utils    设置网络网卡桥接。</span><br><span class="line">qemu-kvm        此包提供hypervisor以及宿主机和虚拟机之间的通信。</span><br><span class="line">qemu-img        此包提供虚拟机磁盘管理工具; 是qemu-kvm的依赖包，所以安装命令中可以不写qemu-img</span><br><span class="line">libvirt         安装虚拟机管理工具，使用virsh等命令来管理和控制虚拟机。</span><br><span class="line">virt-install    这个包提供了virt-install命令，用于从命令行创建虚拟机。</span><br><span class="line">libvirt-python  这个包包含一个模块，它允许用Python编写的应用程序使用libvirt 提供的API。</span><br><span class="line">libvirt-client  此包提供用于访问libvirt的API和库，还包括virsh，用于从命令行管理和控制虚拟机。</span><br><span class="line">virt-manager    这个包提供了virt-manager工具，也称为Virtual Machine Manager。这是一个用于管理虚拟机的图形工具，它使用libvirt-client库作为管理API。</span><br></pre></td></tr></table></figure>
-
 <p><strong>验证安装结果，下图说明已经成功安装了</strong></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod | grep kvm</span><br></pre></td></tr></table></figure>
-
 <p>如果安装成功则显示：</p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grica83tw8j30qj04bmx8.jpg" alt="image-20200613122659088"></p>
 <p><em><strong>如果出现下面这种情况</strong></em></p>
@@ -379,16 +405,14 @@
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricbopph4j30ar032jri.jpg" alt="image-20200613123135117"></p>
 <p><strong>如果没有，需要执行</strong></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modprobe kvm-intel</span><br></pre></td></tr></table></figure>
-
 <p>还没有就重启一下系统试试</p>
 <p><strong>开启 kvm 服务，并且设置其开机自动启动</strong></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start libvirtd</span><br><span class="line">systemctl <span class="built_in">enable</span> libvirtd</span><br></pre></td></tr></table></figure>
-
 <p><strong>查看状态操作结果,如下图所示，说明运行情况良好</strong></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status libvirtd</span><br></pre></td></tr></table></figure>
-
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1griccj6ug4j30u2099js4.jpg" alt="image-20200613131424231"></p>
-<h2 id="2-kvm-安装虚机"><a href="#2-kvm-安装虚机" class="headerlink" title="2. kvm 安装虚机"></a>2. kvm 安装虚机</h2><p><strong>向默认路径下载或拉取系统ISO，后面做虚拟化主机的时候会用到</strong></p>
+<h2 id="2-kvm-安装虚机">2. kvm 安装虚机</h2>
+<p><strong>向默认路径下载或拉取系统ISO，后面做虚拟化主机的时候会用到</strong></p>
 <blockquote>
 <p>libvirtd 存放镜像的默认位置在  /var/lib/libvirt/images/</p>
 </blockquote>
@@ -405,11 +429,12 @@
 <p>命令行安装虚拟机</p>
 </blockquote>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@KVM ~]<span class="comment"># virt-install --name centos7-01 --memory 1024 --vcpus 1 \</span></span><br><span class="line">--disk /opt/centos7-01.raw,format=raw,size=10 \</span><br><span class="line">--cdrom /var/lib/libvirt/images/CentOS-7-x86_64-DVD-1708.iso \</span><br><span class="line">--network=default --graphics vnc,listen=0.0.0.0 \</span><br><span class="line">--virt-type kvm --os-type=linux --os-variant rhel7 --noautoconsole</span><br><span class="line"></span><br><span class="line"><span class="comment">#virt-install参数</span></span><br><span class="line">--name=xx                      　           <span class="comment">#虚拟机唯一名称</span></span><br><span class="line">--memory=1024                               <span class="comment">#虚拟机内存，单位为mb</span></span><br><span class="line">--vcpus=1                                   <span class="comment">#虚拟机CPU数量</span></span><br><span class="line">--disk path=/xx/xxx[,size=10,format=raw]    <span class="comment">#存储文件及格式(虚机磁盘)</span></span><br><span class="line">--cdrom=/xxx/xxx                            <span class="comment">#指定安装源文件</span></span><br><span class="line">--network bridge=br0    　　　　　　　　　　   <span class="comment">#网络连接方式，默认为NAT模式</span></span><br><span class="line">--graphics vnc,port=xxx,listen=xxx 　　　　  <span class="comment">#图形化连接参数</span></span><br><span class="line">--virt-type=kvm        　　　　　　　　　      <span class="comment">#虚拟机类型</span></span><br><span class="line">--os-type=xxx                               <span class="comment">#系统类型</span></span><br><span class="line">--os-variant=xxx 　　　　　　　　　　　　　   　 <span class="comment">#系统版本</span></span><br><span class="line">--noautoconsole    　　　　     <span class="comment">#不加这个选项的话会一直卡在这个终端，直到这个系统彻底安装完毕</span></span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p>必须关闭防火墙 或者 添加防火墙规则</p>
+<li>
+<p>必须关闭防火墙 或者 添加防火墙规则</p>
 </li>
-<li><p>在vnc客户端上输入ip跟端口号，默认是5900，每创建一个虚机，端口则加1（5901）</p>
+<li>
+<p>在vnc客户端上输入ip跟端口号，默认是5900，每创建一个虚机，端口则加1（5901）</p>
 </li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricd0umvoj30bw08jaad.jpg" alt="image-20200616143903479"></p>
@@ -425,18 +450,17 @@
 <p>所以，如果想要备份虚机的话，就只需要备份这两个文件</p>
 </blockquote>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricdcj911j30vz052wet.jpg" alt="image-20200616151537441"></p>
-<h2 id="3-virsh-常用命令"><a href="#3-virsh-常用命令" class="headerlink" title="3. virsh 常用命令"></a>3. virsh 常用命令</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##kvm比较重要的俩个目录</span></span><br><span class="line">/etc/libvirt/qemu/                         <span class="comment">#虚拟机配置文件默认目录</span></span><br><span class="line">/var/lib/libvirt/images/                   <span class="comment">#默认镜像文件位置 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">##日常管理命令</span></span><br><span class="line">virsh list --all                           <span class="comment">#查看所有虚拟机，加all列出关机状态的</span></span><br><span class="line">virsh console xxx                          <span class="comment">#以控件台连接到指定虚拟机，需要修改虚机内核配置</span></span><br><span class="line">virsh start xxx                            <span class="comment">#启动虚拟机</span></span><br><span class="line">virsh autostart xxx                        <span class="comment">#设置虚机随机启动</span></span><br><span class="line">virsh shutdown xxx                         <span class="comment">#关闭虚拟机，一般关不了</span></span><br><span class="line">virsh destroy xxx                          <span class="comment">#强制关闭虚拟机（断电）</span></span><br><span class="line">virsh <span class="built_in">suspend</span> kvm01                        <span class="comment">#挂起虚拟机</span></span><br><span class="line">virsh resume kvm01                         <span class="comment">#恢复挂起的虚拟机</span></span><br><span class="line">virsh dumpxml kvm01 &gt; kvm01.xml            <span class="comment">#导出虚机配置文件（备份）</span></span><br><span class="line">virsh undefine xxx                         <span class="comment">#删除虚拟机，只会删除对应的xml，硬盘文件不会删除</span></span><br><span class="line">virsh define /opt/kvm01.xml                <span class="comment">#重新定义一个虚拟</span></span><br><span class="line">virsh edit kvm01                           <span class="comment">#编辑虚机配置文件</span></span><br><span class="line">virsh snapshot-create kvm01                <span class="comment">#创建虚拟机快照（建快照镜像格式要为qcow2格式）</span></span><br><span class="line">virsh snapshot-list kvm01                  <span class="comment">#查看虚拟机快照</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##虚机磁盘管理命令</span></span><br><span class="line">qemu-img create -f qcow2 /opt/kvm01-1.raw 20G            <span class="comment">#新建虚机磁盘，默认格式为raw</span></span><br><span class="line">qemu-img info kvm01                                      <span class="comment">#查看虚机磁盘系统格式</span></span><br><span class="line">qemu-img convert -f raw 原格式文件 -O qcow2 转换格式文件    <span class="comment">#转换虚机磁盘系统格式</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##虚机在线添加硬盘和扩容磁盘的管理命令</span></span><br><span class="line">virsh attach-disk</span><br><span class="line"></span><br><span class="line"><span class="comment">##虚机快照管理命令</span></span><br><span class="line">virsh snapshot-create 虚机名                              <span class="comment">#创建快照</span></span><br><span class="line">virsh snapshot-list 虚机名                                <span class="comment">#查看快照</span></span><br><span class="line">virsh snapshot-revert 虚机名 --snapshotname 快照名         <span class="comment">#还原快照</span></span><br><span class="line">virsh snapshot-delete 虚机名 --snapshotname 快照名         <span class="comment">#删除快照</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##虚机克隆管理命令</span></span><br><span class="line">virt-clone --auto-clone -o 虚机名                         <span class="comment">#完整克隆</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="4-KVM-的日常管理"><a href="#4-KVM-的日常管理" class="headerlink" title="4. KVM 的日常管理"></a>4. KVM 的日常管理</h2><blockquote>
+<h2 id="3-virsh-常用命令">3. virsh 常用命令</h2>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##kvm比较重要的俩个目录</span></span><br><span class="line">/etc/libvirt/qemu/                         <span class="comment">#虚拟机配置文件默认目录</span></span><br><span class="line">/var/lib/libvirt/images/                   <span class="comment">#默认镜像文件位置 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">##日常管理命令</span></span><br><span class="line">virsh list --all                           <span class="comment">#查看所有虚拟机，加all列出关机状态的</span></span><br><span class="line">virsh console xxx                          <span class="comment">#以控件台连接到指定虚拟机，需要修改虚机内核配置</span></span><br><span class="line">virsh start xxx                            <span class="comment">#启动虚拟机</span></span><br><span class="line">virsh autostart xxx                        <span class="comment">#设置虚机随机启动</span></span><br><span class="line">virsh shutdown xxx                         <span class="comment">#关闭虚拟机，一般关不了</span></span><br><span class="line">virsh destroy xxx                          <span class="comment">#强制关闭虚拟机（断电）</span></span><br><span class="line">virsh <span class="built_in">suspend</span> kvm01                        <span class="comment">#挂起虚拟机</span></span><br><span class="line">virsh resume kvm01                         <span class="comment">#恢复挂起的虚拟机</span></span><br><span class="line">virsh dumpxml kvm01 &gt; kvm01.xml            <span class="comment">#导出虚机配置文件（备份）</span></span><br><span class="line">virsh undefine xxx                         <span class="comment">#删除虚拟机，只会删除对应的xml，硬盘文件不会删除</span></span><br><span class="line">virsh define /opt/kvm01.xml                <span class="comment">#重新定义一个虚拟</span></span><br><span class="line">virsh edit kvm01                           <span class="comment">#编辑虚机配置文件</span></span><br><span class="line">virsh snapshot-create kvm01                <span class="comment">#创建虚拟机快照（建快照镜像格式要为qcow2格式）</span></span><br><span class="line">virsh snapshot-list kvm01                  <span class="comment">#查看虚拟机快照</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##虚机磁盘管理命令</span></span><br><span class="line">qemu-img create -f qcow2 /opt/kvm01-1.raw 20G            <span class="comment">#新建虚机磁盘，默认格式为raw</span></span><br><span class="line">qemu-img info kvm01                                      <span class="comment">#查看虚机磁盘系统格式</span></span><br><span class="line">qemu-img convert -f raw 原格式文件 -O qcow2 转换格式文件    <span class="comment">#转换虚机磁盘系统格式</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##虚机在线添加硬盘和扩容磁盘的管理命令</span></span><br><span class="line">virsh attach-disk</span><br><span class="line"></span><br><span class="line"><span class="comment">##虚机快照管理命令</span></span><br><span class="line">virsh snapshot-create 虚机名                              <span class="comment">#创建快照</span></span><br><span class="line">virsh snapshot-list 虚机名                                <span class="comment">#查看快照</span></span><br><span class="line">virsh snapshot-revert 虚机名 --snapshotname 快照名         <span class="comment">#还原快照</span></span><br><span class="line">virsh snapshot-delete 虚机名 --snapshotname 快照名         <span class="comment">#删除快照</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##虚机克隆管理命令</span></span><br><span class="line">virt-clone --auto-clone -o 虚机名                         <span class="comment">#完整克隆</span></span><br></pre></td></tr></table></figure>
+<h2 id="4-KVM-的日常管理">4. KVM 的日常管理</h2>
+<blockquote>
 <p>virsh vncdisplay kvm01                            #查看虚机对应的VNC端口号</p>
 </blockquote>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricdgnvwfj30ny06k74i.jpg" alt="image-20200616160142192"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricdlxiwfj30bw08j74l.jpg" alt="image-20200616160214735"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricdrzd4jj60si0n2q2y02.jpg" alt="image-20200616160233769"></p>
 <blockquote>
-<p>virsh list –all                                         #查看所有虚拟机，加all列出关机状态的</p>
+<p>virsh list --all                                         #查看所有虚拟机，加all列出关机状态的</p>
 </blockquote>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricdz09fkj30m20563yi.jpg" alt="image-20200616144500438"></p>
 <blockquote>
@@ -490,9 +514,11 @@
 <p>virsh domrename kvm01  kvm02                   修改虚机名；修改前记得先关闭虚机</p>
 </blockquote>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricfekkczj30p40akwev.jpg" alt="image-20200616155422743"></p>
-<h2 id="5-KVM虚拟机开机自启-和-console登陆"><a href="#5-KVM虚拟机开机自启-和-console登陆" class="headerlink" title="5. KVM虚拟机开机自启 和 console登陆"></a>5. KVM虚拟机开机自启 和 console登陆</h2><h3 id="4-1-KVM虚拟机开机自启"><a href="#4-1-KVM虚拟机开机自启" class="headerlink" title="4.1 KVM虚拟机开机自启"></a>4.1 KVM虚拟机开机自启</h3><blockquote>
+<h2 id="5-KVM虚拟机开机自启-和-console登陆">5. KVM虚拟机开机自启 和 console登陆</h2>
+<h3 id="4-1-KVM虚拟机开机自启">4.1 KVM虚拟机开机自启</h3>
+<blockquote>
 <p>virsh autostart  kvm01                                    #设置随宿主机开机自启动</p>
-<p>virsh autostart –disable  kvm01                     #取消随宿主机开机自启动</p>
+<p>virsh autostart --disable  kvm01                     #取消随宿主机开机自启动</p>
 </blockquote>
 <ul>
 <li>设置web01虚机随着宿主机的启动而启动</li>
@@ -504,7 +530,8 @@
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricfouhgaj30qo078t8u.jpg" alt="image-20200616162517589"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricfveidbj30p905f0sq.jpg" alt="image-20200616162710182"></p>
 <ul>
-<li>为什么他能够自启？<ul>
+<li>为什么他能够自启？
+<ul>
 <li>其实和启动系统服务的原理一样，就是加了一个软连接</li>
 <li>而且如果你取消了虚机的自启，这个软连接也就会跟随着消失</li>
 </ul>
@@ -516,7 +543,8 @@
 <li>取消掉虚机自启，验证这个软连接还会不会消失</li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricgadj5dj30oo058gm0.jpg" alt="image-20200616163351001"></p>
-<h3 id="4-2-console登陆"><a href="#4-2-console登陆" class="headerlink" title="4.2 console登陆"></a>4.2 console登陆</h3><blockquote>
+<h3 id="4-2-console登陆">4.2 console登陆</h3>
+<blockquote>
 <p>virsh console kvm01                          #以控件台连接到指定虚拟机</p>
 </blockquote>
 <ul>
@@ -524,7 +552,8 @@
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricgf2cq3j30na059aa6.jpg" alt="image-20200616164119696"></p>
 <ul>
-<li><p>所以我们需要先修改 虚机 的内核</p>
+<li>
+<p>所以我们需要先修改 虚机 的内核</p>
 <ul>
 <li>先使用VNC登陆查看一下虚机的IP地址</li>
 </ul>
@@ -537,45 +566,50 @@
 <li>调整虚机的内核并重启系统</li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grubby --upadte-kernel=ALL --args=<span class="string">&quot;console=ttyS0,115200n8&quot;</span></span><br></pre></td></tr></table></figure>
-
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricgovjfoj30xw05c3z2.jpg" alt="image-20200616173139816"></p>
 <ul>
 <li>对比一下两个文件；需要安装vim 或者 df</li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@centos7-01 ~]<span class="comment"># yum -y install vim </span></span><br><span class="line">[root@centos7-01 ~]<span class="comment"># vimdiff /boot/grub2/grub.cfg /opt/grub.cfg</span></span><br></pre></td></tr></table></figure>
-
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricgromp0j31gv0mrjs2.jpg" alt="image-20200616173328907"></p>
 </li>
-<li><p>然后在从KVM上使用console这个命令看看会有什么变化</p>
+<li>
+<p>然后在从KVM上使用console这个命令看看会有什么变化</p>
 </li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gricguvo6nj30qt0by750.jpg" alt="image-20200616173645322"></p>
-<h2 id="6-KVM磁盘格式转换-和-快照管理"><a href="#6-KVM磁盘格式转换-和-快照管理" class="headerlink" title="6. KVM磁盘格式转换 和 快照管理"></a>6. KVM磁盘格式转换 和 快照管理</h2><blockquote>
+<h2 id="6-KVM磁盘格式转换-和-快照管理">6. KVM磁盘格式转换 和 快照管理</h2>
+<blockquote>
 <ul>
 <li>raw（裸格式）                             //占用空间较大，性能较好，但不支持虚拟机快照功能</li>
 <li>qcow2（copy on write）              //占用空间较小，支持快照，性能比RAW稍差一些</li>
 </ul>
 </blockquote>
-<h3 id="6-1-虚机磁盘格式转换"><a href="#6-1-虚机磁盘格式转换" class="headerlink" title="6.1 虚机磁盘格式转换"></a>6.1 虚机磁盘格式转换</h3><ul>
+<h3 id="6-1-虚机磁盘格式转换">6.1 虚机磁盘格式转换</h3>
+<ul>
 <li>基于centos7-01.raw磁盘格式文件转换为一个centos7-01.qcow2格式文件</li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img convert -f raw /opt/centos7-01.raw -O qcow2 /opt/centos7-01.qcow2</span><br></pre></td></tr></table></figure>
-
-
-
 <ul>
 <li>修改虚机配置文件，改变虚机磁盘格式</li>
 </ul>
-<h2 id="9-KVM热添加硬盘-和-扩容"><a href="#9-KVM热添加硬盘-和-扩容" class="headerlink" title="9. KVM热添加硬盘 和 扩容"></a>9. KVM热添加硬盘 和 扩容</h2><h2 id="7-KVM全克隆虚机"><a href="#7-KVM全克隆虚机" class="headerlink" title="7. KVM全克隆虚机"></a>7. KVM全克隆虚机</h2><h2 id="8-KVM链接克隆虚机"><a href="#8-KVM链接克隆虚机" class="headerlink" title="8. KVM链接克隆虚机"></a>8. KVM链接克隆虚机</h2><h1 id="五、KVM网络讲解配置（重点）"><a href="#五、KVM网络讲解配置（重点）" class="headerlink" title="五、KVM网络讲解配置（重点）"></a>五、KVM网络讲解配置（重点）</h1><blockquote>
+<h2 id="9-KVM热添加硬盘-和-扩容">9. KVM热添加硬盘 和 扩容</h2>
+<h2 id="7-KVM全克隆虚机">7. KVM全克隆虚机</h2>
+<h2 id="8-KVM链接克隆虚机">8. KVM链接克隆虚机</h2>
+<h1>五、KVM网络讲解配置（重点）</h1>
+<blockquote>
 <p><em><strong>经常玩虚拟机的都知道有两种模式：一种是NAT，一种是Bridge</strong></em></p>
 <ul>
-<li><p>NAT就好比宿主机（就是安装 kvm 虚拟化的主机）是台路由器，虚拟机是连接路由器下面的电脑，跟宿主机同个网段的电脑是访问不了虚拟机的，要访问的话，就得在宿主机上设置端口映射。</p>
+<li>
+<p>NAT就好比宿主机（就是安装 kvm 虚拟化的主机）是台路由器，虚拟机是连接路由器下面的电脑，跟宿主机同个网段的电脑是访问不了虚拟机的，要访问的话，就得在宿主机上设置端口映射。</p>
 </li>
-<li><p>Bridge 就是把宿主机的物理网卡当做一个交换机，虚拟机直接连接交换机，那就跟宿主机是同一个网段的了，可以被其它电脑访问到，一般做服务虚拟化都是用桥接模式。</p>
+<li>
+<p>Bridge 就是把宿主机的物理网卡当做一个交换机，虚拟机直接连接交换机，那就跟宿主机是同一个网段的了，可以被其它电脑访问到，一般做服务虚拟化都是用桥接模式。</p>
 </li>
 </ul>
 </blockquote>
-<h3 id="4-1-原理"><a href="#4-1-原理" class="headerlink" title="4.1 原理"></a>4.1 原理</h3><blockquote>
+<h3 id="4-1-原理">4.1 原理</h3>
+<blockquote>
 <p>使用 libvirt 安装完 qemu kvm 虚拟机，但是发现虚拟机不能上网，虚拟机想要上网，有很多中方法。 我们称Guest机器为虚拟机,Host机器为开机运行的真实机器。</p>
 <p><em><strong>KVM 虚拟机网络配置一般的两种方式：</strong></em></p>
 <ul>
@@ -591,32 +625,35 @@
 <p><em><strong>两种网络的使用场景：</strong></em></p>
 <ul>
 <li>如果你建一个虚拟机，只是给自己用，不需要给局域网其他人用，那么可以选择NAT。</li>
-<li>反之，选择使用 Bridge </li>
+<li>反之，选择使用 Bridge</li>
 </ul>
 </blockquote>
-<h3 id="4-2-NAT-和-Bridge架构图"><a href="#4-2-NAT-和-Bridge架构图" class="headerlink" title="4.2 NAT 和 Bridge架构图"></a>4.2 NAT 和 Bridge架构图</h3><p>NAT  的网络结构图：</p>
+<h3 id="4-2-NAT-和-Bridge架构图">4.2 NAT 和 Bridge架构图</h3>
+<p>NAT  的网络结构图：</p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grich4vwssj30r90gggml.jpg" alt="image-20200613181800335"></p>
-<p>Bridge 的网络结构图： </p>
+<p>Bridge 的网络结构图：</p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grichay2xpj30uw0ghta0.jpg" alt="image-20200613181516976"></p>
-<h3 id="4-3-NAT方式"><a href="#4-3-NAT方式" class="headerlink" title="4.3 NAT方式"></a>4.3 NAT方式</h3><blockquote>
+<h3 id="4-3-NAT方式">4.3 NAT方式</h3>
+<blockquote>
 <p>NAT方式是 kvm 安装后的默认方式。它支持主机与虚拟机的互访，同时也支持虚拟机访问互联网，但不支持外界访问虚拟机。</p>
 <p>要想实现外部访问 kvm NAT 模式中的虚拟机，需要做端口映射 并 开启路由转发</p>
 </blockquote>
-<p>检查当前的网络设置：  </p>
+<p>检查当前的网络设置：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh net-list --all</span><br></pre></td></tr></table></figure>
-
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grichel5sgj30sl049mxe.jpg" alt="image-20200613184210296"></p>
 <p>检查当前的网络接口：</p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grichgkbl7j30yb0n2go7.jpg" alt="image-20200613185540978"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grichlodjtj30my0akjrr.jpg" alt="image-20200613190437268"></p>
-<h3 id="4-4-Bridge方式"><a href="#4-4-Bridge方式" class="headerlink" title="4.4 Bridge方式"></a>4.4 Bridge方式</h3><blockquote>
+<h3 id="4-4-Bridge方式">4.4 Bridge方式</h3>
+<blockquote>
 <p>有两种配置方案：</p>
 <ul>
 <li>手动修改网卡配置文件</li>
 <li>使用 virsh iface-bridge 命令</li>
 </ul>
 </blockquote>
-<h1 id="六、KVM热迁移虚机实战"><a href="#六、KVM热迁移虚机实战" class="headerlink" title="六、KVM热迁移虚机实战"></a>六、KVM热迁移虚机实战</h1>
+<h1>六、KVM热迁移虚机实战</h1>
+
     </div>
 
     
@@ -707,7 +744,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF%E7%AE%80%E4%BB%8B"><span class="nav-text">一、虚拟化技术简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Hypervisor-%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-text">1. Hypervisor 的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Hypervisor-%E6%9C%89%E4%B8%A4%E7%A7%8D%E7%B1%BB%E5%9E%8B"><span class="nav-text">2. Hypervisor 有两种类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-text">二、虚拟化的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%A3%B8%E9%87%91%E5%B1%9E%EF%BC%88%E5%8E%9F%E7%94%9F%EF%BC%89-%E5%AF%84%E5%B1%85"><span class="nav-text">1. 裸金属（原生）&#x2F;寄居</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%9C%89%E7%82%B9%E7%89%B9%E6%AE%8A%E7%9A%84%E8%A3%B8%E9%87%91%E5%B1%9E-KVM"><span class="nav-text">2. 有点特殊的裸金属 KVM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8E%9F%E7%90%86%E7%AE%80%E4%BB%8B"><span class="nav-text">三、虚拟化原理简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%94%A8%E6%88%B7-%E5%86%85%E6%A0%B8%E7%A9%BA%E9%97%B4"><span class="nav-text">1. 用户&#x2F;内核空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%89%B9%E6%9D%83%E7%BA%A7"><span class="nav-text">2. 特权级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B"><span class="nav-text">3. 指令类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%9C%AA%E8%99%9A%E6%8B%9F%E5%8C%96%E6%97%B6%EF%BC%8CCPU%E7%9A%84%E6%8C%87%E4%BB%A4%E5%88%86%E4%B8%BA%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E5%92%8C%E9%9D%9E%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E3%80%82"><span class="nav-text">3.1 未虚拟化时，CPU的指令分为特权指令和非特权指令。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E8%99%9A%E6%8B%9F%E5%8C%96%E5%90%8E%EF%BC%8CCPU%E7%9A%84%E6%8C%87%E4%BB%A4%E5%88%86%E4%B8%BA%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%EF%BC%8C%E6%95%8F%E6%84%9F%E6%8C%87%E4%BB%A4%EF%BC%8C%E6%99%AE%E9%80%9A%E6%8C%87%E4%BB%A4%E3%80%82"><span class="nav-text">3.2 虚拟化后，CPU的指令分为特权指令，敏感指令，普通指令。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81KVM-%E8%99%9A%E6%8B%9F%E5%8C%96%E6%BC%94%E7%BB%83"><span class="nav-text">四、KVM 虚拟化演练</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%83%A8%E7%BD%B2-KVM"><span class="nav-text">1. 部署 KVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E6%97%B6-%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E6%8E%A8%E8%8D%90"><span class="nav-text">1.1 安装系统时(生产环境推荐)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E6%97%B6-%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%8E%A8%E8%8D%90"><span class="nav-text">1.2 安装系统时(学习环境推荐)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85"><span class="nav-text">1.3 手动安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-kvm-%E5%AE%89%E8%A3%85%E8%99%9A%E6%9C%BA"><span class="nav-text">2. kvm 安装虚机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-virsh-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-text">3. virsh 常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-KVM-%E7%9A%84%E6%97%A5%E5%B8%B8%E7%AE%A1%E7%90%86"><span class="nav-text">4. KVM 的日常管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-KVM%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF-%E5%92%8C-console%E7%99%BB%E9%99%86"><span class="nav-text">5. KVM虚拟机开机自启 和 console登陆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-KVM%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF"><span class="nav-text">4.1 KVM虚拟机开机自启</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-console%E7%99%BB%E9%99%86"><span class="nav-text">4.2 console登陆</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-KVM%E7%A3%81%E7%9B%98%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2-%E5%92%8C-%E5%BF%AB%E7%85%A7%E7%AE%A1%E7%90%86"><span class="nav-text">6. KVM磁盘格式转换 和 快照管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E8%99%9A%E6%9C%BA%E7%A3%81%E7%9B%98%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2"><span class="nav-text">6.1 虚机磁盘格式转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-KVM%E7%83%AD%E6%B7%BB%E5%8A%A0%E7%A1%AC%E7%9B%98-%E5%92%8C-%E6%89%A9%E5%AE%B9"><span class="nav-text">9. KVM热添加硬盘 和 扩容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-KVM%E5%85%A8%E5%85%8B%E9%9A%86%E8%99%9A%E6%9C%BA"><span class="nav-text">7. KVM全克隆虚机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-KVM%E9%93%BE%E6%8E%A5%E5%85%8B%E9%9A%86%E8%99%9A%E6%9C%BA"><span class="nav-text">8. KVM链接克隆虚机</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81KVM%E7%BD%91%E7%BB%9C%E8%AE%B2%E8%A7%A3%E9%85%8D%E7%BD%AE%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-text">五、KVM网络讲解配置（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E5%8E%9F%E7%90%86"><span class="nav-text">4.1 原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-NAT-%E5%92%8C-Bridge%E6%9E%B6%E6%9E%84%E5%9B%BE"><span class="nav-text">4.2 NAT 和 Bridge架构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-NAT%E6%96%B9%E5%BC%8F"><span class="nav-text">4.3 NAT方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-Bridge%E6%96%B9%E5%BC%8F"><span class="nav-text">4.4 Bridge方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81KVM%E7%83%AD%E8%BF%81%E7%A7%BB%E8%99%9A%E6%9C%BA%E5%AE%9E%E6%88%98"><span class="nav-text">六、KVM热迁移虚机实战</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">一、虚拟化技术简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Hypervisor-%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-text">1. Hypervisor 的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Hypervisor-%E6%9C%89%E4%B8%A4%E7%A7%8D%E7%B1%BB%E5%9E%8B"><span class="nav-text">2. Hypervisor 有两种类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">二、虚拟化的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%A3%B8%E9%87%91%E5%B1%9E%EF%BC%88%E5%8E%9F%E7%94%9F%EF%BC%89-%E5%AF%84%E5%B1%85"><span class="nav-text">1. 裸金属（原生）&#x2F;寄居</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%9C%89%E7%82%B9%E7%89%B9%E6%AE%8A%E7%9A%84%E8%A3%B8%E9%87%91%E5%B1%9E-KVM"><span class="nav-text">2. 有点特殊的裸金属 KVM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">三、虚拟化原理简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%94%A8%E6%88%B7-%E5%86%85%E6%A0%B8%E7%A9%BA%E9%97%B4"><span class="nav-text">1. 用户&#x2F;内核空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%89%B9%E6%9D%83%E7%BA%A7"><span class="nav-text">2. 特权级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B"><span class="nav-text">3. 指令类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%9C%AA%E8%99%9A%E6%8B%9F%E5%8C%96%E6%97%B6%EF%BC%8CCPU%E7%9A%84%E6%8C%87%E4%BB%A4%E5%88%86%E4%B8%BA%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E5%92%8C%E9%9D%9E%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E3%80%82"><span class="nav-text">3.1 未虚拟化时，CPU的指令分为特权指令和非特权指令。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E8%99%9A%E6%8B%9F%E5%8C%96%E5%90%8E%EF%BC%8CCPU%E7%9A%84%E6%8C%87%E4%BB%A4%E5%88%86%E4%B8%BA%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%EF%BC%8C%E6%95%8F%E6%84%9F%E6%8C%87%E4%BB%A4%EF%BC%8C%E6%99%AE%E9%80%9A%E6%8C%87%E4%BB%A4%E3%80%82"><span class="nav-text">3.2 虚拟化后，CPU的指令分为特权指令，敏感指令，普通指令。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">四、KVM 虚拟化演练</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%83%A8%E7%BD%B2-KVM"><span class="nav-text">1. 部署 KVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E6%97%B6-%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E6%8E%A8%E8%8D%90"><span class="nav-text">1.1 安装系统时(生产环境推荐)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E6%97%B6-%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%8E%A8%E8%8D%90"><span class="nav-text">1.2 安装系统时(学习环境推荐)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85"><span class="nav-text">1.3 手动安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-kvm-%E5%AE%89%E8%A3%85%E8%99%9A%E6%9C%BA"><span class="nav-text">2. kvm 安装虚机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-virsh-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-text">3. virsh 常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-KVM-%E7%9A%84%E6%97%A5%E5%B8%B8%E7%AE%A1%E7%90%86"><span class="nav-text">4. KVM 的日常管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-KVM%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF-%E5%92%8C-console%E7%99%BB%E9%99%86"><span class="nav-text">5. KVM虚拟机开机自启 和 console登陆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-KVM%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF"><span class="nav-text">4.1 KVM虚拟机开机自启</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-console%E7%99%BB%E9%99%86"><span class="nav-text">4.2 console登陆</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-KVM%E7%A3%81%E7%9B%98%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2-%E5%92%8C-%E5%BF%AB%E7%85%A7%E7%AE%A1%E7%90%86"><span class="nav-text">6. KVM磁盘格式转换 和 快照管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E8%99%9A%E6%9C%BA%E7%A3%81%E7%9B%98%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2"><span class="nav-text">6.1 虚机磁盘格式转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-KVM%E7%83%AD%E6%B7%BB%E5%8A%A0%E7%A1%AC%E7%9B%98-%E5%92%8C-%E6%89%A9%E5%AE%B9"><span class="nav-text">9. KVM热添加硬盘 和 扩容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-KVM%E5%85%A8%E5%85%8B%E9%9A%86%E8%99%9A%E6%9C%BA"><span class="nav-text">7. KVM全克隆虚机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-KVM%E9%93%BE%E6%8E%A5%E5%85%8B%E9%9A%86%E8%99%9A%E6%9C%BA"><span class="nav-text">8. KVM链接克隆虚机</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">五、KVM网络讲解配置（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E5%8E%9F%E7%90%86"><span class="nav-text">4.1 原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-NAT-%E5%92%8C-Bridge%E6%9E%B6%E6%9E%84%E5%9B%BE"><span class="nav-text">4.2 NAT 和 Bridge架构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-NAT%E6%96%B9%E5%BC%8F"><span class="nav-text">4.3 NAT方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-Bridge%E6%96%B9%E5%BC%8F"><span class="nav-text">4.4 Bridge方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">六、KVM热迁移虚机实战</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -722,7 +759,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

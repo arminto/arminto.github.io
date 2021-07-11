@@ -406,11 +406,14 @@
       
         <!--toc-->
 <span id="more"></span>
-
-<h1 id="阿里云实战"><a href="#阿里云实战" class="headerlink" title="阿里云实战"></a>阿里云实战</h1><h2 id="一、云的概念"><a href="#一、云的概念" class="headerlink" title="一、云的概念"></a>一、云的概念</h2><h3 id="1-1、什么是云"><a href="#1-1、什么是云" class="headerlink" title="1.1、什么是云"></a>1.1、什么是云</h3><blockquote>
+<h1>阿里云实战</h1>
+<h2 id="一、云的概念">一、云的概念</h2>
+<h3 id="1-1、什么是云">1.1、什么是云</h3>
+<blockquote>
 <p>云是一种“按需付费的模式”，这种模式提供了（计算、存储、网络等资源），这些资源能过被快速提供。</p>
 </blockquote>
-<h3 id="1-2、云的分类"><a href="#1-2、云的分类" class="headerlink" title="1.2、云的分类"></a>1.2、云的分类</h3><table>
+<h3 id="1-2、云的分类">1.2、云的分类</h3>
+<table>
 <thead>
 <tr>
 <th>公有云</th>
@@ -418,34 +421,44 @@
 <th>混合云</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>只有使用权，按需付费，技术层面、数据不安全。</td>
 <td>自建机房，自己搭建，自行管理；局限: 资源固定。</td>
 <td>主要业务放私有云，当有临时需求的时候使用公有云，使用结柬后释放。</td>
 </tr>
-</tbody></table>
-<h3 id="1-3、为什么要用云"><a href="#1-3、为什么要用云" class="headerlink" title="1.3、为什么要用云"></a>1.3、为什么要用云</h3><blockquote>
+</tbody>
+</table>
+<h3 id="1-3、为什么要用云">1.3、为什么要用云</h3>
+<blockquote>
 <ol>
-<li><p>海量资源池灵活调配</p>
+<li>
+<p>海量资源池灵活调配</p>
 </li>
-<li><p>无处不在的网络访问</p>
+<li>
+<p>无处不在的网络访问</p>
 </li>
-<li><p>随需应变的自助服务[包年包月|按需付费]</p>
+<li>
+<p>随需应变的自助服务[包年包月|按需付费]</p>
 </li>
-<li><p>保证服务的高可用性</p>
+<li>
+<p>保证服务的高可用性</p>
 </li>
-<li><p>能实现快速弹性伸缩</p>
+<li>
+<p>能实现快速弹性伸缩</p>
 </li>
 </ol>
 </blockquote>
-<h3 id="1-4、云有哪些厂商"><a href="#1-4、云有哪些厂商" class="headerlink" title="1.4、云有哪些厂商"></a>1.4、云有哪些厂商</h3><table>
+<h3 id="1-4、云有哪些厂商">1.4、云有哪些厂商</h3>
+<table>
 <thead>
 <tr>
 <th>国内</th>
 <th>国外</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>阿里云</td>
 <td>AWS（亚马逊）</td>
 </tr>
@@ -461,15 +474,18 @@
 <td>等等……</td>
 <td>等等</td>
 </tr>
-</tbody></table>
-<h3 id="1-5、云的产品名称"><a href="#1-5、云的产品名称" class="headerlink" title="1.5、云的产品名称"></a>1.5、云的产品名称</h3><table>
+</tbody>
+</table>
+<h3 id="1-5、云的产品名称">1.5、云的产品名称</h3>
+<table>
 <thead>
 <tr>
 <th>名词</th>
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>安全组</td>
 <td>防火墙规则</td>
 </tr>
@@ -513,24 +529,31 @@
 <td>等等……</td>
 <td>等等……</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <ul>
-<li><p><strong>实例</strong>        相当于一台服务器或者一个功能，每个实例都有自己的名称/ID</p>
+<li>
+<p><strong>实例</strong>	    相当于一台服务器或者一个功能，每个实例都有自己的名称/ID</p>
 </li>
-<li><p><strong>释放</strong>        删除某个实例     </p>
+<li>
+<p><strong>释放</strong>	    删除某个实例</p>
 </li>
 </ul>
-<h3 id="1-6、云服务器-VS-物理服务器"><a href="#1-6、云服务器-VS-物理服务器" class="headerlink" title="1.6、云服务器 VS 物理服务器"></a>1.6、云服务器 VS 物理服务器</h3><ul>
-<li><p><strong>物理服务器：机架式服务器 2U 戴尔 成本高</strong></p>
+<h3 id="1-6、云服务器-VS-物理服务器">1.6、云服务器 VS 物理服务器</h3>
 <ul>
-<li><p>成本：</p>
+<li>
+<p><strong>物理服务器：机架式服务器 2U 戴尔 成本高</strong></p>
+<ul>
+<li>
+<p>成本：</p>
 <ol>
 <li>服务器钱</li>
 <li>IDC机房（租）</li>
 <li>带宽（300-500RMB/MB/月）</li>
 </ol>
 </li>
-<li><p>应用：</p>
+<li>
+<p>应用：</p>
 <ol>
 <li>用于公司数据库</li>
 <li>公司内部用于搭建内部测试环境</li>
@@ -538,15 +561,18 @@
 </li>
 </ul>
 </li>
-<li><p><strong>云服务器：根据用户的需求 可以进行配置 升级 更换配置</strong></p>
+<li>
+<p><strong>云服务器：根据用户的需求 可以进行配置 升级 更换配置</strong></p>
 <ul>
-<li>特点：<ol>
+<li>特点：
+<ol>
 <li>公司刚刚创建（创业公司）</li>
 <li>公司整体数据量不大的时候用</li>
 <li>云服务器 用户 数据 配置 越高，会比物理机还贵</li>
 </ol>
 </li>
-<li>应用：<ol>
+<li>应用：
+<ol>
 <li>初创公司 – 云服务器</li>
 <li>大中型公司 – 物理服务器 + 云服务器</li>
 </ol>
@@ -554,62 +580,92 @@
 </ul>
 </li>
 </ul>
-<h2 id="二、阿里云架构图"><a href="#二、阿里云架构图" class="headerlink" title="二、阿里云架构图"></a>二、阿里云架构图</h2><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50ay49wfj31640u07wh.jpg" alt="image-20210704164218603"></p>
-<h2 id="三、地域-可用区"><a href="#三、地域-可用区" class="headerlink" title="三、地域 / 可用区"></a>三、地域 / 可用区</h2><h3 id="3-1、地域：服务器的所属城市"><a href="#3-1、地域：服务器的所属城市" class="headerlink" title="3.1、地域：服务器的所属城市"></a>3.1、地域：服务器的所属城市</h3><blockquote>
+<h2 id="二、阿里云架构图">二、阿里云架构图</h2>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50ay49wfj31640u07wh.jpg" alt="image-20210704164218603"></p>
+<h2 id="三、地域-可用区">三、地域 / 可用区</h2>
+<h3 id="3-1、地域：服务器的所属城市">3.1、地域：服务器的所属城市</h3>
+<blockquote>
 <p>华北1（北京）</p>
 <p>华北2（邯郸）</p>
 <p>华南1（上海）</p>
 <p>华南2（深圳）</p>
 <p>等等等……</p>
 </blockquote>
-<h3 id="3-2、可用区：服务器所在城市的某个机房"><a href="#3-2、可用区：服务器所在城市的某个机房" class="headerlink" title="3.2、可用区：服务器所在城市的某个机房"></a>3.2、可用区：服务器所在城市的某个机房</h3><blockquote>
-<p>华北1<br>可用区A     可用区B     可用区C     ……</p>
-<p>华北2<br>可用区A     可用区B     可用区C     ……</p>
+<h3 id="3-2、可用区：服务器所在城市的某个机房">3.2、可用区：服务器所在城市的某个机房</h3>
+<blockquote>
+<p>华北1<br>
+可用区A     可用区B     可用区C     ……</p>
+<p>华北2<br>
+可用区A     可用区B     可用区C     ……</p>
 </blockquote>
-<h3 id="3-3、注意事项"><a href="#3-3、注意事项" class="headerlink" title="3.3、注意事项"></a>3.3、注意事项</h3><blockquote>
+<h3 id="3-3、注意事项">3.3、注意事项</h3>
+<blockquote>
 <ul>
-<li><p><strong>相同地域：不同的可用区之间内网是互通的</strong></p>
+<li>
+<p><strong>相同地域：不同的可用区之间内网是互通的</strong></p>
 </li>
-<li><p><strong>不同地域：可用区之间内网是相互隔离的</strong></p>
+<li>
+<p><strong>不同地域：可用区之间内网是相互隔离的</strong></p>
 </li>
 </ul>
 </blockquote>
-<h3 id="3-4、不同地域的可用区之间如何做到内网通信"><a href="#3-4、不同地域的可用区之间如何做到内网通信" class="headerlink" title="3.4、不同地域的可用区之间如何做到内网通信"></a>3.4、不同地域的可用区之间如何做到内网通信</h3><ul>
+<h3 id="3-4、不同地域的可用区之间如何做到内网通信">3.4、不同地域的可用区之间如何做到内网通信</h3>
+<ul>
 <li><strong>经典网络可以通过云市场购买VPN产品，帮助你不同地域打通。</strong></li>
 <li><strong>如果你是VPC网络环境，那就直接购买阿里云的<a target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/44842.html">高速通道</a>，配置即可。</strong></li>
 </ul>
-<h2 id="四、阿里云计费方式"><a href="#四、阿里云计费方式" class="headerlink" title="四、阿里云计费方式"></a>四、阿里云计费方式</h2><h3 id="4-1、包年包月、按量付费、抢占式实例"><a href="#4-1、包年包月、按量付费、抢占式实例" class="headerlink" title="4.1、包年包月、按量付费、抢占式实例"></a>4.1、包年包月、按量付费、抢占式实例</h3><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50bx7mezj31ow0osx61.jpg" alt="image-20210704164322288"></p>
-<h3 id="4-2、公网流量计费方式"><a href="#4-2、公网流量计费方式" class="headerlink" title="4.2、公网流量计费方式"></a>4.2、公网流量计费方式</h3><table>
+<h2 id="四、阿里云计费方式">四、阿里云计费方式</h2>
+<h3 id="4-1、包年包月、按量付费、抢占式实例">4.1、包年包月、按量付费、抢占式实例</h3>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50bx7mezj31ow0osx61.jpg" alt="image-20210704164322288"></p>
+<h3 id="4-2、公网流量计费方式">4.2、公网流量计费方式</h3>
+<table>
 <thead>
 <tr>
 <th>按固定带宽</th>
 <th>公司使用，访问量大，包年包月付费</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>按使用流量</strong></td>
 <td><strong>个人网站，访问量小，0.8元/1GB</strong></td>
 </tr>
-</tbody></table>
-<h2 id="五、基本演练（重点）"><a href="#五、基本演练（重点）" class="headerlink" title="五、基本演练（重点）"></a>五、基本演练（重点）</h2><h3 id="5-1、创建资源组"><a href="#5-1、创建资源组" class="headerlink" title="5.1、创建资源组"></a>5.1、创建资源组</h3><h4 id="5-1-1、登陆阿里云账号—点击控制台"><a href="#5-1-1、登陆阿里云账号—点击控制台" class="headerlink" title="5.1.1、登陆阿里云账号—点击控制台"></a>5.1.1、登陆阿里云账号—点击控制台</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50e2iid5j31bw0u04qp.jpg" alt="image-20210704164415490"></p>
-<h4 id="5-1-2、资源组那块点击-查看全部"><a href="#5-1-2、资源组那块点击-查看全部" class="headerlink" title="5.1.2、资源组那块点击 查看全部"></a>5.1.2、资源组那块点击 查看全部</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50dy333dj31ns0o047g.jpg" alt="image-20210704164439193"></p>
+</tbody>
+</table>
+<h2 id="五、基本演练（重点）">五、基本演练（重点）</h2>
+<h3 id="5-1、创建资源组">5.1、创建资源组</h3>
+<h4 id="5-1-1、登陆阿里云账号—点击控制台">5.1.1、登陆阿里云账号—点击控制台</h4>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50e2iid5j31bw0u04qp.jpg" alt="image-20210704164415490"></p>
+<h4 id="5-1-2、资源组那块点击-查看全部">5.1.2、资源组那块点击 查看全部</h4>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50dy333dj31ns0o047g.jpg" alt="image-20210704164439193"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50dvqgb3j31bc0cmq80.jpg" alt="image-20210704164505191"></p>
-<h4 id="5-1-3、创建资源组"><a href="#5-1-3、创建资源组" class="headerlink" title="5.1.3、创建资源组"></a>5.1.3、创建资源组</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50eee6wdj31ba0r6k2x.jpg" alt="image-20210704164547876"></p>
+<h4 id="5-1-3、创建资源组">5.1.3、创建资源组</h4>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50eee6wdj31ba0r6k2x.jpg" alt="image-20210704164547876"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50faingaj30i210mdht.jpg" alt="image-20210704164631219"></p>
-<h3 id="5-2、创建VPC专有网络（局域网）"><a href="#5-2、创建VPC专有网络（局域网）" class="headerlink" title="5.2、创建VPC专有网络（局域网）"></a>5.2、创建VPC专有网络（局域网）</h3><h4 id="5-2-1、产品与服务中找到-专有网络VPC"><a href="#5-2-1、产品与服务中找到-专有网络VPC" class="headerlink" title="5.2.1、产品与服务中找到 专有网络VPC"></a>5.2.1、产品与服务中找到 专有网络VPC</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50gocrwgj31bi0r6tgf.jpg" alt="image-20210704164759059"></p>
-<h4 id="5-2-2、创建专有网络"><a href="#5-2-2、创建专有网络" class="headerlink" title="5.2.2、创建专有网络"></a>5.2.2、创建专有网络</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50hpuh8ej31b80mu7dv.jpg" alt="image-20210704164816853"></p>
-<h4 id="5-2-3、配置-专有网络、交换机"><a href="#5-2-3、配置-专有网络、交换机" class="headerlink" title="5.2.3、配置 专有网络、交换机"></a>5.2.3、配置 专有网络、交换机</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50hmg3m2j30wy0u0dmh.jpg" alt="image-20210704164852971"></p>
+<h3 id="5-2、创建VPC专有网络（局域网）">5.2、创建VPC专有网络（局域网）</h3>
+<h4 id="5-2-1、产品与服务中找到-专有网络VPC">5.2.1、产品与服务中找到 专有网络VPC</h4>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50gocrwgj31bi0r6tgf.jpg" alt="image-20210704164759059"></p>
+<h4 id="5-2-2、创建专有网络">5.2.2、创建专有网络</h4>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50hpuh8ej31b80mu7dv.jpg" alt="image-20210704164816853"></p>
+<h4 id="5-2-3、配置-专有网络、交换机">5.2.3、配置 专有网络、交换机</h4>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50hmg3m2j30wy0u0dmh.jpg" alt="image-20210704164852971"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50iiy3aij30u00w9dml.jpg" alt="image-20210704164944807"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50j629mzj30u00z6tdf.jpg" alt="image-20210704165023378"></p>
-<h4 id="5-2-4、查看创建的专有网络VPC"><a href="#5-2-4、查看创建的专有网络VPC" class="headerlink" title="5.2.4、查看创建的专有网络VPC"></a>5.2.4、查看创建的专有网络VPC</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50jm16jrj31b80qwgxc.jpg" alt="image-20210704165048182"></p>
+<h4 id="5-2-4、查看创建的专有网络VPC">5.2.4、查看创建的专有网络VPC</h4>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50jm16jrj31b80qwgxc.jpg" alt="image-20210704165048182"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50k4qmnpj31b60i0n25.jpg" alt="image-20210704165118406"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50p57u4zj31be0i80y8.jpg" alt="image-20210704165139067"></p>
-<h3 id="5-3、创建安全组"><a href="#5-3、创建安全组" class="headerlink" title="5.3、创建安全组"></a>5.3、创建安全组</h3><h4 id="5-3-1、产品与服务找到-云服务器ECS"><a href="#5-3-1、产品与服务找到-云服务器ECS" class="headerlink" title="5.3.1、产品与服务找到 云服务器ECS"></a>5.3.1、产品与服务找到 云服务器ECS</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50p17n1wj31b60q445k.jpg" alt="image-20210704165601277"></p>
-<h4 id="5-3-2、选择好地域"><a href="#5-3-2、选择好地域" class="headerlink" title="5.3.2、选择好地域"></a>5.3.2、选择好地域</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50pw28e0j30i213y43u.jpg" alt="image-20210704165650428"></p>
-<h4 id="5-3-3、创建配置安全组"><a href="#5-3-3、创建配置安全组" class="headerlink" title="5.3.3、创建配置安全组"></a>5.3.3、创建配置安全组</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50qilrbqj31b40jste8.jpg" alt="image-20210704165712476"></p>
+<h3 id="5-3、创建安全组">5.3、创建安全组</h3>
+<h4 id="5-3-1、产品与服务找到-云服务器ECS">5.3.1、产品与服务找到 云服务器ECS</h4>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50p17n1wj31b60q445k.jpg" alt="image-20210704165601277"></p>
+<h4 id="5-3-2、选择好地域">5.3.2、选择好地域</h4>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50pw28e0j30i213y43u.jpg" alt="image-20210704165650428"></p>
+<h4 id="5-3-3、创建配置安全组">5.3.3、创建配置安全组</h4>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50qilrbqj31b40jste8.jpg" alt="image-20210704165712476"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50qsw6mzj61bq0lg43d02.jpg" alt="image-20210704165743480"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50rbu7kaj60yv0u0dpm02.jpg" alt="image-20210704165813597"></p>
-<h3 id="5-4、创建ECS云服务器"><a href="#5-4、创建ECS云服务器" class="headerlink" title="5.4、创建ECS云服务器"></a>5.4、创建ECS云服务器</h3><ul>
+<h3 id="5-4、创建ECS云服务器">5.4、创建ECS云服务器</h3>
+<ul>
 <li><strong>前提：账户余额里最少得有100元</strong></li>
 </ul>
 <blockquote>
@@ -622,44 +678,59 @@
 <li>确认下单—即可</li>
 </ol>
 </blockquote>
-<h4 id="5-4-1、创建ECS实例"><a href="#5-4-1、创建ECS实例" class="headerlink" title="5.4.1、创建ECS实例"></a>5.4.1、创建ECS实例</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50ry4e2mj31910u0guq.jpg" alt="image-20210704165848972"></p>
-<h4 id="5-4-2、基本配置"><a href="#5-4-2、基本配置" class="headerlink" title="5.4.2、基本配置"></a>5.4.2、基本配置</h4><ul>
+<h4 id="5-4-1、创建ECS实例">5.4.1、创建ECS实例</h4>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50ry4e2mj31910u0guq.jpg" alt="image-20210704165848972"></p>
+<h4 id="5-4-2、基本配置">5.4.2、基本配置</h4>
+<ul>
 <li><strong>选择好 地域/可用区、付费模式、实例配置、实例数量、镜像、存储、点击下一步网络和安全组</strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50sj78jtj31ay0b8n2y.jpg" alt="image-20210704165922846"></p>
-<h4 id="5-4-3、网络和安全组"><a href="#5-4-3、网络和安全组" class="headerlink" title="5.4.3、网络和安全组"></a>5.4.3、网络和安全组</h4><ul>
+<h4 id="5-4-3、网络和安全组">5.4.3、网络和安全组</h4>
+<ul>
 <li><strong>选择好 网络、交换机、是否分配公网IPV4、选择带宽计费模式 和 带宽峰值、安全组、然后点击下一步 系统配置</strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50t2it4fj313e0u0k3r.jpg" alt="image-20210704165953953"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50tgx9i4j31as0p8n52.jpg" alt="image-20210704170016874"></p>
-<h4 id="5-4-4、系统配置"><a href="#5-4-4、系统配置" class="headerlink" title="5.4.4、系统配置"></a>5.4.4、系统配置</h4><ul>
+<h4 id="5-4-4、系统配置">5.4.4、系统配置</h4>
+<ul>
 <li><strong>选择 登陆配置、设置root密码、实例名称、主机名称、然后点击下一步分组配置</strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50ul740jj31bc0lcgsq.jpg" alt="image-20210704170113386"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50uzqvf6j31bc0oqk1l.jpg" alt="image-20210704170144726"></p>
-<h4 id="5-4-5、分组设置"><a href="#5-4-5、分组设置" class="headerlink" title="5.4.5、分组设置"></a>5.4.5、分组设置</h4><ul>
+<h4 id="5-4-5、分组设置">5.4.5、分组设置</h4>
+<ul>
 <li><strong>这里就需要修改一下资源组就行了、然后点击确认订单</strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50vbeqgqj31bu0emjv2.jpg" alt="image-20210704170203307"></p>
-<h4 id="5-4-6、确认好配置信息后勾选条款创建实例"><a href="#5-4-6、确认好配置信息后勾选条款创建实例" class="headerlink" title="5.4.6、确认好配置信息后勾选条款创建实例"></a>5.4.6、确认好配置信息后勾选条款创建实例</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50vrj1hej31by0gsjxq.jpg" alt="image-20210704170229027"></p>
+<h4 id="5-4-6、确认好配置信息后勾选条款创建实例">5.4.6、确认好配置信息后勾选条款创建实例</h4>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50vrj1hej31by0gsjxq.jpg" alt="image-20210704170229027"></p>
 <ul>
 <li><strong>创建成功后点击控制台查看</strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50wan8zgj31100u0tlp.jpg" alt="image-20210704170300351"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50wo2dkaj613a08gtch02.jpg" alt="image-20210704170320176"></p>
-<h3 id="5-5、远程云服务器的方式"><a href="#5-5、远程云服务器的方式" class="headerlink" title="5.5、远程云服务器的方式"></a>5.5、远程云服务器的方式</h3><h4 id="5-5-1、workbech方式"><a href="#5-5-1、workbech方式" class="headerlink" title="5.5.1、workbech方式"></a>5.5.1、workbech方式</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50xfhbjyj313j0u046b.jpg" alt="image-20210704170405449"></p>
-<h4 id="5-5-2、VNC"><a href="#5-5-2、VNC" class="headerlink" title="5.5.2、VNC"></a>5.5.2、VNC</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50xrfo2dj314c0tqtfh.jpg" alt="image-20210704170425338"></p>
+<h3 id="5-5、远程云服务器的方式">5.5、远程云服务器的方式</h3>
+<h4 id="5-5-1、workbech方式">5.5.1、workbech方式</h4>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50xfhbjyj313j0u046b.jpg" alt="image-20210704170405449"></p>
+<h4 id="5-5-2、VNC">5.5.2、VNC</h4>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50xrfo2dj314c0tqtfh.jpg" alt="image-20210704170425338"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50yb2tt8j313u0pq796.jpg" alt="image-20210704170456137"></p>
-<h4 id="5-5-3、xshell"><a href="#5-5-3、xshell" class="headerlink" title="5.5.3、xshell"></a>5.5.3、xshell</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50zgzs5uj31b60lck1y.jpg" alt="image-20210704170545736"></p>
-<h3 id="5-6、重置密码"><a href="#5-6、重置密码" class="headerlink" title="5.6、重置密码"></a>5.6、重置密码</h3><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50zfryspj31bg0o4k0w.jpg" alt="image-20210704170559994"></p>
-<h4 id="5-6-1、重置实例密码（修改root密码）"><a href="#5-6-1、重置实例密码（修改root密码）" class="headerlink" title="5.6.1、重置实例密码（修改root密码）"></a>5.6.1、重置实例密码（修改root密码）</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50zt3uqtj30ze0u0nel.jpg" alt="image-20210704170622640"></p>
-<h4 id="5-6-2、修改远程连接（VNC）密码"><a href="#5-6-2、修改远程连接（VNC）密码" class="headerlink" title="5.6.2、修改远程连接（VNC）密码"></a>5.6.2、修改远程连接（VNC）密码</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51067z66j61b20rkaji02.jpg" alt="image-20210704170641389"></p>
+<h4 id="5-5-3、xshell">5.5.3、xshell</h4>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50zgzs5uj31b60lck1y.jpg" alt="image-20210704170545736"></p>
+<h3 id="5-6、重置密码">5.6、重置密码</h3>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50zfryspj31bg0o4k0w.jpg" alt="image-20210704170559994"></p>
+<h4 id="5-6-1、重置实例密码（修改root密码）">5.6.1、重置实例密码（修改root密码）</h4>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs50zt3uqtj30ze0u0nel.jpg" alt="image-20210704170622640"></p>
+<h4 id="5-6-2、修改远程连接（VNC）密码">5.6.2、修改远程连接（VNC）密码</h4>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51067z66j61b20rkaji02.jpg" alt="image-20210704170641389"></p>
 <ul>
 <li><strong>验证一下VNC不重启可不可以</strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs510nz4dvj317t0u0tgr.jpg" alt="image-20210704170709194"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs5110irfpj31ae0d6gra.jpg" alt="image-20210704170731296"></p>
-<h3 id="5-7、添加云盘-扩容云盘"><a href="#5-7、添加云盘-扩容云盘" class="headerlink" title="5.7、添加云盘 / 扩容云盘"></a>5.7、添加云盘 / 扩容云盘</h3><h4 id="5-7-1、添加云盘"><a href="#5-7-1、添加云盘" class="headerlink" title="5.7.1、添加云盘"></a>5.7.1、添加云盘</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs511cvswkj31be0paal1.jpg" alt="image-20210704170751845"></p>
+<h3 id="5-7、添加云盘-扩容云盘">5.7、添加云盘 / 扩容云盘</h3>
+<h4 id="5-7-1、添加云盘">5.7.1、添加云盘</h4>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs511cvswkj31be0paal1.jpg" alt="image-20210704170751845"></p>
 <ul>
 <li><strong>选择好创建好要挂在的ECS实例，也可以不选</strong></li>
 </ul>
@@ -673,12 +744,11 @@
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs5147fldqj31b20qutqs.jpg" alt="image-20210704171034903"></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk /dev/vdb</span><br></pre></td></tr></table></figure>
-
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs514oi286j316f0u0qon.jpg" alt="image-20210704171059099"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs514x8ktmj312f0u0e72.jpg" alt="image-20210704171117403"></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@host01 ~]<span class="comment"># mkfs.xfs /dev/vdb1</span></span><br><span class="line"></span><br><span class="line">[root@host01 ~]<span class="comment"># mkdir /data</span></span><br><span class="line"></span><br><span class="line">[root@host01 ~]<span class="comment"># mount /dev/vdb1 /data/</span></span><br><span class="line"></span><br><span class="line">[root@host01 ~]<span class="comment"># df -Th</span></span><br><span class="line">Filesystem     Type      Size  Used Avail Use% Mounted on</span><br><span class="line">devtmpfs    devtmpfs     461M     0  461M   0% /dev</span><br><span class="line">tmpfs       tmpfs        471M     0  471M   0% /dev/shm</span><br><span class="line">tmpfs       tmpfs        471M  496K  471M   1% /run</span><br><span class="line">tmpfs       tmpfs        471M     0  471M   0% /sys/fs/cgroup</span><br><span class="line">/dev/vda1   ext4          40G  1.8G   36G   5% /</span><br><span class="line">tmpfs       tmpfs         95M     0   95M   0% /run/user/0</span><br><span class="line">/dev/vdb1   xfs           20G   33M   20G   1% /data</span><br><span class="line"></span><br><span class="line">[root@host01 ~]<span class="comment"># vim /etc/fstab      #linux分区开机自动挂载的文件</span></span><br><span class="line">/dev/vdb1    /data      xfs      defaults        0 0</span><br></pre></td></tr></table></figure>
-
-<h4 id="5-7-2、扩容云盘"><a href="#5-7-2、扩容云盘" class="headerlink" title="5.7.2、扩容云盘"></a>5.7.2、扩容云盘</h4><ul>
+<h4 id="5-7-2、扩容云盘">5.7.2、扩容云盘</h4>
+<ul>
 <li><strong>实例—&gt;更多—&gt;磁盘扩容</strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs515eea3gj315p0u0n70.jpg" alt="image-20210704171145138"></p>
@@ -692,10 +762,12 @@
 <li><strong>回到xshell查看扩容是否成功</strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs516xqk1jj61ba0ie13u02.jpg" alt="image-20210704171313462"></p>
-<h3 id="5-8、阿里云快照备份及克隆"><a href="#5-8、阿里云快照备份及克隆" class="headerlink" title="5.8、阿里云快照备份及克隆"></a>5.8、阿里云快照备份及克隆</h3><ul>
+<h3 id="5-8、阿里云快照备份及克隆">5.8、阿里云快照备份及克隆</h3>
+<ul>
 <li>ECS 备份策略：每天/每周/每月/时间 进行拍摄快照；快照策略(计划任务)</li>
 <li>手动拍摄快照</li>
-<li>快照应用<ol>
+<li>快照应用
+<ol>
 <li>备份</li>
 <li>克隆（自定义镜像）</li>
 <li><a target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/56159.html?spm=5176.10695662.1996646101.searchclickresult.18efd231ezNxIf">快照计费方式</a></li>
@@ -703,8 +775,9 @@
 </li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs517jfee2j31bc0fcq76.jpg" alt="image-20210704171349438"></p>
-<h4 id="5-8-1、创建快照策略"><a href="#5-8-1、创建快照策略" class="headerlink" title="5.8.1、创建快照策略"></a>5.8.1、创建快照策略</h4><ul>
-<li><strong>点击实例ID –&gt; 选择本实例云盘 –&gt; 设置自动快照规则</strong></li>
+<h4 id="5-8-1、创建快照策略">5.8.1、创建快照策略</h4>
+<ul>
+<li><strong>点击实例ID --&gt; 选择本实例云盘 --&gt; 设置自动快照规则</strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs517w6u1xj31c20g4tg5.jpg" alt="image-20210704171408527"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs5189sehwj319o0jq7af.jpg" alt="image-20210704171430830"></p>
@@ -714,13 +787,13 @@
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51axrhlsj31ba0qkjwo.jpg" alt="image-20210704171621883"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51b1vprvj31ae0l845i.jpg" alt="image-20210704171711446"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51bf2dycj319q0imthd.jpg" alt="image-20210704171730775"></p>
-<h4 id="5-8-2、手动拍摄快照"><a href="#5-8-2、手动拍摄快照" class="headerlink" title="5.8.2、手动拍摄快照"></a>5.8.2、手动拍摄快照</h4><ul>
+<h4 id="5-8-2、手动拍摄快照">5.8.2、手动拍摄快照</h4>
+<ul>
 <li><strong>创建快照之前现在ECS里安装个apache服务</strong></li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@host01 ~]<span class="comment"># yum -y install httpd</span></span><br><span class="line">[root@host01 ~]<span class="comment"># systemctl start httpd;systemctl enable httpd</span></span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><strong>点击实例ID –&gt; 选择本实例云盘 –&gt; 创建系统盘快照</strong></li>
+<li><strong>点击实例ID --&gt; 选择本实例云盘 --&gt; 创建系统盘快照</strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51bz98b5j31ao0i8tf0.jpg" alt="image-20210704171804486"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51clrv04j319u0u0qdc.jpg" alt="image-20210704171840431"></p>
@@ -728,12 +801,16 @@
 <li><strong>检查快照</strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51d08ifhj31ig0n4alw.jpg" alt="image-20210704171903623"></p>
-<h4 id="5-8-3、克隆（自定义镜像）"><a href="#5-8-3、克隆（自定义镜像）" class="headerlink" title="5.8.3、克隆（自定义镜像）"></a>5.8.3、克隆（自定义镜像）</h4><ul>
-<li><p>默认阿里是没有 克隆 的功能</p>
+<h4 id="5-8-3、克隆（自定义镜像）">5.8.3、克隆（自定义镜像）</h4>
+<ul>
+<li>
+<p>默认阿里是没有 克隆 的功能</p>
 </li>
-<li><p>根据上面系统盘快照 创建自定义镜像（克隆）</p>
+<li>
+<p>根据上面系统盘快照 创建自定义镜像（克隆）</p>
 </li>
-<li><p>关于镜像的几个问题</p>
+<li>
+<p>关于镜像的几个问题</p>
 <ul>
 <li>目前阿里 镜像 是免费使用的</li>
 <li>创建的镜像默认只能在当前地区使用；如果实在是想在其他地区使用该镜像的话，就把当前镜像 复制到 其他地区</li>
@@ -747,43 +824,51 @@
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51efrpudj31a60u0gts.jpg" alt="image-20210704172026276"></p>
 <blockquote>
 <ul>
-<li><p><strong>查看自定义镜像</strong></p>
+<li>
+<p><strong>查看自定义镜像</strong></p>
 </li>
-<li><p><strong>复制镜像：就是将自定义镜像 复制到 其他地域上</strong></p>
+<li>
+<p><strong>复制镜像：就是将自定义镜像 复制到 其他地域上</strong></p>
 </li>
 </ul>
 </blockquote>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51erfwojj31iu0man6v.jpg" alt="image-20210704172045794"></p>
-<h4 id="5-8-4、根据自定义镜像创建ECS实例"><a href="#5-8-4、根据自定义镜像创建ECS实例" class="headerlink" title="5.8.4、根据自定义镜像创建ECS实例"></a>5.8.4、根据自定义镜像创建ECS实例</h4><blockquote>
+<h4 id="5-8-4、根据自定义镜像创建ECS实例">5.8.4、根据自定义镜像创建ECS实例</h4>
+<blockquote>
 <p><strong>除了镜像和设置密码那块，其他所有配置信息都和在上面创建的ECS一样</strong></p>
 <p><strong>使用镜像预设密码 就是和上个镜像的密码一致</strong></p>
 </blockquote>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51fbxy5cj31gu0fa79k.jpg" alt="image-20210704172118411"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51fqj52zj31go0i8ti4.jpg" alt="image-20210704172141280"></p>
-<p><strong>注意：</strong>启动的时候应该是起不来的，因为我在/etc/fstab配置了一个磁盘挂在，但我这个实例并没有这个磁盘，所以会起不来系统，这个时候应该到阿里云控制台中使用 **VNC **进入系统中将那句配置注释或删除掉，然后reboot重启。</p>
+<p>**注意：**启动的时候应该是起不来的，因为我在/etc/fstab配置了一个磁盘挂在，但我这个实例并没有这个磁盘，所以会起不来系统，这个时候应该到阿里云控制台中使用 **VNC **进入系统中将那句配置注释或删除掉，然后reboot重启。</p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51h8u8t1j31eg0ga41p.jpg" alt="image-20210704172240053"></p>
 <p><strong>远程连接查看这个实例中有没有apache这个服务</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51hcvpcuj31ce0gkdq6.jpg" alt="image-20210704172302253"></p>
-<h2 id="六、购买弹性公网IP（eip）"><a href="#六、购买弹性公网IP（eip）" class="headerlink" title="六、购买弹性公网IP（eip）"></a>六、购买弹性公网IP（eip）</h2><blockquote>
+<h2 id="六、购买弹性公网IP（eip）">六、购买弹性公网IP（eip）</h2>
+<blockquote>
 <p><strong>eip概述：就是可以将公网ip放到任何主机上使用</strong>（捆绑/解绑）</p>
 <p><strong>使用场景：使用同一个公网IP，给不同的ECS使用</strong></p>
 </blockquote>
-<h3 id="6-1、创建一个没有公网IP的ECS"><a href="#6-1、创建一个没有公网IP的ECS" class="headerlink" title="6.1、创建一个没有公网IP的ECS"></a>6.1、创建一个没有公网IP的ECS</h3><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51hxyrkrj31es0b0gs1.jpg" alt="image-20210704172348616"></p>
+<h3 id="6-1、创建一个没有公网IP的ECS">6.1、创建一个没有公网IP的ECS</h3>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51hxyrkrj31es0b0gs1.jpg" alt="image-20210704172348616"></p>
 <p><strong>修改一下实例名称和主机名后 点击确认订单就可以了，而且root密码和这台ECS密码是一样的</strong></p>
 <ul>
 <li>可以看到下图：只有一个私网IP，没有公网</li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51i8r39yj31bk02875k.jpg" alt="image-20210704172406509"></p>
-<h3 id="6-2、创建弹性公网IP"><a href="#6-2、创建弹性公网IP" class="headerlink" title="6.2、创建弹性公网IP"></a>6.2、创建弹性公网IP</h3><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51it32ctj31ek0kun58.jpg" alt="image-20210704172437374"></p>
+<h3 id="6-2、创建弹性公网IP">6.2、创建弹性公网IP</h3>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51it32ctj31ek0kun58.jpg" alt="image-20210704172437374"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51jbi4fhj31ee0lgagy.jpg" alt="image-20210704172458851"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51jhvayaj318x0u07g1.jpg" alt="image-20210704172517211"></p>
 <ul>
-<li><strong>BGP边界网关协议：</strong><ul>
+<li><strong>BGP边界网关协议：</strong>
+<ul>
 <li>北方 联通</li>
 <li>南方 电信</li>
 <li>机房在北方（北京）</li>
 <li>但用户在南方 或者 海外，导致访问很慢</li>
-<li><strong>两个解决方法：</strong><ol>
+<li><strong>两个解决方法：</strong>
+<ol>
 <li>CDN缓存加速</li>
 <li>BGP多线</li>
 </ol>
@@ -795,24 +880,29 @@
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51jxa7b7j31ek0c876r.jpg" alt="image-20210704172542597"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51kmn7f4j619e0u046k02.jpg" alt="image-20210704172622369"></p>
-<h3 id="6-3、使用eip"><a href="#6-3、使用eip" class="headerlink" title="6.3、使用eip"></a>6.3、使用eip</h3><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51l6cc3pj31eg0ka7cf.jpg" alt="image-20210704172652945"></p>
+<h3 id="6-3、使用eip">6.3、使用eip</h3>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51l6cc3pj31eg0ka7cf.jpg" alt="image-20210704172652945"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51lt80hbj615p0u0ag002.jpg" alt="image-20210704172731494"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51m6z4dvj319c03yaa9.jpg" alt="image-20210704172753296"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51n14ut7j31bi022dhj.jpg" alt="image-20210704172842043"></p>
 <ul>
-<li><p>可以看到弹性公网IP已经绑定到这台ECS主机上了</p>
+<li>
+<p>可以看到弹性公网IP已经绑定到这台ECS主机上了</p>
 </li>
-<li><p>使用xshell连接是否能用</p>
+<li>
+<p>使用xshell连接是否能用</p>
 </li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51n8fkkqj31b00e279e.jpg" alt="image-20210704172853897"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51nmw0zwj31bg0mitmf.jpg" alt="image-20210704172915953"></p>
-<h2 id="七、RDS数据库产品"><a href="#七、RDS数据库产品" class="headerlink" title="七、RDS数据库产品"></a>七、RDS数据库产品</h2><ul>
+<h2 id="七、RDS数据库产品">七、RDS数据库产品</h2>
+<ul>
 <li>rds云数据库</li>
 <li>他是一个功能，创建完成后，可以使用MySQL命令 或者 阿里的web界面连接RDS 进行操作</li>
 <li>如果不想使用RDS数据库产品，也可以使用ECS + MySQL/Mariadb实现数据库功能</li>
 </ul>
-<h3 id="7-1、创建RDS云数据库"><a href="#7-1、创建RDS云数据库" class="headerlink" title="7.1、创建RDS云数据库"></a>7.1、创建RDS云数据库</h3><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51o0p4nvj31ba0mowk0.jpg" alt="image-20210704172939623"></p>
+<h3 id="7-1、创建RDS云数据库">7.1、创建RDS云数据库</h3>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51o0p4nvj31ba0mowk0.jpg" alt="image-20210704172939623"></p>
 <ul>
 <li>点击实例列表—创建实例</li>
 </ul>
@@ -831,7 +921,9 @@
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51u7qivkj31g00rywlj.jpg" alt="image-20210704173533544"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51ukwrr9j31l00e4dkd.jpg" alt="image-20210704173557361"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51v34atqj31f80u013m.jpg" alt="image-20210704173626056"></p>
-<h3 id="7-2、配置RDS数据库"><a href="#7-2、配置RDS数据库" class="headerlink" title="7.2、配置RDS数据库"></a>7.2、配置RDS数据库</h3><h4 id="7-2-1、设置RDS的白名单"><a href="#7-2-1、设置RDS的白名单" class="headerlink" title="7.2.1、设置RDS的白名单"></a>7.2.1、设置RDS的白名单</h4><ul>
+<h3 id="7-2、配置RDS数据库">7.2、配置RDS数据库</h3>
+<h4 id="7-2-1、设置RDS的白名单">7.2.1、设置RDS的白名单</h4>
+<ul>
 <li>产品与服务 — 云数据库RDS版 — 实例列表 — 管理</li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51vs6qmxj31f60o27at.jpg" alt="image-20210704173705759"></p>
@@ -841,39 +933,46 @@
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51y0wfq1j30u00vhgtj.jpg" alt="image-20210704173908827"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51ykj5sxj31bg0goq7n.jpg" alt="image-20210704173946941"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51yzkmndj31bm0oi7d1.jpg" alt="image-20210704174009707"></p>
-<h4 id="7-2-2、创建RDS用户"><a href="#7-2-2、创建RDS用户" class="headerlink" title="7.2.2、创建RDS用户"></a>7.2.2、创建RDS用户</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51zjiupxj31bg0ce0vv.jpg" alt="image-20210704174042602"></p>
+<h4 id="7-2-2、创建RDS用户">7.2.2、创建RDS用户</h4>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs51zjiupxj31bg0ce0vv.jpg" alt="image-20210704174042602"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52026w7ej612x0u00zt02.jpg" alt="image-20210704174111872"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs520ohindj31ao0cydj3.jpg" alt="image-20210704174149472"></p>
-<h3 id="7-3、连接RDS数据库方法"><a href="#7-3、连接RDS数据库方法" class="headerlink" title="7.3、连接RDS数据库方法"></a>7.3、连接RDS数据库方法</h3><h4 id="7-3-1、MySQL命令连接"><a href="#7-3-1、MySQL命令连接" class="headerlink" title="7.3.1、MySQL命令连接"></a>7.3.1、MySQL命令连接</h4><ul>
+<h3 id="7-3、连接RDS数据库方法">7.3、连接RDS数据库方法</h3>
+<h4 id="7-3-1、MySQL命令连接">7.3.1、MySQL命令连接</h4>
+<ul>
 <li>随便在上面我们创建的任意一台ECS中安装一下MySQL客户端</li>
 <li>安装MySQL的目的是为了使用MySQL命令连接我们创建好的RDS云数据库</li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host2 ~]<span class="comment"># yum -y install mysql</span></span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>进入ECS中连接RDS数据库</li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52159y7fj61bk08ktc402.jpg" alt="image-20210704174215604"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs521ig9nij31bm0cy13c.jpg" alt="image-20210704174235105"></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">[root@host2 ~]<span class="comment"># mysql -uroot -p -h rm-bp11cj60hrbf0538s.mysql.rds.aliyuncs.com       //登陆RDS数据库</span></span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 764</span><br><span class="line">Server version: 5.7.26-log Source distribution</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line"></span><br><span class="line">Type <span class="string">&#x27;help;&#x27;</span> or <span class="string">&#x27;\h&#x27;</span> <span class="keyword">for</span> <span class="built_in">help</span>. Type <span class="string">&#x27;\c&#x27;</span> to clear the current input statement.</span><br><span class="line"></span><br><span class="line">MySQL [(none)]&gt; show databases;        //查看一下有什么数据库</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| sys                |</span><br><span class="line">+--------------------+</span><br><span class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">MySQL [(none)]&gt; select user,host from mysql.user;      //查看一下有什么用户</span><br><span class="line">+---------------+----------------+</span><br><span class="line">| user          | host           |</span><br><span class="line">+---------------+----------------+</span><br><span class="line">| aurora        | %              |</span><br><span class="line">| aurora_proxy  | %              |</span><br><span class="line">| root          | %              |</span><br><span class="line">| replicator    | 11.112.240.170 |</span><br><span class="line">| aliyun_root   | 127.0.0.1      |</span><br><span class="line">| mysql.session | localhost      |</span><br><span class="line">| mysql.sys     | localhost      |</span><br><span class="line">+---------------+----------------+</span><br><span class="line">7 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">MySQL [(none)]&gt; show grants <span class="keyword">for</span> aliyun_root@127.0.0.1 \G       //查看一下aliyun_root用户权限</span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">Grants <span class="keyword">for</span> aliyun_root@127.0.0.1: GRANT ALL PRIVILEGES ON *.* TO <span class="string">&#x27;aliyun_root&#x27;</span>@<span class="string">&#x27;127.0.0.1&#x27;</span> WITH GRANT OPTION</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.01 sec)</span><br><span class="line"></span><br><span class="line">MySQL [(none)]&gt; show grants <span class="keyword">for</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span>\G   //查看我自己创建的用户root权限</span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">Grants <span class="keyword">for</span> root@%: GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, RELOAD, PROCESS, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, REPLICATION SLAVE, REPLICATION CLIENT, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, CREATE USER, EVENT, TRIGGER ON *.* TO <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> WITH GRANT OPTION</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
-
-<h4 id="7-3-2、web界面连接RDS数据库"><a href="#7-3-2、web界面连接RDS数据库" class="headerlink" title="7.3.2、web界面连接RDS数据库"></a>7.3.2、web界面连接RDS数据库</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs5222ilqwj31c00oidoi.jpg" alt="image-20210704174301646"></p>
+<h4 id="7-3-2、web界面连接RDS数据库">7.3.2、web界面连接RDS数据库</h4>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs5222ilqwj31c00oidoi.jpg" alt="image-20210704174301646"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs522pesglj31760dwwky.jpg" alt="image-20210704174338223"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52310qtpj315q0qck02.jpg" alt="image-20210704174404807"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs523gmj5bj31dm0qqtnk.jpg" alt="image-20210704174429578"></p>
-<h2 id="八、NAS文件存储"><a href="#八、NAS文件存储" class="headerlink" title="八、NAS文件存储"></a>八、NAS文件存储</h2><h3 id="8-1、NAS概述"><a href="#8-1、NAS概述" class="headerlink" title="8.1、NAS概述"></a>8.1、NAS概述</h3><ul>
-<li><strong>NAS  ：分三种类型</strong><ul>
+<h2 id="八、NAS文件存储">八、NAS文件存储</h2>
+<h3 id="8-1、NAS概述">8.1、NAS概述</h3>
+<ul>
+<li><strong>NAS  ：分三种类型</strong>
+<ul>
 <li>通用型</li>
 <li>极速型</li>
 <li>文件存储 CPFS</li>
 </ul>
 </li>
-<li><strong>NAS有两种协议类型</strong><ul>
+<li><strong>NAS有两种协议类型</strong>
+<ul>
 <li>NFS只支持linux之间的挂在</li>
 <li>SMB既支持linux也支持windows</li>
 </ul>
 </li>
-<li><strong>NAS的使用流程：</strong><ul>
+<li><strong>NAS的使用流程：</strong>
+<ul>
 <li>创建文件系统（相当于安装NFS/Samba软件）</li>
 <li>创建权限组（对这个挂在点的读写权限）</li>
 <li>创建挂载点（进行配置）</li>
@@ -881,7 +980,8 @@
 </ul>
 </li>
 </ul>
-<h3 id="8-2、创建NAS文件系统"><a href="#8-2、创建NAS文件系统" class="headerlink" title="8.2、创建NAS文件系统"></a>8.2、创建NAS文件系统</h3><ul>
+<h3 id="8-2、创建NAS文件系统">8.2、创建NAS文件系统</h3>
+<ul>
 <li>产品与服务 — 文件存储NAS</li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52hj4hfrj31ao0nan2v.jpg" alt="image-20210704175800026"></p>
@@ -890,16 +990,20 @@
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52jhsscrj31bm0tojvt.jpg" alt="image-20210704175953192"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52juwokyj316e09ugnu.jpg" alt="image-20210704180014922"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52k65oq8j31c00hitez.jpg" alt="image-20210704180027889"></p>
-<h3 id="8-3、创建权限组"><a href="#8-3、创建权限组" class="headerlink" title="8.3、创建权限组"></a>8.3、创建权限组</h3><ul>
+<h3 id="8-3、创建权限组">8.3、创建权限组</h3>
+<ul>
 <li>创建只读挂载点</li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52khehatj31aw0ieag6.jpg" alt="image-20210704180048080"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52l5uf95j313g0u079g.jpg" alt="image-20210704180127050"></p>
-<h3 id="8-4、创建只读挂载点"><a href="#8-4、创建只读挂载点" class="headerlink" title="8.4、创建只读挂载点"></a>8.4、创建只读挂载点</h3><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52lv4k9qj31au0jc0za.jpg" alt="image-20210704180209300"></p>
+<h3 id="8-4、创建只读挂载点">8.4、创建只读挂载点</h3>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52lv4k9qj31au0jc0za.jpg" alt="image-20210704180209300"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52m79n0ij316b0u0gs4.jpg" alt="image-20210704180228913"></p>
-<h3 id="8-5、查看所有挂载点"><a href="#8-5、查看所有挂载点" class="headerlink" title="8.5、查看所有挂载点"></a>8.5、查看所有挂载点</h3><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52mhyh2tj31bq0lm10t.jpg" alt="image-20210704180246947"></p>
+<h3 id="8-5、查看所有挂载点">8.5、查看所有挂载点</h3>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52mhyh2tj31bq0lm10t.jpg" alt="image-20210704180246947"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52n3lu3gj31ns0tsgvv.jpg" alt="image-20210704180319641"></p>
-<h3 id="8-6、使用NAS"><a href="#8-6、使用NAS" class="headerlink" title="8.6、使用NAS"></a>8.6、使用NAS</h3><ul>
+<h3 id="8-6、使用NAS">8.6、使用NAS</h3>
+<ul>
 <li>这里挂载点我就直接使用默认的了</li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52nh2arlj31nk0ckdlz.jpg" alt="image-20210704180343879"></p>
@@ -913,7 +1017,6 @@
 <li>注：需要先安装一下nfs-utile这个包，不然系统识别不了！！！</li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ECS_01进行挂在</span></span><br><span class="line">[root@host01 ~]<span class="comment"># yum -y install nfs-utils</span></span><br><span class="line">[root@host01 ~]<span class="comment"># mkdir /nfs_data           //创建挂载点目录</span></span><br><span class="line">[root@host01 ~]<span class="comment"># mount -t nfs 0f2ad48dec-dyt61.cn-hangzhou.nas.aliyuncs.com:/  /nfs_data/    //挂载NAS存储</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#ECS_02进行挂在</span></span><br><span class="line">[root@host2 ~]<span class="comment"># yum -y install nfs-utils</span></span><br><span class="line">[root@host2 ~]<span class="comment"># mkdir /nfs_data            //创建挂载点目录</span></span><br><span class="line">[root@host2 ~]<span class="comment"># mount -t nfs 0f2ad48dec-dyt61.cn-hangzhou.nas.aliyuncs.com:/  /nfs_data/    //挂载NAS存储</span></span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>查看是否挂在成功</li>
 </ul>
@@ -928,10 +1031,11 @@
 <li>卸掉挂载点</li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@host01 ~]<span class="comment"># umount /nfs_data</span></span><br><span class="line">[root@host2 ~]<span class="comment"># umount /nfs_data</span></span><br></pre></td></tr></table></figure>
-
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52puvnx9j31l60koqhu.jpg" alt="image-20210704180601336"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52q2mtmzj31lw0j6tmc.jpg" alt="image-20210704180611783"></p>
-<h2 id="九、OSS对象存储"><a href="#九、OSS对象存储" class="headerlink" title="九、OSS对象存储"></a>九、OSS对象存储</h2><h3 id="9-1、OSS-vs-NAS"><a href="#9-1、OSS-vs-NAS" class="headerlink" title="9.1、OSS  vs  NAS"></a>9.1、OSS  vs  NAS</h3><table>
+<h2 id="九、OSS对象存储">九、OSS对象存储</h2>
+<h3 id="9-1、OSS-vs-NAS">9.1、OSS  vs  NAS</h3>
+<table>
 <thead>
 <tr>
 <th><strong>存储</strong></th>
@@ -939,7 +1043,8 @@
 <th><strong>特点</strong></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>NAS文件存储</td>
 <td>数据量不大，并发量不高，存储空间有限</td>
 <td>类型有nfs/smb ，创建nas文件系统，挂载使用</td>
@@ -949,8 +1054,10 @@
 <td>数据量很大，并发量很高，存储空间无限</td>
 <td>配置好后，给开发人员(access id 和 access secret)在代码中使用</td>
 </tr>
-</tbody></table>
-<h3 id="9-2、创建OSS存储（Bucket）"><a href="#9-2、创建OSS存储（Bucket）" class="headerlink" title="9.2、创建OSS存储（Bucket）"></a>9.2、创建OSS存储（Bucket）</h3><ul>
+</tbody>
+</table>
+<h3 id="9-2、创建OSS存储（Bucket）">9.2、创建OSS存储（Bucket）</h3>
+<ul>
 <li>产品与服务 — 对象存储OSS</li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52rovd8uj31jy0nmwkr.jpg" alt="image-20210704180746270"></p>
@@ -960,7 +1067,8 @@
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52rj5ophj31k80e4q7q.jpg" alt="image-20210704180736968"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52s9vixgj315b0u0an0.jpg" alt="image-20210704180820291"></p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/51374.html?spm=5176.8465980.0.0.4e701450VJbX3I"><strong>Bucket的存储类型</strong></a><ol>
+<li><a target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/51374.html?spm=5176.8465980.0.0.4e701450VJbX3I"><strong>Bucket的存储类型</strong></a>
+<ol>
 <li>标准存储：高可靠、高可用、高性能，数据会经常被访问到。（性能最好的）</li>
 <li>低频存储：数据长期存储、较少访问，存储单价低于标准类型。（性能中等）</li>
 <li>归档存储：数据长期存储、基本不访问，存储单价低于低频访问型。（最差）</li>
@@ -969,7 +1077,9 @@
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52t4728ij315j0u014g.jpg" alt="image-20210704180905357"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52tidnk9j317q0u0alx.jpg" alt="image-20210704180931798"></p>
-<h3 id="9-3、OSS的两种使用方法"><a href="#9-3、OSS的两种使用方法" class="headerlink" title="9.3、OSS的两种使用方法"></a>9.3、OSS的两种使用方法</h3><h4 id="9-3-1、当成一个网盘来使用"><a href="#9-3-1、当成一个网盘来使用" class="headerlink" title="9.3.1、当成一个网盘来使用"></a>9.3.1、当成一个网盘来使用</h4><ul>
+<h3 id="9-3、OSS的两种使用方法">9.3、OSS的两种使用方法</h3>
+<h4 id="9-3-1、当成一个网盘来使用">9.3.1、当成一个网盘来使用</h4>
+<ul>
 <li><strong>工作中不会这么用的</strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52tyu1syj319u0nwq8d.jpg" alt="image-20210704180951260"></p>
@@ -977,14 +1087,15 @@
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52ux3urtj30w70u07d9.jpg" alt="image-20210704181052581"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52v4mp3dj615a0fun0i02.jpg" alt="image-20210704181105886"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52vgp4mgj316g0suwkv.jpg" alt="image-20210704181124116"></p>
-<h4 id="9-3-2、开发程序代码使用"><a href="#9-3-2、开发程序代码使用" class="headerlink" title="9.3.2、开发程序代码使用"></a>9.3.2、开发程序代码使用</h4><ul>
+<h4 id="9-3-2、开发程序代码使用">9.3.2、开发程序代码使用</h4>
+<ul>
 <li>工作中的使用方法</li>
 <li>代码中使用OSS，需要OSS名称（bucketName）|  access id  和 access secret（这两个东西需要在后面RAM中创建）</li>
 <li><a target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/31947.html?spm=5176.8465980.entries.8.4e7014504nEZVB"><strong>SDK参考</strong></a></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52vtp5ovj617i0hktcz02.jpg" alt="image-20210704181145316"></p>
 <ul>
-<li>点击SDK参考 — 有很多语言，这里就看python的就行了 — 选择简单上传 </li>
+<li>点击SDK参考 — 有很多语言，这里就看python的就行了 — 选择简单上传</li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52wjin2wj30dc138ad0.jpg" alt="image-20210704181226468"></p>
 <ul>
@@ -992,21 +1103,20 @@
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52xdhyymj30vc01ujri.jpg" alt="image-20210704181313986"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> oss2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录 https://ram.console.aliyun.com 创建RAM账号。</span></span><br><span class="line">auth = oss2.Auth(<span class="string">&#x27;&lt;yourAccessKeyId&gt;&#x27;</span>, <span class="string">&#x27;&lt;yourAccessKeySecret&gt;&#x27;</span>)</span><br><span class="line"><span class="comment"># Endpoint以杭州为例，其它Region请按实际情况填写。</span></span><br><span class="line">bucket = oss2.Bucket(auth, <span class="string">&#x27;http://oss-cn-hangzhou.aliyuncs.com&#x27;</span>, <span class="string">&#x27;&lt;yourBucketName&gt;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传文件</span></span><br><span class="line"><span class="comment"># 如果需要上传文件时设置文件存储类型与访问权限，请在put_object中设置相关headers, 参考如下。</span></span><br><span class="line"><span class="comment"># headers = dict()</span></span><br><span class="line"><span class="comment"># headers[&quot;x-oss-storage-class&quot;] = &quot;Standard&quot;</span></span><br><span class="line"><span class="comment"># headers[&quot;x-oss-object-acl&quot;] = oss2.OBJECT_ACL_PRIVATE</span></span><br><span class="line"><span class="comment"># result = bucket.put_object(&#x27;&lt;yourObjectName&gt;&#x27;, &#x27;content of object&#x27;, headers=headers)</span></span><br><span class="line">result = bucket.put_object(<span class="string">&#x27;&lt;yourObjectName&gt;&#x27;</span>, <span class="string">&#x27;content of object&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># HTTP返回码。</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;http status: &#123;0&#125;&#x27;</span>.<span class="built_in">format</span>(result.status))</span><br><span class="line"><span class="comment"># 请求ID。请求ID是请求的唯一标识，强烈建议在程序日志中添加此参数。</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;request_id: &#123;0&#125;&#x27;</span>.<span class="built_in">format</span>(result.request_id))</span><br><span class="line"><span class="comment"># ETag是put_object方法返回值特有的属性。</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;ETag: &#123;0&#125;&#x27;</span>.<span class="built_in">format</span>(result.etag))</span><br><span class="line"><span class="comment"># HTTP响应头部。</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;date: &#123;0&#125;&#x27;</span>.<span class="built_in">format</span>(result.headers[<span class="string">&#x27;date&#x27;</span>]))</span><br><span class="line">			</span><br></pre></td></tr></table></figure>
-
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52xrxrdlj312i02m74j.jpg" alt="image-20210704181337456"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-import oss2# 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录 https://ram.console.aliyun.com 创建RAM账号。auth = oss2.Auth(&#x27;&lt;yourAccessKeyId&gt;&#x27;, &#x27;&lt;yourAccessKeySecret&gt;&#x27;)# Endpoint以杭州为例，其它Region请按实际情况填写。bucket = oss2.Bucket(auth, &#x27;http://oss-cn-hangzhou.aliyuncs.com&#x27;, &#x27;&lt;yourBucketName&gt;&#x27;)# 必须以二进制的方式打开文件，因为需要知道文件包含的字节数。with open(&#x27;&lt;yourLocalFile&gt;&#x27;, &#x27;rb&#x27;) as fileobj:    # Seek方法用于指定从第1000个字节位置开始读写。上传时会从您指定的第1000个字节位置开始上传，直到文件结束。    fileobj.seek(1000, os.SEEK_SET)    # Tell方法用于返回当前位置。    current = fileobj.tell()    bucket.put_object(&#x27;&lt;yourObjectName&gt;&#x27;, fileobj)		</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="十、RAM访问控制"><a href="#十、RAM访问控制" class="headerlink" title="十、RAM访问控制"></a>十、RAM访问控制</h2><ul>
-<li><strong>应用场景：子账号</strong><ul>
+<h2 id="十、RAM访问控制">十、RAM访问控制</h2>
+<ul>
+<li><strong>应用场景：子账号</strong>
+<ul>
 <li>给阿里云账户创建小号（普通用户）</li>
 <li>创建一个账号给运维用（账号密码登陆）</li>
 <li>创建一个账号给开发用（代码程序中使用：access id 和 access key）</li>
 </ul>
 </li>
 </ul>
-<h3 id="10-1、使用RAM访问控制"><a href="#10-1、使用RAM访问控制" class="headerlink" title="10.1、使用RAM访问控制"></a>10.1、使用RAM访问控制</h3><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52y3vxq3j31ba0msn3o.jpg" alt="image-20210704181356032"></p>
+<h3 id="10-1、使用RAM访问控制">10.1、使用RAM访问控制</h3>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs52y3vxq3j31ba0msn3o.jpg" alt="image-20210704181356032"></p>
 <blockquote>
 <p><strong>第一次用的时候它会让你开通，至就开通就行了，不花钱。</strong></p>
 </blockquote>
@@ -1027,19 +1137,25 @@
 <th>运维通过web页面登陆 与 控制台阿里云资源</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>编程登陆</td>
 <td>开发人员</td>
 <td>给开发人员在代码中调用（自动创建一个 <strong>access id</strong> 和 <strong>access secret</strong>）</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs5301dz80j31280u0wn3.jpg" alt="image-20210704181547794"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs530vy55pj30xc0u0wkv.jpg" alt="image-20210704181626559"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs530zxisuj318c0fatd1.jpg" alt="image-20210704181641721"></p>
 <blockquote>
-<p><strong>用户登录名称</strong> <a href="mailto:&#79;&#112;&#115;&#x5f;&#x6c;&#105;&#64;&#49;&#53;&#51;&#x34;&#x39;&#56;&#x30;&#54;&#57;&#x33;&#x32;&#56;&#x36;&#x37;&#55;&#56;&#x2e;&#111;&#x6e;&#x61;&#108;&#105;&#x79;&#117;&#x6e;&#x2e;&#x63;&#111;&#109;">&#79;&#112;&#115;&#x5f;&#x6c;&#105;&#64;&#49;&#53;&#51;&#x34;&#x39;&#56;&#x30;&#54;&#57;&#x33;&#x32;&#56;&#x36;&#x37;&#55;&#56;&#x2e;&#111;&#x6e;&#x61;&#108;&#105;&#x79;&#117;&#x6e;&#x2e;&#x63;&#111;&#109;</a><br><strong>登录密码</strong> abc123..<br><strong>AccessKey ID</strong> LTAI4GFAEy29WErDRFgJyoAJ<br><strong>AccessKey Secret</strong> QCG3V0BX7QI4D7KzTN043cJUPAJ95x</p>
+<p><strong>用户登录名称</strong> <a href="mailto:Ops_li@1534980693286778.onaliyun.com">Ops_li@1534980693286778.onaliyun.com</a><br>
+<strong>登录密码</strong> abc123…<br>
+<strong>AccessKey ID</strong> LTAI4GFAEy29WErDRFgJyoAJ<br>
+<strong>AccessKey Secret</strong> QCG3V0BX7QI4D7KzTN043cJUPAJ95x</p>
 </blockquote>
-<h3 id="10-2、运维调用这个用户"><a href="#10-2、运维调用这个用户" class="headerlink" title="10.2、运维调用这个用户"></a>10.2、运维调用这个用户</h3><ul>
+<h3 id="10-2、运维调用这个用户">10.2、运维调用这个用户</h3>
+<ul>
 <li><strong>产品与服务 — 访问控制 — 概述</strong> – <a target="_blank" rel="noopener" href="https://signin.aliyun.com/1534980693286778.onaliyun.com/login.htm">https://signin.aliyun.com</a></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs5323wkmgj31bg0d8djq.jpg" alt="image-20210704181727131"></p>
@@ -1048,7 +1164,7 @@
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs532dppfgj31bc09ywhb.jpg" alt="image-20210704181756035"></p>
 <ul>
-<li><strong>访问<a target="_blank" rel="noopener" href="https://signin.aliyun.com/">https://signin.aliyun.com/</a> 登陆</strong></li>
+<li><strong>访问https://signin.aliyun.com/ 登陆</strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs532tmpf1j61bi0omwim02.jpg" alt="image-20210704181826754"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs5332q0d0j31c60ma0v2.jpg" alt="image-20210704181843372"></p>
@@ -1056,12 +1172,14 @@
 <ul>
 <li><strong>可以看到，这个用户是没有权限的，如果想加权限，需要到主账号中提权</strong></li>
 </ul>
-<h3 id="10-3、给RAM用户授权"><a href="#10-3、给RAM用户授权" class="headerlink" title="10.3、给RAM用户授权"></a>10.3、给RAM用户授权</h3><ul>
+<h3 id="10-3、给RAM用户授权">10.3、给RAM用户授权</h3>
+<ul>
 <li><strong>产品与服务 — 访问控制 — 用户 — 添加权限</strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs5345qrahj31hi0bswhn.jpg" alt="image-20210704181943463"></p>
 <ul>
-<li><strong>权限一般分为两种</strong><ul>
+<li><strong>权限一般分为两种</strong>
+<ul>
 <li><strong>ReadOnly</strong>：只读权限</li>
 <li><strong>Fuil</strong>：完全（读写）</li>
 </ul>
@@ -1077,7 +1195,8 @@
 <li><strong>在从新登陆一下 Ops_li 子账号查看一下</strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs536gify7j31ha0tu4bq.jpg" alt="image-20210704182155478"></p>
-<h3 id="10-4、开发调用这个用户"><a href="#10-4、开发调用这个用户" class="headerlink" title="10.4、开发调用这个用户"></a>10.4、开发调用这个用户</h3><ul>
+<h3 id="10-4、开发调用这个用户">10.4、开发调用这个用户</h3>
+<ul>
 <li><strong>授予子账号OSS完全的权限</strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs537jpd0aj31hg0hidlo.jpg" alt="image-20210704182233176"></p>
@@ -1095,44 +1214,49 @@
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs53b28akuj31h40hcgro.jpg" alt="image-20210704182620293"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs539ys0nwj31ho0q0gsq.jpg" alt="image-20210704182518213"></p>
 <ul>
-<li><p>开发人员调用这个用户</p>
+<li>
+<p>开发人员调用这个用户</p>
 <ul>
-<li><p>创建子账号，根据需要授予权限</p>
+<li>
+<p>创建子账号，根据需要授予权限</p>
 </li>
-<li><p>把access id 和 access secret 交给开发</p>
+<li>
+<p>把access id 和 access secret 交给开发</p>
 </li>
 </ul>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AccessKey ID: LTAI4GFAEy29WErDRFgJyoAJAccessKey Secret: QCG3V0BX7QI4D7KzTN043cJUPAJ95x<span class="comment">#开发使用OSS，上传文件为例# -*- coding: utf-8 -*-import oss2# 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录 https://ram.console.aliyun.com 创建RAM账号。auth = oss2.Auth(&#x27;LTAI4GFAEy29WErDRFgJyoAJ&#x27;, &#x27;QCG3V0BX7QI4D7KzTN043cJUPAJ95x&#x27;)# Endpoint以杭州为例，其它Region请按实际情况填写。bucket = oss2.Bucket(auth, &#x27;http://oss-cn-hangzhou.aliyuncs.com&#x27;, &#x27;lemon-li&#x27;)# 必须以二进制的方式打开文件，因为需要知道文件包含的字节数。with open(&#x27;&lt;yourLocalFile&gt;&#x27;, &#x27;rb&#x27;) as fileobj:    # Seek方法用于指定从第1000个字节位置开始读写。上传时会从您指定的第1000个字节位置开始上传，直到文件结束。    fileobj.seek(1000, os.SEEK_SET)    # Tell方法用于返回当前位置。    current = fileobj.tell()    bucket.put_object(&#x27;&lt;lemon-li&gt;&#x27;, fileobj)</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="十一、DNS解析"><a href="#十一、DNS解析" class="headerlink" title="十一、DNS解析"></a>十一、DNS解析</h2><ul>
+<h2 id="十一、DNS解析">十一、DNS解析</h2>
+<ul>
 <li>最终目的：让用户通过域名访问网站</li>
 </ul>
 <p><strong>流程：</strong></p>
 <ol>
-<li><p>购买域名</p>
+<li>
+<p>购买域名</p>
 <ul>
 <li>新网</li>
 <li>GoDaddy</li>
 <li>阿里云</li>
 </ul>
 </li>
-<li><p>网站环境</p>
+<li>
+<p>网站环境</p>
 <ul>
 <li>lamp</li>
 <li>nginx+tomcat</li>
 </ul>
 </li>
-<li><p>域名备案（服务器在大陆的都要做）</p>
+<li>
+<p>域名备案（服务器在大陆的都要做）</p>
 <ul>
 <li>根据需求填写信息</li>
 <li>大约半个多月能好</li>
 </ul>
 </li>
-<li><p>域名 解析</p>
+<li>
+<p>域名 解析</p>
 <ul>
 <li>将申请的域名备案好后</li>
 <li>添加域名到 网站公网IP上</li>
@@ -1152,35 +1276,37 @@
 <th>TTL</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>A记录：域名 对应  IPV4的地址</td>
-<td>www：解析后的域名为<a target="_blank" rel="noopener" href="http://www.aliyun.com./">www.aliyun.com。</a></td>
+<td>www：<a target="_blank" rel="noopener" href="http://xn--www-c88d89xfa359de88ane2a1q4b.aliyun.com">解析后的域名为www.aliyun.com</a>。</td>
 <td>中国联通</td>
 <td>公网IP</td>
 <td>生成缓存，DNS缓存时间</td>
 </tr>
 <tr>
 <td>AAAA记录：域名 对应 IPV6的地址</td>
-<td><strong>@：</strong>直接解析主域名 aliyun.com。</td>
+<td>**@：**直接解析主域名 <a target="_blank" rel="noopener" href="http://aliyun.com">aliyun.com</a>。</td>
 <td>中国移动</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td>CNAME记录：别名记录，一般用于配置CDN的</td>
-<td>*<strong>：</strong>泛解析，匹配其他所有域名 *.aliyun.com。</td>
+<td>***：**泛解析，匹配其他所有域名 *.aliyun.com。</td>
 <td>中国电信</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td>MX记录：用于 企业邮箱</td>
-<td><strong>mail：</strong>将域名解析为mail.aliyun.com，通常用于解析邮箱服务器。</td>
+<td>**mail：**<a target="_blank" rel="noopener" href="http://xn--mail-uh5fn22au1g78ix50at99e.aliyun.com">将域名解析为mail.aliyun.com</a>，通常用于解析邮箱服务器。</td>
 <td>海外</td>
 <td></td>
 <td></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p><strong>DNS云解析操作流程：</strong></p>
 <ul>
 <li>添加域名</li>
@@ -1203,16 +1329,20 @@
 <li>如果域名没进行备案的话，访问时会是这样</li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs53ijuv1vj31bi0ls15o.jpg" alt="image-20210704183328131"></p>
-<h2 id="十二、CDN配置流程"><a href="#十二、CDN配置流程" class="headerlink" title="十二、CDN配置流程"></a>十二、CDN配置流程</h2><ul>
+<h2 id="十二、CDN配置流程">十二、CDN配置流程</h2>
+<ul>
 <li>CND 内容分发网络</li>
 <li>CDN 给网站加速，缓存网站静态资源 网站样式（css、js、html）图片、视频、音频</li>
-<li>用户访问网站流程：<ul>
+<li>用户访问网站流程：
+<ul>
 <li>用户先访问CDN，如果CDN没有这个资源则在访问服务器，等下次再有用户访问这个资源时就会直接在CDN上访问</li>
 </ul>
 </li>
 </ul>
-<h3 id="12-1、CDN访问详细流程"><a href="#12-1、CDN访问详细流程" class="headerlink" title="12.1、CDN访问详细流程"></a>12.1、CDN访问详细流程</h3><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs53kw1lslj61bk0o4dm002.jpg" alt="image-20210704183501919"></p>
-<h3 id="12-2、使用CDN-给网站加速"><a href="#12-2、使用CDN-给网站加速" class="headerlink" title="12.2、使用CDN 给网站加速"></a>12.2、使用CDN 给网站加速</h3><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs53l7qaraj61bc0my0yp02.jpg" alt="image-20210704183606066"></p>
+<h3 id="12-1、CDN访问详细流程">12.1、CDN访问详细流程</h3>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs53kw1lslj61bk0o4dm002.jpg" alt="image-20210704183501919"></p>
+<h3 id="12-2、使用CDN-给网站加速">12.2、使用CDN 给网站加速</h3>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs53l7qaraj61bc0my0yp02.jpg" alt="image-20210704183606066"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs53lbd0lhj31as0ictc6.jpg" alt="image-20210704183546859"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs53m7qva1j316o086my5.jpg" alt="image-20210704183640276"></p>
 <ul>
@@ -1234,10 +1364,13 @@
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs53r1zypdj318w0j6dkl.jpg" alt="image-20210704184132642"></p>
 <blockquote>
 <p><strong>至此CDN的配置算是完成了，但是现在CDN目前是没有缓存的数据，怎么办？</strong></p>
-<p>需要 <strong>预热/刷新：</strong>让CDN主动找源站 缓存内容，<strong>小的内容使用刷新，大的内容使用预热</strong></p>
+<p>需要 **预热/刷新：**让CDN主动找源站 缓存内容，<strong>小的内容使用刷新，大的内容使用预热</strong></p>
 </blockquote>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs53rg39tqj312y0u0dnq.jpg" alt="image-20210704184157074"></p>
-<h2 id="十三、云监控"><a href="#十三、云监控" class="headerlink" title="十三、云监控"></a>十三、云监控</h2><h2 id="十四、SLB负载均衡"><a href="#十四、SLB负载均衡" class="headerlink" title="十四、SLB负载均衡"></a>十四、SLB负载均衡</h2><h3 id="14-1、SLB常见的两种应用场景"><a href="#14-1、SLB常见的两种应用场景" class="headerlink" title="14.1、SLB常见的两种应用场景"></a>14.1、SLB常见的两种应用场景</h3><ul>
+<h2 id="十三、云监控">十三、云监控</h2>
+<h2 id="十四、SLB负载均衡">十四、SLB负载均衡</h2>
+<h3 id="14-1、SLB常见的两种应用场景">14.1、SLB常见的两种应用场景</h3>
+<ul>
 <li>场景1（推荐）</li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs53slyc7xj31bq0o4jz0.jpg" alt="image-20210704184313307"></p>
@@ -1245,8 +1378,10 @@
 <li>场景2（不推荐）</li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs53t9b5bij31cc0ngq8v.jpg" alt="image-20210704184348698"></p>
-<h3 id="14-2、SLB场景1-应用"><a href="#14-2、SLB场景1-应用" class="headerlink" title="14.2、SLB场景1 应用"></a>14.2、SLB场景1 应用</h3><ul>
-<li><strong>准备好两个可用区的ECS节点</strong><ul>
+<h3 id="14-2、SLB场景1-应用">14.2、SLB场景1 应用</h3>
+<ul>
+<li><strong>准备好两个可用区的ECS节点</strong>
+<ul>
 <li>华北2 – 可用区A – 2台ECS</li>
 <li>华北2 – 可用区B – 2台ECS</li>
 <li>安装nginx &amp; apache 并 设置页面</li>
@@ -1256,7 +1391,6 @@
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs53u41th5j31ae0e0the.jpg" alt="image-20210704184439549"></p>
 <p>#设置页面在此只列出一台</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum -y install nginx</span><br><span class="line">systemctl start nginx;systemctl <span class="built_in">enable</span> nginx</span><br><span class="line">vim /usr/share/nginx/html/index.html</span><br><span class="line">133         &lt;h1&gt;ecs001&lt;/h1&gt;</span><br><span class="line">:wq</span><br></pre></td></tr></table></figure>
-
 <p>#访问这四台nginx验证一下</p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs53uut7p0j31b40cadqu.jpg" alt="image-20210704184513526"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs53vdz5zfj312j0u07wh.jpg" alt="image-20210704184540532"></p>
@@ -1270,12 +1404,15 @@
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs53z52udgj31bu0sw78z.jpg" alt="image-20210704184804220"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs53zbiepij61bg0dmado02.jpg" alt="image-20210704184818233"></p>
 <ul>
-<li>配置SLB负载均衡<ul>
-<li>协议&amp;监听<ul>
+<li>配置SLB负载均衡
+<ul>
+<li>协议&amp;监听
+<ul>
 <li>TCP/UDP（四层负载）</li>
 <li>HTTP/HTTPS（七层负载）</li>
 <li>监听端口</li>
-<li>高级配置<ul>
+<li>高级配置
+<ul>
 <li>调度算法（加权轮询WRR）</li>
 <li>监听转发</li>
 <li>会话保持</li>
@@ -1316,7 +1453,9 @@
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs54beb5ffj31iy0o27o1.jpg" alt="image-20210704190115518"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs54dk7xx1j61ii0owqo902.jpg" alt="image-20210704190321040"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gs54ci5jymj31ik0oani8.jpg" alt="image-20210704190220340"></p>
-<h2 id="十五、Redis云数据库"><a href="#十五、Redis云数据库" class="headerlink" title="十五、Redis云数据库"></a>十五、Redis云数据库</h2><h2 id="十六、ESS弹性伸缩"><a href="#十六、ESS弹性伸缩" class="headerlink" title="十六、ESS弹性伸缩"></a>十六、ESS弹性伸缩</h2>
+<h2 id="十五、Redis云数据库">十五、Redis云数据库</h2>
+<h2 id="十六、ESS弹性伸缩">十六、ESS弹性伸缩</h2>
+
     </div>
 
     
@@ -1407,7 +1546,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%98%BF%E9%87%8C%E4%BA%91%E5%AE%9E%E6%88%98"><span class="nav-text">阿里云实战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%BA%91%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-text">一、云的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%91"><span class="nav-text">1.1、什么是云</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2%E3%80%81%E4%BA%91%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-text">1.2、云的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8%E4%BA%91"><span class="nav-text">1.3、为什么要用云</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4%E3%80%81%E4%BA%91%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8E%82%E5%95%86"><span class="nav-text">1.4、云有哪些厂商</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5%E3%80%81%E4%BA%91%E7%9A%84%E4%BA%A7%E5%93%81%E5%90%8D%E7%A7%B0"><span class="nav-text">1.5、云的产品名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6%E3%80%81%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-VS-%E7%89%A9%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">1.6、云服务器 VS 物理服务器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%98%BF%E9%87%8C%E4%BA%91%E6%9E%B6%E6%9E%84%E5%9B%BE"><span class="nav-text">二、阿里云架构图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%9C%B0%E5%9F%9F-%E5%8F%AF%E7%94%A8%E5%8C%BA"><span class="nav-text">三、地域 &#x2F; 可用区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1%E3%80%81%E5%9C%B0%E5%9F%9F%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%89%80%E5%B1%9E%E5%9F%8E%E5%B8%82"><span class="nav-text">3.1、地域：服务器的所属城市</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2%E3%80%81%E5%8F%AF%E7%94%A8%E5%8C%BA%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%89%80%E5%9C%A8%E5%9F%8E%E5%B8%82%E7%9A%84%E6%9F%90%E4%B8%AA%E6%9C%BA%E6%88%BF"><span class="nav-text">3.2、可用区：服务器所在城市的某个机房</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3%E3%80%81%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">3.3、注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4%E3%80%81%E4%B8%8D%E5%90%8C%E5%9C%B0%E5%9F%9F%E7%9A%84%E5%8F%AF%E7%94%A8%E5%8C%BA%E4%B9%8B%E9%97%B4%E5%A6%82%E4%BD%95%E5%81%9A%E5%88%B0%E5%86%85%E7%BD%91%E9%80%9A%E4%BF%A1"><span class="nav-text">3.4、不同地域的可用区之间如何做到内网通信</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%98%BF%E9%87%8C%E4%BA%91%E8%AE%A1%E8%B4%B9%E6%96%B9%E5%BC%8F"><span class="nav-text">四、阿里云计费方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1%E3%80%81%E5%8C%85%E5%B9%B4%E5%8C%85%E6%9C%88%E3%80%81%E6%8C%89%E9%87%8F%E4%BB%98%E8%B4%B9%E3%80%81%E6%8A%A2%E5%8D%A0%E5%BC%8F%E5%AE%9E%E4%BE%8B"><span class="nav-text">4.1、包年包月、按量付费、抢占式实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2%E3%80%81%E5%85%AC%E7%BD%91%E6%B5%81%E9%87%8F%E8%AE%A1%E8%B4%B9%E6%96%B9%E5%BC%8F"><span class="nav-text">4.2、公网流量计费方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%9F%BA%E6%9C%AC%E6%BC%94%E7%BB%83%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-text">五、基本演练（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1%E3%80%81%E5%88%9B%E5%BB%BA%E8%B5%84%E6%BA%90%E7%BB%84"><span class="nav-text">5.1、创建资源组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-1%E3%80%81%E7%99%BB%E9%99%86%E9%98%BF%E9%87%8C%E4%BA%91%E8%B4%A6%E5%8F%B7%E2%80%94%E7%82%B9%E5%87%BB%E6%8E%A7%E5%88%B6%E5%8F%B0"><span class="nav-text">5.1.1、登陆阿里云账号—点击控制台</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-2%E3%80%81%E8%B5%84%E6%BA%90%E7%BB%84%E9%82%A3%E5%9D%97%E7%82%B9%E5%87%BB-%E6%9F%A5%E7%9C%8B%E5%85%A8%E9%83%A8"><span class="nav-text">5.1.2、资源组那块点击 查看全部</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-3%E3%80%81%E5%88%9B%E5%BB%BA%E8%B5%84%E6%BA%90%E7%BB%84"><span class="nav-text">5.1.3、创建资源组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2%E3%80%81%E5%88%9B%E5%BB%BAVPC%E4%B8%93%E6%9C%89%E7%BD%91%E7%BB%9C%EF%BC%88%E5%B1%80%E5%9F%9F%E7%BD%91%EF%BC%89"><span class="nav-text">5.2、创建VPC专有网络（局域网）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-1%E3%80%81%E4%BA%A7%E5%93%81%E4%B8%8E%E6%9C%8D%E5%8A%A1%E4%B8%AD%E6%89%BE%E5%88%B0-%E4%B8%93%E6%9C%89%E7%BD%91%E7%BB%9CVPC"><span class="nav-text">5.2.1、产品与服务中找到 专有网络VPC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-2%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%93%E6%9C%89%E7%BD%91%E7%BB%9C"><span class="nav-text">5.2.2、创建专有网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-3%E3%80%81%E9%85%8D%E7%BD%AE-%E4%B8%93%E6%9C%89%E7%BD%91%E7%BB%9C%E3%80%81%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="nav-text">5.2.3、配置 专有网络、交换机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-4%E3%80%81%E6%9F%A5%E7%9C%8B%E5%88%9B%E5%BB%BA%E7%9A%84%E4%B8%93%E6%9C%89%E7%BD%91%E7%BB%9CVPC"><span class="nav-text">5.2.4、查看创建的专有网络VPC</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3%E3%80%81%E5%88%9B%E5%BB%BA%E5%AE%89%E5%85%A8%E7%BB%84"><span class="nav-text">5.3、创建安全组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-1%E3%80%81%E4%BA%A7%E5%93%81%E4%B8%8E%E6%9C%8D%E5%8A%A1%E6%89%BE%E5%88%B0-%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8ECS"><span class="nav-text">5.3.1、产品与服务找到 云服务器ECS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-2%E3%80%81%E9%80%89%E6%8B%A9%E5%A5%BD%E5%9C%B0%E5%9F%9F"><span class="nav-text">5.3.2、选择好地域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-3%E3%80%81%E5%88%9B%E5%BB%BA%E9%85%8D%E7%BD%AE%E5%AE%89%E5%85%A8%E7%BB%84"><span class="nav-text">5.3.3、创建配置安全组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4%E3%80%81%E5%88%9B%E5%BB%BAECS%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">5.4、创建ECS云服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-1%E3%80%81%E5%88%9B%E5%BB%BAECS%E5%AE%9E%E4%BE%8B"><span class="nav-text">5.4.1、创建ECS实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-2%E3%80%81%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-text">5.4.2、基本配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-3%E3%80%81%E7%BD%91%E7%BB%9C%E5%92%8C%E5%AE%89%E5%85%A8%E7%BB%84"><span class="nav-text">5.4.3、网络和安全组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-4%E3%80%81%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE"><span class="nav-text">5.4.4、系统配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-5%E3%80%81%E5%88%86%E7%BB%84%E8%AE%BE%E7%BD%AE"><span class="nav-text">5.4.5、分组设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-6%E3%80%81%E7%A1%AE%E8%AE%A4%E5%A5%BD%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%E5%90%8E%E5%8B%BE%E9%80%89%E6%9D%A1%E6%AC%BE%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B"><span class="nav-text">5.4.6、确认好配置信息后勾选条款创建实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5%E3%80%81%E8%BF%9C%E7%A8%8B%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-text">5.5、远程云服务器的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5-1%E3%80%81workbech%E6%96%B9%E5%BC%8F"><span class="nav-text">5.5.1、workbech方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5-2%E3%80%81VNC"><span class="nav-text">5.5.2、VNC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5-3%E3%80%81xshell"><span class="nav-text">5.5.3、xshell</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-6%E3%80%81%E9%87%8D%E7%BD%AE%E5%AF%86%E7%A0%81"><span class="nav-text">5.6、重置密码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-6-1%E3%80%81%E9%87%8D%E7%BD%AE%E5%AE%9E%E4%BE%8B%E5%AF%86%E7%A0%81%EF%BC%88%E4%BF%AE%E6%94%B9root%E5%AF%86%E7%A0%81%EF%BC%89"><span class="nav-text">5.6.1、重置实例密码（修改root密码）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-6-2%E3%80%81%E4%BF%AE%E6%94%B9%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%EF%BC%88VNC%EF%BC%89%E5%AF%86%E7%A0%81"><span class="nav-text">5.6.2、修改远程连接（VNC）密码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-7%E3%80%81%E6%B7%BB%E5%8A%A0%E4%BA%91%E7%9B%98-%E6%89%A9%E5%AE%B9%E4%BA%91%E7%9B%98"><span class="nav-text">5.7、添加云盘 &#x2F; 扩容云盘</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-7-1%E3%80%81%E6%B7%BB%E5%8A%A0%E4%BA%91%E7%9B%98"><span class="nav-text">5.7.1、添加云盘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-7-2%E3%80%81%E6%89%A9%E5%AE%B9%E4%BA%91%E7%9B%98"><span class="nav-text">5.7.2、扩容云盘</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-8%E3%80%81%E9%98%BF%E9%87%8C%E4%BA%91%E5%BF%AB%E7%85%A7%E5%A4%87%E4%BB%BD%E5%8F%8A%E5%85%8B%E9%9A%86"><span class="nav-text">5.8、阿里云快照备份及克隆</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-8-1%E3%80%81%E5%88%9B%E5%BB%BA%E5%BF%AB%E7%85%A7%E7%AD%96%E7%95%A5"><span class="nav-text">5.8.1、创建快照策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-8-2%E3%80%81%E6%89%8B%E5%8A%A8%E6%8B%8D%E6%91%84%E5%BF%AB%E7%85%A7"><span class="nav-text">5.8.2、手动拍摄快照</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-8-3%E3%80%81%E5%85%8B%E9%9A%86%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%E9%95%9C%E5%83%8F%EF%BC%89"><span class="nav-text">5.8.3、克隆（自定义镜像）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-8-4%E3%80%81%E6%A0%B9%E6%8D%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E9%95%9C%E5%83%8F%E5%88%9B%E5%BB%BAECS%E5%AE%9E%E4%BE%8B"><span class="nav-text">5.8.4、根据自定义镜像创建ECS实例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E8%B4%AD%E4%B9%B0%E5%BC%B9%E6%80%A7%E5%85%AC%E7%BD%91IP%EF%BC%88eip%EF%BC%89"><span class="nav-text">六、购买弹性公网IP（eip）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%B2%A1%E6%9C%89%E5%85%AC%E7%BD%91IP%E7%9A%84ECS"><span class="nav-text">6.1、创建一个没有公网IP的ECS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2%E3%80%81%E5%88%9B%E5%BB%BA%E5%BC%B9%E6%80%A7%E5%85%AC%E7%BD%91IP"><span class="nav-text">6.2、创建弹性公网IP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3%E3%80%81%E4%BD%BF%E7%94%A8eip"><span class="nav-text">6.3、使用eip</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81RDS%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%A7%E5%93%81"><span class="nav-text">七、RDS数据库产品</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1%E3%80%81%E5%88%9B%E5%BB%BARDS%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">7.1、创建RDS云数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2%E3%80%81%E9%85%8D%E7%BD%AERDS%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">7.2、配置RDS数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-1%E3%80%81%E8%AE%BE%E7%BD%AERDS%E7%9A%84%E7%99%BD%E5%90%8D%E5%8D%95"><span class="nav-text">7.2.1、设置RDS的白名单</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-2%E3%80%81%E5%88%9B%E5%BB%BARDS%E7%94%A8%E6%88%B7"><span class="nav-text">7.2.2、创建RDS用户</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3%E3%80%81%E8%BF%9E%E6%8E%A5RDS%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%B9%E6%B3%95"><span class="nav-text">7.3、连接RDS数据库方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-3-1%E3%80%81MySQL%E5%91%BD%E4%BB%A4%E8%BF%9E%E6%8E%A5"><span class="nav-text">7.3.1、MySQL命令连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-3-2%E3%80%81web%E7%95%8C%E9%9D%A2%E8%BF%9E%E6%8E%A5RDS%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">7.3.2、web界面连接RDS数据库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81NAS%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8"><span class="nav-text">八、NAS文件存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1%E3%80%81NAS%E6%A6%82%E8%BF%B0"><span class="nav-text">8.1、NAS概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2%E3%80%81%E5%88%9B%E5%BB%BANAS%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-text">8.2、创建NAS文件系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3%E3%80%81%E5%88%9B%E5%BB%BA%E6%9D%83%E9%99%90%E7%BB%84"><span class="nav-text">8.3、创建权限组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-4%E3%80%81%E5%88%9B%E5%BB%BA%E5%8F%AA%E8%AF%BB%E6%8C%82%E8%BD%BD%E7%82%B9"><span class="nav-text">8.4、创建只读挂载点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-5%E3%80%81%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E6%8C%82%E8%BD%BD%E7%82%B9"><span class="nav-text">8.5、查看所有挂载点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-6%E3%80%81%E4%BD%BF%E7%94%A8NAS"><span class="nav-text">8.6、使用NAS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%9D%E3%80%81OSS%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8"><span class="nav-text">九、OSS对象存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1%E3%80%81OSS-vs-NAS"><span class="nav-text">9.1、OSS  vs  NAS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2%E3%80%81%E5%88%9B%E5%BB%BAOSS%E5%AD%98%E5%82%A8%EF%BC%88Bucket%EF%BC%89"><span class="nav-text">9.2、创建OSS存储（Bucket）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3%E3%80%81OSS%E7%9A%84%E4%B8%A4%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-text">9.3、OSS的两种使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#9-3-1%E3%80%81%E5%BD%93%E6%88%90%E4%B8%80%E4%B8%AA%E7%BD%91%E7%9B%98%E6%9D%A5%E4%BD%BF%E7%94%A8"><span class="nav-text">9.3.1、当成一个网盘来使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-3-2%E3%80%81%E5%BC%80%E5%8F%91%E7%A8%8B%E5%BA%8F%E4%BB%A3%E7%A0%81%E4%BD%BF%E7%94%A8"><span class="nav-text">9.3.2、开发程序代码使用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E3%80%81RAM%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="nav-text">十、RAM访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#10-1%E3%80%81%E4%BD%BF%E7%94%A8RAM%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="nav-text">10.1、使用RAM访问控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-2%E3%80%81%E8%BF%90%E7%BB%B4%E8%B0%83%E7%94%A8%E8%BF%99%E4%B8%AA%E7%94%A8%E6%88%B7"><span class="nav-text">10.2、运维调用这个用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-3%E3%80%81%E7%BB%99RAM%E7%94%A8%E6%88%B7%E6%8E%88%E6%9D%83"><span class="nav-text">10.3、给RAM用户授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-4%E3%80%81%E5%BC%80%E5%8F%91%E8%B0%83%E7%94%A8%E8%BF%99%E4%B8%AA%E7%94%A8%E6%88%B7"><span class="nav-text">10.4、开发调用这个用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%B8%80%E3%80%81DNS%E8%A7%A3%E6%9E%90"><span class="nav-text">十一、DNS解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81CDN%E9%85%8D%E7%BD%AE%E6%B5%81%E7%A8%8B"><span class="nav-text">十二、CDN配置流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#12-1%E3%80%81CDN%E8%AE%BF%E9%97%AE%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B"><span class="nav-text">12.1、CDN访问详细流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-2%E3%80%81%E4%BD%BF%E7%94%A8CDN-%E7%BB%99%E7%BD%91%E7%AB%99%E5%8A%A0%E9%80%9F"><span class="nav-text">12.2、使用CDN 给网站加速</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%B8%89%E3%80%81%E4%BA%91%E7%9B%91%E6%8E%A7"><span class="nav-text">十三、云监控</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E5%9B%9B%E3%80%81SLB%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-text">十四、SLB负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#14-1%E3%80%81SLB%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">14.1、SLB常见的两种应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-2%E3%80%81SLB%E5%9C%BA%E6%99%AF1-%E5%BA%94%E7%94%A8"><span class="nav-text">14.2、SLB场景1 应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%BA%94%E3%80%81Redis%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">十五、Redis云数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E5%85%AD%E3%80%81ESS%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9"><span class="nav-text">十六、ESS弹性伸缩</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">阿里云实战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%BA%91%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-text">一、云的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%91"><span class="nav-text">1.1、什么是云</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2%E3%80%81%E4%BA%91%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-text">1.2、云的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8%E4%BA%91"><span class="nav-text">1.3、为什么要用云</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4%E3%80%81%E4%BA%91%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8E%82%E5%95%86"><span class="nav-text">1.4、云有哪些厂商</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5%E3%80%81%E4%BA%91%E7%9A%84%E4%BA%A7%E5%93%81%E5%90%8D%E7%A7%B0"><span class="nav-text">1.5、云的产品名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6%E3%80%81%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-VS-%E7%89%A9%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">1.6、云服务器 VS 物理服务器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%98%BF%E9%87%8C%E4%BA%91%E6%9E%B6%E6%9E%84%E5%9B%BE"><span class="nav-text">二、阿里云架构图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%9C%B0%E5%9F%9F-%E5%8F%AF%E7%94%A8%E5%8C%BA"><span class="nav-text">三、地域 &#x2F; 可用区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1%E3%80%81%E5%9C%B0%E5%9F%9F%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%89%80%E5%B1%9E%E5%9F%8E%E5%B8%82"><span class="nav-text">3.1、地域：服务器的所属城市</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2%E3%80%81%E5%8F%AF%E7%94%A8%E5%8C%BA%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%89%80%E5%9C%A8%E5%9F%8E%E5%B8%82%E7%9A%84%E6%9F%90%E4%B8%AA%E6%9C%BA%E6%88%BF"><span class="nav-text">3.2、可用区：服务器所在城市的某个机房</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3%E3%80%81%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">3.3、注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4%E3%80%81%E4%B8%8D%E5%90%8C%E5%9C%B0%E5%9F%9F%E7%9A%84%E5%8F%AF%E7%94%A8%E5%8C%BA%E4%B9%8B%E9%97%B4%E5%A6%82%E4%BD%95%E5%81%9A%E5%88%B0%E5%86%85%E7%BD%91%E9%80%9A%E4%BF%A1"><span class="nav-text">3.4、不同地域的可用区之间如何做到内网通信</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%98%BF%E9%87%8C%E4%BA%91%E8%AE%A1%E8%B4%B9%E6%96%B9%E5%BC%8F"><span class="nav-text">四、阿里云计费方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1%E3%80%81%E5%8C%85%E5%B9%B4%E5%8C%85%E6%9C%88%E3%80%81%E6%8C%89%E9%87%8F%E4%BB%98%E8%B4%B9%E3%80%81%E6%8A%A2%E5%8D%A0%E5%BC%8F%E5%AE%9E%E4%BE%8B"><span class="nav-text">4.1、包年包月、按量付费、抢占式实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2%E3%80%81%E5%85%AC%E7%BD%91%E6%B5%81%E9%87%8F%E8%AE%A1%E8%B4%B9%E6%96%B9%E5%BC%8F"><span class="nav-text">4.2、公网流量计费方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%9F%BA%E6%9C%AC%E6%BC%94%E7%BB%83%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-text">五、基本演练（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1%E3%80%81%E5%88%9B%E5%BB%BA%E8%B5%84%E6%BA%90%E7%BB%84"><span class="nav-text">5.1、创建资源组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-1%E3%80%81%E7%99%BB%E9%99%86%E9%98%BF%E9%87%8C%E4%BA%91%E8%B4%A6%E5%8F%B7%E2%80%94%E7%82%B9%E5%87%BB%E6%8E%A7%E5%88%B6%E5%8F%B0"><span class="nav-text">5.1.1、登陆阿里云账号—点击控制台</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-2%E3%80%81%E8%B5%84%E6%BA%90%E7%BB%84%E9%82%A3%E5%9D%97%E7%82%B9%E5%87%BB-%E6%9F%A5%E7%9C%8B%E5%85%A8%E9%83%A8"><span class="nav-text">5.1.2、资源组那块点击 查看全部</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-3%E3%80%81%E5%88%9B%E5%BB%BA%E8%B5%84%E6%BA%90%E7%BB%84"><span class="nav-text">5.1.3、创建资源组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2%E3%80%81%E5%88%9B%E5%BB%BAVPC%E4%B8%93%E6%9C%89%E7%BD%91%E7%BB%9C%EF%BC%88%E5%B1%80%E5%9F%9F%E7%BD%91%EF%BC%89"><span class="nav-text">5.2、创建VPC专有网络（局域网）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-1%E3%80%81%E4%BA%A7%E5%93%81%E4%B8%8E%E6%9C%8D%E5%8A%A1%E4%B8%AD%E6%89%BE%E5%88%B0-%E4%B8%93%E6%9C%89%E7%BD%91%E7%BB%9CVPC"><span class="nav-text">5.2.1、产品与服务中找到 专有网络VPC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-2%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%93%E6%9C%89%E7%BD%91%E7%BB%9C"><span class="nav-text">5.2.2、创建专有网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-3%E3%80%81%E9%85%8D%E7%BD%AE-%E4%B8%93%E6%9C%89%E7%BD%91%E7%BB%9C%E3%80%81%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="nav-text">5.2.3、配置 专有网络、交换机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-4%E3%80%81%E6%9F%A5%E7%9C%8B%E5%88%9B%E5%BB%BA%E7%9A%84%E4%B8%93%E6%9C%89%E7%BD%91%E7%BB%9CVPC"><span class="nav-text">5.2.4、查看创建的专有网络VPC</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3%E3%80%81%E5%88%9B%E5%BB%BA%E5%AE%89%E5%85%A8%E7%BB%84"><span class="nav-text">5.3、创建安全组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-1%E3%80%81%E4%BA%A7%E5%93%81%E4%B8%8E%E6%9C%8D%E5%8A%A1%E6%89%BE%E5%88%B0-%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8ECS"><span class="nav-text">5.3.1、产品与服务找到 云服务器ECS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-2%E3%80%81%E9%80%89%E6%8B%A9%E5%A5%BD%E5%9C%B0%E5%9F%9F"><span class="nav-text">5.3.2、选择好地域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-3%E3%80%81%E5%88%9B%E5%BB%BA%E9%85%8D%E7%BD%AE%E5%AE%89%E5%85%A8%E7%BB%84"><span class="nav-text">5.3.3、创建配置安全组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4%E3%80%81%E5%88%9B%E5%BB%BAECS%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">5.4、创建ECS云服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-1%E3%80%81%E5%88%9B%E5%BB%BAECS%E5%AE%9E%E4%BE%8B"><span class="nav-text">5.4.1、创建ECS实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-2%E3%80%81%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-text">5.4.2、基本配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-3%E3%80%81%E7%BD%91%E7%BB%9C%E5%92%8C%E5%AE%89%E5%85%A8%E7%BB%84"><span class="nav-text">5.4.3、网络和安全组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-4%E3%80%81%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE"><span class="nav-text">5.4.4、系统配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-5%E3%80%81%E5%88%86%E7%BB%84%E8%AE%BE%E7%BD%AE"><span class="nav-text">5.4.5、分组设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-6%E3%80%81%E7%A1%AE%E8%AE%A4%E5%A5%BD%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%E5%90%8E%E5%8B%BE%E9%80%89%E6%9D%A1%E6%AC%BE%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B"><span class="nav-text">5.4.6、确认好配置信息后勾选条款创建实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5%E3%80%81%E8%BF%9C%E7%A8%8B%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-text">5.5、远程云服务器的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5-1%E3%80%81workbech%E6%96%B9%E5%BC%8F"><span class="nav-text">5.5.1、workbech方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5-2%E3%80%81VNC"><span class="nav-text">5.5.2、VNC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5-3%E3%80%81xshell"><span class="nav-text">5.5.3、xshell</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-6%E3%80%81%E9%87%8D%E7%BD%AE%E5%AF%86%E7%A0%81"><span class="nav-text">5.6、重置密码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-6-1%E3%80%81%E9%87%8D%E7%BD%AE%E5%AE%9E%E4%BE%8B%E5%AF%86%E7%A0%81%EF%BC%88%E4%BF%AE%E6%94%B9root%E5%AF%86%E7%A0%81%EF%BC%89"><span class="nav-text">5.6.1、重置实例密码（修改root密码）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-6-2%E3%80%81%E4%BF%AE%E6%94%B9%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%EF%BC%88VNC%EF%BC%89%E5%AF%86%E7%A0%81"><span class="nav-text">5.6.2、修改远程连接（VNC）密码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-7%E3%80%81%E6%B7%BB%E5%8A%A0%E4%BA%91%E7%9B%98-%E6%89%A9%E5%AE%B9%E4%BA%91%E7%9B%98"><span class="nav-text">5.7、添加云盘 &#x2F; 扩容云盘</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-7-1%E3%80%81%E6%B7%BB%E5%8A%A0%E4%BA%91%E7%9B%98"><span class="nav-text">5.7.1、添加云盘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-7-2%E3%80%81%E6%89%A9%E5%AE%B9%E4%BA%91%E7%9B%98"><span class="nav-text">5.7.2、扩容云盘</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-8%E3%80%81%E9%98%BF%E9%87%8C%E4%BA%91%E5%BF%AB%E7%85%A7%E5%A4%87%E4%BB%BD%E5%8F%8A%E5%85%8B%E9%9A%86"><span class="nav-text">5.8、阿里云快照备份及克隆</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-8-1%E3%80%81%E5%88%9B%E5%BB%BA%E5%BF%AB%E7%85%A7%E7%AD%96%E7%95%A5"><span class="nav-text">5.8.1、创建快照策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-8-2%E3%80%81%E6%89%8B%E5%8A%A8%E6%8B%8D%E6%91%84%E5%BF%AB%E7%85%A7"><span class="nav-text">5.8.2、手动拍摄快照</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-8-3%E3%80%81%E5%85%8B%E9%9A%86%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%E9%95%9C%E5%83%8F%EF%BC%89"><span class="nav-text">5.8.3、克隆（自定义镜像）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-8-4%E3%80%81%E6%A0%B9%E6%8D%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E9%95%9C%E5%83%8F%E5%88%9B%E5%BB%BAECS%E5%AE%9E%E4%BE%8B"><span class="nav-text">5.8.4、根据自定义镜像创建ECS实例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E8%B4%AD%E4%B9%B0%E5%BC%B9%E6%80%A7%E5%85%AC%E7%BD%91IP%EF%BC%88eip%EF%BC%89"><span class="nav-text">六、购买弹性公网IP（eip）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%B2%A1%E6%9C%89%E5%85%AC%E7%BD%91IP%E7%9A%84ECS"><span class="nav-text">6.1、创建一个没有公网IP的ECS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2%E3%80%81%E5%88%9B%E5%BB%BA%E5%BC%B9%E6%80%A7%E5%85%AC%E7%BD%91IP"><span class="nav-text">6.2、创建弹性公网IP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3%E3%80%81%E4%BD%BF%E7%94%A8eip"><span class="nav-text">6.3、使用eip</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81RDS%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%A7%E5%93%81"><span class="nav-text">七、RDS数据库产品</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1%E3%80%81%E5%88%9B%E5%BB%BARDS%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">7.1、创建RDS云数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2%E3%80%81%E9%85%8D%E7%BD%AERDS%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">7.2、配置RDS数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-1%E3%80%81%E8%AE%BE%E7%BD%AERDS%E7%9A%84%E7%99%BD%E5%90%8D%E5%8D%95"><span class="nav-text">7.2.1、设置RDS的白名单</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-2%E3%80%81%E5%88%9B%E5%BB%BARDS%E7%94%A8%E6%88%B7"><span class="nav-text">7.2.2、创建RDS用户</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3%E3%80%81%E8%BF%9E%E6%8E%A5RDS%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%B9%E6%B3%95"><span class="nav-text">7.3、连接RDS数据库方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-3-1%E3%80%81MySQL%E5%91%BD%E4%BB%A4%E8%BF%9E%E6%8E%A5"><span class="nav-text">7.3.1、MySQL命令连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-3-2%E3%80%81web%E7%95%8C%E9%9D%A2%E8%BF%9E%E6%8E%A5RDS%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">7.3.2、web界面连接RDS数据库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81NAS%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8"><span class="nav-text">八、NAS文件存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1%E3%80%81NAS%E6%A6%82%E8%BF%B0"><span class="nav-text">8.1、NAS概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2%E3%80%81%E5%88%9B%E5%BB%BANAS%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-text">8.2、创建NAS文件系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3%E3%80%81%E5%88%9B%E5%BB%BA%E6%9D%83%E9%99%90%E7%BB%84"><span class="nav-text">8.3、创建权限组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-4%E3%80%81%E5%88%9B%E5%BB%BA%E5%8F%AA%E8%AF%BB%E6%8C%82%E8%BD%BD%E7%82%B9"><span class="nav-text">8.4、创建只读挂载点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-5%E3%80%81%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E6%8C%82%E8%BD%BD%E7%82%B9"><span class="nav-text">8.5、查看所有挂载点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-6%E3%80%81%E4%BD%BF%E7%94%A8NAS"><span class="nav-text">8.6、使用NAS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%9D%E3%80%81OSS%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8"><span class="nav-text">九、OSS对象存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1%E3%80%81OSS-vs-NAS"><span class="nav-text">9.1、OSS  vs  NAS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2%E3%80%81%E5%88%9B%E5%BB%BAOSS%E5%AD%98%E5%82%A8%EF%BC%88Bucket%EF%BC%89"><span class="nav-text">9.2、创建OSS存储（Bucket）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3%E3%80%81OSS%E7%9A%84%E4%B8%A4%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-text">9.3、OSS的两种使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#9-3-1%E3%80%81%E5%BD%93%E6%88%90%E4%B8%80%E4%B8%AA%E7%BD%91%E7%9B%98%E6%9D%A5%E4%BD%BF%E7%94%A8"><span class="nav-text">9.3.1、当成一个网盘来使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-3-2%E3%80%81%E5%BC%80%E5%8F%91%E7%A8%8B%E5%BA%8F%E4%BB%A3%E7%A0%81%E4%BD%BF%E7%94%A8"><span class="nav-text">9.3.2、开发程序代码使用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E3%80%81RAM%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="nav-text">十、RAM访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#10-1%E3%80%81%E4%BD%BF%E7%94%A8RAM%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="nav-text">10.1、使用RAM访问控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-2%E3%80%81%E8%BF%90%E7%BB%B4%E8%B0%83%E7%94%A8%E8%BF%99%E4%B8%AA%E7%94%A8%E6%88%B7"><span class="nav-text">10.2、运维调用这个用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-3%E3%80%81%E7%BB%99RAM%E7%94%A8%E6%88%B7%E6%8E%88%E6%9D%83"><span class="nav-text">10.3、给RAM用户授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-4%E3%80%81%E5%BC%80%E5%8F%91%E8%B0%83%E7%94%A8%E8%BF%99%E4%B8%AA%E7%94%A8%E6%88%B7"><span class="nav-text">10.4、开发调用这个用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%B8%80%E3%80%81DNS%E8%A7%A3%E6%9E%90"><span class="nav-text">十一、DNS解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81CDN%E9%85%8D%E7%BD%AE%E6%B5%81%E7%A8%8B"><span class="nav-text">十二、CDN配置流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#12-1%E3%80%81CDN%E8%AE%BF%E9%97%AE%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B"><span class="nav-text">12.1、CDN访问详细流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-2%E3%80%81%E4%BD%BF%E7%94%A8CDN-%E7%BB%99%E7%BD%91%E7%AB%99%E5%8A%A0%E9%80%9F"><span class="nav-text">12.2、使用CDN 给网站加速</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%B8%89%E3%80%81%E4%BA%91%E7%9B%91%E6%8E%A7"><span class="nav-text">十三、云监控</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E5%9B%9B%E3%80%81SLB%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-text">十四、SLB负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#14-1%E3%80%81SLB%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">14.1、SLB常见的两种应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-2%E3%80%81SLB%E5%9C%BA%E6%99%AF1-%E5%BA%94%E7%94%A8"><span class="nav-text">14.2、SLB场景1 应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%BA%94%E3%80%81Redis%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">十五、Redis云数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E5%85%AD%E3%80%81ESS%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9"><span class="nav-text">十六、ESS弹性伸缩</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -1422,7 +1561,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
