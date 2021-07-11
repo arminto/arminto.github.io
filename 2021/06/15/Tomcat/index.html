@@ -208,41 +208,28 @@
       
         <!--toc-->
 <span id="more"></span>
-<h1>Tomcat个人笔记</h1>
-<h2 id="一、Tomcat简介概述">一、Tomcat简介概述</h2>
-<h3 id="1-Tomcat-历史由来"><em>1. Tomcat 历史由来</em></h3>
-<ul>
+
+<h1 id="Tomcat个人笔记"><a href="#Tomcat个人笔记" class="headerlink" title="Tomcat个人笔记"></a>Tomcat个人笔记</h1><h2 id="一、Tomcat简介概述"><a href="#一、Tomcat简介概述" class="headerlink" title="一、Tomcat简介概述"></a>一、Tomcat简介概述</h2><h3 id="1-Tomcat-历史由来"><a href="#1-Tomcat-历史由来" class="headerlink" title="1. Tomcat 历史由来"></a><em>1. Tomcat 历史由来</em></h3><ul>
 <li>Tomcat 最初由 Sun 公司的软件架构师 James Duncan Davidson 开发，名称为 “JavaWebServer”。</li>
 <li>1999年，在 Davidson 的帮助下，该项目于1999年 于 apache软件基金会旗下的 JServ 项目合并，并发布第一个版本(3.x)，即是现在的Tomcat，该版本实现了 Servlet2.2 和 JSP 1.1规范。</li>
 <li>2001年，Tomcat 发布了4.0版本，作为里程碑式的版本，Tomcat 完全重新设计了其架构,并实现了Servlet 2.3 和 JSP1.2 规范。</li>
 <li>目前Tomcat已经更新到9.0.x版本，但是目前企业中的Tomcat服务器 ，主流版本还是 7.x 和8.x 。</li>
 </ul>
-<h3 id="2-Tomcat基本简介"><em>2. Tomcat基本简介</em></h3>
-<blockquote>
+<h3 id="2-Tomcat基本简介"><a href="#2-Tomcat基本简介" class="headerlink" title="2. Tomcat基本简介"></a><em>2. Tomcat基本简介</em></h3><blockquote>
 <ul>
-<li>
-<p>Tomcat是由java语言开发的，**只要遇见java语言开发的软件包，就一定要提前安装JDK。**因为java语言号称是一次编译，到处运行。（跨平台运行，且不会出现问题）</p>
+<li><p>Tomcat是由java语言开发的，<strong>只要遇见java语言开发的软件包，就一定要提前安装JDK。</strong>因为java语言号称是一次编译，到处运行。（跨平台运行，且不会出现问题）</p>
 </li>
-<li>
-<p>Tomcat 服务器是一个开源的轻量级Web应用服务器，在中小型系统和并发量小的场合下被普遍使用，是开发和调试Servlet、JSP 程序的首选。<strong>说白了用来解析 jsp 网页的</strong></p>
+<li><p>Tomcat 服务器是一个开源的轻量级Web应用服务器，在中小型系统和并发量小的场合下被普遍使用，是开发和调试Servlet、JSP 程序的首选。<strong>说白了用来解析 jsp 网页的</strong></p>
 </li>
-<li>
-<p><strong>与Tomcat功能类似的web软件</strong></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">webLogic: oracle公司，大型的JavaEE服务器，支持所有的JavaEE规范，收费。</span><br><span class="line"></span><br><span class="line">webSphere: IBM公司，大型的JavaEE服务器，支持所有的JavaEE规范，收费。</span><br><span class="line"></span><br><span class="line">JBOSS: JBOSS公司的，大型的JavaE服务器，支持所有的JavaEE规范，收费。</span><br><span class="line"></span><br><span class="line">Tomcat: Apache基金组织，中小型的JavaEE服务器，支持少量的JavaEE规范servlet/jsp，开源。</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p><strong>Tomcat与其他开源的Web软件有什么不同点</strong></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Apache         <span class="comment">#默认只能解析html的页面</span></span><br><span class="line"></span><br><span class="line">Nginx          <span class="comment">#默认只能解析html的页面</span></span><br><span class="line"></span><br><span class="line">Tomcat         <span class="comment">#默认也能解析html的页面，但远远不如以上两者，他主要的作用是能够解析.jsp页面，在公司，很多人把它称之为中间件。</span></span><br></pre></td></tr></table></figure>
-</li>
+<li><p><strong>与Tomcat功能类似的web软件</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">webLogic: oracle公司，大型的JavaEE服务器，支持所有的JavaEE规范，收费。</span><br><span class="line"></span><br><span class="line">webSphere: IBM公司，大型的JavaEE服务器，支持所有的JavaEE规范，收费。</span><br><span class="line"></span><br><span class="line">JBOSS: JBOSS公司的，大型的JavaE服务器，支持所有的JavaEE规范，收费。</span><br><span class="line"></span><br><span class="line">Tomcat: Apache基金组织，中小型的JavaEE服务器，支持少量的JavaEE规范servlet/jsp，开源。</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>Tomcat与其他开源的Web软件有什么不同点</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Apache         <span class="comment">#默认只能解析html的页面</span></span><br><span class="line"></span><br><span class="line">Nginx          <span class="comment">#默认只能解析html的页面</span></span><br><span class="line"></span><br><span class="line">Tomcat         <span class="comment">#默认也能解析html的页面，但远远不如以上两者，他主要的作用是能够解析.jsp页面，在公司，很多人把它称之为中间件。</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 </blockquote>
-<h2 id="二、Tomcat架构原理">二、Tomcat架构原理</h2>
-<h3 id="1-HTTP工作原理"><em>1. HTTP工作原理</em></h3>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gridxlwz34j30x00i7n1w.jpg" alt="image-20200603234950940"></p>
-<h3 id="2-Tomcat基本架构图"><em>2. Tomcat基本架构图</em></h3>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gridxrs5jdj30es09w3zt.jpg" alt="image-20200603230105779"></p>
-<h3 id="3-Tomcat各目录及文件说明"><em>3. Tomcat各目录及文件说明</em></h3>
-<table>
+<h2 id="二、Tomcat架构原理"><a href="#二、Tomcat架构原理" class="headerlink" title="二、Tomcat架构原理"></a>二、Tomcat架构原理</h2><h3 id="1-HTTP工作原理"><a href="#1-HTTP工作原理" class="headerlink" title="1. HTTP工作原理"></a><em>1. HTTP工作原理</em></h3><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gridxlwz34j30x00i7n1w.jpg" alt="image-20200603234950940"></p>
+<h3 id="2-Tomcat基本架构图"><a href="#2-Tomcat基本架构图" class="headerlink" title="2. Tomcat基本架构图"></a><em>2. Tomcat基本架构图</em></h3><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gridxrs5jdj30es09w3zt.jpg" alt="image-20200603230105779"></p>
+<h3 id="3-Tomcat各目录及文件说明"><a href="#3-Tomcat各目录及文件说明" class="headerlink" title="3. Tomcat各目录及文件说明"></a><em>3. Tomcat各目录及文件说明</em></h3><table>
 <thead>
 <tr>
 <th>整体目录</th>
@@ -250,8 +237,7 @@
 <th>简单说明</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><em><strong>bin</strong></em></td>
 <td><em><strong>/</strong></em></td>
 <td><em><strong>存放 Tomcat的启动、停止等批处理脚本和Shell脚本</strong></em></td>
@@ -371,50 +357,44 @@
 <td><em><strong>/</strong></em></td>
 <td><em><strong>存放Web应用JSP代码生成和编译后产生的class文件目录</strong></em></td>
 </tr>
-</tbody>
-</table>
-<h2 id="三、Tomcat部署">三、Tomcat部署</h2>
-<h3 id="1-安装JDK"><em>1. 安装JDK</em></h3>
-<ul>
-<li><strong>官方下载</strong>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.oracle.com">https://www.oracle.com</a></li>
+</tbody></table>
+<h2 id="三、Tomcat部署"><a href="#三、Tomcat部署" class="headerlink" title="三、Tomcat部署"></a>三、Tomcat部署</h2><h3 id="1-安装JDK"><a href="#1-安装JDK" class="headerlink" title="1. 安装JDK"></a><em>1. 安装JDK</em></h3><ul>
+<li><strong>官方下载</strong><ul>
+<li><a target="_blank" rel="noopener" href="https://www.oracle.com/">https://www.oracle.com</a></li>
 </ul>
 </li>
-<li><strong>个人网站下载</strong>
-<ul>
+<li><strong>个人网站下载</strong><ul>
 <li><a target="_blank" rel="noopener" href="http://bbs.lemon-li.cn/jdk-8u181-linux-x64.tar.gz">JDK-8u181-linux-x64</a></li>
 </ul>
 </li>
 <li>Centos7安装Tomcat</li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]<span class="comment"># tar xf jdk-8u181-linux-x64.tar.gz</span></span><br><span class="line"></span><br><span class="line">[root@tomcat ~]<span class="comment"># mv jdk1.8.0_181 /usr/local/java</span></span><br><span class="line"></span><br><span class="line">[root@tomcat ~]<span class="comment"># vim /etc/profile          #添加JAVA环境变量</span></span><br><span class="line"><span class="comment">#JAVA_HOME</span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/<span class="built_in">local</span>/java</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> CLASSPATH=<span class="variable">$JAVA_HOME</span>/lib/tools.jar:<span class="variable">$JAVA_HOME</span>/lib/dt.jar:<span class="variable">$JAVA_HOME</span>/lib</span><br><span class="line">wq!</span><br><span class="line"></span><br><span class="line">[root@tomcat ~]<span class="comment"># source /etc/profile       # 加载环境变量</span></span><br><span class="line"></span><br><span class="line">[root@tomcat ~]<span class="comment"># java -version             #查看JDK版本，当出现版本信息时，表明安装成功</span></span><br><span class="line">java version <span class="string">&quot;1.8.0_181&quot;</span></span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_181-b13)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)</span><br></pre></td></tr></table></figure>
-<h3 id="2-安装-Tomcat"><em>2. 安装 Tomcat</em></h3>
-<ul>
-<li>
-<p><strong>官方下载</strong></p>
+
+
+
+<h3 id="2-安装-Tomcat"><a href="#2-安装-Tomcat" class="headerlink" title="2. 安装 Tomcat"></a><em>2. 安装 Tomcat</em></h3><ul>
+<li><p><strong>官方下载</strong></p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://tomcat.apache.org/">https://tomcat.apache.org/</a></li>
 </ul>
 </li>
-<li>
-<p><strong>个人网站下载</strong></p>
+<li><p><strong>个人网站下载</strong></p>
 <ul>
 <li><a href="bbs.lemon-li.cn/apache-tomcat-8.5.32.tar.gz">Tomcat-8.5.32</a></li>
 </ul>
 </li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]<span class="comment"># tar xf apache-tomcat-8.5.32.tar.gz</span></span><br><span class="line"></span><br><span class="line">[root@tomcat ~]<span class="comment"># mv apache-tomcat-8.5.32 /usr/local/tomcat</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#在catalina.sh文件中添加如下两条配置</span></span><br><span class="line">sed -i <span class="string">&#x27;1a # JDK&#x27;</span> /usr/<span class="built_in">local</span>/tomcat/bin/catalina.sh</span><br><span class="line">sed -i <span class="string">&#x27;2a JAVA_HOME=/usr/local/java&#x27;</span> /usr/<span class="built_in">local</span>/tomcat/bin/catalina.sh</span><br><span class="line"></span><br><span class="line"><span class="comment">#备份主配置及删除配置文件注释</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># cp /usr/local/tomcat/conf/server.xml /usr/local/tomcat/conf/server.xml.bak &amp;&amp; perl -lne &#x27;print unless (/&lt;!--/../--&gt;/)&#x27; /usr/local/tomcat/conf/server.xml.bak &gt; /usr/local/tomcat/conf/server.xml &amp;&amp; sed -i /^$/d /usr/local/tomcat/conf/server.xml</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#启动tomcat服务</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># /usr/local/tomcat/bin/startup.sh </span></span><br><span class="line">Using CATALINA_BASE:   /usr/<span class="built_in">local</span>/tomcat</span><br><span class="line">Using CATALINA_HOME:   /usr/<span class="built_in">local</span>/tomcat</span><br><span class="line">Using CATALINA_TMPDIR: /usr/<span class="built_in">local</span>/tomcat/temp</span><br><span class="line">Using JRE_HOME:        /usr/<span class="built_in">local</span>/java</span><br><span class="line">Using CLASSPATH:       /usr/<span class="built_in">local</span>/tomcat/bin/bootstrap.jar:/usr/<span class="built_in">local</span>/tomcat/bin/tomcat-juli.jar</span><br><span class="line">Tomcat started.</span><br><span class="line"></span><br><span class="line"><span class="comment">#检查Tomcat是否启动</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># netstat -anptu|grep java</span></span><br><span class="line">tcp6       0      0 :::8080             :::*             LISTEN      26265/java       </span><br><span class="line">tcp6       0      0 127.0.0.1:8005      :::*             LISTEN      26265/java       </span><br><span class="line">tcp6       0      0 :::8009             :::*             LISTEN      26265/java</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看Tomcat日志信息</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># tail -f /usr/local/tomcat/logs/catalina.out </span></span><br><span class="line">03-Jun-2020 22:30:50.656 信息 [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler [<span class="string">&quot;http-nio-8080&quot;</span>]</span><br><span class="line">03-Jun-2020 22:30:50.662 信息 [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler [<span class="string">&quot;ajp-nio-8009&quot;</span>]</span><br><span class="line">03-Jun-2020 22:30:50.670 信息 [main] org.apache.catalina.startup.Catalina.start Server startup <span class="keyword">in</span> 485 ms</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><strong>Tomcat的三个端口及作用</strong>
-<ul>
+<li><strong>Tomcat的三个端口及作用</strong><ul>
 <li>8005：这个端口负责 监听 关闭 Tomcat的请求</li>
 <li>8009：负责与其他web服务器进行通信的接口，用的是AJP协议</li>
 <li>8080：负责接收客户端的请求，用的是HTTP协议</li>
 </ul>
 </li>
-<li><strong>访问Tomcat测试页面</strong>
-<ul>
+<li><strong>访问Tomcat测试页面</strong><ul>
 <li><a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080/</a></li>
 </ul>
 </li>
@@ -427,60 +407,55 @@
 <li><em>如果需要登录系统，必须配置 tomcat用户，在安装完 Tomcat后，进行如下操作</em></li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#添加管理页面的用户认证，帐户名为tomcat，密码为123123</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># vim /usr/local/tomcat/conf/tomcat-users.xml</span></span><br><span class="line"><span class="comment">#在&lt;tomcat-users&gt;区域中加入以下两个配置</span></span><br><span class="line">&lt;role rolename=<span class="string">&quot;manager-gui&quot;</span>/&gt;</span><br><span class="line">&lt;user username=<span class="string">&quot;tomcat&quot;</span> password=<span class="string">&quot;123123&quot;</span> roles=<span class="string">&quot;manager-gui&quot;</span>/&gt;</span><br><span class="line">wq！</span><br><span class="line"></span><br><span class="line"><span class="comment">#默认tomcat的管理页面只能通过tomcat服务器上的浏览器才可以访问。**设置其可以在其他主机访问</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># vim /usr/local/tomcat/webapps/manager/META-INF/context.xml</span></span><br><span class="line">20     allow=<span class="string">&quot;.*&quot;</span> /&gt;     <span class="comment">#允许所有</span></span><br><span class="line">wq！</span><br><span class="line"></span><br><span class="line"><span class="comment">#重启Tomcat</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># /usr/local/tomcat/bin/shutdown.sh</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># /usr/local/tomcat/bin/startup.sh</span></span><br></pre></td></tr></table></figure>
+
 <p><em><strong>再来访问服务器状态</strong></em></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gridy6ri1zj30um0lq78u.jpg" alt="image-20200604004628772"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gridyah59jj30x10pptbk.jpg" alt="image-20200604005737091"></p>
-<h2 id="四、server-xml配置文件详解（重点）">四、server.xml配置文件详解（重点）</h2>
-<h3 id="1-一个整体的-server-xml配置实例"><em>1. 一个整体的 server.xml配置实例</em></h3>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Server</span> <span class="attr">port</span>=<span class="string">&quot;8005&quot;</span> <span class="attr">shutdown</span>=<span class="string">&quot;SHUTDOWN&quot;</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">Listener</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.startup.VersionLoggerListener&quot;</span> /&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">Listener</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.core.AprLifecycleListener&quot;</span> <span class="attr">SSLEngine</span>=<span class="string">&quot;on&quot;</span> /&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">Listener</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.core.JreMemoryLeakPreventionListener&quot;</span> /&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">Listener</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.mbeans.GlobalResourcesLifecycleListener&quot;</span> /&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">Listener</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.core.ThreadLocalLeakPreventionListener&quot;</span> /&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">GlobalNamingResources</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">Resource</span> <span class="attr">name</span>=<span class="string">&quot;UserDatabase&quot;</span> <span class="attr">auth</span>=<span class="string">&quot;Container&quot;</span></span></span><br><span class="line"><span class="tag">             <span class="attr">type</span>=<span class="string">&quot;org.apache.catalina.UserDatabase&quot;</span></span></span><br><span class="line"><span class="tag">             <span class="attr">description</span>=<span class="string">&quot;User database that can be updated and saved&quot;</span></span></span><br><span class="line"><span class="tag">             <span class="attr">factory</span>=<span class="string">&quot;org.apache.catalina.users.MemoryUserDatabaseFactory&quot;</span></span></span><br><span class="line"><span class="tag">             <span class="attr">pathname</span>=<span class="string">&quot;conf/tomcat-users.xml&quot;</span> /&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">GlobalNamingResources</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">Service</span> <span class="attr">name</span>=<span class="string">&quot;Catalina&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">&quot;8080&quot;</span> <span class="attr">protocol</span>=<span class="string">&quot;HTTP/1.1&quot;</span></span></span><br><span class="line"><span class="tag">              <span class="attr">connectionTimeout</span>=<span class="string">&quot;20000&quot;</span></span></span><br><span class="line"><span class="tag">              <span class="attr">redirectPort</span>=<span class="string">&quot;8443&quot;</span> /&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">&quot;8009&quot;</span> <span class="attr">protocol</span>=<span class="string">&quot;AJP/1.3&quot;</span> <span class="attr">redirectPort</span>=<span class="string">&quot;8443&quot;</span> /&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">Engine</span> <span class="attr">name</span>=<span class="string">&quot;Catalina&quot;</span> <span class="attr">defaultHost</span>=<span class="string">&quot;localhost&quot;</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">Realm</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.realm.LockOutRealm&quot;</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">Realm</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.realm.UserDatabaseRealm&quot;</span></span></span><br><span class="line"><span class="tag">              <span class="attr">resourceName</span>=<span class="string">&quot;UserDatabase&quot;</span>/&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">Realm</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">&quot;localhost&quot;</span>  <span class="attr">appBase</span>=<span class="string">&quot;webapps&quot;</span></span></span><br><span class="line"><span class="tag">           <span class="attr">unpackWARs</span>=<span class="string">&quot;true&quot;</span> <span class="attr">autoDeploy</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.valves.AccessLogValve&quot;</span> <span class="attr">directory</span>=<span class="string">&quot;logs&quot;</span></span></span><br><span class="line"><span class="tag">              <span class="attr">prefix</span>=<span class="string">&quot;localhost_access_log&quot;</span> <span class="attr">suffix</span>=<span class="string">&quot;.txt&quot;</span></span></span><br><span class="line"><span class="tag">              <span class="attr">pattern</span>=<span class="string">&quot;%h %l %u %t <span class="symbol">&amp;quot;</span>%r<span class="symbol">&amp;quot;</span> %s %b&quot;</span> /&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">Host</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">Engine</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">Service</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Server</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-server-xml文件的结构-和-元素"><em>2. server.xml文件的结构 和 元素</em></h3>
-<h4 id="2-1-server-xml的整体结构如下："><em>2.1. server.xml的整体结构如下：</em></h4>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Server</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Service</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Connector</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Connector</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Engine</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">Host</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">Context</span> /&gt;</span><span class="comment">&lt;!-- 现在常常使用自动部署，不推荐配置Context元素 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">Host</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Engine</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Service</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Server</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="四、server-xml配置文件详解（重点）"><a href="#四、server-xml配置文件详解（重点）" class="headerlink" title="四、server.xml配置文件详解（重点）"></a>四、server.xml配置文件详解（重点）</h2><h3 id="1-一个整体的-server-xml配置实例"><a href="#1-一个整体的-server-xml配置实例" class="headerlink" title="1. 一个整体的 server.xml配置实例"></a><em>1. 一个整体的 server.xml配置实例</em></h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Server</span> <span class="attr">port</span>=<span class="string">&quot;8005&quot;</span> <span class="attr">shutdown</span>=<span class="string">&quot;SHUTDOWN&quot;</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">Listener</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.startup.VersionLoggerListener&quot;</span> /&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">Listener</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.core.AprLifecycleListener&quot;</span> <span class="attr">SSLEngine</span>=<span class="string">&quot;on&quot;</span> /&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">Listener</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.core.JreMemoryLeakPreventionListener&quot;</span> /&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">Listener</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.mbeans.GlobalResourcesLifecycleListener&quot;</span> /&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">Listener</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.core.ThreadLocalLeakPreventionListener&quot;</span> /&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">GlobalNamingResources</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">Resource</span> <span class="attr">name</span>=<span class="string">&quot;UserDatabase&quot;</span> <span class="attr">auth</span>=<span class="string">&quot;Container&quot;</span></span></span><br><span class="line"><span class="tag">             <span class="attr">type</span>=<span class="string">&quot;org.apache.catalina.UserDatabase&quot;</span></span></span><br><span class="line"><span class="tag">             <span class="attr">description</span>=<span class="string">&quot;User database that can be updated and saved&quot;</span></span></span><br><span class="line"><span class="tag">             <span class="attr">factory</span>=<span class="string">&quot;org.apache.catalina.users.MemoryUserDatabaseFactory&quot;</span></span></span><br><span class="line"><span class="tag">             <span class="attr">pathname</span>=<span class="string">&quot;conf/tomcat-users.xml&quot;</span> /&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">GlobalNamingResources</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">Service</span> <span class="attr">name</span>=<span class="string">&quot;Catalina&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">&quot;8080&quot;</span> <span class="attr">protocol</span>=<span class="string">&quot;HTTP/1.1&quot;</span></span></span><br><span class="line"><span class="tag">              <span class="attr">connectionTimeout</span>=<span class="string">&quot;20000&quot;</span></span></span><br><span class="line"><span class="tag">              <span class="attr">redirectPort</span>=<span class="string">&quot;8443&quot;</span> /&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">&quot;8009&quot;</span> <span class="attr">protocol</span>=<span class="string">&quot;AJP/1.3&quot;</span> <span class="attr">redirectPort</span>=<span class="string">&quot;8443&quot;</span> /&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">Engine</span> <span class="attr">name</span>=<span class="string">&quot;Catalina&quot;</span> <span class="attr">defaultHost</span>=<span class="string">&quot;localhost&quot;</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">Realm</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.realm.LockOutRealm&quot;</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">Realm</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.realm.UserDatabaseRealm&quot;</span></span></span><br><span class="line"><span class="tag">              <span class="attr">resourceName</span>=<span class="string">&quot;UserDatabase&quot;</span>/&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">Realm</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">&quot;localhost&quot;</span>  <span class="attr">appBase</span>=<span class="string">&quot;webapps&quot;</span></span></span><br><span class="line"><span class="tag">           <span class="attr">unpackWARs</span>=<span class="string">&quot;true&quot;</span> <span class="attr">autoDeploy</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.valves.AccessLogValve&quot;</span> <span class="attr">directory</span>=<span class="string">&quot;logs&quot;</span></span></span><br><span class="line"><span class="tag">              <span class="attr">prefix</span>=<span class="string">&quot;localhost_access_log&quot;</span> <span class="attr">suffix</span>=<span class="string">&quot;.txt&quot;</span></span></span><br><span class="line"><span class="tag">              <span class="attr">pattern</span>=<span class="string">&quot;%h %l %u %t <span class="symbol">&amp;quot;</span>%r<span class="symbol">&amp;quot;</span> %s %b&quot;</span> /&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">Host</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">Engine</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">Service</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Server</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-server-xml文件的结构-和-元素"><a href="#2-server-xml文件的结构-和-元素" class="headerlink" title="2. server.xml文件的结构 和 元素"></a><em>2. server.xml文件的结构 和 元素</em></h3><h4 id="2-1-server-xml的整体结构如下："><a href="#2-1-server-xml的整体结构如下：" class="headerlink" title="2.1. server.xml的整体结构如下："></a><em>2.1. server.xml的整体结构如下：</em></h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Server</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Service</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Connector</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Connector</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Engine</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">Host</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">Context</span> /&gt;</span><span class="comment">&lt;!-- 现在常常使用自动部署，不推荐配置Context元素 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">Host</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Engine</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Service</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Server</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p><strong>上面只给出了Tomcat的核心组件，除了核心组件外，Tomcat还有一些其他组件，下面介绍组件的分类。</strong></p>
 </blockquote>
-<h4 id="2-2-server-xml文件中的元素可以分四类"><em>2.2. server.xml文件中的元素可以分四类</em></h4>
-<ul>
-<li>
-<p><em><strong>顶层元素：</strong></em>&lt;server&gt; 和 &lt;/service&gt;</p>
+<h4 id="2-2-server-xml文件中的元素可以分四类"><a href="#2-2-server-xml文件中的元素可以分四类" class="headerlink" title="2.2. server.xml文件中的元素可以分四类"></a><em>2.2. server.xml文件中的元素可以分四类</em></h4><ul>
+<li><p><em><strong>顶层元素：</strong></em>&lt;server&gt; 和 &lt;/service&gt;</p>
 <ul>
 <li>&lt;server&gt; ：元素是整个配置文件的根元素</li>
 <li>&lt;/service&gt; ：元素则代表一个Engine元素以及一组与之相连的Connector元素</li>
 </ul>
 </li>
-<li>
-<p><em><strong>连接器：</strong></em>&lt;Connector /&gt;</p>
+<li><p><em><strong>连接器：</strong></em>&lt;Connector /&gt;</p>
 <ul>
 <li>&lt;Connector /&gt;：代表了外部客户端发送请求到特定Service的接口；同时也是外部客户端从特定Service接收响应的接口。</li>
 </ul>
 </li>
-<li>
-<p><em><strong>容器：</strong></em>&lt;Engine&gt;&lt;Host&gt;&lt;/Engine&gt;</p>
+<li><p><em><strong>容器：</strong></em>&lt;Engine&gt;&lt;Host&gt;&lt;/Engine&gt;</p>
 <ul>
 <li>容器的功能是处理<strong>Connector</strong>接收进来的请求，并产生相应的响应。<strong>而Engine、Host 和 Context 都是容器，但它们不是平行的关系，而是父子关系：Engine包含Host，Host包含Context。</strong></li>
 <li>一个Engine组件可以处理Service中的所有请求，一个Host组件可以处理发向一个特定虚拟主机的所有请求，一个Context组件可以处理一个特定Web应用的所有请求。</li>
 </ul>
 </li>
-<li>
-<p>***内嵌组件：***<strong>可以内嵌到容器中的组件。</strong></p>
+<li><p><em><strong>内嵌组件：</strong></em><strong>可以内嵌到容器中的组件。</strong></p>
 <ul>
 <li>实际上， <strong>Server</strong> <strong>、Service</strong> <strong>、Connector</strong> <strong>、Engine</strong> <strong>、Host</strong> <strong>和Context</strong> <strong>是最重要的最核心的Tomcat</strong> <strong>组件</strong>，其他组件都可以归为内嵌组件。</li>
 </ul>
 </li>
 </ul>
-<h4 id="2-3-server-xml元素"><em>2.3. server.xml元素</em></h4>
-<p><strong>1. &lt;Server&gt;元素</strong></p>
+<h4 id="2-3-server-xml元素"><a href="#2-3-server-xml元素" class="headerlink" title="2.3. server.xml元素"></a><em>2.3. server.xml元素</em></h4><p><strong>1. &lt;Server&gt;元素</strong></p>
 <ul>
 <li>Server 元素在最顶层，代表整个 Tomcat 容器，因此它必须是server.xml中唯一一个最外层的元素。 一个 Server 元素中可以有一个或多个Service 元素。</li>
 <li>Server 的主要任务，就是提供一个接口让客户端能够访问到这个 Service 集合，同时维护它所包含的所有的Service的声明周期，包括如何初始化、如何结束服务、如何找到客户端要访问的Service。</li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Server port=<span class="string">&quot;8005&quot;</span> shutdown=<span class="string">&quot;SHUTDOWN&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><em><strong>参数作用：</strong></em>
-<ul>
-<li>**端口号8005：**用来 监听 关闭 Tomcat服务的</li>
-<li>**port：**指定Tomcat监听shutdown命令端口.终止服务器运行时,必须在Tomcat服务器所在的机器上发出shutdown命令，该属性必须设置。</li>
-<li>**shutdown：**指定终止Tomcat服务器运行时,发给Tomcat服务器的shutdown监听端口的字符串，该属性必须设置。</li>
+<li><em><strong>参数作用：</strong></em><ul>
+<li><strong>端口号8005：</strong>用来 监听 关闭 Tomcat服务的</li>
+<li><strong>port：</strong>指定Tomcat监听shutdown命令端口.终止服务器运行时,必须在Tomcat服务器所在的机器上发出shutdown命令，该属性必须设置。</li>
+<li><strong>shutdown：</strong>指定终止Tomcat服务器运行时,发给Tomcat服务器的shutdown监听端口的字符串，该属性必须设置。</li>
 </ul>
 </li>
 </ul>
@@ -497,20 +472,20 @@
 <li>接收客户端连接请求，创建Request 和 Response 对象用于和请求端交换数据，然后分配线程让Engine来处理这个请求，并把产生的Request和Response对象传给Engine，通过配置Connector，可以控制请求Service的协议及端口号。</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">executor</span>=<span class="string">&quot;tomcatThreadPool&quot;</span></span></span><br><span class="line"><span class="tag">               <span class="attr">port</span>=<span class="string">&quot;8080&quot;</span> <span class="attr">protocol</span>=<span class="string">&quot;HTTP/1.1&quot;</span></span></span><br><span class="line"><span class="tag">               <span class="attr">connectionTimeout</span>=<span class="string">&quot;20000&quot;</span></span></span><br><span class="line"><span class="tag">               <span class="attr">redirectPort</span>=<span class="string">&quot;8443&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">&quot;8009&quot;</span> <span class="attr">protocol</span>=<span class="string">&quot;AJP/1.3&quot;</span> <span class="attr">redirectPort</span>=<span class="string">&quot;8443&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><em><strong>参数作用</strong></em>
-<ul>
-<li>**端口号8080：**访问浏览器页面的时候使用8080端口；用的是HTTP协议</li>
-<li>**端口号8009：**连接Web服务(httpd、nginx)的时候使用8009端口；用的是AJP协议</li>
-<li>**port：**服务端监听的端口号，即客户请求的端口号</li>
-<li>**protocol：**规定了请求协议</li>
-<li>**redirectPort：**表示当请求是https时，重定向至端口号为8443的Connector</li>
-<li>**connectionTimeout：**表示连接的超时时间，单位毫秒</li>
-<li>**minSpareThreads：**表示Connector最小等待客户请求的线程数，每个请求由一个线程负责，默认10。</li>
-<li>**maxThreads：**表示此连接器要创建的请求处理线程的最大数量，能处理的最大并发请求数，默认200。</li>
-<li>**maxConnections：**表示服务器在任何给定时间接受和处理的最大连接数。当达到这个数字时，客户端请求会被放到请求队列，默认最大队列数为acceptCount参数值，BIO模式下默认为maxThreads，NIO模式下默认10000。</li>
-<li>**acceptCount：**maxConnections达到最大值即所有请求线程正在使用时，传入连接请求的最大队列长度， 当队列满时收到的任何请求都将被拒绝， 默认值为100。</li>
-<li>**maxHeaderCount：**允许的请求中的最大header数。 包含比指定限制更多的header的请求将被拒绝。 小于0表示无限制，默认值100。</li>
+<li><em><strong>参数作用</strong></em><ul>
+<li><strong>端口号8080：</strong>访问浏览器页面的时候使用8080端口；用的是HTTP协议</li>
+<li><strong>端口号8009：</strong>连接Web服务(httpd、nginx)的时候使用8009端口；用的是AJP协议</li>
+<li><strong>port：</strong>服务端监听的端口号，即客户请求的端口号</li>
+<li><strong>protocol：</strong>规定了请求协议</li>
+<li><strong>redirectPort：</strong>表示当请求是https时，重定向至端口号为8443的Connector</li>
+<li><strong>connectionTimeout：</strong>表示连接的超时时间，单位毫秒</li>
+<li><strong>minSpareThreads：</strong>表示Connector最小等待客户请求的线程数，每个请求由一个线程负责，默认10。</li>
+<li><strong>maxThreads：</strong>表示此连接器要创建的请求处理线程的最大数量，能处理的最大并发请求数，默认200。</li>
+<li><strong>maxConnections：</strong>表示服务器在任何给定时间接受和处理的最大连接数。当达到这个数字时，客户端请求会被放到请求队列，默认最大队列数为acceptCount参数值，BIO模式下默认为maxThreads，NIO模式下默认10000。</li>
+<li><strong>acceptCount：</strong>maxConnections达到最大值即所有请求线程正在使用时，传入连接请求的最大队列长度， 当队列满时收到的任何请求都将被拒绝， 默认值为100。</li>
+<li><strong>maxHeaderCount：</strong>允许的请求中的最大header数。 包含比指定限制更多的header的请求将被拒绝。 小于0表示无限制，默认值100。</li>
 </ul>
 </li>
 </ul>
@@ -520,11 +495,11 @@
 <li>Engine、Host 和 Context 都是容器，但它们不是平行的关系，而是父子关系：Engine 包含 Host，Host 包含 Context。</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Engine</span> <span class="attr">name</span>=<span class="string">&quot;Catalina&quot;</span> <span class="attr">defaultHost</span>=<span class="string">&quot;localhost&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><em><strong>参数作用</strong></em>
-<ul>
-<li>**name：**属性用于日志和错误信息，在整个Server中应该唯一。</li>
-<li>**defaultHost：**属性指定了默认的host名称，当发往本机的请求指定的host名称不存在时，一律使用defaultHost指定的host进行处理，因此defaultHost的值，必须与Engine中的一个Host组件的name属性值匹配。</li>
+<li><em><strong>参数作用</strong></em><ul>
+<li><strong>name：</strong>属性用于日志和错误信息，在整个Server中应该唯一。</li>
+<li><strong>defaultHost：</strong>属性指定了默认的host名称，当发往本机的请求指定的host名称不存在时，一律使用defaultHost指定的host进行处理，因此defaultHost的值，必须与Engine中的一个Host组件的name属性值匹配。</li>
 </ul>
 </li>
 </ul>
@@ -534,13 +509,13 @@
 <li>另在**&lt;Host&gt;**元素中可以包含如下的子元素： &lt;Logger&gt;，&lt;Realm&gt;，&lt;Valve&gt;，&lt;Context&gt;`。</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">&quot;localhost&quot;</span> <span class="attr">appBase</span>=<span class="string">&quot;webapps&quot;</span> <span class="attr">unpackWARs</span>=<span class="string">&quot;true&quot;</span> <span class="attr">autoDeploy</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><em><strong>参数作用</strong></em>
-<ul>
-<li>**name：**虚拟主机的名字。</li>
-<li><strong>appBase：</strong> 指定虚拟主机的目录，可以指定绝对目录,也可以指定相对于&lt;CATALINA_HOME&gt;的相对目录， 如果此项没有设定，默认值为&lt;CATALINA_HOME&gt;/webapps。</li>
+<li><em><strong>参数作用</strong></em><ul>
+<li><strong>name：</strong>虚拟主机的名字。</li>
+<li><strong>appBase：</strong> 指定虚拟主机的目录，可以指定绝对目录,也可以指定相对于<CATALINA_HOME>的相对目录， 如果此项没有设定，默认值为<CATALINA_HOME>/webapps。</li>
 <li><strong>unpackWARs：</strong> 如果此项设为true，表示将把Web应用的war文件先解压为开放目录结构后再运行，如果设为false，将直接运行war文件。</li>
-<li>**autoDeploy：**如果此项设为true，表示当Tomcat服务器处于运行状态时，能够监测appBase下的文件，如果有新的Web应用加入进来，会自动发布这个Web应用。</li>
+<li><strong>autoDeploy：</strong>如果此项设为true，表示当Tomcat服务器处于运行状态时，能够监测appBase下的文件，如果有新的Web应用加入进来，会自动发布这个Web应用。</li>
 </ul>
 </li>
 </ul>
@@ -549,258 +524,243 @@
 <li>每个Context元素代表运行在虚拟主机上的单个Web应用，一个&lt;Host&gt;元素中可以包含多个&lt;Context&gt;`元素</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">path</span>=<span class="string">&quot;/xxx&quot;</span> <span class="attr">docBase</span>=<span class="string">&quot;/xxx/xxx/app1.war&quot;</span> <span class="attr">reloadable</span>=<span class="string">&quot;true&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Context</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><em><strong>参数作用</strong></em>
-<ul>
-<li>**path：**指定访问该Web应用的URL入口。</li>
-<li>**docBase：**指定Web应用的文件路径，可以为绝对路径,也可以为相对于Host的appBase属性的相对路径，如果Web应用采用开放目录结构,那就指定Web应用的根目录;如果Web应用是个WAR文件,那就指定WAR文件的路径。</li>
-<li>**reloadable：**如果这个属性设为true，Tomcat服务器在运行状态下会监视在WEB-INF/class和WEB-INF/lib目录下CLASS文件的改动，如果检测到有calss文件被更新,服务器会自动重新加载Web应用。</li>
+<li><em><strong>参数作用</strong></em><ul>
+<li><strong>path：</strong>指定访问该Web应用的URL入口。</li>
+<li><strong>docBase：</strong>指定Web应用的文件路径，可以为绝对路径,也可以为相对于Host的appBase属性的相对路径，如果Web应用采用开放目录结构,那就指定Web应用的根目录;如果Web应用是个WAR文件,那就指定WAR文件的路径。</li>
+<li><strong>reloadable：</strong>如果这个属性设为true，Tomcat服务器在运行状态下会监视在WEB-INF/class和WEB-INF/lib目录下CLASS文件的改动，如果检测到有calss文件被更新,服务器会自动重新加载Web应用。</li>
 </ul>
 </li>
 </ul>
-<h2 id="五、部署项目">五、部署项目</h2>
-<h3 id="1-安装Mariadb数据库"><em>1. 安装Mariadb数据库</em></h3>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]<span class="comment"># yum -y install mariadb-server mysql</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># systemctl enable mariadb &amp;&amp; systemctl start mariadb</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># mysqladmin -u root -p password &quot;123123&quot;</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-导入-smbms-db-sql-数据库-并授权"><em>2. 导入 smbms_db.sql 数据库 并授权</em></h3>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gridyjb0afj30o104d0st.jpg" alt="image-20200604011047185"></p>
+<h2 id="五、部署项目"><a href="#五、部署项目" class="headerlink" title="五、部署项目"></a>五、部署项目</h2><h3 id="1-安装Mariadb数据库"><a href="#1-安装Mariadb数据库" class="headerlink" title="1. 安装Mariadb数据库"></a><em>1. 安装Mariadb数据库</em></h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]<span class="comment"># yum -y install mariadb-server mysql</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># systemctl enable mariadb &amp;&amp; systemctl start mariadb</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># mysqladmin -u root -p password &quot;123123&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-导入-smbms-db-sql-数据库-并授权"><a href="#2-导入-smbms-db-sql-数据库-并授权" class="headerlink" title="2. 导入 smbms_db.sql 数据库 并授权"></a><em>2. 导入 smbms_db.sql 数据库 并授权</em></h3><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gridyjb0afj30o104d0st.jpg" alt="image-20200604011047185"></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]<span class="comment"># mysql -uroot -p123123 &lt; smbms_db.sql</span></span><br><span class="line"></span><br><span class="line">[root@tomcat ~]<span class="comment"># mysql -u root -p123123</span></span><br><span class="line">MariaDB [(none)]&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| smbms              |</span><br><span class="line">| <span class="built_in">test</span>               |</span><br><span class="line">+--------------------+</span><br><span class="line">5 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; grant all on smbms.* to <span class="string">&#x27;lemon&#x27;</span>@<span class="string">&#x27;192.168.2.1&#x27;</span> identified by <span class="string">&quot;abc22&quot;</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; flush privileges;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; <span class="built_in">exit</span></span><br><span class="line">Bye</span><br></pre></td></tr></table></figure>
-<h3 id="3-部署超市项目网页"><em>3. 部署超市项目网页</em></h3>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将其超市项目移动至网页存放目录</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># mv WebRoot /usr/local/tomcat/webapps/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#修改超市项目的数据库连接url、用户名密码</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># cd /usr/local/tomcat/webapps/WebRoot/</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># vim WEB-INF/classes/database.properties</span></span><br><span class="line">driver=com.mysql.jdbc.Driver</span><br><span class="line"><span class="comment">#在和mysql传递数据的过程中，使用unicode编码格式，并且字符集设置为utf-8</span></span><br><span class="line">url=jdbc:mysql://192.168.2.1:3306/smbms?useUnicode=<span class="literal">true</span>&amp;characterEncoding=utf-8</span><br><span class="line">user=lemon</span><br><span class="line">password=abc22</span><br><span class="line">:wq!</span><br></pre></td></tr></table></figure>
-<h3 id="4-重启Tomcat-并访问网页"><em>4. 重启Tomcat 并访问网页</em></h3>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]<span class="comment"># /usr/local/tomcat/bin/shutdown.sh</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># /usr/local/tomcat/bin/startup.sh</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># netstat -anptu|grep java</span></span><br><span class="line">tcp6       0      0 :::8080             :::*         LISTEN      27025/java          </span><br><span class="line">tcp6       0      0 127.0.0.1:8005      :::*         LISTEN      27025/java          </span><br><span class="line">tcp6       0      0 :::8009             :::*         LISTEN      27025/java</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-部署超市项目网页"><a href="#3-部署超市项目网页" class="headerlink" title="3. 部署超市项目网页"></a><em>3. 部署超市项目网页</em></h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将其超市项目移动至网页存放目录</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># mv WebRoot /usr/local/tomcat/webapps/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#修改超市项目的数据库连接url、用户名密码</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># cd /usr/local/tomcat/webapps/WebRoot/</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># vim WEB-INF/classes/database.properties</span></span><br><span class="line">driver=com.mysql.jdbc.Driver</span><br><span class="line"><span class="comment">#在和mysql传递数据的过程中，使用unicode编码格式，并且字符集设置为utf-8</span></span><br><span class="line">url=jdbc:mysql://192.168.2.1:3306/smbms?useUnicode=<span class="literal">true</span>&amp;characterEncoding=utf-8</span><br><span class="line">user=lemon</span><br><span class="line">password=abc22</span><br><span class="line">:wq!</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-重启Tomcat-并访问网页"><a href="#4-重启Tomcat-并访问网页" class="headerlink" title="4. 重启Tomcat 并访问网页"></a><em>4. 重启Tomcat 并访问网页</em></h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]<span class="comment"># /usr/local/tomcat/bin/shutdown.sh</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># /usr/local/tomcat/bin/startup.sh</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># netstat -anptu|grep java</span></span><br><span class="line">tcp6       0      0 :::8080             :::*         LISTEN      27025/java          </span><br><span class="line">tcp6       0      0 127.0.0.1:8005      :::*         LISTEN      27025/java          </span><br><span class="line">tcp6       0      0 :::8009             :::*         LISTEN      27025/java</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><strong>访问http://localhost:8080/WebRoot/</strong></li>
+<li><strong>访问<a target="_blank" rel="noopener" href="http://localhost:8080/WebRoot/">http://localhost:8080/WebRoot/</a></strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gridyphw75j30u90gi0vw.jpg" alt="image-20200604013053512"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gridyrugfxj310j0i2tab.jpg" alt="image-20200604013138703"></p>
-<h2 id="六、Tomcat的常见配置">六、Tomcat的常见配置</h2>
-<h3 id="1-修改Tomcat默认网页位置"><em>1. 修改Tomcat默认网页位置</em></h3>
-<ul>
+<h2 id="六、Tomcat的常见配置"><a href="#六、Tomcat的常见配置" class="headerlink" title="六、Tomcat的常见配置"></a>六、Tomcat的常见配置</h2><h3 id="1-修改Tomcat默认网页位置"><a href="#1-修改Tomcat默认网页位置" class="headerlink" title="1. 修改Tomcat默认网页位置"></a><em>1. 修改Tomcat默认网页位置</em></h3><ul>
 <li><strong>自定义.jsp页面</strong></li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]<span class="comment"># mkdir -p /usr/local/tomcat/web1</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># cat &lt;&lt;END&gt; /usr/local/tomcat/web1/index.jsp</span></span><br><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> import=<span class="string">&quot;java.util.*&quot;</span> pageEncoding=<span class="string">&quot;UTF-8&quot;</span>%&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">     &lt;title&gt;lemon &lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">     &lt;% out.println(<span class="string">&quot;lemon is a hoandsome man&quot;</span>);%&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><strong>修改server.xml配置文件 并 重启Tomcat</strong></li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# vim /usr/local/tomcat/conf/server.xml</span><br><span class="line"># 修改如下:</span><br><span class="line"># 注意：域名是什么就写什么，不要使用默认的localhost，不然别人是可以非法绑定你域名的</span><br><span class="line"><span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">&quot;www.lemon.com&quot;</span>  <span class="attr">appBase</span>=<span class="string">&quot;webapps&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">unpackWARs</span>=<span class="string">&quot;true&quot;</span> <span class="attr">autoDeploy</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">Context</span> <span class="attr">docBase</span>=<span class="string">&quot;/usr/local/tomcat/web1&quot;</span> <span class="attr">path</span>=<span class="string">&quot;&quot;</span> <span class="attr">reloadable</span>=<span class="string">&quot;false&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Context</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.valves.AccessLogValve&quot;</span> <span class="attr">directory</span>=<span class="string">&quot;logs&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">prefix</span>=<span class="string">&quot;lemon_access_log&quot;</span> <span class="attr">suffix</span>=<span class="string">&quot;.txt&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">pattern</span>=<span class="string">&quot;%h %l %u %t <span class="symbol">&amp;quot;</span>%r<span class="symbol">&amp;quot;</span> %s %b&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Host</span>&gt;</span></span><br><span class="line">wq!</span><br><span class="line"></span><br><span class="line">[root@tomcat ~]# /usr/local/tomcat/bin/shutdown.sh</span><br><span class="line">[root@tomcat ~]# /usr/local/tomcat/bin/startup.sh</span><br><span class="line">[root@tomcat ~]# netstat -anptu|grep java</span><br><span class="line">tcp6       0      0 :::8080             :::*         LISTEN      27025/java          </span><br><span class="line">tcp6       0      0 127.0.0.1:8005      :::*         LISTEN      27025/java          </span><br><span class="line">tcp6       0      0 :::8009             :::*         LISTEN      27025/java</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><strong>访问http://www.lemon.com:8080/</strong>
-<ul>
+<li><strong>访问<a target="_blank" rel="noopener" href="http://www.lemon.com:8080/">http://www.lemon.com:8080/</a></strong><ul>
 <li>注：需要添加host解析</li>
 </ul>
 </li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gridyvyv4fj30tb02mmx3.jpg" alt="image-20200604014626390"></p>
-<h3 id="2-配置基于域名的虚拟主机"><em>2. 配置基于域名的虚拟主机</em></h3>
-<ul>
+<h3 id="2-配置基于域名的虚拟主机"><a href="#2-配置基于域名的虚拟主机" class="headerlink" title="2. 配置基于域名的虚拟主机"></a><em>2. 配置基于域名的虚拟主机</em></h3><ul>
 <li><strong>自定义.jsp页面</strong></li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]<span class="comment"># mkdir -p /usr/local/tomcat/web2</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># cat &lt;&lt;END&gt; /usr/local/tomcat/web2/index.jsp</span></span><br><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> import=<span class="string">&quot;java.util.*&quot;</span> pageEncoding=<span class="string">&quot;UTF-8&quot;</span>%&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">     &lt;title&gt;good &lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">     &lt;% out.println(<span class="string">&quot;good is a hoandsome man&quot;</span>);%&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><strong>修改server.xml配置文件 并 重启Tomcat</strong></li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]# vim /usr/local/tomcat/conf/server.xml</span><br><span class="line"># 直接再添加一对<span class="tag">&lt;/<span class="name">Host</span>&gt;</span>:</span><br><span class="line"><span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">&quot;www.good.com&quot;</span>  <span class="attr">appBase</span>=<span class="string">&quot;webapps&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">unpackWARs</span>=<span class="string">&quot;true&quot;</span> <span class="attr">autoDeploy</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">Context</span> <span class="attr">docBase</span>=<span class="string">&quot;/usr/local/tomcat/web2&quot;</span> <span class="attr">path</span>=<span class="string">&quot;&quot;</span> <span class="attr">reloadable</span>=<span class="string">&quot;false&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Context</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.valves.AccessLogValve&quot;</span> <span class="attr">directory</span>=<span class="string">&quot;logs&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">prefix</span>=<span class="string">&quot;good_access_log&quot;</span> <span class="attr">suffix</span>=<span class="string">&quot;.txt&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">pattern</span>=<span class="string">&quot;%h %l %u %t <span class="symbol">&amp;quot;</span>%r<span class="symbol">&amp;quot;</span> %s %b&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Host</span>&gt;</span></span><br><span class="line">wq!</span><br><span class="line"></span><br><span class="line">[root@tomcat ~]# /usr/local/tomcat/bin/shutdown.sh</span><br><span class="line">[root@tomcat ~]# /usr/local/tomcat/bin/startup.sh</span><br><span class="line">[root@tomcat ~]# netstat -anptu|grep java</span><br><span class="line">tcp6       0      0 :::8080             :::*         LISTEN      27025/java          </span><br><span class="line">tcp6       0      0 127.0.0.1:8005      :::*         LISTEN      27025/java          </span><br><span class="line">tcp6       0      0 :::8009             :::*         LISTEN      27025/java</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><strong>访问http://www.good.com:8080</strong></li>
+<li><strong>访问<a target="_blank" rel="noopener" href="http://www.good.com:8080/">http://www.good.com:8080</a></strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gridz0qf7pj30t802bq2v.jpg" alt="image-20200604015241686"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gridz4vq98j30p0023gli.jpg" alt="image-20200604113008284"></p>
-<h3 id="3-配置Tomcat双实例"><em>3. 配置Tomcat双实例</em></h3>
-<blockquote>
+<h3 id="3-配置Tomcat双实例"><a href="#3-配置Tomcat双实例" class="headerlink" title="3. 配置Tomcat双实例"></a><em>3. 配置Tomcat双实例</em></h3><blockquote>
 <p><strong>直接在添加一对</Service>且 将其名字、端口号改掉</strong></p>
 </blockquote>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]# vim /usr/local/tomcat/conf/server.xml</span><br><span class="line">  <span class="tag">&lt;<span class="name">Service</span> <span class="attr">name</span>=<span class="string">&quot;lemon&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">&quot;8081&quot;</span> <span class="attr">protocol</span>=<span class="string">&quot;HTTP/1.1&quot;</span></span></span><br><span class="line"><span class="tag">               <span class="attr">connectionTimeout</span>=<span class="string">&quot;20000&quot;</span></span></span><br><span class="line"><span class="tag">               <span class="attr">redirectPort</span>=<span class="string">&quot;8443&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">&quot;8010&quot;</span> <span class="attr">protocol</span>=<span class="string">&quot;AJP/1.3&quot;</span> <span class="attr">redirectPort</span>=<span class="string">&quot;8443&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Engine</span> <span class="attr">name</span>=<span class="string">&quot;Catalina&quot;</span> <span class="attr">defaultHost</span>=<span class="string">&quot;localhost&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">Realm</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.realm.LockOutRealm&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Realm</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.realm.UserDatabaseRealm&quot;</span></span></span><br><span class="line"><span class="tag">               <span class="attr">resourceName</span>=<span class="string">&quot;UserDatabase&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">Realm</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">&quot;www.lemon.com&quot;</span>  <span class="attr">appBase</span>=<span class="string">&quot;webapps&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">unpackWARs</span>=<span class="string">&quot;true&quot;</span> <span class="attr">autoDeploy</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">Context</span> <span class="attr">docBase</span>=<span class="string">&quot;/usr/local/tomcat/web1&quot;</span> <span class="attr">path</span>=<span class="string">&quot;&quot;</span> <span class="attr">reloadable</span>=<span class="string">&quot;false&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Context</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.valves.AccessLogValve&quot;</span> <span class="attr">directory</span>=<span class="string">&quot;logs&quot;</span></span></span><br><span class="line"><span class="tag">               <span class="attr">prefix</span>=<span class="string">&quot;lemon_8081_access_log&quot;</span> <span class="attr">suffix</span>=<span class="string">&quot;.txt&quot;</span></span></span><br><span class="line"><span class="tag">               <span class="attr">pattern</span>=<span class="string">&quot;%h %l %u %t <span class="symbol">&amp;quot;</span>%r<span class="symbol">&amp;quot;</span> %s %b&quot;</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">Host</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">&quot;www.good.com&quot;</span>  <span class="attr">appBase</span>=<span class="string">&quot;webapps&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">unpackWARs</span>=<span class="string">&quot;true&quot;</span> <span class="attr">autoDeploy</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">Context</span> <span class="attr">docBase</span>=<span class="string">&quot;/usr/local/tomcat/web2&quot;</span> <span class="attr">path</span>=<span class="string">&quot;&quot;</span> <span class="attr">reloadable</span>=<span class="string">&quot;false&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Context</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.valves.AccessLogValve&quot;</span> <span class="attr">directory</span>=<span class="string">&quot;logs&quot;</span></span></span><br><span class="line"><span class="tag">               <span class="attr">prefix</span>=<span class="string">&quot;good_8081_access_log&quot;</span> <span class="attr">suffix</span>=<span class="string">&quot;.txt&quot;</span></span></span><br><span class="line"><span class="tag">               <span class="attr">pattern</span>=<span class="string">&quot;%h %l %u %t <span class="symbol">&amp;quot;</span>%r<span class="symbol">&amp;quot;</span> %s %b&quot;</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">Host</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Engine</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">Service</span>&gt;</span></span><br><span class="line">wq!</span><br><span class="line"></span><br><span class="line">[root@tomcat ~]# /usr/local/tomcat/bin/shutdown.sh</span><br><span class="line">[root@tomcat ~]# /usr/local/tomcat/bin/startup.sh</span><br><span class="line">[root@tomcat ~]# netstat -anptu|grep java</span><br><span class="line">tcp6       0      0 :::8080          :::*            LISTEN      27422/java          </span><br><span class="line">tcp6       0      0 :::8081          :::*            LISTEN      27422/java          </span><br><span class="line">tcp6       0      0 127.0.0.1:8005   :::*            LISTEN      27422/java          </span><br><span class="line">tcp6       0      0 :::8009          :::*            LISTEN      27422/java          </span><br><span class="line">tcp6       0      0 :::8010          :::*            LISTEN      27422/java</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><strong>访问http://www.lemon.com:8080</strong></li>
+<li><strong>访问<a target="_blank" rel="noopener" href="http://www.lemon.com:8080/">http://www.lemon.com:8080</a></strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gridzcf9oej30t8023dfr.jpg" alt="image-20200604020032963"></p>
 <ul>
-<li><strong>访问http://www.lemon.com:8081</strong></li>
+<li><strong>访问<a target="_blank" rel="noopener" href="http://www.lemon.com:8081/">http://www.lemon.com:8081</a></strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gridze6iluj30t9020a9z.jpg" alt="image-20200604020111690"></p>
 <ul>
 <li><strong>查看Tomcat访问日志</strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gridzglpuvj313h06n0tc.jpg" alt="image-20200604020217173"></p>
-<h3 id="4-定义默认页面（不建议修改）"><em>4. 定义默认页面（不建议修改）</em></h3>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]# vim /usr/local/tomcat/conf/web.xml</span><br><span class="line">4693     <span class="tag">&lt;<span class="name">welcome-file-list</span>&gt;</span></span><br><span class="line">4694         <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.html<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">4695         <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.htm<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">4696         <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.jsp<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">4697     <span class="tag">&lt;/<span class="name">welcome-file-list</span>&gt;</span></span><br><span class="line">wq!</span><br><span class="line">重启Tomcat服务</span><br></pre></td></tr></table></figure>
-<h3 id="5-设置页面超时时间（按情况而定）"><em>5. 设置页面超时时间（按情况而定）</em></h3>
- <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]# vim /usr/local/tomcat/conf/web.xml</span><br><span class="line">595     <span class="tag">&lt;<span class="name">session-config</span>&gt;</span></span><br><span class="line">596         <span class="tag">&lt;<span class="name">session-timeout</span>&gt;</span>30<span class="tag">&lt;/<span class="name">session-timeout</span>&gt;</span></span><br><span class="line">597     <span class="tag">&lt;/<span class="name">session-config</span>&gt;</span></span><br><span class="line">wq!</span><br><span class="line">重启Tomcat服务</span><br></pre></td></tr></table></figure>
-<h3 id="6-禁止列出目录（不建议更改）"><em>6. 禁止列出目录（不建议更改）</em></h3>
-<ul>
+<h3 id="4-定义默认页面（不建议修改）"><a href="#4-定义默认页面（不建议修改）" class="headerlink" title="4. 定义默认页面（不建议修改）"></a><em>4. 定义默认页面（不建议修改）</em></h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]# vim /usr/local/tomcat/conf/web.xml</span><br><span class="line">4693     <span class="tag">&lt;<span class="name">welcome-file-list</span>&gt;</span></span><br><span class="line">4694         <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.html<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">4695         <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.htm<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">4696         <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.jsp<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">4697     <span class="tag">&lt;/<span class="name">welcome-file-list</span>&gt;</span></span><br><span class="line">wq!</span><br><span class="line">重启Tomcat服务</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-设置页面超时时间（按情况而定）"><a href="#5-设置页面超时时间（按情况而定）" class="headerlink" title="5. 设置页面超时时间（按情况而定）"></a><em>5. 设置页面超时时间（按情况而定）</em></h3> <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]# vim /usr/local/tomcat/conf/web.xml</span><br><span class="line">595     <span class="tag">&lt;<span class="name">session-config</span>&gt;</span></span><br><span class="line">596         <span class="tag">&lt;<span class="name">session-timeout</span>&gt;</span>30<span class="tag">&lt;/<span class="name">session-timeout</span>&gt;</span></span><br><span class="line">597     <span class="tag">&lt;/<span class="name">session-config</span>&gt;</span></span><br><span class="line">wq!</span><br><span class="line">重启Tomcat服务</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="6-禁止列出目录（不建议更改）"><a href="#6-禁止列出目录（不建议更改）" class="headerlink" title="6. 禁止列出目录（不建议更改）"></a><em>6. 禁止列出目录（不建议更改）</em></h3><ul>
 <li>默认就是禁止的，如果不想禁止，将false改成true就行。<strong>但是最好不要改！！！</strong></li>
 </ul>
  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]# vim /usr/local/tomcat/conf/web.xml</span><br><span class="line">110        <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">111            <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>listings<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">112            <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">113        <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">wq!</span><br><span class="line">重启Tomcat服务</span><br></pre></td></tr></table></figure>
-<h2 id="七、Tomcat-的三种工作模式">七、Tomcat 的三种工作模式</h2>
-<h3 id="1-同步、异步、阻塞、非阻塞的理念"><em>1. 同步、异步、阻塞、非阻塞的理念</em></h3>
-<ul>
-<li>
-<p>**同步：**自己亲自出马持银行卡到银行排队取钱。事必须一件一件事做，等前一件事情做完了才能做下一件事。</p>
+
+
+
+
+
+<h2 id="七、Tomcat-的三种工作模式"><a href="#七、Tomcat-的三种工作模式" class="headerlink" title="七、Tomcat 的三种工作模式"></a>七、Tomcat 的三种工作模式</h2><h3 id="1-同步、异步、阻塞、非阻塞的理念"><a href="#1-同步、异步、阻塞、非阻塞的理念" class="headerlink" title="1. 同步、异步、阻塞、非阻塞的理念"></a><em>1. 同步、异步、阻塞、非阻塞的理念</em></h3><ul>
+<li><p><strong>同步：</strong>自己亲自出马持银行卡到银行排队取钱。事必须一件一件事做，等前一件事情做完了才能做下一件事。</p>
 </li>
-<li>
-<p>**异步：**异步的概念和同步相对。委托一小弟拿银行卡到银行取钱，然后给你。</p>
+<li><p><strong>异步：</strong>异步的概念和同步相对。委托一小弟拿银行卡到银行取钱，然后给你。</p>
 </li>
-<li>
-<p>**阻塞：**ATM排队取款，你只能等待。</p>
+<li><p><strong>阻塞：</strong>ATM排队取款，你只能等待。</p>
 </li>
-<li>
-<p>**非阻塞：**柜台取款，取个号，然后坐在椅子上做其它事，等号广播会通知你办理，没到号你就不能去，你可以不断问大堂经理排到了没有，大堂经理如果说还没到你就不能去。</p>
+<li><p><strong>非阻塞：</strong>柜台取款，取个号，然后坐在椅子上做其它事，等号广播会通知你办理，没到号你就不能去，你可以不断问大堂经理排到了没有，大堂经理如果说还没到你就不能去。</p>
 </li>
-<li>
-<p>总结：同步和异步是一个过程，阻塞和非阻塞是线程的一种状态。</p>
+<li><p>总结：同步和异步是一个过程，阻塞和非阻塞是线程的一种状态。</p>
 </li>
 </ul>
-<h3 id="2-Tomcat的三种模式"><em>2. Tomcat的三种模式</em></h3>
-<p>（1）<strong>bio：同步阻塞</strong></p>
+<h3 id="2-Tomcat的三种模式"><a href="#2-Tomcat的三种模式" class="headerlink" title="2. Tomcat的三种模式"></a><em>2. Tomcat的三种模式</em></h3><p>（1）<strong>bio：同步阻塞</strong></p>
 <ul>
-<li>
-<p>即阻塞式I/O操作，表示Tomcat使用的是传统的Java I/O操作(即java.io包及其子包)。一个线程处理一个请求，缺点：并发量高时，线程数较多，浪费资源。</p>
+<li><p>即阻塞式I/O操作，表示Tomcat使用的是传统的Java I/O操作(即java.io包及其子包)。一个线程处理一个请求，缺点：并发量高时，线程数较多，浪费资源。</p>
 </li>
-<li>
-<p>使用方式：现在通常不使用</p>
+<li><p>使用方式：现在通常不使用</p>
 </li>
 </ul>
 <p>（2）<strong>nio：同步非阻塞</strong></p>
 <ul>
-<li>
-<p>Java nio是一个基于缓冲区、并能提供非阻塞I/O操作的Java API，因此nio也被看成是non-blocking I/O的缩写。它拥有比传统I/O操作(bio)更好的并发运行性能。利用 Java 的异步请求 IO 处理，可以通过少量的线程处理大量的请求。</p>
+<li><p>Java nio是一个基于缓冲区、并能提供非阻塞I/O操作的Java API，因此nio也被看成是non-blocking I/O的缩写。它拥有比传统I/O操作(bio)更好的并发运行性能。利用 Java 的异步请求 IO 处理，可以通过少量的线程处理大量的请求。</p>
 </li>
-<li>
-<p>使用方式：tomcat默认模式</p>
+<li><p>使用方式：tomcat默认模式</p>
 </li>
 </ul>
 <p>（3）<strong>apr</strong>：<strong>异步非阻塞</strong></p>
 <ul>
-<li>
-<p>Tomcat将以JNI的形式调用Apache HTTP服务器的核心动态链接库来处理文件读取或网络传输操作，从而大大地提高Tomcat对静态文件的处理性能。<em>Tomcat apr也是在Tomcat上运行高并发应用的首选模式。</em></p>
+<li><p>Tomcat将以JNI的形式调用Apache HTTP服务器的核心动态链接库来处理文件读取或网络传输操作，从而大大地提高Tomcat对静态文件的处理性能。<em>Tomcat apr也是在Tomcat上运行高并发应用的首选模式。</em></p>
 </li>
-<li>
-<p>使用方式：在server.xml中更改使用的协议，更加详细的说明可以之间看tomcat的文档。</p>
+<li><p>使用方式：在server.xml中更改使用的协议，更加详细的说明可以之间看tomcat的文档。</p>
 </li>
 </ul>
-<h3 id="3-BIO、NIO、AIO适用场景分析"><em>3. BIO、NIO、AIO适用场景分析</em></h3>
-<ul>
-<li>
-<p><strong>BIO</strong>方式适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中，JDK1.4以前的唯一选择，但程序直观简单易理解。</p>
+<h3 id="3-BIO、NIO、AIO适用场景分析"><a href="#3-BIO、NIO、AIO适用场景分析" class="headerlink" title="3. BIO、NIO、AIO适用场景分析"></a><em>3. BIO、NIO、AIO适用场景分析</em></h3><ul>
+<li><p><strong>BIO</strong>方式适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中，JDK1.4以前的唯一选择，但程序直观简单易理解。</p>
 </li>
-<li>
-<p><strong>NIO</strong>方式适用于连接数目多且连接比较短（轻操作）的架构，比如聊天服务器，并发局限于应用中，编程比较复杂，JDK1.4开始支持。</p>
+<li><p><strong>NIO</strong>方式适用于连接数目多且连接比较短（轻操作）的架构，比如聊天服务器，并发局限于应用中，编程比较复杂，JDK1.4开始支持。</p>
 </li>
-<li>
-<p><strong>AIO</strong>方式使用于连接数目多且连接比较长（重操作）的架构，比如相册服务器，充分调用OS参与并发操作，编程比较复杂，JDK7开始支持。</p>
+<li><p><strong>AIO</strong>方式使用于连接数目多且连接比较长（重操作）的架构，比如相册服务器，充分调用OS参与并发操作，编程比较复杂，JDK7开始支持。</p>
 </li>
 </ul>
-<h3 id="4-Tomcat三种模式性能比较"><em>4. Tomcat三种模式性能比较</em></h3>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grie0iq4o7j30ob0i2121.jpg" alt="image-20200604115521857"></p>
-<h2 id="八、Tomcat优化">八、Tomcat优化</h2>
-<ul>
-<li>
-<p>对于Tomcat软件的优化，主要是从2个方面入手</p>
+<h3 id="4-Tomcat三种模式性能比较"><a href="#4-Tomcat三种模式性能比较" class="headerlink" title="4. Tomcat三种模式性能比较"></a><em>4. Tomcat三种模式性能比较</em></h3><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grie0iq4o7j30ob0i2121.jpg" alt="image-20200604115521857"></p>
+<h2 id="八、Tomcat优化"><a href="#八、Tomcat优化" class="headerlink" title="八、Tomcat优化"></a>八、Tomcat优化</h2><ul>
+<li><p>对于Tomcat软件的优化，主要是从2个方面入手</p>
 <ul>
 <li>Tomcat自身的配置文件调优</li>
 <li>Tomcat所运行的 Jvm 虚拟机的调优；针对JVM的调优主要有两个方面：内存调优和垃圾回收策略调优。</li>
 </ul>
 </li>
-<li>
-<p>服务器资源</p>
+<li><p>服务器资源</p>
 <ul>
 <li>CPU</li>
 <li>内存</li>
 <li>硬盘</li>
 </ul>
 </li>
-<li>
-<p>注：最好调优完成后测试以下，看看性能方面是否提升</p>
+<li><p>注：最好调优完成后测试以下，看看性能方面是否提升</p>
 </li>
 </ul>
-<h3 id="1-Tomcat自身的配置文件调优"><em>1. Tomcat自身的配置文件调优</em></h3>
-<h4 id="1-1-禁用AJP协议连接器节省系统资源"><em>1.1.  禁用AJP协议连接器节省系统资源</em></h4>
-<ul>
-<li>
-<p><strong>为什么要禁言AJP连接器？</strong></p>
+<h3 id="1-Tomcat自身的配置文件调优"><a href="#1-Tomcat自身的配置文件调优" class="headerlink" title="1. Tomcat自身的配置文件调优"></a><em>1. Tomcat自身的配置文件调优</em></h3><h4 id="1-1-禁用AJP协议连接器节省系统资源"><a href="#1-1-禁用AJP协议连接器节省系统资源" class="headerlink" title="1.1.  禁用AJP协议连接器节省系统资源"></a><em>1.1.  禁用AJP协议连接器节省系统资源</em></h4><ul>
+<li><p><strong>为什么要禁言AJP连接器？</strong></p>
 <ul>
 <li>因为项目中一般使用Nginx + tomcat的架构， 所以用不着AJP协议，一般我们可以把AJP连接器禁用，这样有利于提高Tomcat的性能。</li>
 </ul>
 </li>
-<li>
-<p><strong>怎么禁用？</strong></p>
+<li><p><strong>怎么禁用？</strong></p>
 </li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]# vim /usr/local/tomcat/conf/server.xml</span><br><span class="line"># 找到下行配置 注释 就禁用了</span><br><span class="line"><span class="comment">&lt;!-- 禁用AJP连接 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;Connector port=&quot;8009&quot; protocol=&quot;AJP/1.3&quot; redirectPort=&quot;8443&quot; /&gt; --&gt;</span></span><br><span class="line">wq!</span><br></pre></td></tr></table></figure>
+
+
+
 <ul>
 <li><em>重启 tomcat，查看效果。可以看到 AJP服务已经不存在了</em></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grie0oo8g2j31020ol76q.jpg" alt="image-20200604143727430"></p>
-<h4 id="1-2-配置网页传输压缩"><em>1.2. 配置网页传输压缩</em></h4>
-<ul>
+<h4 id="1-2-配置网页传输压缩"><a href="#1-2-配置网页传输压缩" class="headerlink" title="1.2. 配置网页传输压缩"></a><em>1.2. 配置网页传输压缩</em></h4><ul>
 <li><strong>如果有apache或nginx的服务做代理，tomcat则没必要在配置网页传输压缩</strong></li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]# vim /usr/local/tomcat/conf/server.xml</span><br><span class="line">    <span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">&quot;8080&quot;</span> <span class="attr">protocol</span>=<span class="string">&quot;HTTP/1.1&quot;</span></span></span><br><span class="line"><span class="tag">               <span class="attr">connectionTimeout</span>=<span class="string">&quot;20000&quot;</span></span></span><br><span class="line"><span class="tag">               <span class="attr">redirectPort</span>=<span class="string">&quot;8443&quot;</span></span></span><br><span class="line"><span class="tag">               <span class="attr">compression</span>=<span class="string">&quot;on&quot;</span>          # 开启压缩</span></span><br><span class="line"><span class="tag">               <span class="attr">compressionMinSize</span>=<span class="string">&quot;50&quot;</span>   # 指定最小的压缩文件，单位“字节”</span></span><br><span class="line"><span class="tag">               <span class="attr">noCompressionUserAgents</span>=<span class="string">&quot;gozila,traviata&quot;</span>  # 此浏览器类型不进行压缩</span></span><br><span class="line"><span class="tag"><span class="attr">compressableMimeType</span>=<span class="string">&quot;text/html,text,xml,text,javascript,text/css,text/plain&quot;</span> /&gt;</span></span><br><span class="line"># 压缩的文件格式</span><br><span class="line">wq!</span><br><span class="line">重启服务</span><br></pre></td></tr></table></figure>
-<h4 id="1-3-Tomcat修改为-apr工作模式"><em>1.3. Tomcat修改为 apr工作模式</em></h4>
-<ul>
-<li>
-<p><strong>怎么查看当前tomcat的工作模式？</strong></p>
+
+
+
+<h4 id="1-3-Tomcat修改为-apr工作模式"><a href="#1-3-Tomcat修改为-apr工作模式" class="headerlink" title="1.3. Tomcat修改为 apr工作模式"></a><em>1.3. Tomcat修改为 apr工作模式</em></h4><ul>
+<li><p><strong>怎么查看当前tomcat的工作模式？</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grie0vl6dpj30ol0hkjzj.jpg" alt="image-20200604115755369"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grie1439tbj30oo04nwfa.jpg" alt="image-20200604115823109"></p>
 </li>
-<li>
-<p><strong>修改apr工作模式</strong></p>
+<li><p><strong>修改apr工作模式</strong></p>
 <ul>
 <li>首先需要安装APR的三个依赖 <a target="_blank" rel="noopener" href="http://apr.apache.org/download.cgi">http://apr.apache.org/download.cgi</a></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grie17usd0j30qf02mwel.jpg" alt="image-20200604120127538"></p>
 </li>
-<li>
-<p><strong>安装这些APR包</strong></p>
+<li><p><strong>安装这些APR包</strong></p>
 </li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">1、安装相关环境包</span><br><span class="line">[root@tomcat ~]<span class="comment"># yum -y install expat-devel</span></span><br><span class="line"></span><br><span class="line">2、安装apr</span><br><span class="line">[root@tomcat ~]<span class="comment"># tar xf apr-1.6.5.tar.gz &amp;&amp; cd apr-1.6.5</span></span><br><span class="line">[root@tomcat apr-1.6.5]<span class="comment"># ./configure --prefix=/usr/local/apr&amp;&amp;make&amp;&amp;make install&amp;&amp;cd</span></span><br><span class="line"></span><br><span class="line">3、安装apr-iconv</span><br><span class="line">[root@tomcat ~]<span class="comment"># tar xf apr-iconv-1.2.2.tar.gz &amp;&amp; cd apr-iconv-1.2.2/</span></span><br><span class="line">[root@tomcat apr-iconv-1.2.2]<span class="comment"># ./configure --prefix=/usr/local/apr-iconv --with-apr=/usr/local/apr &amp;&amp; make &amp;&amp; make install &amp;&amp; cd</span></span><br><span class="line"></span><br><span class="line">4、 安装apr-util</span><br><span class="line">[root@tomcat ~]<span class="comment"># tar xf apr-util-1.6.1.tar.gz &amp;&amp; cd apr-util-1.6.1</span></span><br><span class="line">[root@tomcat apr-util-1.6.1]<span class="comment"># ./configure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr --with-apr-iconv=/usr/local/apr-iconv/bin/apriconv &amp;&amp; make &amp;&amp; make install &amp;&amp; cd</span></span><br><span class="line"></span><br><span class="line">5、安装Tomcat-native</span><br><span class="line">[root@tomcat ~]<span class="comment"># tar xf /usr/local/tomcat/bin/tomcat-native.tar.gz -C ./</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># cd tomcat-native-1.2.17-src/native/</span></span><br><span class="line">[root@tomcat native]<span class="comment"># ./configure --with-apr=/usr/local/apr&amp;&amp;make&amp;&amp;make install&amp;&amp;cd</span></span><br><span class="line"></span><br><span class="line">6、添加环境变量</span><br><span class="line">[root@tomcat ~]<span class="comment"># vim /etc/profile</span></span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/usr/<span class="built_in">local</span>/apr/lib</span><br><span class="line">wq！</span><br><span class="line">[root@tomcat ~]<span class="comment"># source /etc/profile</span></span><br><span class="line"></span><br><span class="line">7、修改Tomcat配置文件</span><br><span class="line">[root@tomcat ~]<span class="comment"># vim /usr/local/tomcat/conf/server.xml</span></span><br><span class="line">&lt;Listener className=<span class="string">&quot;org.apache.catalina.core.AprLifecycleListener&quot;</span> SSLEngine=<span class="string">&quot;off&quot;</span> /&gt;</span><br><span class="line">&lt;Connector port=<span class="string">&quot;8080&quot;</span> protocol=<span class="string">&quot;org.apache.coyote.http11.Http11AprProtocol&quot;</span></span><br><span class="line">wq!</span><br><span class="line">重启服务</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><strong>查看是否修改</strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grie1euvjhj31020nvq5d.jpg" alt="image-20200604125954654"></p>
-<h4 id="1-4-Tomcat-修改-nio工作模式"><em>1.4. Tomcat 修改 nio工作模式</em></h4>
-<ul>
+<h4 id="1-4-Tomcat-修改-nio工作模式"><a href="#1-4-Tomcat-修改-nio工作模式" class="headerlink" title="1.4. Tomcat 修改 nio工作模式"></a><em>1.4. Tomcat 修改 nio工作模式</em></h4><ul>
 <li><strong>修改nio工作模式</strong></li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]<span class="comment"># vim /usr/local/tomcat/conf/server.xml</span></span><br><span class="line"><span class="comment"># 修改成nio模式</span></span><br><span class="line">&lt;Connector port=<span class="string">&quot;8080&quot;</span> protocol=<span class="string">&quot;org.apache.coyote.http11.Http11NioProtocol&quot;</span></span><br><span class="line">wq！</span><br><span class="line">重启服务</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><strong>查看是否修改</strong></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grie1hozdmj31020nvdi9.jpg" alt="image-20200604130102965"></p>
-<h3 id="2-Tomcat所运行的-Jvm-的调优。"><em>2. Tomcat所运行的 Jvm 的调优。</em></h3>
-<h4 id="2-1-Tomcat内存调优"><em>2.1. Tomcat内存调优</em></h4>
-<ul>
-<li>
-<p><em><strong>找到catalina.sh文件中JAVA_OPTS变量即可，因为后面的启动参数会把JAVA_OPTS作为JVM的启动参数来处理</strong></em></p>
+<h3 id="2-Tomcat所运行的-Jvm-的调优。"><a href="#2-Tomcat所运行的-Jvm-的调优。" class="headerlink" title="2. Tomcat所运行的 Jvm 的调优。"></a><em>2. Tomcat所运行的 Jvm 的调优。</em></h3><h4 id="2-1-Tomcat内存调优"><a href="#2-1-Tomcat内存调优" class="headerlink" title="2.1. Tomcat内存调优"></a><em>2.1. Tomcat内存调优</em></h4><ul>
+<li><p><em><strong>找到catalina.sh文件中JAVA_OPTS变量即可，因为后面的启动参数会把JAVA_OPTS作为JVM的启动参数来处理</strong></em></p>
 </li>
-<li>
-<p><em><strong>内存调优这块呢，无非就是通过修改它们各自的内存空间的大小，使应用能够更加合理的运用：</strong></em></p>
+<li><p><em><strong>内存调优这块呢，无非就是通过修改它们各自的内存空间的大小，使应用能够更加合理的运用：</strong></em></p>
 </li>
-<li>
-<p><em><strong>注意：不是JVM内存设置越大越好，具体还是根据项目对象实际占用内存大小而定，可以通过Java自带的分析工具来查看。如果设置过大，会增加回收时间，从而增加暂停应用时间。</strong></em></p>
+<li><p><em><strong>注意：不是JVM内存设置越大越好，具体还是根据项目对象实际占用内存大小而定，可以通过Java自带的分析工具来查看。如果设置过大，会增加回收时间，从而增加暂停应用时间。</strong></em></p>
 </li>
-<li>
-<p><em><strong>内存结构图</strong></em></p>
+<li><p><em><strong>内存结构图</strong></em></p>
 </li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grie1l2dtgj30go08zn0w.jpg" alt="image-20200614100756851"></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]<span class="comment"># vim /usr/local/tomcat/bin/catalina.sh</span></span><br></pre></td></tr></table></figure>
+
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grie1pm2laj313k01tjri.jpg" alt="image-20200614100357537"></p>
 <ul>
 <li><em><strong>参数说明：</strong></em></li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">-Dfile.encoding 默认文件编码</span><br><span class="line"></span><br><span class="line">-Xms1024m 设置JVM最小内存为1024m。此值可以设置与-Xmx相同，避免每次垃圾回收完成后JVM重新分配内存</span><br><span class="line"></span><br><span class="line">-Xmx1024m 设置JVM最大可用内存为1024MB</span><br><span class="line"></span><br><span class="line">-XX:NewSize 设置年轻代大小</span><br><span class="line"></span><br><span class="line">-XX:MaxNewSize 设置最大的年轻代大小</span><br><span class="line"></span><br><span class="line">-XX:PermSize 设置永久代大小</span><br><span class="line"></span><br><span class="line">-XX:MaxPermSize 设置最大永久代大小</span><br><span class="line"></span><br><span class="line">-XX:NewRatio=4 设置年轻代（包括Eden和两个Survivor区）与终身代的比值（除去永久代）。设置为4，则年轻代与终身代所占比值为1：4，年轻代占整个堆栈的1/5</span><br><span class="line"></span><br><span class="line">-XX:MaxTenuringThreshold=0 设置垃圾最大年龄，默认为：15。如果设置为0的话，则年轻代对象不经过Survivor区，直接进入年老代。对于年老代比较多的应用，可以提高效率。如果将此值设置为一个较大值，则年轻代对象会在Survivor区进行多次复制，这样可以增加对象再年轻代的存活时间，增加在年轻代即被回收的概论。</span><br><span class="line"></span><br><span class="line">-XX:+DisableExplicitGC 这个将会忽略手动调用GC的代码使得System.gc()的调用就会变成一个空调用，完全不会触发任何GC。</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <p><em><strong>AB压力测试</strong></em></p>
 <ul>
-<li>
-<p>**作用：**Apache 附带了压力测试工具 ab，非常容易使用，并且完全可以模拟各种条件对 Web 服务器发起测试请求。在进行性能调整优化过程中，可用 ab 压力测试工具进行优化效果的测试。</p>
+<li><p><strong>作用：</strong>Apache 附带了压力测试工具 ab，非常容易使用，并且完全可以模拟各种条件对 Web 服务器发起测试请求。在进行性能调整优化过程中，可用 ab 压力测试工具进行优化效果的测试。</p>
 </li>
-<li>
-<p>**语法：**ab -n 请求数总和 -c 并发用户数 网站网址</p>
+<li><p><strong>语法：</strong>ab -n 请求数总和 -c 并发用户数 网站网址</p>
 </li>
-<li>
-<p><strong>重要输出参数：</strong></p>
+<li><p><strong>重要输出参数：</strong></p>
 <ul>
 <li>Concurrency Level           并发的用户数</li>
 <li>Time taken for tests        表示所有请求被处理完成所花费的总时间   <strong>越少越好</strong></li>
@@ -814,17 +774,16 @@
 <blockquote>
 <p><em><strong>未加入配之前压力测试结果</strong></em></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]<span class="comment"># ab -n 500000 -c 1000 http://192.168.2.1:8080/</span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>
-<p>第一次测试结果</p>
+<li><p>第一次测试结果</p>
 <ul>
 <li>Time taken for tests:   <strong>29.393</strong> seconds       <strong>越少越好</strong></li>
 <li>Requests per second:    <strong>17010.63</strong> [#/sec] (mean)      <strong>越多越好</strong></li>
 <li>Transfer rate:          <strong>188412.68</strong> [Kbytes/sec] received     <strong>越多越好</strong></li>
 </ul>
 </li>
-<li>
-<p>第二次测试结果</p>
+<li><p>第二次测试结果</p>
 <ul>
 <li>Time taken for tests:   <strong>24.984</strong> seconds</li>
 <li>Requests per second:    <strong>20013.16</strong> [#/sec] (mean)</li>
@@ -834,17 +793,16 @@
 </ul>
 <p><em><strong>加入配之前压力测试结果</strong></em></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]<span class="comment"># vim /usr/local/tomcat/bin/catalina.sh</span></span><br><span class="line">111 JAVA_OPTS=<span class="string">&quot;-Dfile.encoding=UTF-8-server -Xms2048m -Xmx2048m -XX:NewSize=512m -XX:MaxNewSize=1024m&quot;</span></span><br><span class="line"></span><br><span class="line">[root@tomcat ~]<span class="comment"># /usr/local/tomcat/bin/shutdown.sh</span></span><br><span class="line">[root@tomcat ~]<span class="comment"># /usr/local/tomcat/bin/startup.sh</span></span><br><span class="line"></span><br><span class="line">[root@tomcat ~]<span class="comment"># ab -n 500000 -c 1000 http://192.168.2.1:8080/</span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>
-<p>第一次测试结果</p>
+<li><p>第一次测试结果</p>
 <ul>
 <li>Time taken for tests:   <strong>26.420</strong> seconds</li>
 <li>Requests per second:    <strong>18924.84</strong> [#/sec] (mean)</li>
 <li>Transfer rate:          <strong>210039.88</strong> [Kbytes/sec] received</li>
 </ul>
 </li>
-<li>
-<p>第二次测试结果</p>
+<li><p>第二次测试结果</p>
 <ul>
 <li>Time taken for tests:   <strong>21.101</strong> seconds</li>
 <li>Requests per second:    <strong>23695.83</strong> [#/sec] (mean)</li>
@@ -853,16 +811,17 @@
 </li>
 </ul>
 </blockquote>
-<h4 id="2-2-垃圾回收策略调优">2.2. 垃圾回收策略调优</h4>
-<ul>
+<h4 id="2-2-垃圾回收策略调优"><a href="#2-2-垃圾回收策略调优" class="headerlink" title="2.2. 垃圾回收策略调优"></a>2.2. 垃圾回收策略调优</h4><ul>
 <li><em><strong>找到Tomcat根目录下的bin目录，也是设置catalina.sh文件中JAVA_OPTS变量即可。我们都知道Java虚拟机都有默认的垃圾回收机制，但是不同的垃圾回收机制的效率是不同的，正是因为这点我们才经常对Java虚拟机的垃圾回收策略进行相应的调整。下面也是通过我的一些需求来配置的垃圾回收策略：</strong></em></li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@tomcat ~]<span class="comment"># vim /usr/local/tomcat/bin/catalina.sh</span></span><br></pre></td></tr></table></figure>
+
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grie1tvdj4j316h02l3yr.jpg" alt="image-20200614101234535"></p>
 <ul>
 <li><em><strong>Java虚拟机的垃圾回收策略一般分为：串行收集器、并行收集器和并发收集器</strong></em></li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 串行收集器：</span></span><br><span class="line">1、-XX:+UseSerialGC：代表垃圾回收策略为串行收集器，即在整个扫描和复制过程采用单线程的方式来进行，适用于单CPU、新生代空间较小及对暂停时间要求不是非常高的应用上，是client级别默认的GC方式，主要在JDK1.5之前的垃圾回收方式。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 并发收集器：</span></span><br><span class="line">1、-XX:+UseParallelGC：代表垃圾回收策略为并行收集器(吞吐量优先)，即在整个扫描和复制过程采用多线程的方式来进行，适用于多CPU、对暂停时间要求较短的应用上，是server级别默认采用的GC方式。此配置仅对年轻代有效。该配置只能让年轻代使用并发收集，而年老代仍旧使用串行收集。</span><br><span class="line"></span><br><span class="line">2、-XX:ParallelGCThreads=4：配置并行收集器的线程数，即：同时多少个线程一起进行垃圾回收。此值最好配置与处理器数目相等。</span><br><span class="line"></span><br><span class="line">3、-XX:+UseParallelOldGC：配置年老代垃圾收集方式为并行收集。JDK6.0支持对年老代并行收集 。</span><br><span class="line"></span><br><span class="line">4、-XX:MaxGCPauseMillis=100 ：设置每次年轻代垃圾回收的最长时间，如果无法满足此时间，JVM会自动调整年轻代大小，以满足此值。</span><br><span class="line"></span><br><span class="line">5、-XX:+UseAdaptiveSizePolicy：设置此选项后，并行收集器会自动选择年轻代区大小和相应的Survivor区比例，以达到目标系统规定的最低相应时间或者收集频率等，此值建议使用并行收集器时，一直打开。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 并发收集器：</span></span><br><span class="line">1、-XX:+UseConcMarkSweepGC:代表垃圾回收策略为并发收集器。</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>以上的各种GC机制是需要组合使用的，制定方式有下表所示</li>
 </ul>
@@ -958,7 +917,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">Tomcat个人笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81Tomcat%E7%AE%80%E4%BB%8B%E6%A6%82%E8%BF%B0"><span class="nav-text">一、Tomcat简介概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Tomcat-%E5%8E%86%E5%8F%B2%E7%94%B1%E6%9D%A5"><span class="nav-text">1. Tomcat 历史由来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Tomcat%E5%9F%BA%E6%9C%AC%E7%AE%80%E4%BB%8B"><span class="nav-text">2. Tomcat基本简介</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Tomcat%E6%9E%B6%E6%9E%84%E5%8E%9F%E7%90%86"><span class="nav-text">二、Tomcat架构原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-HTTP%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-text">1. HTTP工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Tomcat%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84%E5%9B%BE"><span class="nav-text">2. Tomcat基本架构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Tomcat%E5%90%84%E7%9B%AE%E5%BD%95%E5%8F%8A%E6%96%87%E4%BB%B6%E8%AF%B4%E6%98%8E"><span class="nav-text">3. Tomcat各目录及文件说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81Tomcat%E9%83%A8%E7%BD%B2"><span class="nav-text">三、Tomcat部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85JDK"><span class="nav-text">1. 安装JDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85-Tomcat"><span class="nav-text">2. 安装 Tomcat</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81server-xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-text">四、server.xml配置文件详解（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%80%E4%B8%AA%E6%95%B4%E4%BD%93%E7%9A%84-server-xml%E9%85%8D%E7%BD%AE%E5%AE%9E%E4%BE%8B"><span class="nav-text">1. 一个整体的 server.xml配置实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-server-xml%E6%96%87%E4%BB%B6%E7%9A%84%E7%BB%93%E6%9E%84-%E5%92%8C-%E5%85%83%E7%B4%A0"><span class="nav-text">2. server.xml文件的结构 和 元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-server-xml%E7%9A%84%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="nav-text">2.1. server.xml的整体结构如下：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-server-xml%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%8F%AF%E4%BB%A5%E5%88%86%E5%9B%9B%E7%B1%BB"><span class="nav-text">2.2. server.xml文件中的元素可以分四类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-server-xml%E5%85%83%E7%B4%A0"><span class="nav-text">2.3. server.xml元素</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE"><span class="nav-text">五、部署项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85Mariadb%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">1. 安装Mariadb数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AF%BC%E5%85%A5-smbms-db-sql-%E6%95%B0%E6%8D%AE%E5%BA%93-%E5%B9%B6%E6%8E%88%E6%9D%83"><span class="nav-text">2. 导入 smbms_db.sql 数据库 并授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%83%A8%E7%BD%B2%E8%B6%85%E5%B8%82%E9%A1%B9%E7%9B%AE%E7%BD%91%E9%A1%B5"><span class="nav-text">3. 部署超市项目网页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E9%87%8D%E5%90%AFTomcat-%E5%B9%B6%E8%AE%BF%E9%97%AE%E7%BD%91%E9%A1%B5"><span class="nav-text">4. 重启Tomcat 并访问网页</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81Tomcat%E7%9A%84%E5%B8%B8%E8%A7%81%E9%85%8D%E7%BD%AE"><span class="nav-text">六、Tomcat的常见配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BF%AE%E6%94%B9Tomcat%E9%BB%98%E8%AE%A4%E7%BD%91%E9%A1%B5%E4%BD%8D%E7%BD%AE"><span class="nav-text">1. 修改Tomcat默认网页位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%85%8D%E7%BD%AE%E5%9F%BA%E4%BA%8E%E5%9F%9F%E5%90%8D%E7%9A%84%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA"><span class="nav-text">2. 配置基于域名的虚拟主机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%85%8D%E7%BD%AETomcat%E5%8F%8C%E5%AE%9E%E4%BE%8B"><span class="nav-text">3. 配置Tomcat双实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AE%9A%E4%B9%89%E9%BB%98%E8%AE%A4%E9%A1%B5%E9%9D%A2%EF%BC%88%E4%B8%8D%E5%BB%BA%E8%AE%AE%E4%BF%AE%E6%94%B9%EF%BC%89"><span class="nav-text">4. 定义默认页面（不建议修改）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E8%AE%BE%E7%BD%AE%E9%A1%B5%E9%9D%A2%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4%EF%BC%88%E6%8C%89%E6%83%85%E5%86%B5%E8%80%8C%E5%AE%9A%EF%BC%89"><span class="nav-text">5. 设置页面超时时间（按情况而定）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E7%A6%81%E6%AD%A2%E5%88%97%E5%87%BA%E7%9B%AE%E5%BD%95%EF%BC%88%E4%B8%8D%E5%BB%BA%E8%AE%AE%E6%9B%B4%E6%94%B9%EF%BC%89"><span class="nav-text">6. 禁止列出目录（不建议更改）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81Tomcat-%E7%9A%84%E4%B8%89%E7%A7%8D%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="nav-text">七、Tomcat 的三种工作模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%90%8C%E6%AD%A5%E3%80%81%E5%BC%82%E6%AD%A5%E3%80%81%E9%98%BB%E5%A1%9E%E3%80%81%E9%9D%9E%E9%98%BB%E5%A1%9E%E7%9A%84%E7%90%86%E5%BF%B5"><span class="nav-text">1. 同步、异步、阻塞、非阻塞的理念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Tomcat%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F"><span class="nav-text">2. Tomcat的三种模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-BIO%E3%80%81NIO%E3%80%81AIO%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%E5%88%86%E6%9E%90"><span class="nav-text">3. BIO、NIO、AIO适用场景分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Tomcat%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F%E6%80%A7%E8%83%BD%E6%AF%94%E8%BE%83"><span class="nav-text">4. Tomcat三种模式性能比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81Tomcat%E4%BC%98%E5%8C%96"><span class="nav-text">八、Tomcat优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Tomcat%E8%87%AA%E8%BA%AB%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%B0%83%E4%BC%98"><span class="nav-text">1. Tomcat自身的配置文件调优</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-%E7%A6%81%E7%94%A8AJP%E5%8D%8F%E8%AE%AE%E8%BF%9E%E6%8E%A5%E5%99%A8%E8%8A%82%E7%9C%81%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90"><span class="nav-text">1.1.  禁用AJP协议连接器节省系统资源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-%E9%85%8D%E7%BD%AE%E7%BD%91%E9%A1%B5%E4%BC%A0%E8%BE%93%E5%8E%8B%E7%BC%A9"><span class="nav-text">1.2. 配置网页传输压缩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-Tomcat%E4%BF%AE%E6%94%B9%E4%B8%BA-apr%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="nav-text">1.3. Tomcat修改为 apr工作模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-Tomcat-%E4%BF%AE%E6%94%B9-nio%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="nav-text">1.4. Tomcat 修改 nio工作模式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Tomcat%E6%89%80%E8%BF%90%E8%A1%8C%E7%9A%84-Jvm-%E7%9A%84%E8%B0%83%E4%BC%98%E3%80%82"><span class="nav-text">2. Tomcat所运行的 Jvm 的调优。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-Tomcat%E5%86%85%E5%AD%98%E8%B0%83%E4%BC%98"><span class="nav-text">2.1. Tomcat内存调优</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5%E8%B0%83%E4%BC%98"><span class="nav-text">2.2. 垃圾回收策略调优</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tomcat%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0"><span class="nav-text">Tomcat个人笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81Tomcat%E7%AE%80%E4%BB%8B%E6%A6%82%E8%BF%B0"><span class="nav-text">一、Tomcat简介概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Tomcat-%E5%8E%86%E5%8F%B2%E7%94%B1%E6%9D%A5"><span class="nav-text">1. Tomcat 历史由来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Tomcat%E5%9F%BA%E6%9C%AC%E7%AE%80%E4%BB%8B"><span class="nav-text">2. Tomcat基本简介</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Tomcat%E6%9E%B6%E6%9E%84%E5%8E%9F%E7%90%86"><span class="nav-text">二、Tomcat架构原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-HTTP%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-text">1. HTTP工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Tomcat%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84%E5%9B%BE"><span class="nav-text">2. Tomcat基本架构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Tomcat%E5%90%84%E7%9B%AE%E5%BD%95%E5%8F%8A%E6%96%87%E4%BB%B6%E8%AF%B4%E6%98%8E"><span class="nav-text">3. Tomcat各目录及文件说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81Tomcat%E9%83%A8%E7%BD%B2"><span class="nav-text">三、Tomcat部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85JDK"><span class="nav-text">1. 安装JDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85-Tomcat"><span class="nav-text">2. 安装 Tomcat</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81server-xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-text">四、server.xml配置文件详解（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%80%E4%B8%AA%E6%95%B4%E4%BD%93%E7%9A%84-server-xml%E9%85%8D%E7%BD%AE%E5%AE%9E%E4%BE%8B"><span class="nav-text">1. 一个整体的 server.xml配置实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-server-xml%E6%96%87%E4%BB%B6%E7%9A%84%E7%BB%93%E6%9E%84-%E5%92%8C-%E5%85%83%E7%B4%A0"><span class="nav-text">2. server.xml文件的结构 和 元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-server-xml%E7%9A%84%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="nav-text">2.1. server.xml的整体结构如下：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-server-xml%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%8F%AF%E4%BB%A5%E5%88%86%E5%9B%9B%E7%B1%BB"><span class="nav-text">2.2. server.xml文件中的元素可以分四类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-server-xml%E5%85%83%E7%B4%A0"><span class="nav-text">2.3. server.xml元素</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE"><span class="nav-text">五、部署项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85Mariadb%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">1. 安装Mariadb数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AF%BC%E5%85%A5-smbms-db-sql-%E6%95%B0%E6%8D%AE%E5%BA%93-%E5%B9%B6%E6%8E%88%E6%9D%83"><span class="nav-text">2. 导入 smbms_db.sql 数据库 并授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%83%A8%E7%BD%B2%E8%B6%85%E5%B8%82%E9%A1%B9%E7%9B%AE%E7%BD%91%E9%A1%B5"><span class="nav-text">3. 部署超市项目网页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E9%87%8D%E5%90%AFTomcat-%E5%B9%B6%E8%AE%BF%E9%97%AE%E7%BD%91%E9%A1%B5"><span class="nav-text">4. 重启Tomcat 并访问网页</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81Tomcat%E7%9A%84%E5%B8%B8%E8%A7%81%E9%85%8D%E7%BD%AE"><span class="nav-text">六、Tomcat的常见配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BF%AE%E6%94%B9Tomcat%E9%BB%98%E8%AE%A4%E7%BD%91%E9%A1%B5%E4%BD%8D%E7%BD%AE"><span class="nav-text">1. 修改Tomcat默认网页位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%85%8D%E7%BD%AE%E5%9F%BA%E4%BA%8E%E5%9F%9F%E5%90%8D%E7%9A%84%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA"><span class="nav-text">2. 配置基于域名的虚拟主机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%85%8D%E7%BD%AETomcat%E5%8F%8C%E5%AE%9E%E4%BE%8B"><span class="nav-text">3. 配置Tomcat双实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AE%9A%E4%B9%89%E9%BB%98%E8%AE%A4%E9%A1%B5%E9%9D%A2%EF%BC%88%E4%B8%8D%E5%BB%BA%E8%AE%AE%E4%BF%AE%E6%94%B9%EF%BC%89"><span class="nav-text">4. 定义默认页面（不建议修改）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E8%AE%BE%E7%BD%AE%E9%A1%B5%E9%9D%A2%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4%EF%BC%88%E6%8C%89%E6%83%85%E5%86%B5%E8%80%8C%E5%AE%9A%EF%BC%89"><span class="nav-text">5. 设置页面超时时间（按情况而定）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E7%A6%81%E6%AD%A2%E5%88%97%E5%87%BA%E7%9B%AE%E5%BD%95%EF%BC%88%E4%B8%8D%E5%BB%BA%E8%AE%AE%E6%9B%B4%E6%94%B9%EF%BC%89"><span class="nav-text">6. 禁止列出目录（不建议更改）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81Tomcat-%E7%9A%84%E4%B8%89%E7%A7%8D%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="nav-text">七、Tomcat 的三种工作模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%90%8C%E6%AD%A5%E3%80%81%E5%BC%82%E6%AD%A5%E3%80%81%E9%98%BB%E5%A1%9E%E3%80%81%E9%9D%9E%E9%98%BB%E5%A1%9E%E7%9A%84%E7%90%86%E5%BF%B5"><span class="nav-text">1. 同步、异步、阻塞、非阻塞的理念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Tomcat%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F"><span class="nav-text">2. Tomcat的三种模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-BIO%E3%80%81NIO%E3%80%81AIO%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%E5%88%86%E6%9E%90"><span class="nav-text">3. BIO、NIO、AIO适用场景分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Tomcat%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F%E6%80%A7%E8%83%BD%E6%AF%94%E8%BE%83"><span class="nav-text">4. Tomcat三种模式性能比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81Tomcat%E4%BC%98%E5%8C%96"><span class="nav-text">八、Tomcat优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Tomcat%E8%87%AA%E8%BA%AB%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%B0%83%E4%BC%98"><span class="nav-text">1. Tomcat自身的配置文件调优</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-%E7%A6%81%E7%94%A8AJP%E5%8D%8F%E8%AE%AE%E8%BF%9E%E6%8E%A5%E5%99%A8%E8%8A%82%E7%9C%81%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90"><span class="nav-text">1.1.  禁用AJP协议连接器节省系统资源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-%E9%85%8D%E7%BD%AE%E7%BD%91%E9%A1%B5%E4%BC%A0%E8%BE%93%E5%8E%8B%E7%BC%A9"><span class="nav-text">1.2. 配置网页传输压缩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-Tomcat%E4%BF%AE%E6%94%B9%E4%B8%BA-apr%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="nav-text">1.3. Tomcat修改为 apr工作模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-Tomcat-%E4%BF%AE%E6%94%B9-nio%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="nav-text">1.4. Tomcat 修改 nio工作模式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Tomcat%E6%89%80%E8%BF%90%E8%A1%8C%E7%9A%84-Jvm-%E7%9A%84%E8%B0%83%E4%BC%98%E3%80%82"><span class="nav-text">2. Tomcat所运行的 Jvm 的调优。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-Tomcat%E5%86%85%E5%AD%98%E8%B0%83%E4%BC%98"><span class="nav-text">2.1. Tomcat内存调优</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5%E8%B0%83%E4%BC%98"><span class="nav-text">2.2. 垃圾回收策略调优</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
