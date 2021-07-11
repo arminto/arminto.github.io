@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="NFS存储服务">
+<meta property="og:url" content="http://example.com/2021/07/11/NFS%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1/index.html">
+<meta property="og:site_name" content="LEMON">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1griaogtd9ej30p70gkdkc.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1griap8l7jmj30qg0geq69.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1griapclknoj30ls0clmye.jpg">
+<meta property="article:published_time" content="2021-07-11T11:11:34.000Z">
+<meta property="article:modified_time" content="2021-07-11T11:12:05.582Z">
+<meta property="article:author" content="Armin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNly1griaogtd9ej30p70gkdkc.jpg">
+
+<link rel="canonical" href="http://example.com/2021/07/11/NFS%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>NFS存储服务 | LEMON</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LEMON</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">死记性不如烂笔头</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/11/NFS%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/armin.png">
+      <meta itemprop="name" content="Armin">
+      <meta itemprop="description" content="记录生活中的点点滴滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LEMON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NFS存储服务
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+        <!--toc-->
+<span id="more"></span>
+
+<h2 id="一、NFS工作原理"><a href="#一、NFS工作原理" class="headerlink" title="一、NFS工作原理"></a>一、NFS工作原理</h2><h3 id="1、什么是NFS服务器"><a href="#1、什么是NFS服务器" class="headerlink" title="1、什么是NFS服务器"></a>1、什么是NFS服务器</h3><blockquote>
+<p>NFS就是Network File System的缩写，它最大的功能就是可以通过网络，让不同的机器、不同的操作系统可以共享彼此的文件。</p>
+</blockquote>
+<p>NFS服务器可以让PC将网络中的NFS服务器共享的目录挂载到本地端的文件系统中，而在本地端的系统中来看，那个远程主机的目录就好像是自己的一个磁盘分区一样，在使用上相当便利；</p>
+<h3 id="2、NFS挂载原理"><a href="#2、NFS挂载原理" class="headerlink" title="2、NFS挂载原理"></a>2、NFS挂载原理</h3><p>NFS服务器的挂载结构图：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1griaogtd9ej30p70gkdkc.jpg" alt="img"></p>
+<p>如上图示：</p>
+<p>当我们在NFS服务器设置好一个共享目录/home/public后，其他的有权访问NFS服务器的NFS客户端就可以将这个目录挂载到自己文件系统的某个挂载点，这个挂载点可以自己定义，如上图客户端A与客户端B挂载的目录就不相同。并且挂载好后我们在本地能够看到服务端/home/public的所有数据。如果服务器端配置的客户端只读，那么客户端就只能够只读。如果配置读写，客户端就能够进行读写。挂载后，NFS客户端查看磁盘信息命令：#df –h。</p>
+<p>既然NFS是通过网络来进行服务器端和客户端之间的数据传输，那么两者之间要传输数据就要有想对应的网络端口，NFS服务器到底使用哪个端口来进行数据传输呢？基本上NFS这个服务器的端口开在2049,但由于文件系统非常复杂。因此NFS还有其他的程序去启动额外的端口，这些额外的用来传输数据的端口是随机选择的，是小于1024的端口；既然是随机的那么客户端又是如何知道NFS服务器端到底使用的是哪个端口呢？这时就需要通过远程过程调用（Remote Procedure Call,RPC）协议来实现了！</p>
+<h3 id="3、RPC与NFS如何通讯"><a href="#3、RPC与NFS如何通讯" class="headerlink" title="3、RPC与NFS如何通讯"></a>3、RPC与NFS如何通讯</h3><p>因为NFS支持的功能相当多，而不同的功能都会使用不同的程序来启动，每启动一个功能就会启用一些端口来传输数据，因此NFS的功能对应的端口并不固定，客户端要知道NFS服务器端的相关端口才能建立连接进行数据传输，而RPC就是用来统一管理NFS端口的服务，并且统一对外的端口是111，RPC会记录NFS端口的信息，如此我们就能够通过RPC实现服务端和客户端沟通端口信息。PRC最主要的功能就是指定每个NFS功能所对应的port number,并且通知客户端，记客户端可以连接到正常端口上去。</p>
+<p>那么RPC又是如何知道每个NFS功能的端口呢？</p>
+<p>首先当NFS启动后，就会随机的使用一些端口，然后NFS就会向RPC去注册这些端口，RPC就会记录下这些端口，并且RPC会开启111端口，等待客户端RPC的请求，如果客户端有请求，那么服务器端的RPC就会将之前记录的NFS端口信息告知客户端。如此客户端就会获取NFS服务器端的端口信息，就会以实际端口进行数据的传输了。</p>
+<p>提示：在启动NFS SERVER之前，首先要启动RPC服务（即portmap服务，下同）否则NFS SERVER就无法向RPC服务区注册，另外，如果RPC服务重新启动，原来已经注册好的NFS端口数据就会全部丢失。因此此时RPC服务管理的NFS程序也要重新启动以重新向RPC注册。特别注意：一般修改NFS配置文档后，是不需要重启NFS的，直接在命令执行/etc/init.d/nfs reload或exportfs –rv即可使修改的/etc/exports生效。</p>
+<h3 id="4、NFS客户端和NFS服务端通讯过程"><a href="#4、NFS客户端和NFS服务端通讯过程" class="headerlink" title="4、NFS客户端和NFS服务端通讯过程"></a>4、NFS客户端和NFS服务端通讯过程</h3><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1griap8l7jmj30qg0geq69.jpg" alt="img"></p>
+<p>1）首先服务器端启动RPC服务，并开启111端口</p>
+<p>2）服务器端启动NFS服务，并向RPC注册端口信息</p>
+<p>3）客户端启动RPC（portmap服务），向服务端的RPC(portmap)服务请求服务端的NFS端口</p>
+<p>4）服务端的RPC(portmap)服务反馈NFS端口信息给客户端。</p>
+<p>5）客户端通过获取的NFS端口来建立和服务端的NFS连接并进行数据的传输。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1griapclknoj30ls0clmye.jpg" alt="img"></p>
+<h2 id="二、NFS部署"><a href="#二、NFS部署" class="headerlink" title="二、NFS部署"></a>二、NFS部署</h2><blockquote>
+<p>要部署NFS服务，必须安装下面两个软件包：nfs-utils：NFS主程序，rpcbind:PRC主程序； </p>
+</blockquote>
+<p><strong>NFS服务器端和Client端都需要这安装这两个软件。</strong></p>
+<ul>
+<li>注意：NFS的RPC服务器，Centos5下名字为portmap,CentOS6和CentOS7下名称为rpcbind</li>
+</ul>
+<p><strong>NFS软件包</strong></p>
+<ul>
+<li><p>nfs-utils: NFS主程序，包含rpc.nfsd rpc.mount两个deamons</p>
+</li>
+<li><p>rpcbind: RPC主程序</p>
+</li>
+</ul>
+<p><strong>节点角色</strong></p>
+<ul>
+<li><p>存储服务器：192.168.1.1</p>
+</li>
+<li><p>客户端服务器：192.168.1.2</p>
+</li>
+</ul>
+<h3 id="1、服务端操作"><a href="#1、服务端操作" class="headerlink" title="1、服务端操作"></a>1、服务端操作</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">1、yum -y install nfs-utils rpcbind</span><br><span class="line"></span><br><span class="line">2、<span class="keyword">for</span> i <span class="keyword">in</span> rpcbind nfs;<span class="keyword">do</span> chkconfig <span class="variable">$i</span> on; <span class="keyword">done</span>   <span class="comment">##设置为开机启动</span></span><br><span class="line">	</span><br><span class="line">3、设置共享目录</span><br><span class="line">mkdir /opt/wwwroot</span><br><span class="line">chmod 777 /opt/wwwroot  <span class="comment">##设置权限</span></span><br><span class="line">		</span><br><span class="line">4、vi /etc/exports</span><br><span class="line">/opt/wwwroot	192.168.1.0/24(rw,sync,no_root_squash)</span><br><span class="line">		rw      表示可读写</span><br><span class="line">		ro      Read-only表示只能读权限</span><br><span class="line">		sync    文件实际写入磁盘后才返回</span><br><span class="line">		no_root_squash    访问nfs server共享目录的用户如果是root的话，它对该目录具有root权限</span><br><span class="line"></span><br><span class="line">5、启动nfs服务程序</span><br><span class="line">/etc/init.d/rpcbind start</span><br><span class="line">/etc/init.d/nfs start</span><br><span class="line">netstat -utpnl |grep rpcbind</span><br><span class="line">showmount -e  <span class="comment">##查看本机共享的目录</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2、客户端操作"><a href="#2、客户端操作" class="headerlink" title="2、客户端操作"></a>2、客户端操作</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">1、yum -y install nfs-utils rpcbind</span><br><span class="line">	</span><br><span class="line">2、chkconfig rpcbind on</span><br><span class="line">	</span><br><span class="line">3、showmount -e 192.168.1.1</span><br><span class="line">	</span><br><span class="line">4、<span class="built_in">echo</span> 3 &gt;/proc/sys/vm/drop_caches  <span class="comment">##当nfs因为缓存没有及时而导致错，可以使用该命令</span></span><br><span class="line">	</span><br><span class="line">5、客户机挂载使用nfs共享</span><br><span class="line">mkdir -p /var/www/html</span><br><span class="line">mount 192.168.1.1:/opt/wwwroot /var/www/html/</span><br><span class="line">	   </span><br><span class="line">6、vi /etc/fstab </span><br><span class="line">192.168.1.1:/opt/wwwroot /var/www/html nfs defaults,_netdev 0 0</span><br><span class="line">		</span><br><span class="line">7、<span class="built_in">cd</span> /var/www/html/</span><br><span class="line">touch a.file</span><br><span class="line">ll</span><br><span class="line">切换到1.1上验证：</span><br><span class="line"></span><br><span class="line"><span class="comment"># autofs自动挂载NFS配置：只有使用时才挂载，挂载后不使用会自动超时退出，以便减小存储服务器压力。</span></span><br><span class="line"><span class="comment"># 只需要在客户端配置：</span></span><br><span class="line">yum -y install autofs</span><br><span class="line">vi /etc/auto.nfs</span><br><span class="line">html -rw 192.168.1.1:/opt/wwwroot</span><br><span class="line">:wq</span><br><span class="line"></span><br><span class="line">vi /etc/auto.master</span><br><span class="line">/var/www /etc/auto.nfs  --timeout=60</span><br><span class="line">:wq</span><br><span class="line"></span><br><span class="line">/etc/init.d/autofs  restart</span><br><span class="line">chkconfig autofs on</span><br><span class="line"><span class="built_in">cd</span> /var/www/html  <span class="comment">#进入时自动挂载</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 错误：</span></span><br><span class="line">[root@localhost ~]<span class="comment"># showmount -e</span></span><br><span class="line">clnt_create: RPC: Program not registered</span><br><span class="line">[root@localhost ~]<span class="comment"># rpc.mountd </span></span><br><span class="line">[root@localhost ~]<span class="comment"># showmount -e</span></span><br><span class="line">Export list <span class="keyword">for</span> localhost.localdomain:</span><br><span class="line">/opt/wwwroot 192.168.1.0/24</span><br><span class="line"></span><br><span class="line"><span class="comment"># 故障解决</span></span><br><span class="line">1、nfs只能挂载为nobody</span><br><span class="line">同时修改服务端、客户端/etc/idmapd.conf中的Domain为一样的值，随后重启rpcidmapd服务，或重启所有服务</span><br><span class="line">2、客户端无法卸载nfs目录</span><br><span class="line">umount.nfs4: /var/nfs: device is busy</span><br><span class="line">执行fuser -km /opt/wwwroot，然后再执行umount</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+      </div>
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/07/11/LVS%E5%9B%9B%E5%B1%82%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" rel="prev" title="LVS四层负载均衡">
+      <i class="fa fa-chevron-left"></i> LVS四层负载均衡
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81NFS%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-text">一、NFS工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFNFS%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">1、什么是NFS服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81NFS%E6%8C%82%E8%BD%BD%E5%8E%9F%E7%90%86"><span class="nav-text">2、NFS挂载原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81RPC%E4%B8%8ENFS%E5%A6%82%E4%BD%95%E9%80%9A%E8%AE%AF"><span class="nav-text">3、RPC与NFS如何通讯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81NFS%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%92%8CNFS%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%80%9A%E8%AE%AF%E8%BF%87%E7%A8%8B"><span class="nav-text">4、NFS客户端和NFS服务端通讯过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81NFS%E9%83%A8%E7%BD%B2"><span class="nav-text">二、NFS部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%93%8D%E4%BD%9C"><span class="nav-text">1、服务端操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%93%8D%E4%BD%9C"><span class="nav-text">2、客户端操作</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Armin"
+      src="/uploads/armin.png">
+  <p class="site-author-name" itemprop="name">Armin</p>
+  <div class="site-description" itemprop="description">记录生活中的点点滴滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/" title="GitHub → https:&#x2F;&#x2F;github.com" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://aws.amazon.com/cn/" title="AWS → https:&#x2F;&#x2F;aws.amazon.com&#x2F;cn&#x2F;" rel="noopener" target="_blank"><i class="fab fa-aws fa-fw"></i>AWS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.processon.com/" title="processon → https:&#x2F;&#x2F;www.processon.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-accusoft fa-fw"></i>processon</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cn-ki.net/" title="知识库 → https:&#x2F;&#x2F;www.cn-ki.net&#x2F;" rel="noopener" target="_blank"><i class="fas fa-book-open fa-fw"></i>知识库</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tophub.today/" title="看新闻 → https:&#x2F;&#x2F;tophub.today&#x2F;" rel="noopener" target="_blank"><i class="far fa-newspaper fa-fw"></i>看新闻</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://m.zxjsq.net/" title="计算器 → http:&#x2F;&#x2F;m.zxjsq.net" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计算器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://shijisuishu.bmcx.com/20010314__shijisuishu/" title="计龄器 → https:&#x2F;&#x2F;shijisuishu.bmcx.com&#x2F;20010314__shijisuishu&#x2F;" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计龄器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tool.oschina.net/hexconvert" title="进制转换 → https:&#x2F;&#x2F;tool.oschina.net&#x2F;hexconvert" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>进制转换</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.sojson.com/convert/subnetmask.html" title="子网计算 → https:&#x2F;&#x2F;www.sojson.com&#x2F;convert&#x2F;subnetmask.html" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>子网计算</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.baidu.com/" title="百度一下 → https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank"><i class="fas fa-search fa-fw"></i>百度一下</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Armin</span>
+</div>
+
+<div class="powered-by">
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
