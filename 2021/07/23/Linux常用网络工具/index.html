@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Linux常用网络工具">
+<meta property="og:url" content="http://example.com/2021/07/23/Linux%E5%B8%B8%E7%94%A8%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:site_name" content="LEMON">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsqpmlkdf0j312608wju9.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsqpn1jmdqj310408c40x.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsqpq52cesj30zu0u0qag.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsqpqr1z2hj30zs07qdho.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsqq272lanj31400muq7q.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsqqaxjrpgj30x804gmxj.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsqpxmpdyyj30ym09y75p.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsqpyxuzmtj310809ojsv.jpg">
+<meta property="article:published_time" content="2021-07-23T07:37:08.000Z">
+<meta property="article:modified_time" content="2021-07-23T07:39:10.916Z">
+<meta property="article:author" content="Armin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsqpmlkdf0j312608wju9.jpg">
+
+<link rel="canonical" href="http://example.com/2021/07/23/Linux%E5%B8%B8%E7%94%A8%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux常用网络工具 | LEMON</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LEMON</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录站</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/23/Linux%E5%B8%B8%E7%94%A8%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/armin.png">
+      <meta itemprop="name" content="Armin">
+      <meta itemprop="description" content="记录生活中的点点滴滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LEMON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux常用网络工具
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+        <!--toc-->
+<span id="more"></span>
+
+<h1 id="Linux-常用网络工具"><a href="#Linux-常用网络工具" class="headerlink" title="Linux 常用网络工具"></a>Linux 常用网络工具</h1><blockquote>
+<p>网络和监控命令类似于这些： hostname, ping, ifconfig, iwconfig, netstat, nslookup, traceroute, finger, telnet, ethtool 用于查看 linux 服务器 ip 地址，管理服务器网络配置，通过 telnet 和 ethernet 建立与 linux 之间的网络链接，查看 linux 的服务器信息等。下面让我们看看在 Linux 下的网络和监控命令的使用。</p>
+</blockquote>
+<h2 id="一、ping"><a href="#一、ping" class="headerlink" title="一、ping"></a>一、ping</h2><blockquote>
+<p>ping 将数据包发向用户指定地址。当包被接收，目标机器发送返回数据包。</p>
+</blockquote>
+<p><strong>主要有两个作用：</strong></p>
+<ul>
+<li>用来确认网络连接是畅通的。</li>
+<li>用来查看连接的速度信息。</li>
+</ul>
+<p>如果 ping <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a> 它将返回它的 ip 地址 。你可以通过 ctrl+C 来停止命令。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsqpmlkdf0j312608wju9.jpg" alt="image-20210723111543069"></p>
+<p>补充：-c 参数可以定义 ping 的次数，脚本中的网络判断用得比较多，比如 ping -c 4 <a target="_blank" rel="noopener" href="http://www.baidu.com就是/">www.baidu.com就是</a> ping 百度四次；而在 windows 下，则使用-n 参数来定义 ping 次数，如 ping -n 4 <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsqpn1jmdqj310408c40x.jpg" alt="image-20210723111607953"></p>
+<h2 id="二、ifconfig"><a href="#二、ifconfig" class="headerlink" title="二、ifconfig"></a>二、ifconfig</h2><blockquote>
+<p>查看用户网络配置。它显示当前网络设备配置。对于需要接收或者发送数据错误查找，这个工具极为好用。</p>
+</blockquote>
+<p>ifconfig 列出当前节点的所有网络设备</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsqpq52cesj30zu0u0qag.jpg" alt="image-20210723111846089"></p>
+<p>列出指定的网卡信息</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsqpqr1z2hj30zs07qdho.jpg" alt="image-20210723111942233"></p>
+<p><strong>Ps 在Windows下 用的 ipconfig</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsqq272lanj31400muq7q.jpg" alt="image-20210723113041749"></p>
+<h2 id="三、telnet"><a href="#三、telnet" class="headerlink" title="三、telnet"></a>三、telnet</h2><blockquote>
+<p>通过 telnet 协议连接目标主机，如果 telnet 连接可以在任一端口上完成即代表着两台主机间的连接良好。</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">telnet hostname port – 使用指定的端口 telnet 主机名。这通常用来测试主机是否在线或者网络是否正常。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsqqaxjrpgj30x804gmxj.jpg" alt="image-20210723113906579"></p>
+<p><strong>Ps 此命令在 Windows 下同样适用。</strong></p>
+<h2 id="四、ethtool"><a href="#四、ethtool" class="headerlink" title="四、ethtool"></a>四、ethtool</h2><blockquote>
+<p>ethtool 允许你查看和更改网卡的许多设置（不包括 Wi-Fi 网卡）。你可以管理许多高级设置，包括 tx/rx、校验及网络唤醒功能。</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ethtool -i &lt;网卡设备&gt;    <span class="comment"># 显示一个特定网卡的驱动信息，检查软件兼容性时尤其有用</span></span><br><span class="line"></span><br><span class="line">ethtool -p  &lt;网卡设备&gt;   <span class="comment"># 启动一个适配器的指定行为，比如让适配器的 LED 灯闪烁，以帮助你在多个适配器或接口中标识接口名称</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="五、nslookup"><a href="#五、nslookup" class="headerlink" title="五、nslookup"></a>五、nslookup</h2><blockquote>
+<p>查询DNS的记录，查看域名解析是否正常，在网络故障的时候用来诊断网络问题。</p>
+</blockquote>
+<p><strong>主要是下面的几个用法：</strong></p>
+<h3 id="1、直接查询域名情况"><a href="#1、直接查询域名情况" class="headerlink" title="1、直接查询域名情况"></a>1、直接查询域名情况</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">格式：nslookup domain [dns-server]  <span class="comment"># 如果没有指定dns服务器，就采用系统默认的dns服务器。</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsqpxmpdyyj30ym09y75p.jpg" alt="image-20210723112618411"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsqpyxuzmtj310809ojsv.jpg" alt="image-20210723112733345"></p>
+<h3 id="2、查询其他记录类型"><a href="#2、查询其他记录类型" class="headerlink" title="2、查询其他记录类型"></a>2、查询其他记录类型</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">格式：nslookup -qt = type domain [dns-server]</span><br><span class="line"></span><br><span class="line">参数:</span><br><span class="line">    A --&gt;地址记录</span><br><span class="line">    AAAA   --&gt;地址记录</span><br><span class="line">    AFSDB Andrew    --&gt;文件系统数据库服务器记录</span><br><span class="line">    ATMA --&gt;ATM地址记录</span><br><span class="line">    CNAME   --&gt;别名记录</span><br><span class="line">    HINHO  --&gt;硬件配置记录，包括CPU、操作系统信息 </span><br><span class="line">    ISDN   --&gt;域名对应的ISDN号码</span><br><span class="line">    MB   --&gt;存放指定邮箱的服务器</span><br><span class="line">    MG    --&gt;邮件组记录</span><br><span class="line">    MINFO   --&gt;邮件组和邮箱的信息记录</span><br><span class="line">    MR   --&gt;改名的邮箱记录</span><br><span class="line">    MX   --&gt;邮件服务器记录</span><br><span class="line">    NS  --&gt; 名字服务器记录</span><br><span class="line">    PTR    -&gt;反向记录</span><br><span class="line">    RP    --&gt;负责人记录</span><br><span class="line">    RT  --&gt;路由穿透记录</span><br><span class="line">    SRV    --&gt;TCP服务器信息记录</span><br><span class="line">    TXT   --&gt;域名对应的文本信息</span><br><span class="line">    X25  --&gt;域名对应的X.25地址记录</span><br></pre></td></tr></table></figure>
+
+<h2 id="六、route"><a href="#六、route" class="headerlink" title="六、route"></a>六、route</h2><h3 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h3><blockquote>
+<p><strong>route命令用于显示和操作IP路由表。要实现两个不同的子网之间的通信，需要一台连接两个网络的路由器，或者同时位于两个网络的网关来实现。</strong></p>
+</blockquote>
+<p>在Linux系统中, 设置路由通常是 为了解决以下问题：该Linux系统在一个局域网中, 局域网中有一个网关, 能够让机器访问Internet，那么就需要将这台机器的IP地址设置为 Linux机器的默认路由。</p>
+<p>要注意的是，直接在命令行下执行route命令来添加路由，不会永久保存，当网卡重启或者机器重启之后，该路由就失效了；要想永久保存，可以保存到配置文件。</p>
+<p><strong>linux 默认只支持一条默认路由，当重新启动网口时，会把其他默认路由去掉，只剩下一条该网口生成的默认路由。当然可以通过 route 命令手动添加多条默认路由，如果多条路由一样，则选择最开始找到的路由(排在前面的路由)。</strong></p>
+<h3 id="2、route命令详解"><a href="#2、route命令详解" class="headerlink" title="2、route命令详解"></a>2、route命令详解</h3><h4 id="2-1-命令格式"><a href="#2-1-命令格式" class="headerlink" title="2.1 命令格式"></a>2.1 命令格式</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">route [-CFvnee]</span><br><span class="line"> </span><br><span class="line">route [-v] [-A family] add [-net|-host] target [netmask Nm] [gw Gw] [metric N] </span><br><span class="line">      [mss M] [window W] [irtt I] [reject] [mod] [dyn] [reinstate] [[dev] If]</span><br><span class="line">route [-v] [-A family] del [-net|-host] target [gw Gw] [netmask Nm] [metric N] [[dev] If]</span><br><span class="line">route [-V] [--version] [-h] [--<span class="built_in">help</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-常用选项参数"><a href="#2-2-常用选项参数" class="headerlink" title="2.2 常用选项参数"></a>2.2 常用选项参数</h4><blockquote>
+<p><strong>选项</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-C</td>
+<td>显示路由缓存</td>
+</tr>
+<tr>
+<td>-F</td>
+<td>显示发送信息</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示详细的处理信息</td>
+</tr>
+<tr>
+<td><strong>-n</strong></td>
+<td>不解析名字</td>
+</tr>
+<tr>
+<td>-ee</td>
+<td>使用更详细的资讯来显示</td>
+</tr>
+<tr>
+<td>-V</td>
+<td>显示版本信息</td>
+</tr>
+<tr>
+<td><strong>-net</strong></td>
+<td>到一个网络的路由表</td>
+</tr>
+<tr>
+<td><strong>-host</strong></td>
+<td>到一个主机的路由表</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>参数</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>add</strong></td>
+<td>增加路由记录</td>
+</tr>
+<tr>
+<td><strong>del</strong></td>
+<td>删除路由记录</td>
+</tr>
+<tr>
+<td>target</td>
+<td>目的网络或目的主机</td>
+</tr>
+<tr>
+<td>gw</td>
+<td>设置默认网关。gateway 的简写，后续接的是 IP 的数值</td>
+</tr>
+<tr>
+<td>mss</td>
+<td>设置TCP的最大区块长度（MSS），单位MB</td>
+</tr>
+<tr>
+<td>window</td>
+<td>指定通过路由表的TCP连接的TCP窗口大小</td>
+</tr>
+<tr>
+<td>de</td>
+<td>如果只是要指定由那一块网路卡连线出去，则使用这个设定，后面接 eth0 等</td>
+</tr>
+<tr>
+<td><strong>reject</strong></td>
+<td>设置到指定网络为不可达，避免在连接到这个网络的地址时程序过长时间的等待，直接就知道该网络不可达</td>
+</tr>
+</tbody></table>
+<h4 id="2-3-常用命令格式"><a href="#2-3-常用命令格式" class="headerlink" title="2.3 常用命令格式"></a>2.3 常用命令格式</h4><blockquote>
+<p><strong>添加和删除路由</strong></p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">route &#123;add | del &#125; [-net|-host] [网域或主机] netmask [mask] [gw|dev]</span><br><span class="line"> </span><br><span class="line">增加 (add) 与删除 (del) 路由的相关参数：</span><br><span class="line">(a) -net ：表示后面接的路由为一个网域。</span><br><span class="line">(b) -host ：表示后面接的为连接到单部主机的路由。</span><br><span class="line">(c) netmask ：与网域有关，可以设定 netmask 决定网域的大小。</span><br><span class="line">(d) gw ：gateway 的简写，后续接的是 IP 的数值，与 dev 不同。</span><br><span class="line">(e) dev ：如果只是要指定由那一块网路卡连线出去，则使用这个设定，后面接 eth0 等。</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>查询路由信息</strong></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">route -nee</span><br><span class="line"></span><br><span class="line">(a) -n：不要使用通讯协定或主机名称，直接使用 IP 或 port number。</span><br><span class="line">(b) -ee：使用更详细的资讯来显示。</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>添加/删除默认网关路由</strong></p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">route &#123;add | del &#125; default gw &#123;IP-ADDRESS&#125; &#123;INTERFACE-NAME&#125;</span><br><span class="line"></span><br><span class="line">(a) IP-ADDRESS：用于指定路由器（网关）的IP地址。</span><br><span class="line">(b) INTERFACE-NAME：用于指定接口名称，如eth0。</span><br><span class="line"></span><br><span class="line">例1：route add default gw 192.168.1.1 eth0</span><br><span class="line">例2：route del default gw 192.168.1.1 eth0</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>添加/删除到指定网络的路由规则</strong></p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route &#123;add | del &#125; -net &#123;NETWORK-ADDRESS&#125; netmask &#123;NETMASK&#125; dev &#123;INTERFACE-NAME&#125;(a) NETWORK-ADDRESS：用于指定网络地址。(b) NETMASK：用于指定子网掩码。(c) INTERFACE-NAME：用于指定接口名称，如eth0。例1：route add -net 192.168.1.0 netmask 255.255.255.0 dev eth0例2：route del -net 192.168.1.0 netmask 255.255.255.0 dev eth0</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>添加/删除路由到指定网络为不可达</strong></p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 设置到指定网络为不可达，避免在连接到这个网络的地址时程序过长时间的等待，直接就知道该网络不可达。route &#123;add | del &#125; -net &#123;NETWORK-ADDRESS&#125; netmask &#123;NETMASK&#125; reject(a) NETWORK-ADDRESS：用于指定网络地址。(b) NETMASK：用于指定子网掩码。例1：route add -net 10.0.0.0 netmask 255.0.0.0 reject例2：route del -net 10.0.0.0 netmask 255.0.0.0 reject</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-4-输出详解"><a href="#2-4-输出详解" class="headerlink" title="2.4 输出详解"></a>2.4 输出详解</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host01 ~]<span class="comment"># route -nKernel IP routing tableDestination     Gateway         Genmask         Flags Metric Ref    Use Iface0.0.0.0         192.168.1.1     0.0.0.0         UG    0      0        0 ens34169.254.0.0     0.0.0.0         255.255.0.0     U     1002   0        0 ens32169.254.0.0     0.0.0.0         255.255.0.0     U     1003   0        0 ens34192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 ens34192.168.2.0     0.0.0.0         255.255.255.0   U     0      0        0 ens32## 这里会发现后两个169.254.0.0的路由，这个地址原来是windows下的机器dhcp获取ip失效的时候,预设的一个ip地址段，可能是linux照搬来了吧.其实那个地址存在也无所谓,不能在互联网上用的，过修改/etc/sysconfig/network,在文件结尾添加NOZEROCONF=yes重启网络服务就行了[root@host01 ~]# route -nKernel IP routing tableDestination     Gateway         Genmask         Flags Metric Ref    Use Iface0.0.0.0         192.168.1.1     0.0.0.0         UG    0      0        0 ens34192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 ens34192.168.2.0     0.0.0.0         255.255.255.0   U     0      0        0 ens32</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Destination</td>
+<td>目标网络或目标主机。Destination 为 default（0.0.0.0）时，表示这个是默认网关，所有数据都发到这个网关</td>
+</tr>
+<tr>
+<td>Gateway</td>
+<td>网关地址，0.0.0.0 表示当前记录对应的 Destination 跟本机在同一个网段，通信时不需要经过网关。如果没有就显示星号(*)</td>
+</tr>
+<tr>
+<td>Genmask</td>
+<td>Destination字段的网络掩码, Destination 是主机时需要设为 255.255.255.255, 是默认路由时会设置为 0.0.0.0</td>
+</tr>
+<tr>
+<td>Flags</td>
+<td><strong>标记：</strong>【<strong>U</strong> 该路由可以使用】，【<strong>R</strong> 恢复动态路由产生的表项】，【<strong>D</strong> 该路由是由改变路由（redirect）报文创建的】，【<strong>M</strong> 该路由已被改变路由报文修改】，【**!** 这个路由将不会被接受】，【<strong>G</strong> 该路由是到一个网关 (路由器)。如果没有设置该标志，说明目的地 是直接相连的】</td>
+</tr>
+<tr>
+<td>Metric</td>
+<td>路由距离，到达指定网络所需的中转数，是大型局域网和广域网设置所必需的</td>
+</tr>
+<tr>
+<td>Ref</td>
+<td>路由项引用次数</td>
+</tr>
+<tr>
+<td>Use</td>
+<td>此路由项被路由软件查找的次数</td>
+</tr>
+<tr>
+<td>Iface</td>
+<td>网卡名字，例如 ens32</td>
+</tr>
+</tbody></table>
+<h3 id="3、实例分析"><a href="#3、实例分析" class="headerlink" title="3、实例分析"></a>3、实例分析</h3><h4 id="3-1-路由选择分析"><a href="#3-1-路由选择分析" class="headerlink" title="3.1 路由选择分析"></a>3.1 路由选择分析</h4><blockquote>
+<p>当TCP/IP需要向某个IP地址发起通信时，它会对路由表进行评估，以确定如何发送数据包。评估过程如下：</p>
+</blockquote>
+<p>(1) TCP/IP使用需要通信的目的IP地址和<strong>路由表中每一个路由项的网络掩码进行相与计算，如果相与后的结果匹配对应路由项的网络地址，则记录下此路由项。</strong></p>
+<p>(2) 当计算完路由表中所有的路由项后：</p>
+<ul>
+<li>TCP/IP选择记录下的路由项中的<strong>最长匹配路由</strong>（网络掩码中具有最多 “1” 位的路由项）来和此目的IP地址进行通信。</li>
+<li>如果存在多个最长匹配路由，那么选择<strong>具有最低跃点数的路由项。</strong></li>
+<li>如果存在多个具有最低跃点数的最长匹配路由，那么：均根据最长匹配路由所对应的网络接口在<strong>网络连接的高级设置中的绑定优先级来决定(一般有线(eth0) &gt; 无线 (wlan0) &gt; 移动信号(4G))。</strong></li>
+<li><strong>如果优先级一致，则选择最开始找到的最长匹配路由。(排在前面的路由)</strong></li>
+</ul>
+<h4 id="3-2-验证分析"><a href="#3-2-验证分析" class="headerlink" title="3.2 验证分析"></a>3.2 验证分析</h4><p>(1) 验证：traceroute <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
+<blockquote>
+<p>通过路由表可以知道这个数据包到底是在那个路由网关出去的，我这里显示的是1.1这个路由网关出去的</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host01 ~]<span class="comment"># traceroute www.baidu.comtraceroute to www.baidu.com (61.135.169.125), 30 hops max, 60 byte packets 1  192.168.1.1 (192.168.1.1)  0.886 ms  1.509 ms  1.547 ms [root@host01 ~]# route -nKernel IP routing tableDestination     Gateway         Genmask         Flags Metric Ref    Use Iface0.0.0.0         192.168.1.1     0.0.0.0         UG    0      0        0 ens34192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 ens34192.168.2.0     0.0.0.0         255.255.255.0   U     0      0        0 ens32</span></span><br></pre></td></tr></table></figure>
+
+<p>(2) 删除1.1这个路由网关，验证这个数据包还能否出去</p>
+<blockquote>
+<p>重新添加路由后，我们通过路由表可以知道有两条相同默认路由可以选择，由于先找到192.168.1.1 网关路由，所以最后选择了 192.168.1.1 网关。</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host01 ~]<span class="comment"># route -nKernel IP routing tableDestination     Gateway         Genmask         Flags Metric Ref    Use Iface0.0.0.0         192.168.1.1     0.0.0.0         UG    0      0        0 ens34192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 ens34192.168.2.0     0.0.0.0         255.255.255.0   U     0      0        0 ens32[root@host01 ~]# [root@host01 ~]# route del default gw 192.168.1.1[root@host01 ~]# route -nKernel IP routing tableDestination     Gateway         Genmask         Flags Metric Ref    Use Iface192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 ens34192.168.2.0     0.0.0.0         255.255.255.0   U     0      0        0 ens32[root@host01 ~]# traceroute www.baidu.comtraceroute to www.baidu.com (61.135.169.121), 30 hops max, 60 byte packetsconnect: 网络不可达[root@host01 ~]# route add default gw 192.168.1.1[root@host01 ~]# route -nKernel IP routing tableDestination     Gateway         Genmask         Flags Metric Ref    Use Iface0.0.0.0         192.168.1.1     0.0.0.0         UG    0      0        0 ens34192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 ens34192.168.2.0     0.0.0.0         255.255.255.0   U     0      0        0 ens32[root@host01 ~]# traceroute www.baidu.comtraceroute to www.baidu.com (61.135.169.121), 30 hops max, 60 byte packets 1  192.168.1.1 (192.168.1.1)  0.937 ms  1.955 ms  1.907 ms</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-添加和删除路由"><a href="#3-3-添加和删除路由" class="headerlink" title="3.3 添加和删除路由"></a>3.3 添加和删除路由</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host01 ~]<span class="comment"># route -nKernel IP routing tableDestination     Gateway         Genmask         Flags Metric Ref    Use Iface0.0.0.0         192.168.1.1     0.0.0.0         UG    0      0        0 ens34192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 ens34192.168.2.0     0.0.0.0         255.255.255.0   U     0      0        0 ens32[root@host01 ~]# [root@host01 ~]# route del default gw 192.168.1.1[root@host01 ~]# route -nKernel IP routing tableDestination     Gateway         Genmask         Flags Metric Ref    Use Iface192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 ens34192.168.2.0     0.0.0.0         255.255.255.0   U     0      0        0 ens32[root@host01 ~]# traceroute www.baidu.comtraceroute to www.baidu.com (61.135.169.121), 30 hops max, 60 byte packetsconnect: 网络不可达[root@host01 ~]# route add default gw 192.168.1.1[root@host01 ~]# route -nKernel IP routing tableDestination     Gateway         Genmask         Flags Metric Ref    Use Iface0.0.0.0         192.168.1.1     0.0.0.0         UG    0      0        0 ens34192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 ens34192.168.2.0     0.0.0.0         255.255.255.0   U     0      0        0 ens32[root@host01 ~]# traceroute www.baidu.comtraceroute to www.baidu.com (61.135.169.121), 30 hops max, 60 byte packets 1  192.168.1.1 (192.168.1.1)  0.937 ms  1.955 ms  1.907 ms</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-4-默认路由网关"><a href="#3-4-默认路由网关" class="headerlink" title="3.4 默认路由网关"></a>3.4 默认路由网关</h4><blockquote>
+<p>增加默认路由的方法！而且网关只要有一个就够了！</p>
+<p><strong>注意：添加网关的前提是你必须有这个网段，如果没有，时添加不了的！</strong>示例如下：</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 因为我没有3.0网段，所以添加网关的时候系统会提示网络不可达[root@host01 ~]# route add default gw 192.168.3.1SIOCADDRT: 网络不可达</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host01 ~]<span class="comment"># route -nKernel IP routing tableDestination     Gateway         Genmask         Flags Metric Ref    Use Iface0.0.0.0         192.168.1.1     0.0.0.0         UG    0      0        0 ens34192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 ens34192.168.2.0     0.0.0.0         255.255.255.0   U     0      0        0 ens32[root@host01 ~]# [root@host01 ~]# route del default gw 192.168.1.1[root@host01 ~]# route -nKernel IP routing tableDestination     Gateway         Genmask         Flags Metric Ref    Use Iface192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 ens34192.168.2.0     0.0.0.0         255.255.255.0   U     0      0        0 ens32[root@host01 ~]# traceroute www.baidu.comtraceroute to www.baidu.com (61.135.169.121), 30 hops max, 60 byte packetsconnect: 网络不可达[root@host01 ~]# route add default gw 192.168.1.1[root@host01 ~]# route -nKernel IP routing tableDestination     Gateway         Genmask         Flags Metric Ref    Use Iface0.0.0.0         192.168.1.1     0.0.0.0         UG    0      0        0 ens34192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 ens34192.168.2.0     0.0.0.0         255.255.255.0   U     0      0        0 ens32[root@host01 ~]# traceroute www.baidu.comtraceroute to www.baidu.com (61.135.169.121), 30 hops max, 60 byte packets 1  192.168.1.1 (192.168.1.1)  0.937 ms  1.955 ms  1.907 ms</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-5-添加带metric的路由"><a href="#3-5-添加带metric的路由" class="headerlink" title="3.5 添加带metric的路由"></a>3.5 添加带metric的路由</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@host01 ~]<span class="comment"># route -nKernel IP routing tableDestination     Gateway         Genmask         Flags Metric Ref    Use Iface0.0.0.0         192.168.1.1     0.0.0.0         UG    0      0        0 ens34192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 ens34192.168.2.0     0.0.0.0         255.255.255.0   U     0      0        0 ens32[root@host01 ~]# route add default gw 192.168.2.222 dev ens32 metric 99[root@host01 ~]# route -nKernel IP routing tableDestination     Gateway         Genmask         Flags Metric Ref    Use Iface0.0.0.0         192.168.1.1     0.0.0.0         UG    0      0        0 ens340.0.0.0         192.168.2.222   0.0.0.0         UG    99     0        0 ens32192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 ens34192.168.2.0     0.0.0.0         255.255.255.0   U     0      0        0 ens32</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="七、tcpdump"><a href="#七、tcpdump" class="headerlink" title="七、tcpdump"></a>七、tcpdump</h2><blockquote>
+<p>用简单的话来定义tcpdump，就是：dump the traffic on a network，根据使用者的定义对网络上的数据包进行截获的包分析工具。 tcpdump可以将网络中传送的数据包的“头”完全截获下来提供分析。它支持针对网络层、协议、主机、网络或端口的过滤，并提供and、or、not等逻辑语句来帮助你去掉无用的信息。</p>
+</blockquote>
+<h3 id="1、语法选项"><a href="#1、语法选项" class="headerlink" title="1、语法选项"></a>1、语法选项</h3><p><strong>语法</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump [-adeflnNOpqStvx][-c&lt;数据包数目&gt;][-dd][-ddd][-F&lt;表达文件&gt;][-i&lt;网络界面&gt;][-r&lt;数据包文件&gt;][-s&lt;数据包大小&gt;][-tt][-T&lt;数据包类型&gt;][-vv][-w&lt;数据包文件&gt;][输出数据栏位]</span><br></pre></td></tr></table></figure>
+
+<p><strong>选项</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>尝试将网络和广播地址转换成名称。</td>
+</tr>
+<tr>
+<td>-A</td>
+<td>以ASCII格式打印出所有分组，并将链路层的头最小化。</td>
+</tr>
+<tr>
+<td>-c &lt;数据包数目&gt;</td>
+<td>收到指定的数据包数目后，就停止进行倾倒操作。</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>把编译过的数据包编码转换成可阅读的格式，并倾倒到标准输出。</td>
+</tr>
+<tr>
+<td>-dd</td>
+<td>把编译过的数据包编码转换成C语言的格式，并倾倒到标准输出。</td>
+</tr>
+<tr>
+<td>-ddd</td>
+<td>把编译过的数据包编码转换成十进制数字的格式，并倾倒到标准输出。</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>在输出行打印出数据链路层的头部信息，包括源mac和目的mac，以及网络层的协议；</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>用数字显示网际网络地址。</td>
+</tr>
+<tr>
+<td>-F &lt;表达文件&gt;</td>
+<td>指定内含表达方式的文件。</td>
+</tr>
+<tr>
+<td>-i  &lt;网络界面&gt;</td>
+<td>使用指定的网络截面送出数据包。</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>使用标准输出列的缓冲区。</td>
+</tr>
+<tr>
+<td>-nn</td>
+<td>将每个监听到的数据包中的域名转换成IP、端口从应用名称转换成端口号后显示。(-n 不把网络地址转换成名字)</td>
+</tr>
+<tr>
+<td>-N</td>
+<td>不列出域名。</td>
+</tr>
+<tr>
+<td>-O</td>
+<td>不将数据包编码最佳化。</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>不让网络界面进入混杂模式。</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>快速输出，仅列出少数的传输协议信息。</td>
+</tr>
+<tr>
+<td>-r &lt;数据包文件&gt;</td>
+<td>从指定的文件读取数据包数据。</td>
+</tr>
+<tr>
+<td>-s &lt;数据包大小&gt;</td>
+<td>设置每个数据包的大小, 0表示包不截断, 抓完整的数据包。默认的话 tcpdump 只显示部分数据包, 默认68字节。</td>
+</tr>
+<tr>
+<td>-S</td>
+<td>用绝对而非相对数值列出TCP关联数。</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>在每列倾倒资料上不显示时间戳记。</td>
+</tr>
+<tr>
+<td>-tt</td>
+<td>在每列倾倒资料上显示未经格式化的时间戳记。</td>
+</tr>
+<tr>
+<td>-T &lt;数据包类型&gt;</td>
+<td>强制将表达方式所指定的数据包转译成设置的数据包类型。</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>详细显示指令执行过程。（一般使用 -vv 更详细显示指令执行过程。）</td>
+</tr>
+<tr>
+<td>-X</td>
+<td>把协议头和包内容都原原本本的显示出来（tcpdump会以16进制和ASCII的形式显示）。</td>
+</tr>
+<tr>
+<td>-w &lt;数据包文件&gt;</td>
+<td>直接将包写入文件中，并不分析和打印出来。</td>
+</tr>
+</tbody></table>
+<h3 id="2、条件表达式"><a href="#2、条件表达式" class="headerlink" title="2、条件表达式"></a>2、条件表达式</h3><blockquote>
+<p>该表达式用于决定哪些数据包将被打印。如果不给定条件表达式，网络上所有被捕获的包都会被打印。否则，只有满足条件表达式的数据包被打印.(nt: all packets, 可理解为，所有被指定接口捕获的数据包)。</p>
+<p>表达式由一个或多个表达元组成(nt：primitive，表达元，可理解为组成表达式的基本元素)。一个表达元通常由一个或多个修饰符(qualifiers)后跟一个名字或数字表示的id组成(nt：即 qualifiers id )。有三种不同类型的修饰符：type、dir以及 proto。</p>
+</blockquote>
+<p><strong>type   修饰符指定id 所代表的对象类型, id可以是名字也可以是数字.</strong> </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">可选的对象类型有: host, net, port 以及portrange(nt: host 表明id是主机, net 表明id是网络, port 表明id是端口，而portrange 表明id 是一个端口范围);如, <span class="string">&#x27;host foo&#x27;</span>, <span class="string">&#x27;net 128.3&#x27;</span>, <span class="string">&#x27;port 20&#x27;</span>, <span class="string">&#x27;portrange 6000-6008&#x27;</span>(nt: 分别表示主机 foo,网络 128.3, 端口 20, 端口范围 6000-6008).;如果不指定<span class="built_in">type</span> 修饰符, id默认的修饰符为host;</span><br></pre></td></tr></table></figure>
+
+<p><strong>dir   修饰符描述id 所对应的传输方向, 即发往id 还是从id 接收（nt: 而id 到底指什么需要看其前面的type 修饰符）。</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">可取的方向为: src, dst, src or dst, src and dst.(nt:分别表示, id是传输源, id是传输目的, id是传输源或者传输目的, id是传输源并且是传输目的);例如, <span class="string">&#x27;src foo&#x27;</span>,<span class="string">&#x27;dst net 128.3&#x27;</span>, <span class="string">&#x27;src or dst port ftp-data&#x27;</span>.(nt: 分别表示符合条件的数据包中, 源主机是foo, 目的网络是128.3, 源或目的端口为 ftp-data);如果不指定dir修饰符, id 默认的修饰符为src or dst;</span><br></pre></td></tr></table></figure>
+
+<p><strong>proto   修饰符描述id 所属的协议. 可选的协议有: ether, fddi, tr, wlan, ip, ip6, arp, rarp, decnet, tcp以及 upd.</strong></p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(nt | rt: ether, fddi, tr, 具体含义未知, 需补充. 可理解为物理以太网传输协议, 光纤分布数据网传输协议,以及用于路由跟踪的协议;wlan, 无线局域网协议; ip,ip6 即通常的TCP/IP协议栈中所使用的ipv4以及ipv6网络层协议;arp, rarp 即地址解析协议,反向地址解析协议; decnet, Digital Equipment Corporation开发的, 最早用于PDP-11 机器互联的网络协议; tcp<span class="built_in"> and </span>udp, 即通常TCP/IP协议栈中的两个传输层协议);</span><br></pre></td></tr></table></figure>
+
+<p><strong>表达式顺序：proto  &gt; dir &gt; type</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对于修饰符后跟id 的格式，可理解为 <span class="built_in">type</span> id 是对包最基本的过滤条件：即对包相关的主机，网络，端口的限制；dir 表示对包的传送方向的限制；proto表示对包相关的协议限制表达元之间还可以通过关键字and，or 以及 not 进行连接，从而可组成比较复杂的条件表达式。比如，host foo and not port ftp and not port ftp-data (nt：其过滤条件可理解为，数据包的主机为foo，并且端口不是ftp(端口21) 和ftp-data(端口20，常用端口和名字的对应可在linux 系统中的/etc/service 文件中找到))。为了表示方便, 同样的修饰符可以被省略, 如 tcp dst port ftp or ftp-data or domain 与以下的表达式含义相同 tcp dst port ftp or tcp dst port ftp-data or tcp dst port domain。(nt：其过滤条件可理解为：包的协议为tcp，目的端口为ftp 或 ftp-data 或 domain(端口53) )。</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、常用示例"><a href="#3、常用示例" class="headerlink" title="3、常用示例"></a>3、常用示例</h3><p><strong>查看当前机器有哪些网络接口</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-master-192 ~]<span class="comment"># tcpdump -D1.eth02.docker03.cni04.nflog (Linux netfilter log (NFLOG) interface)5.nfqueue (Linux netfilter queue (NFQUEUE) interface)6.flannel.17.usbmon1 (USB bus number 1)8.veth65a0cd7a9.any (Pseudo-device that captures on all interfaces)10.lo [Loopback]# 下面所有测试中都有 -i any的选项，表示抓取所有网络接口上的包，为了让测试方便</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>针对指定主机抓包</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i any -n -nn host 192.168.1.10 -w ./$(date +%Y%m%d%H%M%S).pcap</span><br></pre></td></tr></table></figure>
+
+<p><strong>针对指定端口抓包</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i any -n -nn port 80 -w ./$(date +%Y%m%d%H%M%S).pcap</span><br></pre></td></tr></table></figure>
+
+<p><strong>针对主机和端口抓包，两者关系 and</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i any -n -nn host 192.168.1.10 and port 80 -w ./$(date +%Y%m%d%H%M%S).pcap</span><br></pre></td></tr></table></figure>
+
+<p><strong>针对多个端口抓包</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i any -n -nn port 111 or port 443</span><br></pre></td></tr></table></figure>
+
+<p><strong>针对多个主机抓包</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i any -n -nn host www.baidu.com or www.360.com</span><br></pre></td></tr></table></figure>
+
+<p><strong>抓取访问destination 443端口的包</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i any -n dst port 443         <span class="comment"># 然后做一个curl https://www.baidu.com的操作…………15:11:43.007067 IP 10.244.0.4.46484 &gt; 10.96.0.1.https: Flags [.], ack 507, win 1393,length 0…………</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>抓取源端口是80的包</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i any -nn src port 80</span><br></pre></td></tr></table></figure>
+
+<p><strong>抓取源或者目标端口都是80的包</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i any -n -nn port 80</span><br></pre></td></tr></table></figure>
+
+<p><strong>抓取源的端口是20-80的包</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i any -n src portrange 20-80</span><br></pre></td></tr></table></figure>
+
+<p><strong>抓取端口是20-80的包，不考虑源或目标</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i any -n portrange 20-80</span><br></pre></td></tr></table></figure>
+
+<p><strong>抓取destination为 <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a> 的包</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i any dst www.baidu.com        <span class="comment"># 然后ping www.baidu.com ,以及 curl www.baidu.com</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>抓取destination为192.168.1.[0-255]的包</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i any -n -nn dst 192.168.1     <span class="comment"># 可以指定范围  ★★★★★ 注意用法  不是一个完整的IP地址</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>抓取source为192.168.<em>.</em> 的包</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i any -n -nn src host 192.168  <span class="comment"># 等价于 tcpdump -i any -n -nn src 192.168</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>抓取192.168的包(不管是source还是destination )</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i any -n -nn host 192.168 </span><br></pre></td></tr></table></figure>
+
+<p><strong>抓取包长度小于800的包</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i any -n -nn less 800</span><br></pre></td></tr></table></figure>
+
+<p><strong>抓取包长度大于800的包</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i any -n -nn greater 800</span><br></pre></td></tr></table></figure>
+
+<p><strong>只抓取tcp包</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i any -n tcp</span><br></pre></td></tr></table></figure>
+
+<p><strong>只抓取udp包</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i any -n udp</span><br></pre></td></tr></table></figure>
+
+<p><strong>只抓取icmp的包，internet控制包</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i any -n icmp</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+      </div>
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/07/23/Rsync-inotify-%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5/" rel="prev" title="Rsync+inotify 实时同步">
+      <i class="fa fa-chevron-left"></i> Rsync+inotify 实时同步
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-%E5%B8%B8%E7%94%A8%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7"><span class="nav-text">Linux 常用网络工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81ping"><span class="nav-text">一、ping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81ifconfig"><span class="nav-text">二、ifconfig</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81telnet"><span class="nav-text">三、telnet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81ethtool"><span class="nav-text">四、ethtool</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81nslookup"><span class="nav-text">五、nslookup</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E7%9B%B4%E6%8E%A5%E6%9F%A5%E8%AF%A2%E5%9F%9F%E5%90%8D%E6%83%85%E5%86%B5"><span class="nav-text">1、直接查询域名情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E6%9F%A5%E8%AF%A2%E5%85%B6%E4%BB%96%E8%AE%B0%E5%BD%95%E7%B1%BB%E5%9E%8B"><span class="nav-text">2、查询其他记录类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81route"><span class="nav-text">六、route</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E6%A6%82%E8%BF%B0"><span class="nav-text">1、概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81route%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3"><span class="nav-text">2、route命令详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-%E5%91%BD%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="nav-text">2.1 命令格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9%E5%8F%82%E6%95%B0"><span class="nav-text">2.2 常用选项参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="nav-text">2.3 常用命令格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-%E8%BE%93%E5%87%BA%E8%AF%A6%E8%A7%A3"><span class="nav-text">2.4 输出详解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90"><span class="nav-text">3、实例分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%88%86%E6%9E%90"><span class="nav-text">3.1 路由选择分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-%E9%AA%8C%E8%AF%81%E5%88%86%E6%9E%90"><span class="nav-text">3.2 验证分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-%E6%B7%BB%E5%8A%A0%E5%92%8C%E5%88%A0%E9%99%A4%E8%B7%AF%E7%94%B1"><span class="nav-text">3.3 添加和删除路由</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-%E9%BB%98%E8%AE%A4%E8%B7%AF%E7%94%B1%E7%BD%91%E5%85%B3"><span class="nav-text">3.4 默认路由网关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-%E6%B7%BB%E5%8A%A0%E5%B8%A6metric%E7%9A%84%E8%B7%AF%E7%94%B1"><span class="nav-text">3.5 添加带metric的路由</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81tcpdump"><span class="nav-text">七、tcpdump</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E8%AF%AD%E6%B3%95%E9%80%89%E9%A1%B9"><span class="nav-text">1、语法选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E6%9D%A1%E4%BB%B6%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-text">2、条件表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E5%B8%B8%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="nav-text">3、常用示例</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Armin"
+      src="/uploads/armin.png">
+  <p class="site-author-name" itemprop="name">Armin</p>
+  <div class="site-description" itemprop="description">记录生活中的点点滴滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/" title="GitHub → https:&#x2F;&#x2F;github.com" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://aws.amazon.com/cn/" title="AWS → https:&#x2F;&#x2F;aws.amazon.com&#x2F;cn&#x2F;" rel="noopener" target="_blank"><i class="fab fa-aws fa-fw"></i>AWS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.processon.com/" title="processon → https:&#x2F;&#x2F;www.processon.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-accusoft fa-fw"></i>processon</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cn-ki.net/" title="知识库 → https:&#x2F;&#x2F;www.cn-ki.net&#x2F;" rel="noopener" target="_blank"><i class="fas fa-book-open fa-fw"></i>知识库</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tophub.today/" title="看新闻 → https:&#x2F;&#x2F;tophub.today&#x2F;" rel="noopener" target="_blank"><i class="far fa-newspaper fa-fw"></i>看新闻</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://m.zxjsq.net/" title="计算器 → http:&#x2F;&#x2F;m.zxjsq.net" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计算器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://shijisuishu.bmcx.com/20010314__shijisuishu/" title="计龄器 → https:&#x2F;&#x2F;shijisuishu.bmcx.com&#x2F;20010314__shijisuishu&#x2F;" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计龄器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tool.oschina.net/hexconvert" title="进制转换 → https:&#x2F;&#x2F;tool.oschina.net&#x2F;hexconvert" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>进制转换</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.sojson.com/convert/subnetmask.html" title="子网计算 → https:&#x2F;&#x2F;www.sojson.com&#x2F;convert&#x2F;subnetmask.html" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>子网计算</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.baidu.com/" title="百度一下 → https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank"><i class="fas fa-search fa-fw"></i>百度一下</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Armin</span>
+</div>
+
+<div class="powered-by">
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
