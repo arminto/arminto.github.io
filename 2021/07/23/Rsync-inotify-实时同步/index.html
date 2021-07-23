@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Rsync+inotify 实时同步">
+<meta property="og:url" content="http://example.com/2021/07/23/Rsync-inotify-%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5/index.html">
+<meta property="og:site_name" content="LEMON">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsqp4l6eknj30s70bgq4m.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsqp4m8aw8j30qn04y753.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsqp4phu7tj30zf0dxdiv.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsqp4scn20j30rw05yab9.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsqp4v920cj30vz0bh40s.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsqp4y2johj30pg0600tu.jpg">
+<meta property="article:published_time" content="2021-07-23T02:59:40.000Z">
+<meta property="article:modified_time" content="2021-07-23T03:00:35.719Z">
+<meta property="article:author" content="Armin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsqp4l6eknj30s70bgq4m.jpg">
+
+<link rel="canonical" href="http://example.com/2021/07/23/Rsync-inotify-%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Rsync+inotify 实时同步 | LEMON</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LEMON</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录站</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/23/Rsync-inotify-%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/armin.png">
+      <meta itemprop="name" content="Armin">
+      <meta itemprop="description" content="记录生活中的点点滴滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LEMON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Rsync+inotify 实时同步
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+        <!--toc-->
+<span id="more"></span>
+
+<h1 id="Rsync实时同步工具"><a href="#Rsync实时同步工具" class="headerlink" title="Rsync实时同步工具"></a>Rsync实时同步工具</h1><h2 id="一、rsync是什么"><a href="#一、rsync是什么" class="headerlink" title="一、rsync是什么"></a>一、rsync是什么</h2><ul>
+<li><p>rsync（remote synchronize）是Liunx/Unix下的一个远程数据同步工具。它可通过LAN/WAN快速同步多台主机间的文件和目录，并适当利用rsync算法（差分编码）以减少数据的传输。</p>
+</li>
+<li><p>rsync算法并不是每一次都整份传输，而是只传输两个文件的不同部分，因此其传输速度相当快。</p>
+</li>
+<li><p>除此之外，rsync可拷贝、显示目录属性，以及拷贝文件，并可选择性的压缩以及递归拷贝。</p>
+</li>
+</ul>
+<h2 id="二、rsync的工作原理"><a href="#二、rsync的工作原理" class="headerlink" title="二、rsync的工作原理"></a>二、rsync的工作原理</h2><ol>
+<li><p>客户端构造FileList，FileList包含了需要与服务器同步的所有文件信息对name-&gt;id（id用来唯一表示文件例如MD5）。</p>
+</li>
+<li><p>客户端将FileList发送到服务器。</p>
+</li>
+<li><p>服务器上rsync处理客户端发过来的FileList，构建新的NewFileList。其中根据MD5值比较，删除服务器上已经存在的文件信息对，只保留服务器上不存在或变化的文件。</p>
+</li>
+<li><p>客户端得到服务器发送过来的NewFileList，然后把NewFileList中的文件重新传输到服务器。</p>
+</li>
+</ol>
+<h2 id="三、rsync优点"><a href="#三、rsync优点" class="headerlink" title="三、rsync优点"></a>三、rsync优点</h2><p>1）可以镜像保存整个目录树和文件系统。</p>
+<p>2）可以很容易做到保持原来文件的权限、时间、软硬连接等。</p>
+<p>3）无需特殊权限即可安装。</p>
+<p>4）拥有优化的流程和比较高的文件传输效率。</p>
+<p>5）可以使用shell（rsh、ssh）方式来传输文件。</p>
+<p>6）支持匿名运行。</p>
+<p>7）与scp相比，rsync传输速度绝对远远超过scp的传输速度。</p>
+<ul>
+<li>在局域网中经常用rsync和scp传输大量mysql数据库文件，发现rsync传输文件速度至少要比scp快20倍以上。</li>
+<li>所以如果需要在Liunx/Unix服务器之间互传海量数据时，建议选择rsync进行传输。</li>
+</ul>
+<h2 id="四、rsync两种认证方式"><a href="#四、rsync两种认证方式" class="headerlink" title="四、rsync两种认证方式"></a>四、rsync两种认证方式</h2><blockquote>
+<p><strong>rsync有两种常用的认证方式，一种是rsync-daemon方式，另外一种是ssh方式。在平时使用过程，我们使用最多的是rsync-daemon方式。      注意：在使用rsync时，服务器和客户端都必须安装rsync程序。</strong></p>
+</blockquote>
+<h3 id="4-1-rsync-daemon认证"><a href="#4-1-rsync-daemon认证" class="headerlink" title="4.1 rsync-daemon认证"></a>4.1 rsync-daemon认证</h3><ul>
+<li><p><strong>rsync在rsync-daemon认证方式下，默认监听TCP的873端口。</strong></p>
+</li>
+<li><p><strong>rsync-daemon认证方式是rsync的主要认证方式，这个也是我们经常使用的认证方式。并且也只有在此种模式下，rsync才可以把密码写入到一个文件中。</strong></p>
+</li>
+<li><p><strong>注意：rsync-daemon认证方式，需要服务器和客户端都安装rsync服务，并且只需要rsync服务器端启动rsync，同时配置rsync配置文件。客户端启不启动rsync服务，都不影响同步的正常进行。</strong></p>
+</li>
+</ul>
+<h3 id="4-2-ssh认证"><a href="#4-2-ssh认证" class="headerlink" title="4.2 ssh认证"></a>4.2 ssh认证</h3><ul>
+<li><p><strong>rsync在ssh认证方式下，可通过系统用户进行认证，即在rsync上通过ssh隧道进行传输，类似于scp工具。此时同步操作不在局限于rsync中定义的同步文件夹。</strong></p>
+</li>
+<li><p><strong>ssh认证方式，不需要服务器和客户端配置rsync配置文件，只需双方都安装rsync服务，并且也不需要双方启动rsync。</strong></p>
+</li>
+</ul>
+<h2 id="五、rsync-常用选项"><a href="#五、rsync-常用选项" class="headerlink" title="五、rsync 常用选项"></a>五、rsync 常用选项</h2><ul>
+<li>若使用普通用户身份运行 rsync 命令，同步后的文件的属主将改变为这个普通用户身份。</li>
+<li>若使用超级用户身份运行 rsync 命令，同步后的文件的属主将保持原来的用户身份。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a, ––archive</td>
+<td>#归档模式，表示以递归方式传输文件，并保持所有文件属性，等价于 -rlptgoD (注意不包括 -H)</td>
+</tr>
+<tr>
+<td>-v, ––verbose</td>
+<td>#详细输出模式</td>
+</tr>
+<tr>
+<td>-z, ––compress</td>
+<td>#在传输文件时进行压缩处理</td>
+</tr>
+<tr>
+<td>-r, ––recursive</td>
+<td>#对子目录以递归模式处理</td>
+</tr>
+<tr>
+<td>-H, ––hard-links</td>
+<td>#保持硬链接文件</td>
+</tr>
+<tr>
+<td>-p, ––perms</td>
+<td>#保持文件权限</td>
+</tr>
+<tr>
+<td>-t, ––times</td>
+<td>#保持文件时间信息</td>
+</tr>
+<tr>
+<td>-g, ––group</td>
+<td>#保持文件属组信息</td>
+</tr>
+<tr>
+<td>-o, ––owner</td>
+<td>#保持文件属主信息 (super-user only)</td>
+</tr>
+<tr>
+<td>-D</td>
+<td>#保持设备文件和特殊文件 (super-user only)</td>
+</tr>
+<tr>
+<td>––exclude=PATTERN</td>
+<td>#指定排除一个不需要传输的文件匹配模式</td>
+</tr>
+<tr>
+<td>––exclude-from=FILE</td>
+<td>#从 FILE 中读取排除规则</td>
+</tr>
+<tr>
+<td>––include=PATTERN</td>
+<td>#指定需要传输的文件匹配模式</td>
+</tr>
+<tr>
+<td>––include-from=FILE</td>
+<td>#从 FILE 中读取包含规则</td>
+</tr>
+<tr>
+<td>––copy-unsafe-links</td>
+<td>#拷贝指向SRC路径目录树以外的链接文件</td>
+</tr>
+<tr>
+<td>––safe-links</td>
+<td>#忽略指向SRC路径目录树以外的链接文件（默认）</td>
+</tr>
+<tr>
+<td>––existing</td>
+<td>#仅仅更新那些已经存在于接收端的文件，而不备份那些新创建的文件</td>
+</tr>
+<tr>
+<td>––ignore-existing</td>
+<td>#忽略那些已经存在于接收端的文件，仅备份那些新创建的文件</td>
+</tr>
+<tr>
+<td>-b, ––backup</td>
+<td>#当有变化时，对目标目录中的旧版文件进行备份</td>
+</tr>
+<tr>
+<td>––backup-dir=DIR</td>
+<td>#与 -b 结合使用，将备份的文件存到 DIR 目录中</td>
+</tr>
+<tr>
+<td>––link-dest=DIR</td>
+<td>#当文件未改变时基于 DIR 创建硬链接文件</td>
+</tr>
+<tr>
+<td>––delete</td>
+<td>#删除那些接收端还有而发送端已经不存在的文件，让目标目录和源目录数据保持一致</td>
+</tr>
+<tr>
+<td>––delete-before</td>
+<td>#接收者在传输之前进行删除操作 (默认)</td>
+</tr>
+<tr>
+<td>––delete-during</td>
+<td>#接收者在传输过程中进行删除操作</td>
+</tr>
+<tr>
+<td>––delete-after</td>
+<td>#接收者在传输之后进行删除操作</td>
+</tr>
+<tr>
+<td>––delete-excluded</td>
+<td>#在接收方同时删除被排除的文件</td>
+</tr>
+<tr>
+<td>-e, ––rsh=COMMAND</td>
+<td>#指定替代 rsh 的 shell 程序</td>
+</tr>
+<tr>
+<td>––ignore-errors</td>
+<td>#即使出现 I/O 错误也进行删除</td>
+</tr>
+<tr>
+<td>––partial</td>
+<td>#保留那些因故没有完全传输的文件，以是加快随后的再次传输</td>
+</tr>
+<tr>
+<td>––progress</td>
+<td>#在传输时显示传输过程</td>
+</tr>
+<tr>
+<td>-P</td>
+<td>#等价于 ––partial ––progress</td>
+</tr>
+<tr>
+<td>––delay-updates</td>
+<td>#将正在更新的文件先保存到一个临时目录（默认为 “.<del>tmp</del>”），待传输完毕再更新目标文件</td>
+</tr>
+<tr>
+<td>-l, ––links</td>
+<td>#保持符号链接文件</td>
+</tr>
+<tr>
+<td>-q, ––quiet</td>
+<td>#精简输出模式</td>
+</tr>
+<tr>
+<td>-h, ––human-readable</td>
+<td>#输出文件大小使用易读的单位（如，K，M等）</td>
+</tr>
+<tr>
+<td>-n, ––dry-run</td>
+<td>#仅测试哪些文件将被传输</td>
+</tr>
+<tr>
+<td>––list-only</td>
+<td>#仅仅列出文件而不进行复制</td>
+</tr>
+<tr>
+<td>––rsyncpath=PROGRAM</td>
+<td>#指定远程服务器上的 rsync 命令所在路径</td>
+</tr>
+<tr>
+<td>––password-file=FILE</td>
+<td>#从 FILE 中读取口令，以避免在终端上输入口令，通常在 cron 中连接 rsync 服务器时使用</td>
+</tr>
+<tr>
+<td>-4, ––ipv4</td>
+<td>#使用 IPv4</td>
+</tr>
+<tr>
+<td>-6, ––ipv6</td>
+<td>#使用 IPv6</td>
+</tr>
+<tr>
+<td>––version</td>
+<td>#打印版本信息</td>
+</tr>
+<tr>
+<td>––help</td>
+<td>#显示帮助信息</td>
+</tr>
+</tbody></table>
+<h2 id="六、rsync三种工作模式"><a href="#六、rsync三种工作模式" class="headerlink" title="六、rsync三种工作模式"></a>六、rsync三种工作模式</h2><p>rsync 是一个功能非常强大的工具，其命令也有很多功能选项。rsync 的命令格式为：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1）本地使用：</span><br><span class="line">rsync [OPTION...] SRC... [DEST]</span><br><span class="line"></span><br><span class="line">2）通过远程 Shell 使用：</span><br><span class="line">拉: rsync [OPTION...] [USER@]HOST:SRC... [DEST]</span><br><span class="line">推: rsync [OPTION...] SRC... [USER@]HOST:DEST</span><br><span class="line"></span><br><span class="line">3）访问 rsync 服务器:</span><br><span class="line">拉: rsync [OPTION...] [USER@]HOST::SRC... [DEST]</span><br><span class="line">推: rsync [OPTION...] SRC... [USER@]HOST::DEST</span><br><span class="line">拉: rsync [OPTION...] rsync://[USER@]HOST[:PORT]/SRC... [DEST]</span><br><span class="line">推: rsync [OPTION...] SRC... rsync://[USER@]HOST[:PORT]/DEST</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>SRC: 是要复制的源位置</li>
+<li>DEST: 是复制目标位置</li>
+<li>若本地登录用户与远程主机上的用户一致，可以省略 USER@</li>
+<li>使用远程 shell 同步时，主机名与资源之间使用单个冒号“:”作为分隔符</li>
+<li>使用 rsync 服务器同步时，主机名与资源之间使用两个冒号“::”作为分隔符</li>
+<li>当访问 rsync 服务器时也可以使用 rsync:// URL</li>
+<li>‘拉’ 复制是指从远程主机复制文件到本地主机</li>
+<li>‘推’ 复制是指从本地主机复制文件到远程主机</li>
+<li>当进行“拉”复制时，若指定一个 SRC 且省略 DEST，则只列出资源而不进行复制</li>
+<li><strong>注意：无论是推送和拉取，rsync命令都是在客户端执行，只是命令的格式不同而已。</strong></li>
+</ul>
+<h2 id="七、配置rsync"><a href="#七、配置rsync" class="headerlink" title="七、配置rsync"></a>七、配置rsync</h2><h3 id="7-1-rsync服务端配置"><a href="#7-1-rsync服务端配置" class="headerlink" title="7.1 rsync服务端配置"></a>7.1 rsync服务端配置</h3><ul>
+<li><p>sync服务器端需要两个配置文件：rsyncd.conf、rsyncd.password。</p>
+</li>
+<li><p>其中rsyncd.conf默认存放在/etc/目录下，同时它也是rsync服务器的主配置文件。该文件配置了rsync服务器的控制认证、访问、日志记录等等。而rsyncd.password主要用于存储rsync用户名和密码。</p>
+</li>
+<li><p>但是在rsync安装完毕后后是不会生成以上这两个配置文件的，需要我们手工进行创建。</p>
+</li>
+<li><p>rsyncd.conf配置文件内容如下：</p>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@service ~]<span class="comment"># vi /etc/rsyncd.conf</span></span><br><span class="line">uid = nobody                                  <span class="comment">#进行备份的用户，nobody 为任何用户</span></span><br><span class="line">gid = nobody                                  <span class="comment">#进行备份的组，nobody为任意组</span></span><br><span class="line">user chroot = no                              <span class="comment">#如果&quot;use chroot&quot;指定为true，那么rsync在传输文件以前首先chroot到path参数所指定的目录下。这样做的原因是实现额外的安全防护，但是缺点是需要以root权限，并且不能备份指向外部的符号连接所指向的目录文件。默认情况下chroot值为true，但是这个一般不需要，我选择no或false</span></span><br><span class="line">max connections = 200                         <span class="comment">#最大连接数200</span></span><br><span class="line">timeout = 600      <span class="comment">#覆盖客户指定的IP超时时间，也就是说rsync服务器不会永远等待一个崩溃的客户端。</span></span><br><span class="line">pid file = /var/run/rsyncd.pid                <span class="comment">#pid文件的存放位置</span></span><br><span class="line">lock file = /var/run/rsyncd.lock              <span class="comment">#锁文件的存放位置</span></span><br><span class="line"><span class="built_in">log</span> file = /var/run/rsyncd.log                <span class="comment">#日志文件的存放位置</span></span><br><span class="line"></span><br><span class="line">[backup]                              <span class="comment">#这里是认证模块名，即跟samba语法一样，是对外公布的名字</span></span><br><span class="line">path = /backup/                               <span class="comment">#这里是参与同步的目录</span></span><br><span class="line">ignore errors                                 <span class="comment">#可以忽略一些无关的IO错误</span></span><br><span class="line"><span class="built_in">read</span> only = no                                <span class="comment">#默认允许可读可写</span></span><br><span class="line">list = no                                     <span class="comment">#不允许列清单</span></span><br><span class="line">hosts allow = 192.168.2.0/255.255.255.0  <span class="comment">#这里跟samba的语法是一样的，只允许192.168.1.0/24的网段进行同步，拒绝其它一切</span></span><br><span class="line">auth users = <span class="built_in">test</span>                             <span class="comment">#认证的用户名</span></span><br><span class="line">secrets file = /etc/rsyncd.password           <span class="comment">#密码文件存放地址</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#注意： 一个rsync配置文件中可以包含多个认证模块，同时一个密码文件中也可以存放多个用户和其对应的密码。其中每一个认证模块可以对应不同的客户端。</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置文件创建完毕后，我们来创建密码文件。如下：</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@service ~]<span class="comment"># echo &quot;test:123123&quot;&gt;&gt;/etc/rsyncd.password</span></span><br><span class="line">[root@service ~]<span class="comment"># cat /etc/rsyncd.password </span></span><br><span class="line"><span class="built_in">test</span>:123123</span><br><span class="line"><span class="comment">#注意：该密码文件中的用户和密码可以进行自定义，同时该用户不一定要在服务器中的系统用户存在。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#密码文件创建完毕后，要把其权限要设置为600，否则会在以后同步时提示验证出错。</span></span><br><span class="line">[root@service ~]<span class="comment"># chmod 600 /etc/rsyncd.password</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>以上两个文件创建完毕后，我们来创建其对应的目录并授权，如下：权限必须是777</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@service ~]<span class="comment"># mkdir /backup</span></span><br><span class="line">[root@service ~]<span class="comment"># chmod -R 777 /backup</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>启动Rsync服务</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@service ~]<span class="comment"># systemctl start rsyncd ; systemctl enable rsyncd</span></span><br><span class="line">[root@service ~]<span class="comment"># netstat -tunlp |grep 873</span></span><br><span class="line">tcp        0      0 0.0.0.0:873             0.0.0.0:*               LISTEN      16099/rsync     </span><br><span class="line">tcp6       0      0 :::873                  :::*                    LISTEN      16099/rsync</span><br></pre></td></tr></table></figure>
+
+<p><strong>以上就是rsync服务端的配置。</strong></p>
+<h3 id="7-2-rsync客户端配置"><a href="#7-2-rsync客户端配置" class="headerlink" title="7.2 rsync客户端配置"></a>7.2 rsync客户端配置</h3><ul>
+<li><p>rsync客户端配置与服务器端相比差别还是比较大的。</p>
+</li>
+<li><p>在客户端安装完毕rsync服务后，是不需要启动rsync服务的。我们只需要在客户端创建连接rsync服务器时，验证码用户所需要的密码文件即可。</p>
+</li>
+<li><p><strong>该密码文件中的密码要与rsync服务器上的密码文件中的密码对应，并且也要与rsync服务器rsyncd.conf配置文件中的认证模块中的用户匹配。</strong></p>
+</li>
+<li><p>当然该密码文件不创建也是可以的，不创建的话。我们在执行rsync操作时，就需要输入rsync的对应用户的密码。如下：</p>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@client ~]<span class="comment"># echo &quot;123123&quot;&gt;&gt;/etc/rsyncd.password</span></span><br><span class="line">[root@client ~]<span class="comment"># chmod 600 /etc/rsyncd.password</span></span><br><span class="line">[root@client ~]<span class="comment"># ll /etc/rsyncd.password</span></span><br><span class="line">-rw------- 1 root root 7 5月  12 09:39 /etc/rsyncd.password</span><br><span class="line">[root@client ~]<span class="comment"># cat /etc/rsyncd.password</span></span><br><span class="line">123123</span><br><span class="line"></span><br><span class="line"><span class="comment">#注意：该密码文件中只能存放一个用户的密码，并且该文件与rsync服务器端的密码文件一样也需要把其权限设置为600。</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>以上就是rsync客户端的配置。</strong></p>
+<h2 id="八、rsync的启动与关闭"><a href="#八、rsync的启动与关闭" class="headerlink" title="八、rsync的启动与关闭"></a>八、rsync的启动与关闭</h2><ul>
+<li><p>在前面我们讲过rsync-daemon认证方式，需要服务器和客户端都安装rsync服务，并且只需要rsync服务器端启动rsync，同时配置rsync配置文件，客户端启动不启动rsync服务。</p>
+</li>
+<li><p>rsync-daemon认证方式的启动，如果是源码方式安装的rsync，我们可以使用rsync –daemon来启动rsync。如下：</p>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> PATH=<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/bin/&gt;&gt;/etc/profile</span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line"></span><br><span class="line">rsync --daemon</span><br><span class="line"></span><br><span class="line">ps aux |grep rsync</span><br><span class="line"></span><br><span class="line">netstat -tunlp |grep 873</span><br><span class="line">tcp        0      0 0.0.0.0:873             0.0.0.0:*               LISTEN      16099/rsync</span><br><span class="line">tcp6       0      0 :::873                  :::*                    LISTEN      16099/rsync</span><br><span class="line"></span><br><span class="line"><span class="comment">#注意：上述命令中，只有rsync --daemon才是启动rsync的命令。并且该命令启动时，会默认加载/etc/rsyncd.conf文件。所以如果rsync的配置文件不在/etc目录下或者rsync配置文件名不为rsyncd.conf，那么我们在启动rsync服务时，就要手工加上该配置文件的完整路径。方法如下：rsync --daemon --config=/etc/rsyncd.conf</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="九、rsync同步示例"><a href="#九、rsync同步示例" class="headerlink" title="九、rsync同步示例"></a>九、rsync同步示例</h2><h3 id="9-1-ssh认证用法"><a href="#9-1-ssh认证用法" class="headerlink" title="9.1 ssh认证用法"></a>9.1 ssh认证用法</h3><ul>
+<li>这种用法最好配置免登，不然每次都要输入密码</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#全量，跟scp意思一致</span></span><br><span class="line">rsync -avz anaconda-ks.cfg root@192.168.2.1:/root/        <span class="comment">#推送</span></span><br><span class="line">rsync -avz root@192.168.2.1:/root/anaconda-ks.cfg /root   <span class="comment">#拉取</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#增量示例1</span></span><br><span class="line">rsync -avz --delete /opt/ root@192.168.1.1:/opt/      <span class="comment">#让服务端与客户端保持一致性</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>图示：服务的1.1   客户端1.2 </li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsqp4l6eknj30s70bgq4m.jpg" alt="image-20200512004334201"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsqp4m8aw8j30qn04y753.jpg" alt="image-20200512004232299"></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#增量示例2    【--exclude-from=：排除单个或多个文件】</span></span><br><span class="line"><span class="comment">#让服务端除了lemon.bak 和 lm.bak这两个文件；其他文件都与客户端保持一致</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">&quot;lemon.bak\nlm.bak&quot;</span>&gt;&gt;/root/file.txt</span><br><span class="line">rsync -avz --delete --exclude-from=/root/file.txt /opt/ root@192.168.2.1:/opt/   <span class="comment">#多个文件排除</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>图示：服务的1.1       客户端1.2 </li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsqp4phu7tj30zf0dxdiv.jpg" alt="image-20200512004936410"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsqp4scn20j30rw05yab9.jpg" alt="image-20200512005032229"></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#增量示例3   【--exclude=：只能排除单个文件】</span></span><br><span class="line"><span class="comment">#让服务端除了lemon.bak这个文件；其他文件都与客户端保持一致</span></span><br><span class="line">rsync -avz --delete --exclude=lemon.bak /opt/ root@192.168.2.1:/opt/      <span class="comment">#单个文件排除</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>图示：服务的1.1       客户端1.2 </li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsqp4v920cj30vz0bh40s.jpg" alt="image-20200512005328597"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsqp4y2johj30pg0600tu.jpg" alt="image-20200512005418159"></p>
+<h3 id="9-2-daemon认证用法-常用"><a href="#9-2-daemon认证用法-常用" class="headerlink" title="9.2 daemon认证用法 (常用)"></a>9.2 daemon认证用法 (常用)</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#从服务器上下载文件（拉取）</span></span><br><span class="line">rsync -avz --password-file=/etc/rsyncd.password <span class="built_in">test</span>@192.168.2.1::backup /home/</span><br><span class="line">		</span><br><span class="line"><span class="comment">#从本地上传到服务器上去（推送）</span></span><br><span class="line">rsync -avz --password-file=/etc/rsyncd.password /home <span class="built_in">test</span>@192.168.2.1::backup</span><br><span class="line">       </span><br><span class="line"><span class="comment">#上传并让客户端和服务端的数据文件保持一致性</span></span><br><span class="line">rsync -avz --delete --password-file=/etc/rsyncd.password /home <span class="built_in">test</span>@192.168.2.1::backup</span><br><span class="line"></span><br><span class="line"><span class="comment">#除了lemon.txt文件；其他的数据文件客户端和服务端都保持一致性【单个文件】</span></span><br><span class="line">rsync -avz --delete --exclude=lemon.txt --password-file=/etc/rsyncd.password /home <span class="built_in">test</span>@192.168.2.1::backup</span><br><span class="line"></span><br><span class="line"><span class="comment">#除了lemon.txt和lm.txt文件其他的数据文件客户端和服务端都保持一致性,【多个文件】</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">&quot;lemon.txt\nlm.txt&quot;</span>&gt;&gt;/file.txt</span><br><span class="line">rsync -avz --delete --exclude=/file.txt --password-file=/etc/rsyncd.password /home <span class="built_in">test</span>@192.168.2.1::backup</span><br></pre></td></tr></table></figure>
+
+<h2 id="十、rsync-inotify实时同步"><a href="#十、rsync-inotify实时同步" class="headerlink" title="十、rsync + inotify实时同步"></a>十、rsync + inotify实时同步</h2><h3 id="10-1-Inotify是什么？"><a href="#10-1-Inotify是什么？" class="headerlink" title="10.1 Inotify是什么？"></a>10.1 Inotify是什么？</h3><p>Inotify 是一种强大的、细粒度的、异步的文件系统事件监控机制，linux内核从2.6.13起，加入了Inotify支持，通过Inotify可以监控文件系统 中添加、删除，修改、移动等各种细微事件，利用这个内核接口，第三方软件就可以监控文件系统下文件的各种变化情况，而inotify-tools就是这样 的一个第三方软件。inotify可以监控文件系统的各种变化，当文件有任何变动时，就触发rsync同步，这样刚好解决了同步数据的实时性问题。</p>
+<h3 id="10-2-案例实操"><a href="#10-2-案例实操" class="headerlink" title="10.2 案例实操"></a>10.2 案例实操</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line">安装inotify：</span><br><span class="line">tar xf inotify-tools-3.13.tar.gz -C /usr/src/ &amp;&amp; <span class="built_in">cd</span> /usr/src/inotify-tools-3.13/</span><br><span class="line">./configure --prefix=/usr/<span class="built_in">local</span>/inotify &amp;&amp; make &amp;&amp; make install</span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/inotify/bin/ &amp;&amp; ll</span><br><span class="line">总用量 108</span><br><span class="line">-rwxr-xr-x 1 root root 52552 5月  12 01:13 inotifywait</span><br><span class="line">-rwxr-xr-x 1 root root 54648 5月  12 01:13 inotifywatch</span><br><span class="line"></span><br><span class="line"><span class="comment">#inotifywait选项：</span></span><br><span class="line">    -m               <span class="comment">#始终保持事件监听状态</span></span><br><span class="line">    -q               <span class="comment">#打印监控事件的信息 </span></span><br><span class="line">    -r               <span class="comment">#递归查询目录</span></span><br><span class="line">    --excludei       <span class="comment">#排除文件或目录时，不区分大小写。</span></span><br><span class="line">    --timefmt        <span class="comment">#指定时间输出的格式</span></span><br><span class="line">    --format         <span class="comment">#打印使用指定的输出类似格式字符串</span></span><br><span class="line">    -e               <span class="comment">#通过此参数可以指定需要监控的事件；</span></span><br><span class="line">      Events：</span><br><span class="line">     	     modify          <span class="comment">#文件或目录内容被修改。</span></span><br><span class="line">    	     create          <span class="comment">#文件或目录被创建在当前目录</span></span><br><span class="line">     	     attrib          <span class="comment">#文件或目录属性被改变。</span></span><br><span class="line">    	     move            <span class="comment">#文件或目录被移动另一个目录或从另一个目录移动至当前目录。</span></span><br><span class="line">    	     delete          <span class="comment">#文件或目录被删除</span></span><br><span class="line">    	     access          <span class="comment">#文件或目录被读取。</span></span><br><span class="line">     	     close           <span class="comment">#文件或目录封闭，无论读/写模式。</span></span><br><span class="line">    	     open            <span class="comment">#文件或目录被打开。</span></span><br><span class="line">    	     moved_to        <span class="comment">#文件或目录被移动至另外一个目录。</span></span><br><span class="line">             unmount         <span class="comment">#文件系统被卸载</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1、通过rsync协议加inotify实现实时同步</span><br><span class="line">服务端：192.168.2.1</span><br><span class="line">客户端：192.168.2.2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2、修改配置文件如下</span><br><span class="line">vi /etc/sysctl.conf</span><br><span class="line">fs.inotify.max_queued_events = 16384      <span class="comment">#监控队列大小</span></span><br><span class="line">fs.inotify.max_user_instances = 1024      <span class="comment">#最多监控实例数</span></span><br><span class="line">fs.inotify.max_user_watches = 1048576     <span class="comment">#每个实例最多监控文件数</span></span><br><span class="line">wq!保存退出</span><br><span class="line"></span><br><span class="line">sysctl -p    <span class="comment">#查看</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">3、在2.2上新建源地址</span><br><span class="line">mkdir /backup</span><br><span class="line">chown -R nobody:nobody /backup</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">4、创建一个排除的文件</span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">&quot;lemon.txt\nroot.txt&quot;</span>&gt;&gt;/root/file.bak</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">5、在2.2上建一个脚本如下：</span><br><span class="line">vi rsync_inotify.sh</span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"><span class="comment">#注释：服务端除了lemon.txt和root.txt文件其他的都与客户端保持一致</span></span><br><span class="line"><span class="comment">#注意：这种ssh认证方式需要在客户端要先完成免登，如果不想做免登的话就是用daemon认证方式</span></span><br><span class="line">inotifywait=<span class="string">&quot;/usr/local/inotify/bin/inotifywait -mrq -e modify,create,attrib,move,delete /backup/&quot;</span></span><br><span class="line">rsync=<span class="string">&quot;rsync -azH --delete --exclude-from=/root/file.bak /backup/ root@192.168.2.1:/opt/&quot;</span></span><br><span class="line"><span class="variable">$inotifywait</span> | <span class="keyword">while</span> <span class="built_in">read</span> files</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="variable">$rsync</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">6、配置免登</span><br><span class="line">ssh-keygen -t rsa</span><br><span class="line">ssh-copy-id root@192.168.2.1</span><br><span class="line">ssh root@192.168.2.1</span><br><span class="line">Last login: Tue May 12 09:24:06 2020 from 192.168.2.254</span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line">登出</span><br><span class="line">Connection to 192.168.2.1 closed.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">7、在客户端将脚本放置后台运行，然后测试</span><br><span class="line">setsid bash /root/rsync_inotify.sh</span><br><span class="line">ps -aux|grep rsync_inotify.sh</span><br><span class="line">root       7128  0.0  0.1 113132  1212 ?        Ss   09:54   0:00 bash /root/rsync_inotify.sh</span><br><span class="line">root       7130  0.0  0.0 113132   388 ?        S    09:54   0:00 bash /root/rsync_inotify.sh</span><br><span class="line"><span class="built_in">cd</span> /backup </span><br><span class="line">touch &#123;1..5&#125;.txt </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">8、去服务端查看是否同步过去</span><br><span class="line">ls</span><br><span class="line">1.txt  2.txt  3.txt  4.txt  5.txt  lemon.txt  root.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">9、设置开机自动脚本运行</span><br><span class="line">chmod -R 700 /etc/rc.d/rc.local</span><br><span class="line">vi /etc/rc.local</span><br><span class="line">setsid bash /root/rsync_inotify.sh</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+      </div>
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/07/23/Route/" rel="prev" title="Route">
+      <i class="fa fa-chevron-left"></i> Route
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Rsync%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5%E5%B7%A5%E5%85%B7"><span class="nav-text">Rsync实时同步工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81rsync%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">一、rsync是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81rsync%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-text">二、rsync的工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81rsync%E4%BC%98%E7%82%B9"><span class="nav-text">三、rsync优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81rsync%E4%B8%A4%E7%A7%8D%E8%AE%A4%E8%AF%81%E6%96%B9%E5%BC%8F"><span class="nav-text">四、rsync两种认证方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-rsync-daemon%E8%AE%A4%E8%AF%81"><span class="nav-text">4.1 rsync-daemon认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-ssh%E8%AE%A4%E8%AF%81"><span class="nav-text">4.2 ssh认证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81rsync-%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9"><span class="nav-text">五、rsync 常用选项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81rsync%E4%B8%89%E7%A7%8D%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="nav-text">六、rsync三种工作模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E9%85%8D%E7%BD%AErsync"><span class="nav-text">七、配置rsync</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-rsync%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="nav-text">7.1 rsync服务端配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-rsync%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="nav-text">7.2 rsync客户端配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81rsync%E7%9A%84%E5%90%AF%E5%8A%A8%E4%B8%8E%E5%85%B3%E9%97%AD"><span class="nav-text">八、rsync的启动与关闭</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%9D%E3%80%81rsync%E5%90%8C%E6%AD%A5%E7%A4%BA%E4%BE%8B"><span class="nav-text">九、rsync同步示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-ssh%E8%AE%A4%E8%AF%81%E7%94%A8%E6%B3%95"><span class="nav-text">9.1 ssh认证用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-daemon%E8%AE%A4%E8%AF%81%E7%94%A8%E6%B3%95-%E5%B8%B8%E7%94%A8"><span class="nav-text">9.2 daemon认证用法 (常用)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E3%80%81rsync-inotify%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5"><span class="nav-text">十、rsync + inotify实时同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#10-1-Inotify%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">10.1 Inotify是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-2-%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%93%8D"><span class="nav-text">10.2 案例实操</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Armin"
+      src="/uploads/armin.png">
+  <p class="site-author-name" itemprop="name">Armin</p>
+  <div class="site-description" itemprop="description">记录生活中的点点滴滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/" title="GitHub → https:&#x2F;&#x2F;github.com" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://aws.amazon.com/cn/" title="AWS → https:&#x2F;&#x2F;aws.amazon.com&#x2F;cn&#x2F;" rel="noopener" target="_blank"><i class="fab fa-aws fa-fw"></i>AWS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.processon.com/" title="processon → https:&#x2F;&#x2F;www.processon.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-accusoft fa-fw"></i>processon</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cn-ki.net/" title="知识库 → https:&#x2F;&#x2F;www.cn-ki.net&#x2F;" rel="noopener" target="_blank"><i class="fas fa-book-open fa-fw"></i>知识库</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tophub.today/" title="看新闻 → https:&#x2F;&#x2F;tophub.today&#x2F;" rel="noopener" target="_blank"><i class="far fa-newspaper fa-fw"></i>看新闻</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://m.zxjsq.net/" title="计算器 → http:&#x2F;&#x2F;m.zxjsq.net" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计算器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://shijisuishu.bmcx.com/20010314__shijisuishu/" title="计龄器 → https:&#x2F;&#x2F;shijisuishu.bmcx.com&#x2F;20010314__shijisuishu&#x2F;" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计龄器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tool.oschina.net/hexconvert" title="进制转换 → https:&#x2F;&#x2F;tool.oschina.net&#x2F;hexconvert" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>进制转换</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.sojson.com/convert/subnetmask.html" title="子网计算 → https:&#x2F;&#x2F;www.sojson.com&#x2F;convert&#x2F;subnetmask.html" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>子网计算</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.baidu.com/" title="百度一下 → https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank"><i class="fas fa-search fa-fw"></i>百度一下</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Armin</span>
+</div>
+
+<div class="powered-by">
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
