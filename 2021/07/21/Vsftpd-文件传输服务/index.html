@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Vsftpd 文件传输服务">
+<meta property="og:url" content="http://example.com/2021/07/21/Vsftpd-%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1/index.html">
+<meta property="og:site_name" content="LEMON">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsqm095ui9j30hz0jvgmj.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsqm0bz3n2j30hx0jf75e.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsodpan8q7j31gs0o4k0n.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsodp7xalqj316g0ckgmp.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsodp6abobj616k090wf302.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsodwsgdkoj30zi060dgx.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsodu4xuaej315403sdgs.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsoe9rfijpj311w0bwt9a.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsodwpp7brj313y0bk0vf.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsoeb4lwlfj31360fmwg3.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsoebnos8oj31a00cgmy7.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsqm03zzi6j315y04w3yv.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsqm026lppj315o05ggm6.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsqlzssz9xj316606qwf6.jpg">
+<meta property="article:published_time" content="2021-07-21T10:21:01.000Z">
+<meta property="article:modified_time" content="2021-07-23T01:11:24.693Z">
+<meta property="article:author" content="Armin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsqm095ui9j30hz0jvgmj.jpg">
+
+<link rel="canonical" href="http://example.com/2021/07/21/Vsftpd-%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Vsftpd 文件传输服务 | LEMON</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LEMON</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录站</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/21/Vsftpd-%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/armin.png">
+      <meta itemprop="name" content="Armin">
+      <meta itemprop="description" content="记录生活中的点点滴滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LEMON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vsftpd 文件传输服务
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+        <!--toc-->
+<span id="more"></span>
+
+<h1 id="Vsftpd-文件传输服务"><a href="#Vsftpd-文件传输服务" class="headerlink" title="Vsftpd 文件传输服务"></a>Vsftpd 文件传输服务</h1><blockquote>
+<p>ftp是典型的C/S结构，由服务端跟客户端两个部分共同实现文件传输功能</p>
+</blockquote>
+<h2 id="一、Ftp工作原理"><a href="#一、Ftp工作原理" class="headerlink" title="一、Ftp工作原理"></a>一、Ftp工作原理</h2><blockquote>
+<p>ftp采用TCP协议的20、21端口与客户端进行通信</p>
+</blockquote>
+<ul>
+<li><p>20端口：用于建立数据连接并传输文件数据</p>
+</li>
+<li><p>21端口：用于建立控制连接，并传输ftp控制命令</p>
+</li>
+</ul>
+<h2 id="二、ftp的传输模式"><a href="#二、ftp的传输模式" class="headerlink" title="二、ftp的传输模式"></a>二、ftp的传输模式</h2><h3 id="1、主动模式"><a href="#1、主动模式" class="headerlink" title="1、主动模式"></a>1、主动模式</h3><blockquote>
+<p>首先由客户端向服务端的21端口建立ftp控制连接，当需要传送数据时，服务端从 20 端口主动向客户端发起连接。</p>
+</blockquote>
+<p>在主动模式下, FTP客户端从任意端口5150（端口号&gt;1023）发起一个FTP请求, 并携带自己监听的端口号5151（发送的端口号+1=监听端口号）；随后服务器返回确认, 然后从服务器本地的20端口主动发起连接请求到客户端的监听端口5151, 最后客户端返回确认。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gsqm095ui9j30hz0jvgmj.jpg" alt="img"></p>
+<h3 id="2、被动模式"><a href="#2、被动模式" class="headerlink" title="2、被动模式"></a>2、被动模式</h3><blockquote>
+<p>首先由客户端向服务端的21端口建立ftp控制连接，当需要传送数据时，客户端向服务端的非20端口发送请求并建立连接数据</p>
+</blockquote>
+<p>在被动模式中，命令连接和数据连接都由客户端来发起，如上图所示，客户端用随机命令端口5150向服务器的21命令端口发送一个PASV请求，然后服务器返回数据端口3267，告诉客户端我在哪个端口监听数据连接。然后客户端向服务器的监听端口3268发起数据连接，最后服务器回复确认。</p>
+<p><strong>vsftpd默认是被动模式。</strong>所以客户端要设置被动模式连接，如果到现在还没连接成功的看客户端有没有设置被动传输模式。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gsqm0bz3n2j30hx0jf75e.jpg" alt="img"></p>
+<h2 id="三、FTP-常见的服务端及客户端"><a href="#三、FTP-常见的服务端及客户端" class="headerlink" title="三、FTP 常见的服务端及客户端"></a>三、FTP 常见的服务端及客户端</h2><h3 id="1、常见的服务端程序"><a href="#1、常见的服务端程序" class="headerlink" title="1、常见的服务端程序"></a>1、常见的服务端程序</h3><ul>
+<li>IIS、Serv-U</li>
+<li>wu-ftpd、Proftpd</li>
+<li>vsftpd（Very Secure FTP Daemon）</li>
+</ul>
+<h3 id="2、常见的-FTP-客户端程序"><a href="#2、常见的-FTP-客户端程序" class="headerlink" title="2、常见的 FTP 客户端程序"></a>2、常见的 FTP 客户端程序</h3><ul>
+<li>ftp 命令</li>
+<li>CuteFTP、FlashFXP、LeapFTP、Filezilla</li>
+<li>gftp、kuftp</li>
+</ul>
+<h2 id="四、部署-FTP-服务"><a href="#四、部署-FTP-服务" class="headerlink" title="四、部署 FTP 服务"></a>四、部署 FTP 服务</h2><h3 id="1、把光盘挂载到-mnt下"><a href="#1、把光盘挂载到-mnt下" class="headerlink" title="1、把光盘挂载到/mnt下"></a>1、把光盘挂载到/mnt下</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/cdrom /mnt</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、添加本地yum源"><a href="#2、添加本地yum源" class="headerlink" title="2、添加本地yum源"></a>2、添加本地yum源</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/yum.repos.d &amp;&amp; mkdir repo.bak</span><br><span class="line">mv * repo.bak</span><br><span class="line">vim  vsftp.repo</span><br><span class="line">[<span class="built_in">local</span>]</span><br><span class="line">name=<span class="built_in">local</span></span><br><span class="line">baseurl=file:///mnt</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、安装FTP-服务"><a href="#3、安装FTP-服务" class="headerlink" title="3、安装FTP 服务"></a>3、安装FTP 服务</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install vsftpd</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、匿名用户访问"><a href="#五、匿名用户访问" class="headerlink" title="五、匿名用户访问"></a>五、匿名用户访问</h2><h3 id="1、备份原-ftp-配置文件"><a href="#1、备份原-ftp-配置文件" class="headerlink" title="1、备份原 ftp 配置文件"></a>1、备份原 ftp 配置文件</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/vsftpd/</span><br><span class="line">mv vsftpd.conf vsftpd.conf.bak</span><br><span class="line">cat vsftpd.conf.bak |grep -v <span class="string">&quot;^#&quot;</span>|grep -v <span class="string">&quot;^$&quot;</span> &gt; vsftpd.conf</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、修改配置文件"><a href="#2、修改配置文件" class="headerlink" title="2、修改配置文件"></a>2、修改配置文件</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">anonymous_enable=YES</span><br><span class="line">anon_upload_enable=YES</span><br><span class="line">anon_other_write_enable=YES</span><br><span class="line">anon_mkdir_write_enable=YES</span><br><span class="line">local_enable=YES</span><br><span class="line">write_enable=YES</span><br><span class="line">local_umask=022</span><br><span class="line">dirmessage_enable=YES</span><br><span class="line">xferlog_enable=YES</span><br><span class="line">connect_from_port_20=YES</span><br><span class="line">xferlog_std_format=YES</span><br><span class="line">listen=YES</span><br><span class="line">pam_service_name=vsftpd</span><br><span class="line">userlist_enable=YES</span><br><span class="line">tcp_wrappers=YES</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsodpan8q7j31gs0o4k0n.jpg" alt="image-20210721102519177"></p>
+<h3 id="3、给予数据根目录写权限"><a href="#3、给予数据根目录写权限" class="headerlink" title="3、给予数据根目录写权限"></a>3、给予数据根目录写权限</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /var/ftp</span><br><span class="line">chmod o+w pub</span><br></pre></td></tr></table></figure>
+
+<p>4、启动服务</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start vsftpd</span><br><span class="line">systemctl <span class="built_in">enable</span> vsftpd</span><br></pre></td></tr></table></figure>
+
+<p>5、<a href="ftp://ip可匿名登录访问/">ftp://IP可匿名登录访问</a></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsodp7xalqj316g0ckgmp.jpg" alt="image-20210721104350645"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsodp6abobj616k090wf302.jpg" alt="image-20210721104441947"></p>
+<h2 id="六、user-list文件限制用户登录"><a href="#六、user-list文件限制用户登录" class="headerlink" title="六、user_list文件限制用户登录"></a>六、user_list文件限制用户登录</h2><p>1、编辑/etc/vsdtpd/user_list文件，把允许登录服务的用户添加进文件</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsodwsgdkoj30zi060dgx.jpg" alt="image-20210721105532858"></p>
+<p>Ps 此 ftpusers 文件中的所有用户都将禁止登陆，不管 user_list 文件中是否出现。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsodu4xuaej315403sdgs.jpg" alt="image-20210721105635423"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsoe9rfijpj311w0bwt9a.jpg" alt="image-20210721111138269"></p>
+<p>2、添加用户赋予密码</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsodwpp7brj313y0bk0vf.jpg" alt="image-20210721105905780"></p>
+<p>3、编辑配置文件追加以下内容（记得把 <code>anonymous_enable</code> 配置改为 NO）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim vsftpd.conf</span><br><span class="line">userlist_enable=YES        <span class="comment"># 启用 user_list 用户列表文件</span></span><br><span class="line">userlist_deny=NO           <span class="comment"># 不禁用 user_list 列表中用户登陆</span></span><br></pre></td></tr></table></figure>
+
+<p>4、重启vsftpd服务</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart vsftpd</span><br></pre></td></tr></table></figure>
+
+<p>5、测试 nlemon 用户不可以登陆访问</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsoeb4lwlfj31360fmwg3.jpg" alt="image-20210721111253312"></p>
+<p>6、验证 ylemon 用户可以登陆访问</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsoebnos8oj31a00cgmy7.jpg" alt="image-20210721111328263"></p>
+<h2 id="七、虚拟用户登录（常用）"><a href="#七、虚拟用户登录（常用）" class="headerlink" title="七、虚拟用户登录（常用）"></a>七、虚拟用户登录（常用）</h2><blockquote>
+<p>vsftpd提供了三种认证方式，分别是：匿名用户认证、本地用户认证和虚拟用户认证。从安全的角度来说，虚拟用户最安全也是最常用的认证方式，下面开始配置虚拟用户。</p>
+</blockquote>
+<h3 id="1、创建vusers-list文件"><a href="#1、创建vusers-list文件" class="headerlink" title="1、创建vusers.list文件"></a>1、创建vusers.list文件</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/vsftpd/vusers.list</span><br><span class="line">tom</span><br><span class="line">123123</span><br><span class="line">jerry</span><br><span class="line">456456</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、db-load-创建用户的数据库文件"><a href="#2、db-load-创建用户的数据库文件" class="headerlink" title="2、db_load 创建用户的数据库文件"></a>2、db_load 创建用户的数据库文件</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/vsftpd/</span><br><span class="line">db_load -T -t <span class="built_in">hash</span> -f vusers.list vusers.db</span><br><span class="line">chmod 600 /etc/vsftpd/vusers.*</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3、添加映射的本地用户"><a href="#3、添加映射的本地用户" class="headerlink" title="3、添加映射的本地用户"></a>3、添加映射的本地用户</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd -d /var/ftproot -s /sbin/nologin virtual</span><br><span class="line">chmod 755 /var/ftproot/</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、添加编辑文件vsftpd-vu"><a href="#4、添加编辑文件vsftpd-vu" class="headerlink" title="4、添加编辑文件vsftpd.vu"></a>4、添加编辑文件vsftpd.vu</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/pam.d/vsftpd.vu</span><br><span class="line"><span class="comment">#%PAM-1.0</span></span><br><span class="line"><span class="comment"># 此句用于检查用户密码，数据库文件不要写后缀.db</span></span><br><span class="line">auth     required  /lib64/security/pam_userdb.so  db=/etc/vsftpd/vusers</span><br><span class="line"></span><br><span class="line"><span class="comment"># 此句用于检查用户是否在有效期内，数据库支持虚拟用户的PAM认证文件。</span></span><br><span class="line">account  required  /lib64/security/pam_userdb.so  db=/etc/vsftpd/vusers</span><br></pre></td></tr></table></figure>
+
+<h3 id="5、编辑配置文件"><a href="#5、编辑配置文件" class="headerlink" title="5、编辑配置文件"></a>5、编辑配置文件</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/vsftpd/vsftpd.conf</span><br><span class="line">anonymous_enable=NO</span><br><span class="line">allow_writeable_chroot=YES               <span class="comment"># 必须，如果不加入此配置则无法登陆</span></span><br><span class="line">local_enable=YES                         <span class="comment"># 必须，本地系统用户访问</span></span><br><span class="line">write_enable=YES                         <span class="comment"># 必须，任何形式的写入方式</span></span><br><span class="line">dirmessage_enable=YES</span><br><span class="line">xferlog_enable=YES</span><br><span class="line">connect_from_port_20=YES</span><br><span class="line">xferlog_std_format=YES</span><br><span class="line">listen=YES</span><br><span class="line">tcp_wrappers=YES</span><br><span class="line">anon_umask=022                           <span class="comment"># 必须，虚拟用户上传的默认权限掩码值</span></span><br><span class="line">local_umask=022                          <span class="comment"># 必须，本地用户上传的默认权限掩码值</span></span><br><span class="line">guest_enable=YES                         <span class="comment"># 必须，开启虚拟用户模式</span></span><br><span class="line">guest_username=virtual                   <span class="comment"># 必须，指定虚拟用户账号</span></span><br><span class="line">pam_service_name=vsftpd.vu               <span class="comment"># 必须，指定pam文件</span></span><br><span class="line">user_config_dir=/etc/vsftpd/vusers_dir   <span class="comment"># 必须，指定虚拟用户的权限配置目录</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6、创建vusers-dir目录下的虚拟用户"><a href="#6、创建vusers-dir目录下的虚拟用户" class="headerlink" title="6、创建vusers_dir目录下的虚拟用户"></a>6、创建vusers_dir目录下的虚拟用户</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /etc/vsftpd/vusers_dir</span><br><span class="line">touch /etc/vsftpd/vusers_dir/tom</span><br><span class="line">touch /etc/vsftpd/vusers_dir/jerry</span><br></pre></td></tr></table></figure>
+
+<h3 id="7、为虚拟用户设置不同的权限"><a href="#7、为虚拟用户设置不同的权限" class="headerlink" title="7、为虚拟用户设置不同的权限"></a>7、为虚拟用户设置不同的权限</h3><p>tom 权限设置</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/vsftpd/vusers_dir/tom</span><br><span class="line">anon_upload_enable=YES</span><br><span class="line">anon_mkdir_write_enable=YES</span><br><span class="line">anon_other_write_enable=YES</span><br></pre></td></tr></table></figure>
+
+<p>jerry 权限设置</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果不进行权限设置的话，默认该用户只有 登录、浏览、下载 的权限。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="8、验证虚拟用户权限"><a href="#8、验证虚拟用户权限" class="headerlink" title="8、验证虚拟用户权限"></a>8、验证虚拟用户权限</h3><ul>
+<li>使用Tom虚拟用户登录服务,Tom可以登录、浏览、下载、上传、创建、删除</li>
+<li>Jerry用户只能登录、浏览、下载、但无法上传</li>
+</ul>
+<h2 id="八、Vsftpd的常用配置项"><a href="#八、Vsftpd的常用配置项" class="headerlink" title="八、Vsftpd的常用配置项"></a>八、Vsftpd的常用配置项</h2><h3 id="1、修改-vsftpd-服务的监听地址、端口"><a href="#1、修改-vsftpd-服务的监听地址、端口" class="headerlink" title="1、修改 vsftpd 服务的监听地址、端口"></a>1、修改 vsftpd 服务的监听地址、端口</h3><p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gsqm03zzi6j315y04w3yv.jpg" alt="image-20210721175156029"></p>
+<h3 id="2、允许使用-FTP-服务器的被动模式"><a href="#2、允许使用-FTP-服务器的被动模式" class="headerlink" title="2、允许使用 FTP 服务器的被动模式"></a>2、允许使用 FTP 服务器的被动模式</h3><p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gsqm026lppj315o05ggm6.jpg" alt="image-20210721175244990"></p>
+<h3 id="3、限制-FTP-连接的并发数、传输速率"><a href="#3、限制-FTP-连接的并发数、传输速率" class="headerlink" title="3、限制 FTP 连接的并发数、传输速率"></a>3、限制 FTP 连接的并发数、传输速率</h3><p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gsqlzssz9xj316606qwf6.jpg" alt="image-20210721175304895"></p>
+
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+      </div>
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/07/21/CentOS7-%E7%BD%91%E5%8D%A1%E8%81%9A%E5%90%88%E9%93%BE%E8%B7%AF/" rel="prev" title="CentOS7 网卡聚合链路">
+      <i class="fa fa-chevron-left"></i> CentOS7 网卡聚合链路
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vsftpd-%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1"><span class="nav-text">Vsftpd 文件传输服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81Ftp%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-text">一、Ftp工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81ftp%E7%9A%84%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8F"><span class="nav-text">二、ftp的传输模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E4%B8%BB%E5%8A%A8%E6%A8%A1%E5%BC%8F"><span class="nav-text">1、主动模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E8%A2%AB%E5%8A%A8%E6%A8%A1%E5%BC%8F"><span class="nav-text">2、被动模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81FTP-%E5%B8%B8%E8%A7%81%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%8F%8A%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-text">三、FTP 常见的服务端及客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%B8%B8%E8%A7%81%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%A8%8B%E5%BA%8F"><span class="nav-text">1、常见的服务端程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%B8%B8%E8%A7%81%E7%9A%84-FTP-%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%A8%8B%E5%BA%8F"><span class="nav-text">2、常见的 FTP 客户端程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%83%A8%E7%BD%B2-FTP-%E6%9C%8D%E5%8A%A1"><span class="nav-text">四、部署 FTP 服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E6%8A%8A%E5%85%89%E7%9B%98%E6%8C%82%E8%BD%BD%E5%88%B0-mnt%E4%B8%8B"><span class="nav-text">1、把光盘挂载到&#x2F;mnt下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0yum%E6%BA%90"><span class="nav-text">2、添加本地yum源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E5%AE%89%E8%A3%85FTP-%E6%9C%8D%E5%8A%A1"><span class="nav-text">3、安装FTP 服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%8C%BF%E5%90%8D%E7%94%A8%E6%88%B7%E8%AE%BF%E9%97%AE"><span class="nav-text">五、匿名用户访问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%A4%87%E4%BB%BD%E5%8E%9F-ftp-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">1、备份原 ftp 配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">2、修改配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E7%BB%99%E4%BA%88%E6%95%B0%E6%8D%AE%E6%A0%B9%E7%9B%AE%E5%BD%95%E5%86%99%E6%9D%83%E9%99%90"><span class="nav-text">3、给予数据根目录写权限</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81user-list%E6%96%87%E4%BB%B6%E9%99%90%E5%88%B6%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95"><span class="nav-text">六、user_list文件限制用户登录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E8%99%9A%E6%8B%9F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%EF%BC%88%E5%B8%B8%E7%94%A8%EF%BC%89"><span class="nav-text">七、虚拟用户登录（常用）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%88%9B%E5%BB%BAvusers-list%E6%96%87%E4%BB%B6"><span class="nav-text">1、创建vusers.list文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81db-load-%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6"><span class="nav-text">2、db_load 创建用户的数据库文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E6%B7%BB%E5%8A%A0%E6%98%A0%E5%B0%84%E7%9A%84%E6%9C%AC%E5%9C%B0%E7%94%A8%E6%88%B7"><span class="nav-text">3、添加映射的本地用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E6%B7%BB%E5%8A%A0%E7%BC%96%E8%BE%91%E6%96%87%E4%BB%B6vsftpd-vu"><span class="nav-text">4、添加编辑文件vsftpd.vu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81%E7%BC%96%E8%BE%91%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">5、编辑配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81%E5%88%9B%E5%BB%BAvusers-dir%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E8%99%9A%E6%8B%9F%E7%94%A8%E6%88%B7"><span class="nav-text">6、创建vusers_dir目录下的虚拟用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%E3%80%81%E4%B8%BA%E8%99%9A%E6%8B%9F%E7%94%A8%E6%88%B7%E8%AE%BE%E7%BD%AE%E4%B8%8D%E5%90%8C%E7%9A%84%E6%9D%83%E9%99%90"><span class="nav-text">7、为虚拟用户设置不同的权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8%E3%80%81%E9%AA%8C%E8%AF%81%E8%99%9A%E6%8B%9F%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90"><span class="nav-text">8、验证虚拟用户权限</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81Vsftpd%E7%9A%84%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="nav-text">八、Vsftpd的常用配置项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E4%BF%AE%E6%94%B9-vsftpd-%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%9B%91%E5%90%AC%E5%9C%B0%E5%9D%80%E3%80%81%E7%AB%AF%E5%8F%A3"><span class="nav-text">1、修改 vsftpd 服务的监听地址、端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%85%81%E8%AE%B8%E4%BD%BF%E7%94%A8-FTP-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E8%A2%AB%E5%8A%A8%E6%A8%A1%E5%BC%8F"><span class="nav-text">2、允许使用 FTP 服务器的被动模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E9%99%90%E5%88%B6-FTP-%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%B9%B6%E5%8F%91%E6%95%B0%E3%80%81%E4%BC%A0%E8%BE%93%E9%80%9F%E7%8E%87"><span class="nav-text">3、限制 FTP 连接的并发数、传输速率</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Armin"
+      src="/uploads/armin.png">
+  <p class="site-author-name" itemprop="name">Armin</p>
+  <div class="site-description" itemprop="description">记录生活中的点点滴滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/" title="GitHub → https:&#x2F;&#x2F;github.com" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://aws.amazon.com/cn/" title="AWS → https:&#x2F;&#x2F;aws.amazon.com&#x2F;cn&#x2F;" rel="noopener" target="_blank"><i class="fab fa-aws fa-fw"></i>AWS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.processon.com/" title="processon → https:&#x2F;&#x2F;www.processon.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-accusoft fa-fw"></i>processon</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cn-ki.net/" title="知识库 → https:&#x2F;&#x2F;www.cn-ki.net&#x2F;" rel="noopener" target="_blank"><i class="fas fa-book-open fa-fw"></i>知识库</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tophub.today/" title="看新闻 → https:&#x2F;&#x2F;tophub.today&#x2F;" rel="noopener" target="_blank"><i class="far fa-newspaper fa-fw"></i>看新闻</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://m.zxjsq.net/" title="计算器 → http:&#x2F;&#x2F;m.zxjsq.net" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计算器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://shijisuishu.bmcx.com/20010314__shijisuishu/" title="计龄器 → https:&#x2F;&#x2F;shijisuishu.bmcx.com&#x2F;20010314__shijisuishu&#x2F;" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计龄器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tool.oschina.net/hexconvert" title="进制转换 → https:&#x2F;&#x2F;tool.oschina.net&#x2F;hexconvert" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>进制转换</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.sojson.com/convert/subnetmask.html" title="子网计算 → https:&#x2F;&#x2F;www.sojson.com&#x2F;convert&#x2F;subnetmask.html" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>子网计算</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.baidu.com/" title="百度一下 → https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank"><i class="fas fa-search fa-fw"></i>百度一下</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Armin</span>
+</div>
+
+<div class="powered-by">
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
