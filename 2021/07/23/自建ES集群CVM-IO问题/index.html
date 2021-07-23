@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="自建ES集群CVM IO问题">
+<meta property="og:url" content="http://example.com/2021/07/23/%E8%87%AA%E5%BB%BAES%E9%9B%86%E7%BE%A4CVM-IO%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="LEMON">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsr242cs0zj31840h8mz7.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsr24d8u24j318o0qsdil.jpg">
+<meta property="article:published_time" content="2021-07-23T10:18:32.000Z">
+<meta property="article:modified_time" content="2021-07-23T10:37:28.788Z">
+<meta property="article:author" content="Armin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsr242cs0zj31840h8mz7.jpg">
+
+<link rel="canonical" href="http://example.com/2021/07/23/%E8%87%AA%E5%BB%BAES%E9%9B%86%E7%BE%A4CVM-IO%E9%97%AE%E9%A2%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>自建ES集群CVM IO问题 | LEMON</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LEMON</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录站</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/23/%E8%87%AA%E5%BB%BAES%E9%9B%86%E7%BE%A4CVM-IO%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/armin.png">
+      <meta itemprop="name" content="Armin">
+      <meta itemprop="description" content="记录生活中的点点滴滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LEMON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          自建ES集群CVM IO问题
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+        <!--toc-->
+<span id="more"></span>
+
+<h1 id="自建ES集群CVM-IO问题"><a href="#自建ES集群CVM-IO问题" class="headerlink" title="自建ES集群CVM IO问题"></a>自建ES集群CVM IO问题</h1><h2 id="1、问题描述"><a href="#1、问题描述" class="headerlink" title="1、问题描述"></a>1、问题描述</h2><blockquote>
+<p>永辉自建ES集群CVM 出现IO Hang的情况，子机无法登陆，进程也无法kill掉，需要进行节点重启切换来恢复业务。</p>
+</blockquote>
+<h2 id="2、问题过程及原因分析"><a href="#2、问题过程及原因分析" class="headerlink" title="2、问题过程及原因分析"></a>2、问题过程及原因分析</h2><p>1） 宕机的原因：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">crash&gt; bt</span><br><span class="line">PID: 134 TASK: ffff92baa433da00 CPU: 12 COMMAND: <span class="string">&quot;khungtaskd&quot;</span></span><br><span class="line"><span class="comment">#0 [ffffbbbf06783d00] machine_kexec at ffffffffa2263f53</span></span><br><span class="line"><span class="comment">#1 [ffffbbbf06783d60] __crash_kexec at ffffffffa232bff9</span></span><br><span class="line"><span class="comment">#2 [ffffbbbf06783e28] panic at ffffffffa228e070</span></span><br><span class="line"><span class="comment">#3 [ffffbbbf06783eb0] watchdog at ffffffffa235e4ce</span></span><br><span class="line"><span class="comment">#4 [ffffbbbf06783f08] kthread at ffffffffa22afe81</span></span><br><span class="line"><span class="comment">#5 [ffffbbbf06783f50] ret_from_fork at ffffffffa2c00205</span></span><br><span class="line">进程长时间处于 D 状态</span><br></pre></td></tr></table></figure>
+
+<p>2）通过分析Kdump日志，系统有大量 hung task，都集中在 xfs 文件系统（其它 hung task 是由 xfs hung task 引起的连锁反应），具体信息如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#3911 进程尝试获取 mutex，产生 hungtask</span></span><br><span class="line">PID: 3911 TASK: ffff92ba6ecd0000 CPU: 5 COMMAND: <span class="string">&quot;nginx-ingress-c&quot;</span></span><br><span class="line"><span class="comment">#0 [ffffbbbf08a1b350] __schedule at ffffffffa2b9c201</span></span><br><span class="line"><span class="comment">#1 [ffffbbbf08a1b3e8] schedule at ffffffffa2b9c83c</span></span><br><span class="line"><span class="comment">#2 [ffffbbbf08a1b3f8] schedule_preempt_disabled at ffffffffa2b9cb1e</span></span><br><span class="line"><span class="comment">#3 [ffffbbbf08a1b408] __mutex_lock at ffffffffa2b9e1dc</span></span><br><span class="line"><span class="comment">#4 [ffffbbbf08a1b498] __mutex_lock_slowpath at ffffffffa2b9e533</span></span><br><span class="line"><span class="comment">#5 [ffffbbbf08a1b4b8] mutex_lock at ffffffffa2b9e56f //slab 回收路径上尝试获取 mutex</span></span><br><span class="line"><span class="comment">#6 [ffffbbbf08a1b4d0] xfs_reclaim_inodes_ag at ffffffffc07567ca [xfs]</span></span><br><span class="line"><span class="comment">#7 [ffffbbbf08a1b658] xfs_reclaim_inodes_nr at ffffffffc07578d3 [xfs]</span></span><br><span class="line"><span class="comment">#8 [ffffbbbf08a1b678] xfs_fs_free_cached_objects at ffffffffc076a7b9 [xfs]</span></span><br><span class="line"><span class="comment">#9 [ffffbbbf08a1b688] super_cache_scan at ffffffffa247d005</span></span><br><span class="line"><span class="comment">#10 [ffffbbbf08a1b6e0] shrink_slab at ffffffffa23e9107</span></span><br><span class="line"><span class="comment">#11 [ffffbbbf08a1b7a0] shrink_slab at ffffffffa23e9389</span></span><br><span class="line"><span class="comment">#12 [ffffbbbf08a1b7b0] shrink_node at ffffffffa23ee33e</span></span><br><span class="line"><span class="comment">#13 [ffffbbbf08a1b838] do_try_to_free_pages at ffffffffa23ee5e9</span></span><br><span class="line"><span class="comment">#14 [ffffbbbf08a1b890] try_to_free_mem_cgroup_pages at ffffffffa23eeafa</span></span><br><span class="line"><span class="comment">#15 [ffffbbbf08a1b910] try_charge at ffffffffa2462a51</span></span><br><span class="line"><span class="comment">#16 [ffffbbbf08a1b9a8] mem_cgroup_try_charge at ffffffffa2467883</span></span><br><span class="line"><span class="comment">#17 [ffffbbbf08a1b9e8] __add_to_page_cache_locked at ffffffffa23d0a28</span></span><br><span class="line"><span class="comment">#18 [ffffbbbf08a1ba40] add_to_page_cache_lru at ffffffffa23d0c5e</span></span><br><span class="line"><span class="comment">#19 [ffffbbbf08a1ba78] ext4_mpage_readpages at ffffffffa2549606</span></span><br><span class="line"><span class="comment">#20 [ffffbbbf08a1bb68] ext4_readpages at ffffffffa25282f3</span></span><br><span class="line"><span class="comment">#21 [ffffbbbf08a1bb78] __do_page_cache_readahead at ffffffffa23e2cc9</span></span><br><span class="line"><span class="comment">#22 [ffffbbbf08a1bc48] filemap_fault at ffffffffa23d249d</span></span><br><span class="line"><span class="comment">#23 [ffffbbbf08a1bd10] ext4_filemap_fault at ffffffffa25330e1</span></span><br><span class="line"><span class="comment">#24 [ffffbbbf08a1bd30] __do_fault at ffffffffa240d564</span></span><br><span class="line"><span class="comment">#25 [ffffbbbf08a1bd58] handle_pte_fault at ffffffffa241262a</span></span><br><span class="line"><span class="comment">#26 [ffffbbbf08a1bdb0] __handle_mm_fault at ffffffffa2413178</span></span><br><span class="line"><span class="comment">#27 [ffffbbbf08a1be58] handle_mm_fault at ffffffffa2413371</span></span><br><span class="line"><span class="comment">#28 [ffffbbbf08a1be90] __do_page_fault at ffffffffa2275aa0</span></span><br><span class="line"><span class="comment">#29 [ffffbbbf08a1bf08] do_page_fault at ffffffffa2275d4e</span></span><br><span class="line"><span class="comment">#30 [ffffbbbf08a1bf38] do_async_page_fault at ffffffffa226c4d1</span></span><br><span class="line"><span class="comment">#31 [ffffbbbf08a1bf50] async_page_fault at ffffffffa2c01635</span></span><br><span class="line"><span class="comment">#3911 进程等待的锁，被 13528 持有， 13528 一直未唤醒</span></span><br><span class="line">PID: 13528 TASK: ffff92a6cbb35a00 CPU: 3 COMMAND: <span class="string">&quot;elasticsearch[s&quot;</span></span><br><span class="line"><span class="comment">#0 [ffffbbbf10c07330] __schedule at ffffffffa2b9c201</span></span><br><span class="line"><span class="comment">#1 [ffffbbbf10c073c8] schedule at ffffffffa2b9c83c</span></span><br><span class="line"><span class="comment">#2 [ffffbbbf10c073d8] schedule_timeout at ffffffffa2ba07af</span></span><br><span class="line"><span class="comment">#3 [ffffbbbf10c07458] wait_for_completion at ffffffffa2b9d3aa</span></span><br><span class="line"><span class="comment">#4 [ffffbbbf10c074b0] flush_work at ffffffffa22a9ae6 //提交工作队列， 等待完成</span></span><br><span class="line"><span class="comment">#5 [ffffbbbf10c07530] xlog_cil_force_lsn at ffffffffc077593b [xfs]</span></span><br><span class="line"><span class="comment">#6 [ffffbbbf10c075c8] _xfs_log_force_lsn at ffffffffc0773b64 [xfs]</span></span><br><span class="line"><span class="comment">#7 [ffffbbbf10c07648] xfs_log_force_lsn at ffffffffc0773e54 [xfs]</span></span><br><span class="line"><span class="comment">#8 [ffffbbbf10c07680] __xfs_iunpin_wait at ffffffffc075f7f2 [xfs]</span></span><br><span class="line"><span class="comment">#9 [ffffbbbf10c076f8] xfs_iunpin_wait at ffffffffc07629aa [xfs]</span></span><br><span class="line"><span class="comment">#10 [ffffbbbf10c07708] xfs_reclaim_inode at ffffffffc0756212 [xfs]</span></span><br><span class="line"><span class="comment">#11 [ffffbbbf10c07758] xfs_reclaim_inodes_ag at ffffffffc07566e6 [xfs]</span></span><br><span class="line"><span class="comment">#12 [ffffbbbf10c078e0] xfs_reclaim_inodes_nr at ffffffffc07578d3 [xfs]</span></span><br><span class="line"><span class="comment">#13 [ffffbbbf10c07900] xfs_fs_free_cached_objects at ffffffffc076a7b9 [xfs]</span></span><br><span class="line"><span class="comment">#14 [ffffbbbf10c07910] super_cache_scan at ffffffffa247d005</span></span><br><span class="line"><span class="comment">#15 [ffffbbbf10c07968] shrink_slab at ffffffffa23e9107</span></span><br><span class="line"><span class="comment">#16 [ffffbbbf10c07a28] shrink_slab at ffffffffa23e9389</span></span><br><span class="line"><span class="comment">#17 [ffffbbbf10c07a38] shrink_node at ffffffffa23ee33e</span></span><br><span class="line"><span class="comment">#18 [ffffbbbf10c07ac0] do_try_to_free_pages at ffffffffa23ee5e9</span></span><br><span class="line"><span class="comment">#19 [ffffbbbf10c07b18] try_to_free_mem_cgroup_pages at ffffffffa23eeafa</span></span><br><span class="line"><span class="comment">#20 [ffffbbbf10c07b98] try_charge at ffffffffa2462a51</span></span><br><span class="line"><span class="comment">#21 [ffffbbbf10c07c30] memcg_kmem_charge_memcg at ffffffffa2466fec</span></span><br><span class="line"><span class="comment">#22 [ffffbbbf10c07c70] memcg_kmem_charge at ffffffffa24670de</span></span><br><span class="line"><span class="comment">#23 [ffffbbbf10c07ca8] __alloc_pages_nodemask at ffffffffa23dcd5b</span></span><br><span class="line"><span class="comment">#24 [ffffbbbf10c07d10] alloc_pages_current at ffffffffa243b26a</span></span><br><span class="line"><span class="comment">#25 [ffffbbbf10c07d40] pte_alloc_one at ffffffffa227bc97</span></span><br><span class="line"><span class="comment">#26 [ffffbbbf10c07d58] handle_pte_fault at ffffffffa24129d1</span></span><br><span class="line"><span class="comment">#27 [ffffbbbf10c07db0] __handle_mm_fault at ffffffffa2413178</span></span><br><span class="line"><span class="comment">#28 [ffffbbbf10c07e58] handle_mm_fault at ffffffffa2413371</span></span><br><span class="line"><span class="comment">#29 [ffffbbbf10c07e90] __do_page_fault at ffffffffa2275aa0</span></span><br><span class="line"><span class="comment">#30 [ffffbbbf10c07f08] do_page_fault at ffffffffa2275d4e</span></span><br><span class="line"><span class="comment">#31 [ffffbbbf10c07f38] do_async_page_fault at ffffffffa226c4d1</span></span><br><span class="line"><span class="comment">#32 [ffffbbbf10c07f50] async_page_fault at ffffffffa2c01635</span></span><br><span class="line">PID: 13197 TASK: ffff92ba97878000 CPU: 14 COMMAND: <span class="string">&quot;kworker/14:1&quot;</span></span><br><span class="line"><span class="comment">#0 [ffffbbbf16157900] __schedule at ffffffffa2b9c201</span></span><br><span class="line"><span class="comment">#1 [ffffbbbf16157998] schedule at ffffffffa2b9c83c</span></span><br><span class="line"><span class="comment">#2 [ffffbbbf161579a8] io_schedule at ffffffffa22bd566</span></span><br><span class="line"><span class="comment">#3 [ffffbbbf161579c0] wbt_wait at ffffffffa268c3f7 //IO 卡在 wbt_wait 长时间不完成</span></span><br><span class="line"><span class="comment">#4 [ffffbbbf16157a50] blk_mq_make_request at ffffffffa26644d0</span></span><br><span class="line"><span class="comment">#5 [ffffbbbf16157ad8] generic_make_request at ffffffffa2657714</span></span><br><span class="line"><span class="comment">#6 [ffffbbbf16157b38] submit_bio at ffffffffa2657963</span></span><br><span class="line"><span class="comment">#7 [ffffbbbf16157b88] _xfs_buf_ioapply at ffffffffc0749eee [xfs]</span></span><br><span class="line"><span class="comment">#8 [ffffbbbf16157c48] xfs_buf_submit at ffffffffc074ba85 [xfs]</span></span><br><span class="line"><span class="comment">#9 [ffffbbbf16157c88] xlog_bdstrat at ffffffffc07709bb [xfs]</span></span><br><span class="line"><span class="comment">#10 [ffffbbbf16157ca8] xlog_sync at ffffffffc07726b1 [xfs]</span></span><br><span class="line"><span class="comment">#11 [ffffbbbf16157cf0] xlog_state_release_iclog at ffffffffc077280c [xfs]</span></span><br><span class="line"><span class="comment">#12 [ffffbbbf16157d18] xlog_write at ffffffffc07732f5 [xfs]</span></span><br><span class="line"><span class="comment">#13 [ffffbbbf16157db0] xlog_cil_push at ffffffffc0774f97 [xfs]</span></span><br><span class="line"><span class="comment">#14 [ffffbbbf16157e70] xlog_cil_push_work at ffffffffc0775115 [xfs]</span></span><br><span class="line"><span class="comment">#15 [ffffbbbf16157e80] process_one_work at ffffffffa22a901e</span></span><br><span class="line"><span class="comment">#16 [ffffbbbf16157ec8] worker_thread at ffffffffa22a9282</span></span><br><span class="line"><span class="comment">#17 [ffffbbbf16157f08] kthread at ffffffffa22afe81</span></span><br><span class="line"><span class="comment">#18 [ffffbbbf16157f50] ret_from_fork at ffffffffa2c00205</span></span><br><span class="line">PID: 12130 TASK: ffff92ba96d0bc00 CPU: 13 COMMAND: <span class="string">&quot;kworker/u40:4&quot;</span></span><br><span class="line"><span class="comment">#0 [ffffbbbf0f22b630] __schedule at ffffffffa2b9c201</span></span><br><span class="line"><span class="comment">#1 [ffffbbbf0f22b6c8] schedule at ffffffffa2b9c83c</span></span><br><span class="line"><span class="comment">#2 [ffffbbbf0f22b6d8] io_schedule at ffffffffa22bd566</span></span><br><span class="line"><span class="comment">#3 [ffffbbbf0f22b6f0] wbt_wait at ffffffffa268c3f7</span></span><br><span class="line"><span class="comment">#4 [ffffbbbf0f22b780] blk_mq_make_request at ffffffffa26644d0</span></span><br><span class="line"><span class="comment">#5 [ffffbbbf0f22b808] generic_make_request at ffffffffa2657714</span></span><br><span class="line"><span class="comment">#6 [ffffbbbf0f22b868] submit_bio at ffffffffa2657963</span></span><br><span class="line"><span class="comment">#7 [ffffbbbf0f22b8c0] xfs_add_to_ioend at ffffffffc0743b17 [xfs]</span></span><br><span class="line"><span class="comment">#8 [ffffbbbf0f22b900] xfs_do_writepage at ffffffffc07443e6 [xfs]</span></span><br><span class="line"><span class="comment">#9 [ffffbbbf0f22b9a8] write_cache_pages at ffffffffa23e147c</span></span><br><span class="line"><span class="comment">#10 [ffffbbbf0f22bac0] xfs_vm_writepages at ffffffffc07440be [xfs]</span></span><br><span class="line"><span class="comment">#11 [ffffbbbf0f22bb38] do_writepages at ffffffffa23e22ab</span></span><br><span class="line"><span class="comment">#12 [ffffbbbf0f22bbb8] __writeback_single_inode at ffffffffa24ac315</span></span><br><span class="line"><span class="comment">#13 [ffffbbbf0f22bc18] writeback_sb_inodes at ffffffffa24acaa1</span></span><br><span class="line"><span class="comment">#14 [ffffbbbf0f22bcf0] __writeback_inodes_wb at ffffffffa24ace37</span></span><br><span class="line"><span class="comment">#15 [ffffbbbf0f22bd38] wb_writeback at ffffffffa24ad1d1</span></span><br><span class="line"><span class="comment">#16 [ffffbbbf0f22bdd8] wb_workfn at ffffffffa24ad96b</span></span><br><span class="line"><span class="comment">#17 [ffffbbbf0f22be80] process_one_work at ffffffffa22a901e</span></span><br><span class="line"><span class="comment">#18 [ffffbbbf0f22bec8] worker_thread at ffffffffa22a9282</span></span><br><span class="line"><span class="comment">#19 [ffffbbbf0f22bf08] kthread at ffffffffa22afe81</span></span><br><span class="line">从系统 dump 日志看， Linux 内核内部 bug 导致 IO 无法下发，引起 hung task</span><br></pre></td></tr></table></figure>
+
+<p>3）同时发现linux社区中也有类似的bug报告：</p>
+<p>Kernel Bug 报告</p>
+<p><a target="_blank" rel="noopener" href="https://patchwork.kernel.org/project/linux-block/patch/20180814155749.28912-1-ming.lei@redhat.com/">blk-wbt: fix IO hang in wbt_wait() - Patchwork</a></p>
+<p><a target="_blank" rel="noopener" href="https://marc.info/?l=linux-block&amp;m=153221542021033&amp;w=2">https://marc.info/?l=linux-block&amp;m=153221542021033&amp;w=2</a></p>
+<p>Ubuntu 报告</p>
+<p><a target="_blank" rel="noopener" href="https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1805693">Bug #1805693 “User reports a hang on 18.04 LTS(4.15.18) under a …” : Bugs : linux package : Ubuntu</a></p>
+<p>社区在 4.15 内核后续也修复了多个 wbt 的缺陷， 可通过 git log block/blk-wbt.c 查看。</p>
+<p>4）与永辉团队确认，之前ucloud上面使用的是4.19版本，而当前容器化部署的使用的是4.15内核版本，其中4.19内核修复了wbt的bug：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsr242cs0zj31840h8mz7.jpg" alt="image-20210723182741073"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsr24d8u24j318o0qsdil.jpg" alt="image-20210723182758426"></p>
+<h2 id="3、问题原因"><a href="#3、问题原因" class="headerlink" title="3、问题原因"></a>3、问题原因</h2><p>Linux 内核 bug 导致 IO 无法下发，引起 hung task </p>
+<h2 id="4、规避建议"><a href="#4、规避建议" class="headerlink" title="4、规避建议"></a>4、规避建议</h2><blockquote>
+<p><strong>建议使用之前业务已经大量使用的稳定版本内核，或最新的 ubuntu 内核</strong></p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">第一步：检查安装的内核版本</span><br><span class="line">要发现当前系统安装的版本</span><br><span class="line">$ uname -sr</span><br><span class="line"></span><br><span class="line">第二步：升级ubuntu内核</span><br><span class="line">打开 http://kernel.ubuntu.com/~kernel-ppa/mainline/ 并选择列表中需要的版本，根据系统架构下载 .deb 文件：</span><br><span class="line">对于 64 位系统：</span><br><span class="line">$ wget http://kernel.ubuntu.com/~kernel-ppa/mainline/xxxx</span><br><span class="line">$ wget http://kernel.ubuntu.com/~kernel-ppa/mainline/xxxx</span><br><span class="line">$ wget http://kernel.ubuntu.com/~kernel-ppa/mainline/xxxx</span><br><span class="line"></span><br><span class="line">下载完成这些所有内核文件后，如下安装：</span><br><span class="line"></span><br><span class="line">$ sudo dpkg -i *.deb</span><br><span class="line">安装完成后，重启并验证新的内核是否已经被使用：<span class="variable">$uname</span>-sr</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+      </div>
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/07/23/Vnstat%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7%E5%99%A8/" rel="prev" title="Vnstat流量监控器">
+      <i class="fa fa-chevron-left"></i> Vnstat流量监控器
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%BB%BAES%E9%9B%86%E7%BE%A4CVM-IO%E9%97%AE%E9%A2%98"><span class="nav-text">自建ES集群CVM IO问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-text">1、问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E9%97%AE%E9%A2%98%E8%BF%87%E7%A8%8B%E5%8F%8A%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90"><span class="nav-text">2、问题过程及原因分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E9%97%AE%E9%A2%98%E5%8E%9F%E5%9B%A0"><span class="nav-text">3、问题原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E8%A7%84%E9%81%BF%E5%BB%BA%E8%AE%AE"><span class="nav-text">4、规避建议</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Armin"
+      src="/uploads/armin.png">
+  <p class="site-author-name" itemprop="name">Armin</p>
+  <div class="site-description" itemprop="description">记录生活中的点点滴滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/" title="GitHub → https:&#x2F;&#x2F;github.com" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://aws.amazon.com/cn/" title="AWS → https:&#x2F;&#x2F;aws.amazon.com&#x2F;cn&#x2F;" rel="noopener" target="_blank"><i class="fab fa-aws fa-fw"></i>AWS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.processon.com/" title="processon → https:&#x2F;&#x2F;www.processon.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-accusoft fa-fw"></i>processon</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cn-ki.net/" title="知识库 → https:&#x2F;&#x2F;www.cn-ki.net&#x2F;" rel="noopener" target="_blank"><i class="fas fa-book-open fa-fw"></i>知识库</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tophub.today/" title="看新闻 → https:&#x2F;&#x2F;tophub.today&#x2F;" rel="noopener" target="_blank"><i class="far fa-newspaper fa-fw"></i>看新闻</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://m.zxjsq.net/" title="计算器 → http:&#x2F;&#x2F;m.zxjsq.net" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计算器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://shijisuishu.bmcx.com/20010314__shijisuishu/" title="计龄器 → https:&#x2F;&#x2F;shijisuishu.bmcx.com&#x2F;20010314__shijisuishu&#x2F;" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计龄器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tool.oschina.net/hexconvert" title="进制转换 → https:&#x2F;&#x2F;tool.oschina.net&#x2F;hexconvert" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>进制转换</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.sojson.com/convert/subnetmask.html" title="子网计算 → https:&#x2F;&#x2F;www.sojson.com&#x2F;convert&#x2F;subnetmask.html" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>子网计算</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.baidu.com/" title="百度一下 → https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank"><i class="fas fa-search fa-fw"></i>百度一下</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Armin</span>
+</div>
+
+<div class="powered-by">
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
