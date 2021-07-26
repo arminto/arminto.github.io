@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Jumpserver">
+<meta property="og:url" content="http://example.com/2021/07/26/Jumpserver/index.html">
+<meta property="og:site_name" content="LEMON">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsug59795yj31j90u0wi2.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsugs9ijpsj31dg0hedgj.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsugs88ucyj31dg0jqdgl.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsugs5lnklj31nv0u00wa.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsugu71c79j31nk0ran0d.jpg">
+<meta property="article:published_time" content="2021-07-26T09:38:31.000Z">
+<meta property="article:modified_time" content="2021-07-26T09:39:17.012Z">
+<meta property="article:author" content="Armin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gsug59795yj31j90u0wi2.jpg">
+
+<link rel="canonical" href="http://example.com/2021/07/26/Jumpserver/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Jumpserver | LEMON</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LEMON</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录站</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/26/Jumpserver/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/armin.png">
+      <meta itemprop="name" content="Armin">
+      <meta itemprop="description" content="记录生活中的点点滴滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LEMON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Jumpserver
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+        <!--toc-->
+<span id="more"></span>
+
+<h1 id="Jumpserver堡垒机"><a href="#Jumpserver堡垒机" class="headerlink" title="Jumpserver堡垒机"></a>Jumpserver堡垒机</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://docs.jumpserver.org/zh/master/"><strong>JumpServer 官方详细文档</strong></a></p>
+</blockquote>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>跳板机就是一台服务器，开发或运维人员在维护过程中首先要统一登录到这台服务器，然后再登录到目标设备进行维护和操作。</p>
+<p>跳板机缺点：没有实现对运维人员操作行为的控制和审计，使用跳板机的过程中还是会出现误操作、违规操作导致的事故，一旦出现操作事故很难快速定位到原因和责任人。</p>
+<p>堡垒机，即在一个特定的网络环境下，为了保障网络和数据不受来自外部和内部用户的入侵和破坏，而运用各种技术手段实时收集和监控网络环境中每一个组成部分的系统状态、安全事件、网络活动，以便集中报警、及时处理及审计定责。</p>
+<p><strong>堡垒机比跳板机多了实时收集、监控网络环境、集中报警等功能</strong>。</p>
+<h2 id="页面展示"><a href="#页面展示" class="headerlink" title="页面展示"></a>页面展示</h2><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsug59795yj31j90u0wi2.jpg" alt="!界面展示"></p>
+<h2 id="特色优势"><a href="#特色优势" class="headerlink" title="特色优势"></a>特色优势</h2><ul>
+<li>开源: 零门槛，线上快速获取和安装；</li>
+<li>分布式: 轻松支持大规模并发访问；</li>
+<li>无插件: 仅需浏览器，极致的 Web Terminal 使用体验；</li>
+<li>多云支持: 一套系统，同时管理不同云上面的资产；</li>
+<li>云端存储: 审计录像云端存储，永不丢失；</li>
+<li>多租户: 一套系统，多个子公司和部门同时使用；</li>
+<li>多应用支持: 数据库，Windows远程应用，Kubernetes。</li>
+</ul>
+<h2 id="功能列表"><a href="#功能列表" class="headerlink" title="功能列表"></a>功能列表</h2><table>
+<thead>
+<tr>
+<th>身份认证 Authentication</th>
+<th>登录认证</th>
+<th>资源统一登录与认证</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LDAP/AD 认证</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>RADIUS 认证</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>OpenID 认证（实现单点登录）</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CAS 认证 （实现单点登录）</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>钉钉认证 （扫码登录）</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>企业微信认证 （扫码登录）</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MFA认证</td>
+<td>MFA 二次认证（Google Authenticator）</td>
+<td></td>
+</tr>
+<tr>
+<td>RADIUS 二次认证</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>登录复核</td>
+<td>用户登录行为受管理员的监管与控制</td>
+<td></td>
+</tr>
+<tr>
+<td>登录限制</td>
+<td>用户登录来源 IP 受管理员控制（支持黑/白名单）</td>
+<td></td>
+</tr>
+<tr>
+<td>账号管理 Account</td>
+<td>集中账号</td>
+<td>管理用户管理</td>
+</tr>
+<tr>
+<td>系统用户管理</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>统一密码</td>
+<td>资产密码托管</td>
+<td></td>
+</tr>
+<tr>
+<td>自动生成密码</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>自动推送密码</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>密码过期设置</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>批量改密</td>
+<td>定期批量改密</td>
+<td></td>
+</tr>
+<tr>
+<td>多种密码策略</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>多云纳管</td>
+<td>对私有云、公有云资产自动统一纳管</td>
+<td></td>
+</tr>
+<tr>
+<td>收集用户</td>
+<td>自定义任务定期收集主机用户</td>
+<td></td>
+</tr>
+<tr>
+<td>密码匣子</td>
+<td>统一对资产主机的用户密码进行查看、更新、测试操作</td>
+<td></td>
+</tr>
+<tr>
+<td>授权控制 Authorization</td>
+<td>多维授权</td>
+<td>对用户、用户组、资产、资产节点、应用以及系统用户进行授权</td>
+</tr>
+<tr>
+<td>资产授权</td>
+<td>资产以树状结构进行展示</td>
+<td></td>
+</tr>
+<tr>
+<td>资产和节点均可灵活授权</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>节点内资产自动继承授权</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>子节点自动继承父节点授权</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>应用授权</td>
+<td>实现更细粒度的应用级授权</td>
+<td></td>
+</tr>
+<tr>
+<td>MySQL 数据库应用、RemoteApp 远程应用</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>动作授权</td>
+<td>实现对授权资产的文件上传、下载以及连接动作的控制</td>
+<td></td>
+</tr>
+<tr>
+<td>时间授权</td>
+<td>实现对授权资源使用时间段的限制</td>
+<td></td>
+</tr>
+<tr>
+<td>特权指令</td>
+<td>实现对特权指令的使用（支持黑白名单）</td>
+<td></td>
+</tr>
+<tr>
+<td>命令过滤</td>
+<td>实现对授权系统用户所执行的命令进行控制</td>
+<td></td>
+</tr>
+<tr>
+<td>文件传输</td>
+<td>SFTP 文件上传/下载</td>
+<td></td>
+</tr>
+<tr>
+<td>文件管理</td>
+<td>实现 Web SFTP 文件管理</td>
+<td></td>
+</tr>
+<tr>
+<td>工单管理</td>
+<td>支持对用户登录请求行为进行控制</td>
+<td></td>
+</tr>
+<tr>
+<td>访问控制</td>
+<td>登录资产复核（通过 SSH/Telnet 协议登录资产）</td>
+<td></td>
+</tr>
+<tr>
+<td>命令执行复核</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>组织管理</td>
+<td>实现多租户管理与权限隔离</td>
+<td></td>
+</tr>
+<tr>
+<td>安全审计 Audit</td>
+<td>操作审计</td>
+<td>用户操作行为审计</td>
+</tr>
+<tr>
+<td>会话审计</td>
+<td>在线会话内容监控</td>
+<td></td>
+</tr>
+<tr>
+<td>在线会话内容审计</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>历史会话内容审计</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>录像审计</td>
+<td>支持对 Linux、Windows 等资产操作的录像进行回放审计</td>
+<td></td>
+</tr>
+<tr>
+<td>支持对 RemoteApp、MySQL 等应用操作的录像进行回放审计</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>指令审计</td>
+<td>支持对资产和应用等操作的命令进行审计</td>
+<td></td>
+</tr>
+<tr>
+<td>文件传输</td>
+<td>可对文件的上传、下载记录进行审计</td>
+<td></td>
+</tr>
+<tr>
+<td>数据库审计 Database</td>
+<td>连接方式</td>
+<td>命令方式</td>
+</tr>
+<tr>
+<td>Web UI方式</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>支持的数据库</td>
+<td>MySQL</td>
+<td></td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MariaDB</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>功能亮点</td>
+<td>语法高亮</td>
+<td></td>
+</tr>
+<tr>
+<td>SQL格式化</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>支持快捷键</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>支持选中执行</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SQL历史查询</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>支持页面创建 DB, TABLE</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>会话审计</td>
+<td>命令记录</td>
+<td></td>
+</tr>
+<tr>
+<td>录像回放</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="安全建议"><a href="#安全建议" class="headerlink" title="安全建议"></a>安全建议</h2><ul>
+<li>Jumpserver 对外需要开放 80 443 和 2222 端口</li>
+<li>JumpServer 所在服务器操作系统应该升级到最新</li>
+<li>JumpServer 依赖的软件升级到最新版本</li>
+<li>服务器、数据库、redis 等依赖组件请勿使用弱口令密码</li>
+<li>不推荐关闭 firewalld 和 selinux</li>
+<li>只开放必要的端口，必要的话请通过 vpn 或者 sslvpn 访问 JumpServer</li>
+<li>如果必须开放到外网使用，你应该部署 web 应用防火墙做安全过滤</li>
+<li>请部署 ssl 证书通过 https 协议来访问 JumpServer</li>
+<li>JumpServer 不要使用弱口令密码，应立即改掉默认的 admin 密码</li>
+<li>推荐开启 MFA 功能，避免因密码泄露导致的安全问题</li>
+</ul>
+<h2 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h2><blockquote>
+<p>两种方式：自动部署 和 手动部署 </p>
+</blockquote>
+<h3 id="自动部署"><a href="#自动部署" class="headerlink" title="自动部署"></a>自动部署</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 默认会安装到 /opt/jumpserver-installer-v2.12.1 目录</span></span><br><span class="line">curl -sSL https://github.com/jumpserver/jumpserver/releases/download/v2.12.1/quick_start.sh | bash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用方式</span></span><br><span class="line"><span class="comment"># 安装完成后配置文件 /opt/jumpserver/config/config.txt</span></span><br><span class="line"><span class="built_in">cd</span> /opt/jumpserver-installer-v2.12.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">./jmsctl.sh start</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止</span></span><br><span class="line">./jmsctl.sh down</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载</span></span><br><span class="line">./jmsctl.sh uninstall</span><br><span class="line"></span><br><span class="line"><span class="comment"># 帮助</span></span><br><span class="line">./jmsctl.sh -h</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新安装</span></span><br><span class="line">./jmsctl.sh uninstall</span><br><span class="line">./jmsctl.sh install</span><br></pre></td></tr></table></figure>
+
+<h3 id="手动部署"><a href="#手动部署" class="headerlink" title="手动部署"></a>手动部署</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /opt</span><br><span class="line">wget https://github.com/jumpserver/installer/releases/download/v2.12.1/jumpserver-installer-v2.12.1.tar.gz</span><br><span class="line">tar -xf jumpserver-installer-v2.12.1.tar.gz</span><br><span class="line"><span class="built_in">cd</span> jumpserver-installer-v2.12.1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 根据需要修改配置文件模板, 如果不清楚用途可以跳过修改</span></span><br><span class="line">cat config-example.txt</span><br><span class="line"><span class="comment"># 以下设置如果为空系统会自动生成随机字符串填入</span></span><br><span class="line"><span class="comment">## 迁移请修改 SECRET_KEY 和 BOOTSTRAP_TOKEN 为原来的设置</span></span><br><span class="line"><span class="comment">## 完整参数文档 https://docs.jumpserver.org/zh/master/admin-guide/env/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 安装配置, amd64 默认使用华为云加速下载, arm64 请注释掉 DOCKER_IMAGE_PREFIX=swr.cn-south-1.myhuaweicloud.com</span></span><br><span class="line"><span class="comment"># DOCKER_IMAGE_PREFIX=swr.cn-south-1.myhuaweicloud.com</span></span><br><span class="line">VOLUME_DIR=/opt/jumpserver</span><br><span class="line">DOCKER_DIR=/var/lib/docker</span><br><span class="line">SECRET_KEY=</span><br><span class="line">BOOTSTRAP_TOKEN=</span><br><span class="line">LOG_LEVEL=ERROR</span><br><span class="line"></span><br><span class="line"><span class="comment">##  MySQL 配置, USE_EXTERNAL_MYSQL=1 表示使用外置数据库, 请输入正确的 MySQL 信息</span></span><br><span class="line">USE_EXTERNAL_MYSQL=0</span><br><span class="line">DB_HOST=mysql</span><br><span class="line">DB_PORT=3306</span><br><span class="line">DB_USER=root</span><br><span class="line">DB_PASSWORD=</span><br><span class="line">DB_NAME=jumpserver</span><br><span class="line"></span><br><span class="line"><span class="comment">##  Redis 配置, USE_EXTERNAL_REDIS=1 表示使用外置数据库, 请输入正确的 Redis 信息</span></span><br><span class="line">USE_EXTERNAL_REDIS=0</span><br><span class="line">REDIS_HOST=redis</span><br><span class="line">REDIS_PORT=6379</span><br><span class="line">REDIS_PASSWORD=</span><br><span class="line"></span><br><span class="line"><span class="comment">## Compose 项目设置, 如果 192.168.250.0/24 网段与你现有网段冲突, 请修改然后重启 JumpServer</span></span><br><span class="line">COMPOSE_PROJECT_NAME=jms</span><br><span class="line">COMPOSE_HTTP_TIMEOUT=3600</span><br><span class="line">DOCKER_CLIENT_TIMEOUT=3600</span><br><span class="line">DOCKER_SUBNET=192.168.250.0/24</span><br><span class="line"></span><br><span class="line"><span class="comment">## IPV6 设置, 容器是否开启 ipv6 nat, USE_IPV6=1 表示开启, 为 0 的情况下 DOCKER_SUBNET_IPV6 定义不生效</span></span><br><span class="line">USE_IPV6=0</span><br><span class="line">DOCKER_SUBNET_IPV6=2001:db8:10::/64</span><br><span class="line"></span><br><span class="line"><span class="comment">## Nginx 配置, USE_LB=1 表示开启, 为 0 的情况下, HTTPS_PORT 定义不生效</span></span><br><span class="line">HTTP_PORT=80</span><br><span class="line">SSH_PORT=2222</span><br><span class="line">RDP_PORT=3389</span><br><span class="line"></span><br><span class="line">USE_LB=0</span><br><span class="line">HTTPS_PORT=443</span><br><span class="line"></span><br><span class="line"><span class="comment">## Task 配置, 是否启动 jms_celery 容器, 单节点必须开启</span></span><br><span class="line">USE_TASK=1</span><br><span class="line"></span><br><span class="line"><span class="comment">## XPack, USE_XPACK=1 表示开启, 开源版本设置无效</span></span><br><span class="line">USE_XPACK=0</span><br><span class="line"></span><br><span class="line"><span class="comment"># Core 配置, Session 定义, SESSION_COOKIE_AGE 表示闲置多少秒后 session 过期, SESSION_EXPIRE_AT_BROWSER_CLOSE=true 表示关闭浏览器即 session 过期</span></span><br><span class="line"><span class="comment"># SESSION_COOKIE_AGE=86400</span></span><br><span class="line">SESSION_EXPIRE_AT_BROWSER_CLOSE=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Koko Lion XRDP 组件配置</span></span><br><span class="line">CORE_HOST=http://core:8080</span><br><span class="line"></span><br><span class="line"><span class="comment"># 额外的配置</span></span><br><span class="line">CURRENT_VERSION=</span><br><span class="line"></span><br><span class="line">./jmsctl.sh install</span><br><span class="line">./jmsctl.sh start</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### 使用方式</span></span><br><span class="line"><span class="built_in">cd</span> /opt/jumpserver-installer-v2.12.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">./jmsctl.sh start</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止</span></span><br><span class="line">./jmsctl.sh down</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载</span></span><br><span class="line">./jmsctl.sh uninstall</span><br><span class="line"></span><br><span class="line"><span class="comment"># 帮助</span></span><br><span class="line">./jmsctl.sh -h</span><br></pre></td></tr></table></figure>
+
+<h2 id="系统设置"><a href="#系统设置" class="headerlink" title="系统设置"></a>系统设置</h2><blockquote>
+<p><strong>必须要设置的两个地方：基本设置 和 邮件设置</strong></p>
+<p><strong>以下操作均在 Web 页面完成，请使用 admin 用户登陆，默认密码 admin</strong></p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装完毕后的相关信息</span></span><br><span class="line">&gt;&gt;&gt; The Installation is Complete</span><br><span class="line">1. You can use the following <span class="built_in">command</span> to start, and <span class="keyword">then</span> visit</span><br><span class="line"><span class="built_in">cd</span> /opt/jumpserver-installer-v2.12.1</span><br><span class="line">./jmsctl.sh start</span><br><span class="line"></span><br><span class="line">2. Other management commands</span><br><span class="line">./jmsctl.sh stop</span><br><span class="line">./jmsctl.sh restart</span><br><span class="line">./jmsctl.sh backup</span><br><span class="line">./jmsctl.sh upgrade</span><br><span class="line">For more commands, you can enter ./jmsctl.sh --<span class="built_in">help</span> to understand</span><br><span class="line"></span><br><span class="line">3. Web access</span><br><span class="line">http://192.168.245.11:80</span><br><span class="line">Default username: admin  Default password: admin</span><br><span class="line"></span><br><span class="line">4. SSH/SFTP access</span><br><span class="line">ssh -p2222 admin@192.168.245.11</span><br><span class="line">sftp -P2222 admin@192.168.245.11</span><br><span class="line"></span><br><span class="line">5. More information</span><br><span class="line">Offical Website: https://www.jumpserver.org/</span><br><span class="line">Documentation: https://docs.jumpserver.org/</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsugs9ijpsj31dg0hedgj.jpg" alt="image-20210726170450138"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsugs88ucyj31dg0jqdgl.jpg" alt="image-20210726170519423"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsugs5lnklj31nv0u00wa.jpg" alt="image-20210726171158346"></p>
+<h3 id="1-1-基本设置"><a href="#1-1-基本设置" class="headerlink" title="1.1 基本设置"></a>1.1 基本设置</h3><table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">示例</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">当前站点URL</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://demo.jumpserver.org/">https://demo.jumpserver.org</a></td>
+<td align="left">不设置的话，邮件收到的地址为 <code>http://localhost</code></td>
+</tr>
+<tr>
+<td align="left">用户向导URL</td>
+<td align="left"></td>
+<td align="left">用户首次登陆可以看到此 <code>超链接</code>，可以不设置</td>
+</tr>
+<tr>
+<td align="left">忘记密码URL</td>
+<td align="left"></td>
+<td align="left">使用了 LDAP, OPENID 等外部认证系统，可以自定义</td>
+</tr>
+</tbody></table>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsugu71c79j31nk0ran0d.jpg" alt="image-20210726171355450"></p>
+<h3 id="1-2-邮件设置"><a href="#1-2-邮件设置" class="headerlink" title="1.2 邮件设置"></a>1.2 邮件设置</h3><blockquote>
+<p>必须设置才能使用与邮件相关的功能；不可以同时勾选 <code>使用SSL</code> 和 <code>使用TLS</code> ！</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">示例</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">SMTP主机</td>
+<td align="left">smtp.qq.com</td>
+<td align="left">服务商提供的 smtp 服务器</td>
+</tr>
+<tr>
+<td align="left">SMTP端口</td>
+<td align="left">25</td>
+<td align="left">通常是 <code>25</code></td>
+</tr>
+<tr>
+<td align="left">SMTP账号</td>
+<td align="left"><a href="mailto:296015668@qq.com">296015668@qq.com</a></td>
+<td align="left">通常是 <code>user@domain.com</code></td>
+</tr>
+<tr>
+<td align="left">SMTP密码</td>
+<td align="left">****************</td>
+<td align="left">每次 <code>测试连接</code> 都需要重新输入密码</td>
+</tr>
+<tr>
+<td align="left">使用SSL</td>
+<td align="left">[ ]</td>
+<td align="left">如果端口使用 <code>465</code>，必须勾选此项</td>
+</tr>
+<tr>
+<td align="left">使用TLS</td>
+<td align="left">[ ]</td>
+<td align="left">如果端口使用 <code>587</code>，必须勾选此项</td>
+</tr>
+<tr>
+<td align="left">发件人</td>
+<td align="left"><a href="mailto:296015668@qq.com">296015668@qq.com</a></td>
+<td align="left"><code>测试连接</code> 必须要输入</td>
+</tr>
+<tr>
+<td align="left">主题前缀</td>
+<td align="left">[JMS]</td>
+<td align="left">邮件的标题，收到的邮件是 <code>[JMS]</code> 开头</td>
+</tr>
+<tr>
+<td align="left">测试收件人</td>
+<td align="left"><a href="mailto:296015668@qq.com">296015668@qq.com</a></td>
+<td align="left">测试连接必填</td>
+</tr>
+</tbody></table>
+<h2 id="资产管理"><a href="#资产管理" class="headerlink" title="资产管理"></a>资产管理</h2><blockquote>
+<p><strong>准备两个测试资产和一个数据库来验证功能</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">IP</th>
+<th align="left">Host name</th>
+<th align="left">Port</th>
+<th align="left">System</th>
+<th align="left">Admin User</th>
+<th align="left">Password</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">172.16.80.11</td>
+<td align="left">test_ssh01</td>
+<td align="left">22</td>
+<td align="left">Centos 7</td>
+<td align="left">root</td>
+<td align="left">Test2020.L</td>
+</tr>
+<tr>
+<td align="left">172.16.80.21</td>
+<td align="left">test_rdp01</td>
+<td align="left">3389</td>
+<td align="left">Windows 10</td>
+<td align="left">administrator</td>
+<td align="left">Test2020.W</td>
+</tr>
+<tr>
+<td align="left">172.16.80.31</td>
+<td align="left">test_mysql01</td>
+<td align="left">3306</td>
+<td align="left">MySQL 5</td>
+<td align="left">root</td>
+<td align="left">Test2020.M</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Windows 资产先进行</strong> <a target="_blank" rel="noopener" href="https://docs.jumpserver.org/zh/master/admin-guide/assets/windows_ssh/">Windows SSH 设置</a></li>
+<li><strong>MySQL 应用需要授权 core 和 koko 的远程访问的权限</strong> <a target="_blank" rel="noopener" href="https://docs.jumpserver.org/zh/master/admin-guide/app/mysql/">MySQL 应用要求</a></li>
+</ul>
+<h3 id="1-1-编辑资产树"><a href="#1-1-编辑资产树" class="headerlink" title="1.1 编辑资产树"></a>1.1 编辑资产树</h3><blockquote>
+<p><strong>根节点 Default 不能重名, 右击节点可以添加、删除和重命名节点, 以及进行资产相关的操作</strong></p>
+</blockquote>
+<p><strong>说明</strong></p>
+<ul>
+<li>点击页面左侧的 <code>资产管理</code> - <code>资产列表</code></li>
+<li>先在根节点 <code>Default</code> 右键新建 <code>SSH Server</code> 和 <code>RDP Server</code> 两个节点</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Defaule</span><br><span class="line">├─ SSH Server</span><br><span class="line">└─ RDP Server</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-创建特权用户"><a href="#1-2-创建特权用户" class="headerlink" title="1.2 创建特权用户"></a>1.2 创建特权用户</h3><blockquote>
+<p><strong>点击页面左侧的</strong> <code>资产管理</code> <strong>-</strong> <code>系统用户</code> <strong>-</strong> <code>创建特权用户</code> <strong>创建两个特权用户, 特权用户的内容就是上面表单的</strong> <code>Admin User</code> <strong>和</strong> <code>Password</code>。</p>
+<p><strong>名称不能重名, 密码或者密钥二选一即可, 一些资产不允许通过 密码 认证可以改用 私钥 认证</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">表单</th>
+<th align="left">SSH 特权用户示例</th>
+<th align="left">RDP 特权用户示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">名称</td>
+<td align="left">172.16.80.11_root</td>
+<td align="left">172.16.80.21_administrator</td>
+</tr>
+<tr>
+<td align="left">用户名</td>
+<td align="left">root</td>
+<td align="left">administrator</td>
+</tr>
+<tr>
+<td align="left">密码</td>
+<td align="left">Test2020.L</td>
+<td align="left">Test2020.W</td>
+</tr>
+<tr>
+<td align="left">SSH密钥</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">备注</td>
+<td align="left">SSH 资产特权用户</td>
+<td align="left">RDP 资产特权用户</td>
+</tr>
+</tbody></table>
+<h3 id="1-3-创建资产"><a href="#1-3-创建资产" class="headerlink" title="1.3 创建资产"></a>1.3 创建资产</h3><blockquote>
+<p><strong>点击页面左侧的</strong> <code>资产管理</code> <strong>-</strong> <code>资产列表</code> <strong>-</strong> <code>创建资产</code> <strong>把两个资产导入</strong>。</p>
+<p><strong>主机名不能重名！</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">表单</th>
+<th align="left">SSH 资产示例</th>
+<th align="left">RDP 资产示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">主机名</td>
+<td align="left">test_ssh01</td>
+<td align="left">test_rdp01</td>
+</tr>
+<tr>
+<td align="left">IP(域名)</td>
+<td align="left">172.16.80.11</td>
+<td align="left">172.16.80.21</td>
+</tr>
+<tr>
+<td align="left">系统平台</td>
+<td align="left">Linux</td>
+<td align="left">Windows</td>
+</tr>
+<tr>
+<td align="left">公网IP</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">网域</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">协议组</td>
+<td align="left">ssh 22</td>
+<td align="left">rdp 3389 / ssh 22</td>
+</tr>
+<tr>
+<td align="left">特权用户</td>
+<td align="left">172.16.80.11_root</td>
+<td align="left">172.16.80.21_administrator</td>
+</tr>
+<tr>
+<td align="left">节点</td>
+<td align="left">Default / SSH Server</td>
+<td align="left">Default / RDP Server</td>
+</tr>
+</tbody></table>
+<p><strong>创建 Windows 资产, 注意协议组我们需要选择</strong> <code>ssh</code> <strong>和</strong> <code>rdp</code><strong>, 否则无法获取 Windows 资产的状态及硬件信息；</strong></p>
+<p><strong>测试资产连接提示</strong></p>
+<ol>
+<li>资产创建信息填写好保存之后隔几秒钟时间刷新一下网页, <code>ssh</code> 协议资产的可连接图标会显示 <code>绿色</code>, 且 <code>硬件信息</code> 会显示出来</li>
+<li>如果 <code>可连接</code> 的图标是 <code>黄色</code> 或者 <code>红色</code> , 可以点击 <code>资产</code> 的 <code>名称</code>，在右侧 <code>快速修改</code> - <code>测试可连接性</code> 点击 <code>测试</code> 按钮, 根据错误提示处理</li>
+<li>被连接 <code>Linux</code> 资产需要 <code>python</code> 组件, 且版本大于等于 <code>2.6</code>, <code>Ubuntu</code> 等资产默认不允许 <code>root</code> 用户远程 <code>ssh</code> 登录, 请自行处理, <code>Windows</code> 资产需要手动安装 <code>OpenSSH Server</code></li>
+<li>如果资产不能正常连接, 请检查 特权用户 的 <code>用户名</code> 和 <code>密码</code> 是否正确以及该 <code>特权用户</code> 是否能使用 <code>SSH</code> 从 <code>JumpServer</code> 主机正确登录到资产主机上</li>
+</ol>
+<h4 id="1-3-1-创建数据库应用"><a href="#1-3-1-创建数据库应用" class="headerlink" title="1.3.1 创建数据库应用"></a>1.3.1 创建数据库应用</h4><blockquote>
+<p><strong>击页面左侧的</strong> <code>应用管理</code> <strong>-</strong> <code>数据库应用</code> <strong>-</strong> <code>创建数据库应用</code> <strong>创建 mysql 数据库</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">表单</th>
+<th align="left">MySQL 资产示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">名称</td>
+<td align="left">test_mysql01</td>
+</tr>
+<tr>
+<td align="left">类型</td>
+<td align="left">MySQL</td>
+</tr>
+<tr>
+<td align="left">主机</td>
+<td align="left">172.16.80.31</td>
+</tr>
+<tr>
+<td align="left">端口</td>
+<td align="left">3306</td>
+</tr>
+<tr>
+<td align="left">数据库</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">备注</td>
+<td align="left">MySQL 资产</td>
+</tr>
+</tbody></table>
+<p><strong>数据库 选项可以留空, 如果是某些特定用户, 只允许访问指定的数据库, 这里指定数据库名称即可。</strong></p>
+<h3 id="1-4-创建系统用户"><a href="#1-4-创建系统用户" class="headerlink" title="1.4 创建系统用户"></a>1.4 创建系统用户</h3><table>
+<thead>
+<tr>
+<th align="left">IP</th>
+<th align="left">System</th>
+<th align="left">System User</th>
+<th align="left">Password</th>
+<th align="left">Group</th>
+<th align="left">Sudo</th>
+<th align="left">Sftp Root</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">172.16.80.11</td>
+<td align="left">Centos 7</td>
+<td align="left">testssh01</td>
+<td align="left">random pass</td>
+<td align="left"></td>
+<td align="left">ALL</td>
+<td align="left">/</td>
+</tr>
+<tr>
+<td align="left">172.16.80.21</td>
+<td align="left">Windows 10</td>
+<td align="left">testrdp01</td>
+<td align="left">random pass</td>
+<td align="left">Users</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">172.16.80.23</td>
+<td align="left">MySQL 5</td>
+<td align="left">root</td>
+<td align="left">Test2020.M</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<p><strong>系统用户提示</strong></p>
+<ol>
+<li>在理解 <code>系统用户</code> 之前, 你首先得知道系统用户是干嘛用的. 在 <code>Jumpserver</code> 中, 需要对资产不同的用途创建不同的 <code>系统用户</code></li>
+<li>比如一个 <code>资产</code>, 开发要用、测试要用、可能还要其他的部门也要使用, 偷懒的人可能会统一给 <code>root</code> 用户, 但是这样并不安全</li>
+<li>系统用户就是为了解决这个问题, 我们针对不同的用途创建不同的 <code>系统用户</code>, <code>Linux</code> 通过 <code>Sudo</code> 来控制用户的权限, <code>Windows</code> 通过组来控制用户权限</li>
+</ol>
+<p><strong>点击页面左侧的</strong> <code>资产管理</code> <strong>-</strong> <code>系统用户</code> <strong>-</strong> <code>创建普通用户</code> <strong>创建对应协议系统用户</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">表单</th>
+<th align="left">SSH 系统用户</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">名称</td>
+<td align="left">test_ssh01_测试系统用户</td>
+</tr>
+<tr>
+<td align="left">协议</td>
+<td align="left">ssh</td>
+</tr>
+<tr>
+<td align="left">用户名</td>
+<td align="left">testssh01</td>
+</tr>
+<tr>
+<td align="left">动态用户名</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">登录模式</td>
+<td align="left">自动登陆</td>
+</tr>
+<tr>
+<td align="left">认证方式</td>
+<td align="left">托管密码</td>
+</tr>
+<tr>
+<td align="left">自动生成</td>
+<td align="left">√</td>
+</tr>
+<tr>
+<td align="left">自动推送</td>
+<td align="left">√</td>
+</tr>
+<tr>
+<td align="left">Sudo</td>
+<td align="left">ALL</td>
+</tr>
+<tr>
+<td align="left">Shell</td>
+<td align="left">/bin/bash</td>
+</tr>
+<tr>
+<td align="left">家目录</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">用户附属组</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">命令过滤器</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">SFTP根路径</td>
+<td align="left">/</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">表单</th>
+<th align="left">RDP 系统用户</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">名称</td>
+<td align="left">test_rdp01_测试系统用户</td>
+</tr>
+<tr>
+<td align="left">协议</td>
+<td align="left">rdp</td>
+</tr>
+<tr>
+<td align="left">用户名</td>
+<td align="left">testssh01</td>
+</tr>
+<tr>
+<td align="left">动态用户名</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">认证方式</td>
+<td align="left">托管密码</td>
+</tr>
+<tr>
+<td align="left">自动生成</td>
+<td align="left">√</td>
+</tr>
+<tr>
+<td align="left">自动推送</td>
+<td align="left">√</td>
+</tr>
+<tr>
+<td align="left">AD域名</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">自动推送</td>
+<td align="left">√</td>
+</tr>
+<tr>
+<td align="left">用户附属组</td>
+<td align="left">Users</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">表单</th>
+<th align="left">MySQL 系统用户</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">名称</td>
+<td align="left">test_mysql01_测试系统用户</td>
+</tr>
+<tr>
+<td align="left">认证方式</td>
+<td align="left">托管密码</td>
+</tr>
+<tr>
+<td align="left">用户名</td>
+<td align="left">root</td>
+</tr>
+<tr>
+<td align="left">协议</td>
+<td align="left">mysql</td>
+</tr>
+<tr>
+<td align="left">密码</td>
+<td align="left">Test2020.M</td>
+</tr>
+</tbody></table>
+<h2 id="创建授权规则"><a href="#创建授权规则" class="headerlink" title="创建授权规则"></a>创建授权规则</h2><h3 id="1-1-为用户分配资产"><a href="#1-1-为用户分配资产" class="headerlink" title="1.1 为用户分配资产"></a>1.1 为用户分配资产</h3><table>
+<thead>
+<tr>
+<th align="left">IP</th>
+<th align="left">System</th>
+<th align="left">System User</th>
+<th align="left">User</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">172.16.80.11</td>
+<td align="left">Centos 7</td>
+<td align="left">testssh01</td>
+<td align="left">admin</td>
+</tr>
+<tr>
+<td align="left">172.16.80.21</td>
+<td align="left">Windows 10</td>
+<td align="left">testrdp01</td>
+<td align="left">admin</td>
+</tr>
+<tr>
+<td align="left">172.16.80.31</td>
+<td align="left">MySQL 5</td>
+<td align="left">root</td>
+<td align="left">admin</td>
+</tr>
+</tbody></table>
+<p><strong>点击页面左侧的</strong> <code>授权管理</code> <strong>-</strong> <code>资产授权</code> <strong>-</strong> <code>创建授权规则</code> <strong>创建两个授权</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">表单</th>
+<th align="left">SSH 资产授权</th>
+<th align="left">RDP 资产授权</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">名称</td>
+<td align="left">test_ssh01_测试授权</td>
+<td align="left">test_rdp01_测试授权</td>
+</tr>
+<tr>
+<td align="left">用户</td>
+<td align="left">Administrator(admin)</td>
+<td align="left">Administrator(admin)</td>
+</tr>
+<tr>
+<td align="left">用户组</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">资产</td>
+<td align="left">test_ssh01(172.16.80.11)</td>
+<td align="left">test_rdp01(172.16.80.21)</td>
+</tr>
+<tr>
+<td align="left">节点</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">系统用户</td>
+<td align="left">test_ssh01_测试系统用户(testssh01)</td>
+<td align="left">test_rdp01_测试系统用户(testrdp01)</td>
+</tr>
+<tr>
+<td align="left">权限</td>
+<td align="left">√ 全部</td>
+<td align="left">√ 全部</td>
+</tr>
+</tbody></table>
+<p><strong>资产授权提示</strong></p>
+<ol>
+<li>名称, 授权的名称, 不能重复</li>
+<li>用户 和 用户组 二选一, 不推荐即选择 用户 又选择 用户组</li>
+<li>资产 和 节点 二选一, 选择 节点 会包含 节点 下面的所有 资产</li>
+<li>系统用户, 及所选的 用户 或 用户组 下的 用户 能通过该 系统用户 使用所选 节点 或者 节点 下的 资产<br>用户(组), 资产(节点), 系统用户 是一对一的关系, 所以当拥有 Linux、Windows 不同类型资产时, 应该分别给 Linux 资产和 Windows 资产创建 授权规则</li>
+<li>一般情况下, 资产授权给用户, 节点授权给用户组, 一个授权只能选择一个系统用户</li>
+</ol>
+<h3 id="1-2-为用户分配数据库应用"><a href="#1-2-为用户分配数据库应用" class="headerlink" title="1.2 为用户分配数据库应用"></a>1.2 为用户分配数据库应用</h3><p><strong>点击页面左侧的</strong> <code>授权管理</code> <strong>-</strong> <code>数据库应用</code> <strong>-</strong> <code>创建授权规则</code> <strong>创建数据库授权</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">表单</th>
+<th align="left">MySQL 资产授权</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">名称</td>
+<td align="left">test_mysql01_测试授权</td>
+</tr>
+<tr>
+<td align="left">用户</td>
+<td align="left">Administrator(admin)</td>
+</tr>
+<tr>
+<td align="left">用户组</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">数据库应用</td>
+<td align="left">test_mysql01</td>
+</tr>
+<tr>
+<td align="left">系统用户</td>
+<td align="left">test_mysql01_测试系统用户(root)</td>
+</tr>
+</tbody></table>
+<h2 id="用户登录"><a href="#用户登录" class="headerlink" title="用户登录"></a>用户登录</h2><p><strong>登录 JumpServer</strong></p>
+<p>点击页面左侧的 <code>会话管理</code> - <code>Web终端</code> 用户只能看到自己被管理员授权了的 <code>资产</code> , 如果登录后无资产, 请联系管理员进行确认。</p>
+<p><strong>连接资产</strong></p>
+<ol>
+<li>在我的资产点击资产右边的 <code>连接</code> 快速连接资产</li>
+<li>也可以点击左侧栏的 <code>Web终端</code> 点击 <code>资产</code> 名字, 就连上资产了</li>
+<li>如果显示连接 <code>超时</code>, 请参考 <code>FAQ</code> 文档进行处理</li>
+</ol>
+<p><strong>断开资产</strong></p>
+<ol>
+<li>点击页面顶部的 <code>Server</code> 按钮会弹出选个选项, 第一个断开所选的连接, 第二个断开所有连接</li>
+<li>也可以直接点资产小窗口的 X , <code>SSH</code> 会话也可以输入 <code>exit</code> 来退出</li>
+<li>直接关闭页面也可以, 但是不推荐</li>
+</ol>
+<p><strong>文件管理</strong></p>
+<ol>
+<li>点击 <code>文件管理</code></li>
+<li>先在左边选择<code>资产</code>, 目前只支持自动登录的 <code>SSH</code> 协议 <code>资产</code></li>
+<li>也可以使用 <code>sftp</code> 方式进行 <code>文件管理</code></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+      </div>
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/07/23/%E8%87%AA%E5%BB%BAES%E9%9B%86%E7%BE%A4CVM-IO%E9%97%AE%E9%A2%98/" rel="prev" title="自建ES集群CVM IO问题">
+      <i class="fa fa-chevron-left"></i> 自建ES集群CVM IO问题
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Jumpserver%E5%A0%A1%E5%9E%92%E6%9C%BA"><span class="nav-text">Jumpserver堡垒机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E5%B1%95%E7%A4%BA"><span class="nav-text">页面展示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E8%89%B2%E4%BC%98%E5%8A%BF"><span class="nav-text">特色优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E5%88%97%E8%A1%A8"><span class="nav-text">功能列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E5%BB%BA%E8%AE%AE"><span class="nav-text">安全建议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F"><span class="nav-text">安装方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2"><span class="nav-text">自动部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E5%8A%A8%E9%83%A8%E7%BD%B2"><span class="nav-text">手动部署</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE"><span class="nav-text">系统设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE"><span class="nav-text">1.1 基本设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E9%82%AE%E4%BB%B6%E8%AE%BE%E7%BD%AE"><span class="nav-text">1.2 邮件设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%84%E4%BA%A7%E7%AE%A1%E7%90%86"><span class="nav-text">资产管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E7%BC%96%E8%BE%91%E8%B5%84%E4%BA%A7%E6%A0%91"><span class="nav-text">1.1 编辑资产树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%88%9B%E5%BB%BA%E7%89%B9%E6%9D%83%E7%94%A8%E6%88%B7"><span class="nav-text">1.2 创建特权用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E5%88%9B%E5%BB%BA%E8%B5%84%E4%BA%A7"><span class="nav-text">1.3 创建资产</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1-%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8"><span class="nav-text">1.3.1 创建数据库应用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E5%88%9B%E5%BB%BA%E7%B3%BB%E7%BB%9F%E7%94%A8%E6%88%B7"><span class="nav-text">1.4 创建系统用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%8E%88%E6%9D%83%E8%A7%84%E5%88%99"><span class="nav-text">创建授权规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E4%B8%BA%E7%94%A8%E6%88%B7%E5%88%86%E9%85%8D%E8%B5%84%E4%BA%A7"><span class="nav-text">1.1 为用户分配资产</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E4%B8%BA%E7%94%A8%E6%88%B7%E5%88%86%E9%85%8D%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8"><span class="nav-text">1.2 为用户分配数据库应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95"><span class="nav-text">用户登录</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Armin"
+      src="/uploads/armin.png">
+  <p class="site-author-name" itemprop="name">Armin</p>
+  <div class="site-description" itemprop="description">记录生活中的点点滴滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/" title="GitHub → https:&#x2F;&#x2F;github.com" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://aws.amazon.com/cn/" title="AWS → https:&#x2F;&#x2F;aws.amazon.com&#x2F;cn&#x2F;" rel="noopener" target="_blank"><i class="fab fa-aws fa-fw"></i>AWS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.processon.com/" title="processon → https:&#x2F;&#x2F;www.processon.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-accusoft fa-fw"></i>processon</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cn-ki.net/" title="知识库 → https:&#x2F;&#x2F;www.cn-ki.net&#x2F;" rel="noopener" target="_blank"><i class="fas fa-book-open fa-fw"></i>知识库</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tophub.today/" title="看新闻 → https:&#x2F;&#x2F;tophub.today&#x2F;" rel="noopener" target="_blank"><i class="far fa-newspaper fa-fw"></i>看新闻</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://m.zxjsq.net/" title="计算器 → http:&#x2F;&#x2F;m.zxjsq.net" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计算器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://shijisuishu.bmcx.com/20010314__shijisuishu/" title="计龄器 → https:&#x2F;&#x2F;shijisuishu.bmcx.com&#x2F;20010314__shijisuishu&#x2F;" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计龄器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tool.oschina.net/hexconvert" title="进制转换 → https:&#x2F;&#x2F;tool.oschina.net&#x2F;hexconvert" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>进制转换</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.sojson.com/convert/subnetmask.html" title="子网计算 → https:&#x2F;&#x2F;www.sojson.com&#x2F;convert&#x2F;subnetmask.html" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>子网计算</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.baidu.com/" title="百度一下 → https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank"><i class="fas fa-search fa-fw"></i>百度一下</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Armin</span>
+</div>
+
+<div class="powered-by">
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
