@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid0pw1s9j30ve0aggm4.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid0mckvyj31bu0acjs3.jpg">
 <meta property="article:published_time" content="2021-07-13T01:29:33.000Z">
-<meta property="article:modified_time" content="2021-07-13T13:36:05.049Z">
+<meta property="article:modified_time" content="2021-07-27T08:22:55.941Z">
 <meta property="article:author" content="Armin">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gricvz2ha1j30g70get9v.jpg">
@@ -571,7 +571,10 @@
 </li>
 </ul>
 </blockquote>
-<h2 id="测试-continue、break、exit-语句的不同点"><a href="#测试-continue、break、exit-语句的不同点" class="headerlink" title="测试 continue、break、exit 语句的不同点"></a>测试 continue、break、exit 语句的不同点</h2><ul>
+<h2 id="测试-continue、break、exit-语句的不同点"><a href="#测试-continue、break、exit-语句的不同点" class="headerlink" title="测试 continue、break、exit 语句的不同点"></a>测试 continue、break、exit 语句的不同点</h2><blockquote>
+<p>break是立马跳出循环；continue是跳出当前条件循环，继续下一轮条件循环；exit是直接退出整个脚本</p>
+</blockquote>
+<ul>
 <li>代码如下</li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@lemon ~]<span class="comment"># vim test.sh</span></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> &#123;1..5&#125;;<span class="keyword">do</span></span><br><span class="line">    <span class="keyword">if</span> [ <span class="variable">$i</span> -eq 3 ];<span class="keyword">then</span></span><br><span class="line">       <span class="variable">$1</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$i</span>&quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;循环体外命令&quot;</span></span><br></pre></td></tr></table></figure>
