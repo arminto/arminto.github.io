@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid5gwp8kj310c0fsjsv.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid5k4oxyj616w0cln0w02.jpg">
 <meta property="article:published_time" content="2021-08-02T10:45:28.000Z">
-<meta property="article:modified_time" content="2021-08-02T10:53:28.233Z">
+<meta property="article:modified_time" content="2021-08-02T10:59:05.601Z">
 <meta property="article:author" content="Armin">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid4v3vwjj30s60gy0v5.jpg">
@@ -219,8 +219,8 @@
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grid5d4htkj30xc05agm3.jpg" alt="image-20200625144100710"></p>
 <h2 id="HTTP协议概念"><a href="#HTTP协议概念" class="headerlink" title="HTTP协议概念"></a>HTTP协议概念</h2><blockquote>
 <p>HTTP是超文本传输协议，其定义了客户端与服务器端之间文本传输的规范。HTTP默认使用80端口，这个端口指的是服务端的端口，而客户端使用的端口是动态分配的。当我们没有指定端口访问时，浏览器会默认帮我们添加80端口。我们也可以自己指定访问端口如：<a href="http://www.ip.com:80。">http://www.ip.com:80。</a> </p>
-<p>需要注意的是，现在大多数访问都使用了HTTPS协议，而HTTPS的默认端口为443，如果使用80端口访问HTTPS协议的服务器可能会被拒绝。</p>
 </blockquote>
+<p>需要注意的是，现在大多数访问都使用了HTTPS协议，而HTTPS的默认端口为443，如果使用80端口访问HTTPS协议的服务器可能会被拒绝。</p>
 <h3 id="1-HTTP协议简介"><a href="#1-HTTP协议简介" class="headerlink" title="1. HTTP协议简介"></a>1. HTTP协议简介</h3><ol>
 <li><p>HTTP协议的核心功能是传输Web服务器上的HTML 页面及其他文件；可以理解HTTP协议就是做业务的。</p>
 </li>
@@ -235,9 +235,8 @@
 </ol>
 <h3 id="2-HTTP请求的方法"><a href="#2-HTTP请求的方法" class="headerlink" title="2. HTTP请求的方法"></a>2. HTTP请求的方法</h3><blockquote>
 <p>根据 HTTP 标准，HTTP 请求可以使用多种请求方法。</p>
-<p>HTTP1.0 定义了三种请求方法： GET, POST 和 HEAD方法。</p>
-<p>HTTP1.1 新增了六种请求方法：OPTIONS、PUT、PATCH、DELETE、TRACE 和 CONNECT 方法。</p>
 </blockquote>
+<p>HTTP1.0 定义了三种请求方法： GET, POST 和 HEAD方法。<br>HTTP1.1 新增了六种请求方法：OPTIONS、PUT、PATCH、DELETE、TRACE 和 CONNECT 方法。</p>
 <table>
 <thead>
 <tr>
@@ -338,9 +337,11 @@
 <td>客户应该在Authorization头中提供什么类型的授权信息？在包含401（Unauthorized）状态行的应答中这个头是必需的。例如，response.setHeader(“WWW-Authenticate”, “BASIC realm=＼”executives＼””)。  注意Servlet一般不进行这方面的处理，而是让Web服务器的专门机制来控制受密码保护页面的访问（例如.htaccess）。</td>
 </tr>
 </tbody></table>
-<h3 id="4-HTTP状态代码"><a href="#4-HTTP状态代码" class="headerlink" title="4. HTTP状态代码"></a>4. HTTP状态代码</h3><p>当浏览者访问一个网页时，浏览者的浏览器会向网页所在服务器发出请求。当浏览器接收并显示网页前，此网页所在的服务器会返回一个包含HTTP状态码的信息头（server header）用以响应浏览器的请求。</p>
-<p>HTTP状态码由三个十进制数字组成，第一个十进制数字定义了状态码的类型，后两个数字没有分类的作用。HTTP状态码共分为5种类型：1xx   2xx   3xx   4xx   5xx 。</p>
+<h3 id="4-HTTP状态代码"><a href="#4-HTTP状态代码" class="headerlink" title="4. HTTP状态代码"></a>4. HTTP状态代码</h3><blockquote>
 <p>HTTP状态码的英文为HTTP Status Code。</p>
+</blockquote>
+<p>当浏览者访问一个网页时，浏览者的浏览器会向网页所在服务器发出请求。当浏览器接收并显示网页前，此网页所在的服务器会返回一个包含HTTP状态码的信息头（server header）用以响应浏览器的请求。</p>
+<p>HTTP状态码由三个十进制数字组成，第一个十进制数字定义了状态码的类型，后两个数字没有分类的作用。HTTP状态码共分为5种类型：1xx   2xx   3xx   4xx   5xx 。</p>
 <p><strong>下面是最常见的HTTP状态码：</strong></p>
 <ul>
 <li><p>200        服务器成功返回内容</p>
@@ -369,8 +370,8 @@
 <h3 id="5-HTTP-content-type"><a href="#5-HTTP-content-type" class="headerlink" title="5. HTTP  content-type"></a>5. HTTP  content-type</h3><p><strong>简介</strong></p>
 <blockquote>
 <p>Content-Type（内容类型），一般是指网页中存在的 Content-Type，用于定义网络文件的类型和网页的编码，决定浏览器将以什么形式、什么编码读取这个文件，这就是经常看到一些 PHP 网页点击的结果却是下载一个文件或一张图片的原因。</p>
-<p>Content-Type 标头告诉客户端实际返回的内容的内容类型。</p>
 </blockquote>
+<p><strong>Content-Type 标头告诉客户端实际返回的内容的内容类型。</strong></p>
 <p><strong>语法</strong></p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>text/html; charset=utf-8</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>multipart/form-data; boundary=something</span><br></pre></td></tr></table></figure>
 
