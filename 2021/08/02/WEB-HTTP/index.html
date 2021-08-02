@@ -33,8 +33,9 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid5ac1r9j30xc05aaai.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid5d4htkj30xc05agm3.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid5gwp8kj310c0fsjsv.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid5k4oxyj616w0cln0w02.jpg">
 <meta property="article:published_time" content="2021-08-02T10:45:28.000Z">
-<meta property="article:modified_time" content="2021-08-02T10:46:35.811Z">
+<meta property="article:modified_time" content="2021-08-02T10:53:28.233Z">
 <meta property="article:author" content="Armin">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid4v3vwjj30s60gy0v5.jpg">
@@ -365,6 +366,40 @@
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grid5gwp8kj310c0fsjsv.jpg" alt="image-20200625162413480"></p>
 <p><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/http/http-status-codes.html">其他的一些HTTP状态码</a></strong></p>
+<h3 id="5-HTTP-content-type"><a href="#5-HTTP-content-type" class="headerlink" title="5. HTTP  content-type"></a>5. HTTP  content-type</h3><p><strong>简介</strong></p>
+<blockquote>
+<p>Content-Type（内容类型），一般是指网页中存在的 Content-Type，用于定义网络文件的类型和网页的编码，决定浏览器将以什么形式、什么编码读取这个文件，这就是经常看到一些 PHP 网页点击的结果却是下载一个文件或一张图片的原因。</p>
+<p>Content-Type 标头告诉客户端实际返回的内容的内容类型。</p>
+</blockquote>
+<p><strong>语法</strong></p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>text/html; charset=utf-8</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>multipart/form-data; boundary=something</span><br></pre></td></tr></table></figure>
+
+<p><strong>实例</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grid5k4oxyj616w0cln0w02.jpg" alt="image-20200625160438655"></p>
+<p><strong>常见的媒体格式类型如下</strong></p>
+<ul>
+<li>text/html ： HTML格式</li>
+<li>text/plain ：纯文本格式</li>
+<li>text/xml ： XML格式</li>
+<li>image/gif ：gif图片格式</li>
+<li>image/jpeg ：jpg图片格式</li>
+<li>image/png：png图片格式</li>
+</ul>
+<p><strong>以application开头的媒体格式类型</strong></p>
+<ul>
+<li>application/xhtml+xml ：XHTML格式</li>
+<li>application/xml： XML数据格式</li>
+<li>application/atom+xml ：Atom XML聚合格式</li>
+<li>application/json： JSON数据格式</li>
+<li>application/pdf：pdf格式</li>
+<li>application/msword ： Word文档格式</li>
+<li>application/octet-stream ： 二进制流数据（如常见的文件下载）</li>
+</ul>
+<p><strong>常见的媒体格式是上传文件之时使用的</strong></p>
+<ul>
+<li>multipart/form-data ： 需要在表单中进行文件上传时，就需要使用该格式</li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/http/http-content-type.html">更加详细的HTTP  content-type 对照表</a></strong></p>
 
     </div>
 
@@ -453,7 +488,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WEB-amp-HTTP"><span class="nav-text">WEB &amp; HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#WEB-%E7%BD%91%E7%AB%99"><span class="nav-text">WEB 网站</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Web%E7%BD%91%E7%AB%99%E5%B8%B8%E8%AF%86"><span class="nav-text">1. Web网站常识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-URL%E7%9A%84%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="nav-text">2. URL的组成部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-%E5%8D%8F%E8%AE%AE-Protocol"><span class="nav-text">2.1 协议(Protocol)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-%E5%9F%9F%E5%90%8D-Domain"><span class="nav-text">2.2 域名(Domain)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-%E7%AB%AF%E5%8F%A3-Port"><span class="nav-text">2.3 端口(Port)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-URL%E6%96%87%E4%BB%B6%E8%B5%84%E6%BA%90"><span class="nav-text">2.4 URL文件资源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-%E5%8F%82%E6%95%B0-query"><span class="nav-text">2.5 参数(query)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-%E7%89%87%E6%AE%B5-fragment"><span class="nav-text">2.6 片段(fragment)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E5%8D%8F%E8%AE%AE%E6%A6%82%E5%BF%B5"><span class="nav-text">HTTP协议概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-HTTP%E5%8D%8F%E8%AE%AE%E7%AE%80%E4%BB%8B"><span class="nav-text">1. HTTP协议简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-HTTP%E8%AF%B7%E6%B1%82%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-text">2. HTTP请求的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-HTTP%E5%93%8D%E5%BA%94%E5%A4%B4%E4%BF%A1%E6%81%AF"><span class="nav-text">3. HTTP响应头信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-HTTP%E7%8A%B6%E6%80%81%E4%BB%A3%E7%A0%81"><span class="nav-text">4. HTTP状态代码</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WEB-amp-HTTP"><span class="nav-text">WEB &amp; HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#WEB-%E7%BD%91%E7%AB%99"><span class="nav-text">WEB 网站</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Web%E7%BD%91%E7%AB%99%E5%B8%B8%E8%AF%86"><span class="nav-text">1. Web网站常识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-URL%E7%9A%84%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="nav-text">2. URL的组成部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-%E5%8D%8F%E8%AE%AE-Protocol"><span class="nav-text">2.1 协议(Protocol)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-%E5%9F%9F%E5%90%8D-Domain"><span class="nav-text">2.2 域名(Domain)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-%E7%AB%AF%E5%8F%A3-Port"><span class="nav-text">2.3 端口(Port)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-URL%E6%96%87%E4%BB%B6%E8%B5%84%E6%BA%90"><span class="nav-text">2.4 URL文件资源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-%E5%8F%82%E6%95%B0-query"><span class="nav-text">2.5 参数(query)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-%E7%89%87%E6%AE%B5-fragment"><span class="nav-text">2.6 片段(fragment)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E5%8D%8F%E8%AE%AE%E6%A6%82%E5%BF%B5"><span class="nav-text">HTTP协议概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-HTTP%E5%8D%8F%E8%AE%AE%E7%AE%80%E4%BB%8B"><span class="nav-text">1. HTTP协议简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-HTTP%E8%AF%B7%E6%B1%82%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-text">2. HTTP请求的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-HTTP%E5%93%8D%E5%BA%94%E5%A4%B4%E4%BF%A1%E6%81%AF"><span class="nav-text">3. HTTP响应头信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-HTTP%E7%8A%B6%E6%80%81%E4%BB%A3%E7%A0%81"><span class="nav-text">4. HTTP状态代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-HTTP-content-type"><span class="nav-text">5. HTTP  content-type</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -468,7 +503,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

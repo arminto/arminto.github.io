@@ -25,15 +25,6 @@
 <meta property="og:url" content="http://example.com/2021/06/15/Nginx/index.html">
 <meta property="og:site_name" content="LEMON">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid4v3vwjj30s60gy0v5.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid4zznyxj30xc05adg0.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid52dbu7j30xc05a74o.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid557adcj30xc05awen.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid57z03ej30xc05aaaj.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid5ac1r9j30xc05aaai.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid5d4htkj30xc05agm3.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid5gwp8kj310c0fsjsv.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid5k4oxyj616w0cln0w02.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid5nw02tj31c90sun3v.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid694kv0j30rb0kodhn.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid6bwqcmj31540lf0w7.jpg">
@@ -74,10 +65,10 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7szpo4npj31gf0s077e.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gr7szvbsb9j31gf0rx77c.jpg">
 <meta property="article:published_time" content="2021-06-14T19:04:45.000Z">
-<meta property="article:modified_time" content="2021-07-13T13:24:03.280Z">
+<meta property="article:modified_time" content="2021-08-02T10:52:09.408Z">
 <meta property="article:author" content="Armin">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid4v3vwjj30s60gy0v5.jpg">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNly1grid5nw02tj31c90sun3v.jpg">
 
 <link rel="canonical" href="http://example.com/2021/06/15/Nginx/">
 
@@ -231,206 +222,6 @@
         <!--toc-->
 <span id="more"></span>
 
-<h1 id="Web网站概念"><a href="#Web网站概念" class="headerlink" title="Web网站概念"></a>Web网站概念</h1><h2 id="1-Web网站常识"><a href="#1-Web网站常识" class="headerlink" title="1. Web网站常识"></a>1. Web网站常识</h2><ol>
-<li><p>域名：域名是一个IP地址的“面具” ，目的是便于记忆和访问一个或一组服务器的地址（网站，电子邮件，FTP等）。</p>
-</li>
-<li><p>域名解析：本地HOSTS解析、DNS服务器解析</p>
-</li>
-<li><p>网站的基本概念：网站、网页、主页；HTTP、URL、HTML、超链接</p>
-</li>
-<li><p>web网站：有web1.0（以编辑为特征）和web2.0（侧重用户交互）</p>
-</li>
-<li><p>动态页面与静态页面的差别, 静态页面内容几乎是固定的, 而动态页面的内容会因用户、浏览器、时间等而发生变化</p>
-</li>
-</ol>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grid4v3vwjj30s60gy0v5.jpg" alt="image-20200625141505969"></p>
-<h2 id="2-URL的组成部分"><a href="#2-URL的组成部分" class="headerlink" title="2. URL的组成部分"></a>2. URL的组成部分</h2><h3 id="2-1-协议-Protocol"><a href="#2-1-协议-Protocol" class="headerlink" title="2.1 协议(Protocol)"></a>2.1 协议(Protocol)</h3><p><em><strong>http://</strong></em> 为协议名, 标明了请求需要使用的协议, 通常使用的就是HTTP协议 或 安全协议 HTTPS。</p>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grid4zznyxj30xc05adg0.jpg" alt="image-20200625143705588"></p>
-<h3 id="2-2-域名-Domain"><a href="#2-2-域名-Domain" class="headerlink" title="2.2 域名(Domain)"></a>2.2 域名(Domain)</h3><p><em><strong><a target="_blank" rel="noopener" href="http://www.example.com/">www.example.com</a></strong></em> 为域名, 标明了需要请求的服务器的地址。</p>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grid52dbu7j30xc05a74o.jpg" alt="image-20200625143903439"></p>
-<h3 id="2-3-端口-Port"><a href="#2-3-端口-Port" class="headerlink" title="2.3 端口(Port)"></a>2.3 端口(Port)</h3><p><em><strong>:80</strong></em> 是端口号, 标明了获取服务器资源的入口, 端口号用于区分服务的端口, 一台拥有公网IP的服务器可以提供许多服务, 比如Web服务、FTP服务、SMTP服务等;  服务器的资源是通过“IP地址+端口号”来区分不同的服务,  如果把服务器比作房子,  端口号就可以看做是通向不同服务的门。</p>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grid557adcj30xc05awen.jpg" alt="image-20200625143922623"></p>
-<h3 id="2-4-URL文件资源"><a href="#2-4-URL文件资源" class="headerlink" title="2.4 URL文件资源"></a>2.4 URL文件资源</h3><p><em><strong>/path/to/myfile.html</strong></em> 表示服务器上资源的路径, 过去这样的路径标记的是服务器上文件的物理路径, 但是现在路径表示的只是一个抽象地址, 并不指代任何物理地址。</p>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grid57z03ej30xc05aaaj.jpg" alt="image-20200625144036536"></p>
-<h3 id="2-5-参数-query"><a href="#2-5-参数-query" class="headerlink" title="2.5 参数(query)"></a>2.5 参数(query)</h3><p><em><strong>?key1=value1&amp;key2=value2</strong></em> 是请求里提供的额外参数, 这些参数是以键值对的形式,通过<code>&amp;</code>符号分隔开来,服务器可以通过这些参数进行相应的个性化处理。</p>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grid5ac1r9j30xc05aaai.jpg" alt="image-20200625144053593"></p>
-<h3 id="2-6-片段-fragment"><a href="#2-6-片段-fragment" class="headerlink" title="2.6 片段(fragment)"></a>2.6 片段(fragment)</h3><p><em><strong>#SomewhereInTheDocument</strong></em> 是对资源的部分补充, <code>fragment</code>可以理解为资源内部的<code>书签</code>, 用来想服务器指明展示的内容所在的<code>书签</code>的点; 例如对于<code>HTML</code>文件来说, 浏览器会滚动到特定的或者上次浏览过的位置.对于音频或者视频资源来说,浏览器又会跳转到对应的时间节点。</p>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grid5d4htkj30xc05agm3.jpg" alt="image-20200625144100710"></p>
-<h1 id="HTTP协议概念"><a href="#HTTP协议概念" class="headerlink" title="HTTP协议概念"></a>HTTP协议概念</h1><blockquote>
-<p>HTTP是超文本传输协议，其定义了客户端与服务器端之间文本传输的规范。HTTP默认使用80端口，这个端口指的是服务端的端口，而客户端使用的端口是动态分配的。当我们没有指定端口访问时，浏览器会默认帮我们添加80端口。我们也可以自己指定访问端口如：<a href="http://www.ip.com:80。">http://www.ip.com:80。</a> </p>
-<p>需要注意的是，现在大多数访问都使用了HTTPS协议，而HTTPS的默认端口为443，如果使用80端口访问HTTPS协议的服务器可能会被拒绝。</p>
-</blockquote>
-<h2 id="1-HTTP协议简介"><a href="#1-HTTP协议简介" class="headerlink" title="1. HTTP协议简介"></a>1. HTTP协议简介</h2><ol>
-<li><p>HTTP协议的核心功能是传输Web服务器上的HTML 页面及其他文件；可以理解HTTP协议就是做业务的。</p>
-</li>
-<li><p>HTTP协议版本 http0.9（已过时）、http1.0和http1.1（目前广泛使用）、http2.0（未普及）</p>
-</li>
-<li><p>HTTP协议有多种获得 Web 资源的方法，最为常见的就是GET和POST及方法</p>
-</li>
-<li><p>HTTP请求会有很多的状态码，常看到的有：200、301、404、500等等</p>
-</li>
-<li><p>HTTP报文格式，一个完整的http访问包含请求（request）和响应（response）</p>
-</li>
-</ol>
-<h2 id="2-HTTP请求的方法"><a href="#2-HTTP请求的方法" class="headerlink" title="2. HTTP请求的方法"></a>2. HTTP请求的方法</h2><blockquote>
-<p>根据 HTTP 标准，HTTP 请求可以使用多种请求方法。</p>
-<p>HTTP1.0 定义了三种请求方法： GET, POST 和 HEAD方法。</p>
-<p>HTTP1.1 新增了六种请求方法：OPTIONS、PUT、PATCH、DELETE、TRACE 和 CONNECT 方法。</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>GET</td>
-<td>请求指定的页面信息，并返回实体主体。</td>
-</tr>
-<tr>
-<td>HEAD</td>
-<td>类似于 GET 请求，只不过返回的响应中没有具体的内容，用于获取报头</td>
-</tr>
-<tr>
-<td>POST</td>
-<td>向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST 请求可能会导致新的资源的建立和/或已有资源的修改。</td>
-</tr>
-<tr>
-<td>PUT</td>
-<td>从客户端向服务器传送的数据取代指定的文档的内容。</td>
-</tr>
-<tr>
-<td>DELETE</td>
-<td>请求服务器删除指定的页面。</td>
-</tr>
-<tr>
-<td>CONNECT</td>
-<td>HTTP/1.1 协议中预留给能够将连接改为管道方式的代理服务器。</td>
-</tr>
-<tr>
-<td>OPTIONS</td>
-<td>允许客户端查看服务器的性能。</td>
-</tr>
-<tr>
-<td>TRACE</td>
-<td>回显服务器收到的请求，主要用于测试或诊断。</td>
-</tr>
-<tr>
-<td>PATCH</td>
-<td>是对 PUT 方法的补充，用来对已知资源进行局部更新 。</td>
-</tr>
-</tbody></table>
-<h2 id="3-HTTP响应头信息"><a href="#3-HTTP响应头信息" class="headerlink" title="3. HTTP响应头信息"></a>3. HTTP响应头信息</h2><table>
-<thead>
-<tr>
-<th>应答头</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Allow</td>
-<td>服务器支持哪些请求方法（如GET、POST等）。</td>
-</tr>
-<tr>
-<td>Content-Encoding</td>
-<td>文档的编码（Encode）方法。只有在解码之后才可以得到Content-Type头指定的内容类型。利用gzip压缩文档能够显著地减少HTML文档的下载时间。Java的GZIPOutputStream可以很方便地进行gzip压缩，但只有Unix上的Netscape和Windows上的IE 4、IE  5才支持它。因此，Servlet应该通过查看Accept-Encoding头（即request.getHeader(“Accept-Encoding”)）检查浏览器是否支持gzip，为支持gzip的浏览器返回经gzip压缩的HTML页面，为其他浏览器返回普通页面。</td>
-</tr>
-<tr>
-<td>Content-Length</td>
-<td>表示内容长度。只有当浏览器使用持久HTTP连接时才需要这个数据。如果你想要利用持久连接的优势，可以把输出文档写入  ByteArrayOutputStream，完成后查看其大小，然后把该值放入Content-Length头，最后通过byteArrayStream.writeTo(response.getOutputStream()发送内容。</td>
-</tr>
-<tr>
-<td>Content-Type</td>
-<td>表示后面的文档属于什么MIME类型。Servlet默认为text/plain，但通常需要显式地指定为text/html。由于经常要设置Content-Type，因此HttpServletResponse提供了一个专用的方法setContentType。</td>
-</tr>
-<tr>
-<td>Date</td>
-<td>当前的GMT时间。你可以用setDateHeader来设置这个头以避免转换时间格式的麻烦。</td>
-</tr>
-<tr>
-<td>Expires</td>
-<td>应该在什么时候认为文档已经过期，从而不再缓存它？</td>
-</tr>
-<tr>
-<td>Last-Modified</td>
-<td>文档的最后改动时间。客户可以通过If-Modified-Since请求头提供一个日期，该请求将被视为一个条件GET，只有改动时间迟于指定时间的文档才会返回，否则返回一个304（Not Modified）状态。Last-Modified也可用setDateHeader方法来设置。</td>
-</tr>
-<tr>
-<td>Location</td>
-<td>表示客户应当到哪里去提取文档。Location通常不是直接设置的，而是通过HttpServletResponse的sendRedirect方法，该方法同时设置状态代码为302。</td>
-</tr>
-<tr>
-<td>Refresh</td>
-<td>表示浏览器应该在多少时间之后刷新文档，以秒计。除了刷新当前文档之外，你还可以通过setHeader(“Refresh”, “5; URL=<a target="_blank" rel="noopener" href="http://host/path&quot;)%E8%AE%A9%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AF%BB%E5%8F%96%E6%8C%87%E5%AE%9A%E7%9A%84%E9%A1%B5%E9%9D%A2%E3%80%82">http://host/path&quot;)让浏览器读取指定的页面。</a>  注意这种功能通常是通过设置HTML页面HEAD区的＜META HTTP-EQUIV=”Refresh”  CONTENT=”5;URL=<a target="_blank" rel="noopener" href="http://host/path&quot;%EF%BC%9E%E5%AE%9E%E7%8E%B0%EF%BC%8C%E8%BF%99%E6%98%AF%E5%9B%A0%E4%B8%BA%EF%BC%8C%E8%87%AA%E5%8A%A8%E5%88%B7%E6%96%B0%E6%88%96%E9%87%8D%E5%AE%9A%E5%90%91%E5%AF%B9%E4%BA%8E%E9%82%A3%E4%BA%9B%E4%B8%8D%E8%83%BD%E4%BD%BF%E7%94%A8CGI%E6%88%96Servlet%E7%9A%84HTML%E7%BC%96%E5%86%99%E8%80%85%E5%8D%81%E5%88%86%E9%87%8D%E8%A6%81%E3%80%82%E4%BD%86%E6%98%AF%EF%BC%8C%E5%AF%B9%E4%BA%8EServlet%E6%9D%A5%E8%AF%B4%EF%BC%8C%E7%9B%B4%E6%8E%A5%E8%AE%BE%E7%BD%AERefresh%E5%A4%B4%E6%9B%B4%E5%8A%A0%E6%96%B9%E4%BE%BF%E3%80%82">http://host/path&quot;＞实现，这是因为，自动刷新或重定向对于那些不能使用CGI或Servlet的HTML编写者十分重要。但是，对于Servlet来说，直接设置Refresh头更加方便。</a>   注意Refresh的意义是”N秒之后刷新本页面或访问指定页面”，而不是”每隔N秒刷新本页面或访问指定页面”。因此，连续刷新要求每次都发送一个Refresh头，而发送204状态代码则可以阻止浏览器继续刷新，不管是使用Refresh头还是＜META HTTP-EQUIV=”Refresh” …＞。   注意Refresh头不属于HTTP 1.1正式规范的一部分，而是一个扩展，但Netscape和IE都支持它。</td>
-</tr>
-<tr>
-<td>Server</td>
-<td>服务器名字。Servlet一般不设置这个值，而是由Web服务器自己设置。</td>
-</tr>
-<tr>
-<td>Set-Cookie</td>
-<td>设置和页面关联的Cookie。Servlet不应使用response.setHeader(“Set-Cookie”, …)，而是应使用HttpServletResponse提供的专用方法addCookie。参见下文有关Cookie设置的讨论。</td>
-</tr>
-<tr>
-<td>WWW-Authenticate</td>
-<td>客户应该在Authorization头中提供什么类型的授权信息？在包含401（Unauthorized）状态行的应答中这个头是必需的。例如，response.setHeader(“WWW-Authenticate”, “BASIC realm=＼”executives＼””)。  注意Servlet一般不进行这方面的处理，而是让Web服务器的专门机制来控制受密码保护页面的访问（例如.htaccess）。</td>
-</tr>
-</tbody></table>
-<h2 id="4-HTTP状态代码"><a href="#4-HTTP状态代码" class="headerlink" title="4. HTTP状态代码"></a>4. HTTP状态代码</h2><blockquote>
-<p>HTTP状态码的英文为HTTP Status Code。</p>
-<p>HTTP状态码由三个十进制数字组成，第一个十进制数字定义了状态码的类型，后两个数字没有分类的作用。HTTP状态码共分为5种类型：1xx   2xx   3xx   4xx   5xx 。</p>
-<p>当用户访问一个网页时，浏览器会向网页所在服务器发出请求，当浏览器接收并显示网页前，此网页所在的服务器会返回一个包含HTTP状态码的信息头（server header）用以响应浏览器的请求。</p>
-</blockquote>
-<p><strong>下面是最常见的HTTP状态码：</strong></p>
-<blockquote>
-<p>200        服务器成功返回内容</p>
-<p>301/2     永久/临时重定向</p>
-<p>304        未修改 Not Modified</p>
-<p>307        重定向中保留原始数据</p>
-<p>404        请求的页面不存在</p>
-<p>413        请求实体太大，服务器拒绝处理当前请求</p>
-<p>500        服务器内部错误</p>
-<p>502        代理请求后端失败</p>
-<p>503        服务器暂时不可用</p>
-<p>504        请求成功，但是连接超时</p>
-</blockquote>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grid5gwp8kj310c0fsjsv.jpg" alt="image-20200625162413480"></p>
-<p><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/http/http-status-codes.html">其他的一些HTTP状态码</a></strong></p>
-<h2 id="5-HTTP-content-type"><a href="#5-HTTP-content-type" class="headerlink" title="5. HTTP  content-type"></a>5. HTTP  content-type</h2><p><strong>简介</strong></p>
-<blockquote>
-<p>Content-Type（内容类型），一般是指网页中存在的 Content-Type，用于定义网络文件的类型和网页的编码，决定浏览器将以什么形式、什么编码读取这个文件，这就是经常看到一些 PHP 网页点击的结果却是下载一个文件或一张图片的原因。</p>
-<p>Content-Type 标头告诉客户端实际返回的内容的内容类型。</p>
-</blockquote>
-<p><strong>语法</strong></p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>text/html; charset=utf-8</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>multipart/form-data; boundary=something</span><br></pre></td></tr></table></figure>
-
-<p><strong>实例</strong></p>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grid5k4oxyj616w0cln0w02.jpg" alt="image-20200625160438655"></p>
-<p><strong>常见的媒体格式类型如下</strong></p>
-<ul>
-<li>text/html ： HTML格式</li>
-<li>text/plain ：纯文本格式</li>
-<li>text/xml ： XML格式</li>
-<li>image/gif ：gif图片格式</li>
-<li>image/jpeg ：jpg图片格式</li>
-<li>image/png：png图片格式</li>
-</ul>
-<p><strong>以application开头的媒体格式类型</strong></p>
-<ul>
-<li>application/xhtml+xml ：XHTML格式</li>
-<li>application/xml： XML数据格式</li>
-<li>application/atom+xml ：Atom XML聚合格式</li>
-<li>application/json： JSON数据格式</li>
-<li>application/pdf：pdf格式</li>
-<li>application/msword ： Word文档格式</li>
-<li>application/octet-stream ： 二进制流数据（如常见的文件下载）</li>
-</ul>
-<p><strong>常见的媒体格式是上传文件之时使用的</strong></p>
-<ul>
-<li>multipart/form-data ： 需要在表单中进行文件上传时，就需要使用该格式</li>
-</ul>
-<p><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/http/http-content-type.html">更加详细的HTTP  content-type 对照表</a></strong></p>
 <h1 id="Nginx原理介绍"><a href="#Nginx原理介绍" class="headerlink" title="Nginx原理介绍"></a>Nginx原理介绍</h1><h2 id="1-1-Nginx-概述"><a href="#1-1-Nginx-概述" class="headerlink" title="1.1 Nginx 概述"></a>1.1 Nginx 概述</h2><blockquote>
 <p>Nginx是⼀一个开源且⾼高性能、可靠的HTTP中间件、代理理服务。</p>
 <p>开源: 直接获取源代码</p>
@@ -1324,7 +1115,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Web%E7%BD%91%E7%AB%99%E6%A6%82%E5%BF%B5"><span class="nav-text">Web网站概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Web%E7%BD%91%E7%AB%99%E5%B8%B8%E8%AF%86"><span class="nav-text">1. Web网站常识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-URL%E7%9A%84%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="nav-text">2. URL的组成部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%8D%8F%E8%AE%AE-Protocol"><span class="nav-text">2.1 协议(Protocol)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%9F%9F%E5%90%8D-Domain"><span class="nav-text">2.2 域名(Domain)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E7%AB%AF%E5%8F%A3-Port"><span class="nav-text">2.3 端口(Port)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-URL%E6%96%87%E4%BB%B6%E8%B5%84%E6%BA%90"><span class="nav-text">2.4 URL文件资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E5%8F%82%E6%95%B0-query"><span class="nav-text">2.5 参数(query)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-%E7%89%87%E6%AE%B5-fragment"><span class="nav-text">2.6 片段(fragment)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP%E5%8D%8F%E8%AE%AE%E6%A6%82%E5%BF%B5"><span class="nav-text">HTTP协议概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-HTTP%E5%8D%8F%E8%AE%AE%E7%AE%80%E4%BB%8B"><span class="nav-text">1. HTTP协议简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-HTTP%E8%AF%B7%E6%B1%82%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-text">2. HTTP请求的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-HTTP%E5%93%8D%E5%BA%94%E5%A4%B4%E4%BF%A1%E6%81%AF"><span class="nav-text">3. HTTP响应头信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-HTTP%E7%8A%B6%E6%80%81%E4%BB%A3%E7%A0%81"><span class="nav-text">4. HTTP状态代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-HTTP-content-type"><span class="nav-text">5. HTTP  content-type</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx%E5%8E%9F%E7%90%86%E4%BB%8B%E7%BB%8D"><span class="nav-text">Nginx原理介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Nginx-%E6%A6%82%E8%BF%B0"><span class="nav-text">1.1 Nginx 概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Nginx%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-text">1.2 Nginx的优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Nginx%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">1.3 Nginx应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-Nginx%E7%9A%84%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="nav-text">1.4 Nginx的进程模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-Nginx%E7%9A%84%E7%BB%84%E6%88%90%E9%80%BB%E8%BE%91%E5%9B%BE"><span class="nav-text">1.5 Nginx的组成逻辑图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-Nginx%E7%9A%84%E6%A8%A1%E5%9D%97%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">1.6 Nginx的模块是什么</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2"><span class="nav-text">Nginx应用部署</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E8%BF%9B%E5%85%A5-nginx-%E5%AE%98%E7%BD%91%EF%BC%8C%E4%B8%8B%E8%BD%BD"><span class="nav-text">1.1 进入 nginx 官网，下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E5%AE%89%E8%A3%85Nginx%E4%BE%9D%E8%B5%96"><span class="nav-text">1.2 安装Nginx依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E5%AE%89%E8%A3%85Nginx%E5%B9%B6%E4%BF%AE%E6%94%B9%E5%B1%9E%E4%B8%BB%E5%B1%9E%E7%A5%96"><span class="nav-text">1.3 安装Nginx并修改属主属祖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-%E8%AE%BE%E7%BD%AE%E9%98%B2%E7%81%AB%E5%A2%99%E8%A7%84%E5%88%99"><span class="nav-text">1.4 设置防火墙规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-Nginx%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-%E5%8F%8A-%E4%BF%A1%E5%8F%B7"><span class="nav-text">1.5 Nginx常用命令 及 信号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-%E4%BC%98%E5%8C%96Nginx%E4%B8%94%E7%BC%96%E5%86%99%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC"><span class="nav-text">1.6 优化Nginx且编写启动脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-%E5%90%AF%E5%8A%A8Nginx%E6%9C%8D%E5%8A%A1"><span class="nav-text">1.7 启动Nginx服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E5%8F%8A%E5%86%85%E7%BD%AE%E5%8F%98%E9%87%8F"><span class="nav-text">Nginx常用模块及内置变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Nginx%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97"><span class="nav-text">1.1 Nginx常用模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Nginx%E5%86%85%E7%BD%AE%E5%8F%98%E9%87%8F"><span class="nav-text">1.2 Nginx内置变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx-conf-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">Nginx.conf 配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%AD%E6%B3%95"><span class="nav-text">1.1 Nginx配置文件语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84"><span class="nav-text">1.2 配置文件整体结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-main%E5%85%A8%E5%B1%80%E5%9D%97"><span class="nav-text">1.2.1 main全局块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-events%E5%9D%97"><span class="nav-text">1.2.2 events块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-http%E5%9D%97"><span class="nav-text">1.2.3 http块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-4-server%E5%9D%97"><span class="nav-text">1.2.4 server块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-5-location%E5%9D%97"><span class="nav-text">1.2.5 location块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Nginx%E7%9A%84%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE"><span class="nav-text">1.3 Nginx的默认配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3"><span class="nav-text">Nginx日志文件详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Nginx%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE"><span class="nav-text">1.1 Nginx日志配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2%E8%AE%BF%E9%97%AE%E6%97%A5%E5%BF%97%E6%AE%B5%E5%88%86%E6%9E%90"><span class="nav-text">1.2访问日志段分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Nginx%E8%AE%BF%E9%97%AE%E6%97%A5%E5%BF%97%E7%BB%9F%E8%AE%A1"><span class="nav-text">1.3 Nginx访问日志统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-http-access-module%E5%B1%80%E9%99%90%E6%80%A7"><span class="nav-text">1.4 http_access_module局限性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx%E5%B8%B8%E7%94%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-text">Nginx常用的基本配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Nginx-%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA"><span class="nav-text">1.1 Nginx 虚拟主机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-%E9%85%8D%E7%BD%AE%E5%9F%BA%E4%BA%8E%E5%9F%9F%E5%90%8D%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%EF%BC%88%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%EF%BC%89"><span class="nav-text">1.1.1 配置基于域名虚拟主机（最常用的）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-%E9%85%8D%E7%BD%AE%EF%A5%A7%E5%90%8C%E7%AB%AF%E5%8F%A3%E8%AE%BF%E9%97%AE%EF%A5%A7%E5%90%8C%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA"><span class="nav-text">1.1.2 配置不同端口访问不同虚拟主机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-3-%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E5%88%AB%E5%90%8D"><span class="nav-text">1.1.3 配置虚拟主机别名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Nginx-%E7%8A%B6%E6%80%81%E7%9B%91%E6%8E%A7"><span class="nav-text">1.2 Nginx 状态监控</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Nginx%E4%B8%8B%E8%BD%BD%E7%AB%99%E7%82%B9"><span class="nav-text">1.3 Nginx下载站点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-Nginx-%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="nav-text">1.4 Nginx 访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1-%E5%9F%BA%E4%BA%8EIP%E7%9A%84%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="nav-text">1.4.1 基于IP的访问控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2-%E5%9F%BA%E4%BA%8E%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86%E8%AE%A4%E8%AF%81"><span class="nav-text">1.4.2 基于用户登陆认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-3-%E4%B8%8A%E9%9D%A2%E4%B8%A4%E8%80%85%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%B8%80%E8%B5%B7%E7%94%A8"><span class="nav-text">1.4.3 上面两者也可以一起用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-Nginx-%E8%AE%BF%E9%97%AE%E9%99%90%E5%88%B6"><span class="nav-text">1.5 Nginx 访问限制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1-http%E5%8D%8F%E8%AE%AE%E7%9A%84%E8%BF%9E%E6%8E%A5%E4%B8%8E%E8%AF%B7%E6%B1%82"><span class="nav-text">1.5.1 http协议的连接与请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-2-HTTP-%E5%8D%8F%E8%AE%AE%E7%9A%84%E8%BF%9E%E6%8E%A5%E4%B8%8E%E8%AF%B7%E6%B1%82"><span class="nav-text">1.5.2 HTTP 协议的连接与请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-3-Nginx-%E8%BF%9E%E6%8E%A5%E9%99%90%E5%88%B6"><span class="nav-text">1.5.3 Nginx 连接限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-4-Nginx-%E8%AF%B7%E6%B1%82%E9%99%90%E5%88%B6"><span class="nav-text">1.5.4 Nginx 请求限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-5-%E6%95%B4%E4%BD%93%E6%80%BB%E7%BB%93"><span class="nav-text">1.5.5 整体总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-Nginx%E6%97%A5%E5%BF%97%E5%88%86%E5%89%B2"><span class="nav-text">1.6 Nginx日志分割</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-1-%E6%89%8B%E5%8A%A8%E6%97%A5%E5%BF%97%E5%88%86%E5%89%B2"><span class="nav-text">1.6.1 手动日志分割</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-2-%E8%87%AA%E5%8A%A8%E6%97%A5%E5%BF%97%E5%88%86%E5%89%B2"><span class="nav-text">1.6.2 自动日志分割</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-Nginx%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7%E9%83%A8%E7%BD%B2"><span class="nav-text">1.7 Nginx平滑升级部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-index-%E5%92%8C-autoindex%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">1.8 index 和 autoindex的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-root-%E5%92%8C-alias-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-text">1.9 root 和 alias 的区别（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-9-1-root%E5%B1%9E%E6%80%A7"><span class="nav-text">1.9.1 root属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-9-2-alias%E5%B1%9E%E6%80%A7%EF%BC%88%E5%88%AB%E5%90%8D%EF%BC%89"><span class="nav-text">1.9.2 alias属性（别名）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-10-%E5%AE%9A%E4%B9%89%E9%94%99%E8%AF%AF%E9%A1%B5%E9%9D%A2"><span class="nav-text">1.10 定义错误页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-11-%E8%AE%BE%E7%BD%AENginx%E9%98%B2%E7%9B%97%E9%93%BE"><span class="nav-text">1.11 设置Nginx防盗链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-12-%E5%A6%82%E4%BD%95%E5%9C%A8%E5%B7%B2%E7%BB%8F%E5%AE%89%E8%A3%85%E5%A5%BD%E7%9A%84nginx%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97"><span class="nav-text">1.12 如何在已经安装好的nginx中添加模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-13-Nginx%E4%B8%AD%E7%9A%84location%E6%8C%87%E4%BB%A4%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-text">1.13 Nginx中的location指令（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-13-1-%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E7%9A%84%E6%A8%A1%E5%9D%97"><span class="nav-text">1.13.1 安装第三方的模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-13-2-location%E8%AF%AD%E6%B3%95-%E5%8F%8A-%E7%AC%A6%E5%8F%B7%E8%A7%84%E5%88%99"><span class="nav-text">1.13.2 location语法 及 符号规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-13-4-location%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%8A%E6%A1%88%E4%BE%8B"><span class="nav-text">1.13.4 location优先级及案例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%8E%A7%E5%88%B6"><span class="nav-text">Nginx静态资源控制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E7%B1%BB%E5%9E%8B"><span class="nav-text">1. 静态资源类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-text">2. 静态资源基本配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E9%AB%98%E6%95%88-sendfile"><span class="nav-text">2.1 文件读取高效 sendfile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%8F%90%E9%AB%98%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%E6%95%88%E7%8E%87-tcp-nopush"><span class="nav-text">2.2 提高网络传输效率 tcp_nopush</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E4%B8%8E-tcp-nopush-%E5%AF%B9%E5%BA%94%E7%9A%84%E9%85%8D%E7%BD%AE-tcp-nodelay"><span class="nav-text">2.3 与 tcp_nopush 对应的配置 tcp_nodelay</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">2.4 注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%8E%8B%E7%BC%A9%E9%85%8D%E7%BD%AE"><span class="nav-text">3. 静态资源文件压缩配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-gzip-%E5%8E%8B%E7%BC%A9%E9%85%8D%E7%BD%AE%E8%AF%AD%E6%B3%95"><span class="nav-text">3.1 gzip 压缩配置语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-gzip-%E5%8E%8B%E7%BC%A9%E6%AF%94%E7%8E%87%E9%85%8D%E7%BD%AE%E8%AF%AD%E6%B3%95"><span class="nav-text">3.2 gzip 压缩比率配置语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-gzip-%E5%8E%8B%E7%BC%A9%E5%8D%8F%E8%AE%AE%E7%89%88%E6%9C%AC"><span class="nav-text">3.3 gzip 压缩协议版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%E6%A1%88%E4%BE%8B%EF%BC%88%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%BC%80%E5%90%AF%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%EF%BC%89"><span class="nav-text">3.4 图片压缩案例（不建议开启图片压缩）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E6%96%87%E6%9C%AC%E5%8E%8B%E7%BC%A9%E6%A1%88%E4%BE%8B"><span class="nav-text">3.5 文本压缩案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%B5%8F%E8%A7%88%EF%A8%B8%E7%BC%93%E5%AD%98"><span class="nav-text">4. 静态资源浏览器缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%98%B2%E7%9B%97%E9%93%BE"><span class="nav-text">5. 静态资源防盗链</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx%E5%8E%9F%E7%90%86%E4%BB%8B%E7%BB%8D"><span class="nav-text">Nginx原理介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Nginx-%E6%A6%82%E8%BF%B0"><span class="nav-text">1.1 Nginx 概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Nginx%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-text">1.2 Nginx的优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Nginx%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">1.3 Nginx应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-Nginx%E7%9A%84%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="nav-text">1.4 Nginx的进程模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-Nginx%E7%9A%84%E7%BB%84%E6%88%90%E9%80%BB%E8%BE%91%E5%9B%BE"><span class="nav-text">1.5 Nginx的组成逻辑图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-Nginx%E7%9A%84%E6%A8%A1%E5%9D%97%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">1.6 Nginx的模块是什么</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2"><span class="nav-text">Nginx应用部署</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E8%BF%9B%E5%85%A5-nginx-%E5%AE%98%E7%BD%91%EF%BC%8C%E4%B8%8B%E8%BD%BD"><span class="nav-text">1.1 进入 nginx 官网，下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E5%AE%89%E8%A3%85Nginx%E4%BE%9D%E8%B5%96"><span class="nav-text">1.2 安装Nginx依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E5%AE%89%E8%A3%85Nginx%E5%B9%B6%E4%BF%AE%E6%94%B9%E5%B1%9E%E4%B8%BB%E5%B1%9E%E7%A5%96"><span class="nav-text">1.3 安装Nginx并修改属主属祖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-%E8%AE%BE%E7%BD%AE%E9%98%B2%E7%81%AB%E5%A2%99%E8%A7%84%E5%88%99"><span class="nav-text">1.4 设置防火墙规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-Nginx%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-%E5%8F%8A-%E4%BF%A1%E5%8F%B7"><span class="nav-text">1.5 Nginx常用命令 及 信号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-%E4%BC%98%E5%8C%96Nginx%E4%B8%94%E7%BC%96%E5%86%99%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC"><span class="nav-text">1.6 优化Nginx且编写启动脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-%E5%90%AF%E5%8A%A8Nginx%E6%9C%8D%E5%8A%A1"><span class="nav-text">1.7 启动Nginx服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E5%8F%8A%E5%86%85%E7%BD%AE%E5%8F%98%E9%87%8F"><span class="nav-text">Nginx常用模块及内置变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Nginx%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97"><span class="nav-text">1.1 Nginx常用模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Nginx%E5%86%85%E7%BD%AE%E5%8F%98%E9%87%8F"><span class="nav-text">1.2 Nginx内置变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx-conf-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">Nginx.conf 配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%AD%E6%B3%95"><span class="nav-text">1.1 Nginx配置文件语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84"><span class="nav-text">1.2 配置文件整体结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-main%E5%85%A8%E5%B1%80%E5%9D%97"><span class="nav-text">1.2.1 main全局块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-events%E5%9D%97"><span class="nav-text">1.2.2 events块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-http%E5%9D%97"><span class="nav-text">1.2.3 http块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-4-server%E5%9D%97"><span class="nav-text">1.2.4 server块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-5-location%E5%9D%97"><span class="nav-text">1.2.5 location块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Nginx%E7%9A%84%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE"><span class="nav-text">1.3 Nginx的默认配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3"><span class="nav-text">Nginx日志文件详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Nginx%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE"><span class="nav-text">1.1 Nginx日志配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2%E8%AE%BF%E9%97%AE%E6%97%A5%E5%BF%97%E6%AE%B5%E5%88%86%E6%9E%90"><span class="nav-text">1.2访问日志段分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Nginx%E8%AE%BF%E9%97%AE%E6%97%A5%E5%BF%97%E7%BB%9F%E8%AE%A1"><span class="nav-text">1.3 Nginx访问日志统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-http-access-module%E5%B1%80%E9%99%90%E6%80%A7"><span class="nav-text">1.4 http_access_module局限性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx%E5%B8%B8%E7%94%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-text">Nginx常用的基本配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Nginx-%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA"><span class="nav-text">1.1 Nginx 虚拟主机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-%E9%85%8D%E7%BD%AE%E5%9F%BA%E4%BA%8E%E5%9F%9F%E5%90%8D%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%EF%BC%88%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%EF%BC%89"><span class="nav-text">1.1.1 配置基于域名虚拟主机（最常用的）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-%E9%85%8D%E7%BD%AE%EF%A5%A7%E5%90%8C%E7%AB%AF%E5%8F%A3%E8%AE%BF%E9%97%AE%EF%A5%A7%E5%90%8C%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA"><span class="nav-text">1.1.2 配置不同端口访问不同虚拟主机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-3-%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E5%88%AB%E5%90%8D"><span class="nav-text">1.1.3 配置虚拟主机别名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Nginx-%E7%8A%B6%E6%80%81%E7%9B%91%E6%8E%A7"><span class="nav-text">1.2 Nginx 状态监控</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Nginx%E4%B8%8B%E8%BD%BD%E7%AB%99%E7%82%B9"><span class="nav-text">1.3 Nginx下载站点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-Nginx-%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="nav-text">1.4 Nginx 访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1-%E5%9F%BA%E4%BA%8EIP%E7%9A%84%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="nav-text">1.4.1 基于IP的访问控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2-%E5%9F%BA%E4%BA%8E%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86%E8%AE%A4%E8%AF%81"><span class="nav-text">1.4.2 基于用户登陆认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-3-%E4%B8%8A%E9%9D%A2%E4%B8%A4%E8%80%85%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%B8%80%E8%B5%B7%E7%94%A8"><span class="nav-text">1.4.3 上面两者也可以一起用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-Nginx-%E8%AE%BF%E9%97%AE%E9%99%90%E5%88%B6"><span class="nav-text">1.5 Nginx 访问限制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1-http%E5%8D%8F%E8%AE%AE%E7%9A%84%E8%BF%9E%E6%8E%A5%E4%B8%8E%E8%AF%B7%E6%B1%82"><span class="nav-text">1.5.1 http协议的连接与请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-2-HTTP-%E5%8D%8F%E8%AE%AE%E7%9A%84%E8%BF%9E%E6%8E%A5%E4%B8%8E%E8%AF%B7%E6%B1%82"><span class="nav-text">1.5.2 HTTP 协议的连接与请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-3-Nginx-%E8%BF%9E%E6%8E%A5%E9%99%90%E5%88%B6"><span class="nav-text">1.5.3 Nginx 连接限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-4-Nginx-%E8%AF%B7%E6%B1%82%E9%99%90%E5%88%B6"><span class="nav-text">1.5.4 Nginx 请求限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-5-%E6%95%B4%E4%BD%93%E6%80%BB%E7%BB%93"><span class="nav-text">1.5.5 整体总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-Nginx%E6%97%A5%E5%BF%97%E5%88%86%E5%89%B2"><span class="nav-text">1.6 Nginx日志分割</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-1-%E6%89%8B%E5%8A%A8%E6%97%A5%E5%BF%97%E5%88%86%E5%89%B2"><span class="nav-text">1.6.1 手动日志分割</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-2-%E8%87%AA%E5%8A%A8%E6%97%A5%E5%BF%97%E5%88%86%E5%89%B2"><span class="nav-text">1.6.2 自动日志分割</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-Nginx%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7%E9%83%A8%E7%BD%B2"><span class="nav-text">1.7 Nginx平滑升级部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-index-%E5%92%8C-autoindex%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">1.8 index 和 autoindex的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-root-%E5%92%8C-alias-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-text">1.9 root 和 alias 的区别（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-9-1-root%E5%B1%9E%E6%80%A7"><span class="nav-text">1.9.1 root属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-9-2-alias%E5%B1%9E%E6%80%A7%EF%BC%88%E5%88%AB%E5%90%8D%EF%BC%89"><span class="nav-text">1.9.2 alias属性（别名）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-10-%E5%AE%9A%E4%B9%89%E9%94%99%E8%AF%AF%E9%A1%B5%E9%9D%A2"><span class="nav-text">1.10 定义错误页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-11-%E8%AE%BE%E7%BD%AENginx%E9%98%B2%E7%9B%97%E9%93%BE"><span class="nav-text">1.11 设置Nginx防盗链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-12-%E5%A6%82%E4%BD%95%E5%9C%A8%E5%B7%B2%E7%BB%8F%E5%AE%89%E8%A3%85%E5%A5%BD%E7%9A%84nginx%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97"><span class="nav-text">1.12 如何在已经安装好的nginx中添加模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-13-Nginx%E4%B8%AD%E7%9A%84location%E6%8C%87%E4%BB%A4%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-text">1.13 Nginx中的location指令（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-13-1-%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E7%9A%84%E6%A8%A1%E5%9D%97"><span class="nav-text">1.13.1 安装第三方的模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-13-2-location%E8%AF%AD%E6%B3%95-%E5%8F%8A-%E7%AC%A6%E5%8F%B7%E8%A7%84%E5%88%99"><span class="nav-text">1.13.2 location语法 及 符号规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-13-4-location%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%8A%E6%A1%88%E4%BE%8B"><span class="nav-text">1.13.4 location优先级及案例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%8E%A7%E5%88%B6"><span class="nav-text">Nginx静态资源控制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E7%B1%BB%E5%9E%8B"><span class="nav-text">1. 静态资源类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-text">2. 静态资源基本配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E9%AB%98%E6%95%88-sendfile"><span class="nav-text">2.1 文件读取高效 sendfile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%8F%90%E9%AB%98%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%E6%95%88%E7%8E%87-tcp-nopush"><span class="nav-text">2.2 提高网络传输效率 tcp_nopush</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E4%B8%8E-tcp-nopush-%E5%AF%B9%E5%BA%94%E7%9A%84%E9%85%8D%E7%BD%AE-tcp-nodelay"><span class="nav-text">2.3 与 tcp_nopush 对应的配置 tcp_nodelay</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">2.4 注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%8E%8B%E7%BC%A9%E9%85%8D%E7%BD%AE"><span class="nav-text">3. 静态资源文件压缩配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-gzip-%E5%8E%8B%E7%BC%A9%E9%85%8D%E7%BD%AE%E8%AF%AD%E6%B3%95"><span class="nav-text">3.1 gzip 压缩配置语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-gzip-%E5%8E%8B%E7%BC%A9%E6%AF%94%E7%8E%87%E9%85%8D%E7%BD%AE%E8%AF%AD%E6%B3%95"><span class="nav-text">3.2 gzip 压缩比率配置语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-gzip-%E5%8E%8B%E7%BC%A9%E5%8D%8F%E8%AE%AE%E7%89%88%E6%9C%AC"><span class="nav-text">3.3 gzip 压缩协议版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%E6%A1%88%E4%BE%8B%EF%BC%88%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%BC%80%E5%90%AF%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%EF%BC%89"><span class="nav-text">3.4 图片压缩案例（不建议开启图片压缩）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E6%96%87%E6%9C%AC%E5%8E%8B%E7%BC%A9%E6%A1%88%E4%BE%8B"><span class="nav-text">3.5 文本压缩案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%B5%8F%E8%A7%88%EF%A8%B8%E7%BC%93%E5%AD%98"><span class="nav-text">4. 静态资源浏览器缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%98%B2%E7%9B%97%E9%93%BE"><span class="nav-text">5. 静态资源防盗链</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -1339,7 +1130,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
