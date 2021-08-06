@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Python控制语句（六）">
+<meta property="og:url" content="http://example.com/2021/08/06/Python%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5%EF%BC%88%E5%85%AD%EF%BC%89/index.html">
+<meta property="og:site_name" content="LEMON">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-06T01:44:57.000Z">
+<meta property="article:modified_time" content="2021-08-06T01:47:47.256Z">
+<meta property="article:author" content="Armin">
+<meta property="article:tag" content="py">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/08/06/Python%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5%EF%BC%88%E5%85%AD%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Python控制语句（六） | LEMON</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LEMON</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录站</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/06/Python%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5%EF%BC%88%E5%85%AD%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/armin.png">
+      <meta itemprop="name" content="Armin">
+      <meta itemprop="description" content="记录生活中的点点滴滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LEMON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python控制语句（六）
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+        <!--toc-->
+<span id="more"></span>
+
+<h1 id="pyhton-控制语句"><a href="#pyhton-控制语句" class="headerlink" title="pyhton 控制语句"></a>pyhton 控制语句</h1><blockquote>
+<p>程序在一般情况下是按顺序执行的，编程语言提供了各种控制结构，允许复杂的执行路径。循环语句允许执行一个语句或语句多次</p>
+</blockquote>
+<h2 id="if-控制语句"><a href="#if-控制语句" class="headerlink" title="if 控制语句"></a>if 控制语句</h2><h3 id="一、if-语句格式"><a href="#一、if-语句格式" class="headerlink" title="一、if 语句格式"></a>一、if 语句格式</h3><blockquote>
+<p><em><strong>何为真假？</strong></em></p>
+<p><strong>假：</strong>0    0.0    “”     None      Flase；计算表达式的值如果等于0、0.0、”空字符串”、None、Flase的都为假</p>
+<p><strong>真：</strong>除了假的这些值，其他的都为真</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 格式</span></span><br><span class="line"><span class="keyword">if</span> 表达式：</span><br><span class="line">    语句</span><br><span class="line"></span><br><span class="line"><span class="comment"># 逻辑</span></span><br><span class="line">当程序执行到<span class="keyword">if</span>语句时，首先计算<span class="string">&quot;表达式&quot;</span>的值，如果<span class="string">&quot;表达式&quot;</span>的值为真，就执行<span class="keyword">if</span>下的<span class="string">&quot;语句&quot;</span>；如果<span class="string">&quot;表达式&quot;</span>的值为假，则跳过整个<span class="keyword">if</span>语句，继续向下执行。</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、if-else-语句格式"><a href="#二、if-else-语句格式" class="headerlink" title="二、if-else 语句格式"></a>二、if-else 语句格式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 格式</span></span><br><span class="line"><span class="keyword">if</span> 表达式：</span><br><span class="line">    语句<span class="number">1</span></span><br><span class="line"><span class="keyword">else</span>：</span><br><span class="line">    语句<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 逻辑</span></span><br><span class="line">当程序执行到<span class="keyword">if</span>-<span class="keyword">else</span>时，首先计算<span class="string">&quot;表达式&quot;</span>的值，如果<span class="string">&quot;表达式&quot;</span>的值为真，则执行<span class="string">&quot;语句1&quot;</span>，执行完<span class="string">&quot;语句1&quot;</span>跳出整个<span class="keyword">if</span>-<span class="keyword">else</span>语句；如果<span class="string">&quot;表达式&quot;</span>的值为假，则执行<span class="string">&quot;语句2&quot;</span>，执行完<span class="string">&quot;语句2&quot;</span>跳出整个<span class="keyword">if</span>-<span class="keyword">else</span>语句。</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、if-elif-else-语句格式"><a href="#三、if-elif-else-语句格式" class="headerlink" title="三、if-elif-else 语句格式"></a>三、if-elif-else 语句格式</h3><blockquote>
+<p>注：elif 可以在一个if语句里出现多次，没有限制</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 格式</span></span><br><span class="line"><span class="keyword">if</span>  表达式<span class="number">1</span></span><br><span class="line">    语句<span class="number">1</span></span><br><span class="line"><span class="keyword">elif</span> 表达式<span class="number">2</span></span><br><span class="line">    语句<span class="number">2</span></span><br><span class="line"><span class="keyword">elif</span> 表达式<span class="number">3</span></span><br><span class="line">    语句<span class="number">3</span></span><br><span class="line">......</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    语句<span class="number">4</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># 逻辑</span></span><br><span class="line">这里面的每个<span class="keyword">elif</span>都是对他上面所有表达式的否定；当程序执行<span class="keyword">if</span>-<span class="keyword">elif</span>-<span class="keyword">else</span>语句时，首先会计算“表达式<span class="number">1</span>”的值，如果“表达式<span class="number">1</span>”的值为真，则执行“语句<span class="number">1</span>”，执行完“语句<span class="number">1</span>”，则跳出整个<span class="keyword">if</span>-<span class="keyword">elif</span>-<span class="keyword">else</span>语句；如果“表达式<span class="number">1</span>”为假，计算“表达式<span class="number">2</span>”的值，如果“表达式<span class="number">2</span>”的值为真，则执行“语句<span class="number">2</span>”，执行完“语句<span class="number">2</span>”，则跳出整个<span class="keyword">if</span>-<span class="keyword">elif</span>-<span class="keyword">else</span>语句；如果“表达式<span class="number">2</span>”为假，计算“表达式<span class="number">3</span>”的值；如此下去，直到某个表达式的值为真才停止，如果没有一个真的表达式，且有<span class="keyword">else</span>，则执行“<span class="keyword">else</span>语句”。</span><br></pre></td></tr></table></figure>
+
+<h3 id="四、if-语句示例"><a href="#四、if-语句示例" class="headerlink" title="四、if 语句示例"></a>四、if 语句示例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">age = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入年龄:&quot;</span>))</span><br><span class="line"><span class="keyword">if</span> age &lt;= <span class="number">0</span>:              <span class="comment">#0 -1 -2 -3 -4 ......</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;你还没出娘胎&quot;</span>)</span><br><span class="line"><span class="keyword">elif</span> age &lt;= <span class="number">7</span>:            <span class="comment">#1 2 3 4 5 6 7</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;儿童&quot;</span>)</span><br><span class="line"><span class="keyword">elif</span> age &lt;= <span class="number">17</span>:           <span class="comment">#8 9 10 11 12 ......17</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;少年&quot;</span>)</span><br><span class="line"><span class="keyword">elif</span> age &lt;= <span class="number">22</span>:           <span class="comment">#18 19 20 21 22</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;成年&quot;</span>)</span><br><span class="line"><span class="keyword">elif</span> age &lt;= <span class="number">30</span>:           <span class="comment">#23 24 25 26 ...... 30</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;青年&quot;</span>)</span><br><span class="line"><span class="keyword">elif</span> age &lt;= <span class="number">50</span>:           <span class="comment">#31 32 33 34 ...... 50</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;壮年&quot;</span>)</span><br><span class="line"><span class="keyword">elif</span> age &lt;= <span class="number">100</span>:          <span class="comment">#51 52 53 54 ...... 100</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;老年&quot;</span>)</span><br><span class="line"><span class="keyword">elif</span> age &lt;= <span class="number">150</span>:          <span class="comment">#101 102 103 104 ...... 150</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;老寿星&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;老妖怪&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="While循环语句"><a href="#While循环语句" class="headerlink" title="While循环语句"></a>While循环语句</h2><h3 id="一、while-循环使用场景"><a href="#一、while-循环使用场景" class="headerlink" title="一、while 循环使用场景"></a>一、while 循环使用场景</h3><ul>
+<li>循环的作用就是让 <strong>指定的代码</strong> 重复的执行</li>
+<li><code>while</code> 循环最常用的应用场景就是 <strong>让执行的代码</strong> 按照 <strong>指定的次数</strong> <strong>重复</strong> 执行</li>
+<li>需求 —— 打印 5 遍 <code>Hello Python</code></li>
+<li>思考 —— 如果要求打印 100 遍怎么办？</li>
+</ul>
+<h3 id="二、while-语句格式"><a href="#二、while-语句格式" class="headerlink" title="二、while 语句格式"></a>二、while 语句格式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#格式</span></span><br><span class="line"><span class="keyword">while</span> 表达式:</span><br><span class="line">    语句</span><br><span class="line">    </span><br><span class="line"><span class="comment">#逻辑</span></span><br><span class="line">当程序执行到<span class="keyword">while</span>语句时，首先会计算表达式的值，如果表达式的值为假，结束整个<span class="keyword">while</span>语句，如果表达式的值为真，则执行语句，执行完语句再去计算表达式的值，如果表达式的值还为真，则在执行语句...... 直到表达式的值为假才会停止，否则一直循环。</span><br><span class="line"></span><br><span class="line"><span class="comment">#例如：</span></span><br><span class="line">num = <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> num &lt;= <span class="number">5</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;num = %d&quot;</span> % num)</span><br><span class="line">    num += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="三、while-else-语句格式"><a href="#三、while-else-语句格式" class="headerlink" title="三、while-else 语句格式"></a>三、while-else 语句格式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#格式</span></span><br><span class="line"><span class="keyword">while</span> 表达式:</span><br><span class="line">    语句<span class="number">1</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    语句<span class="number">2</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">#逻辑</span></span><br><span class="line">当<span class="keyword">while</span>表达式为真时，循环执行“语句<span class="number">1</span>”，当语句<span class="number">1</span>执行结束后，在执行<span class="keyword">else</span>中的“语句<span class="number">2</span>”；当<span class="keyword">while</span>条件为假时；则执行<span class="keyword">else</span>中的“语句<span class="number">2</span>”，当“语句<span class="number">2</span>”执行结束后，退出整个<span class="keyword">while</span>循环。并且<span class="keyword">while</span>如果是以<span class="keyword">break</span>导致循环截止的，同样不会执行<span class="keyword">else</span>下面的语句。</span><br><span class="line"></span><br><span class="line"><span class="comment">#总结</span></span><br><span class="line">只有在<span class="keyword">while</span>表达式为假时才执行<span class="keyword">else</span>中的语句</span><br><span class="line"></span><br><span class="line"><span class="comment">#例如</span></span><br><span class="line">index = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> index &lt; <span class="number">5</span>:</span><br><span class="line">    index += <span class="number">1</span></span><br><span class="line">    <span class="built_in">print</span>(index)</span><br><span class="line">    <span class="keyword">if</span> index == <span class="number">3</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;my name is a lemon&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="四、while-简单示例"><a href="#四、while-简单示例" class="headerlink" title="四、while 简单示例"></a>四、while 简单示例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;死循环：表达式永远为真的循环</span></span><br><span class="line"><span class="string">例如：</span></span><br><span class="line"><span class="string">while 1 + 1 == 2:    #1 + 1永远等于2</span></span><br><span class="line"><span class="string">    print(&quot;my name is a lemon&quot;)</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;用while计算1+2+3+....+100的总数</span></span><br><span class="line"><span class="string">num1 = 0</span></span><br><span class="line"><span class="string">num2 = 1</span></span><br><span class="line"><span class="string">while num2 &lt;= 100:</span></span><br><span class="line"><span class="string">    num1 += num2</span></span><br><span class="line"><span class="string">    num2 += 1</span></span><br><span class="line"><span class="string">print(&quot;num1 = %d&quot; % (num1))     # num1 = 5050</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;将str1变量中的字符串每个字符都打印一遍，并且显示每个字符的序列号</span></span><br><span class="line"><span class="string">str1 = &quot;lemon&quot;</span></span><br><span class="line"><span class="string">index = 0</span></span><br><span class="line"><span class="string">while index &lt; len(str1):</span></span><br><span class="line"><span class="string">    print(index, str1[index])</span></span><br><span class="line"><span class="string">    index += 1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="五、while-语句练习"><a href="#五、while-语句练习" class="headerlink" title="五、while 语句练习"></a>五、while 语句练习</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;打印出所有三位数中水仙花数</span></span><br><span class="line"><span class="string">num = 100</span></span><br><span class="line"><span class="string">while num &lt;= 999:</span></span><br><span class="line"><span class="string">    n = num // 100</span></span><br><span class="line"><span class="string">    u = num // 10 % 10</span></span><br><span class="line"><span class="string">    m = num % 10</span></span><br><span class="line"><span class="string">    if num == n**3 + u**3 + m**3:</span></span><br><span class="line"><span class="string">        print(&quot;水仙花数: %s&quot; % (num))</span></span><br><span class="line"><span class="string">    num += 1</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;如何将所有五位数中的回文数都列出来</span></span><br><span class="line"><span class="string">num = 10000</span></span><br><span class="line"><span class="string">while num &lt;= 99999:</span></span><br><span class="line"><span class="string">    a = num // 10000 % 10       # 万</span></span><br><span class="line"><span class="string">    b = num // 1000 % 10        # 千</span></span><br><span class="line"><span class="string">    c = num // 10 % 10          # 十</span></span><br><span class="line"><span class="string">    d = num % 10                # 个</span></span><br><span class="line"><span class="string">    if a == d and b == c:</span></span><br><span class="line"><span class="string">        print(&quot;回文数 = %d&quot; % (num))</span></span><br><span class="line"><span class="string">    num += 1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;从控制台输入一个数，分解质因数;例如：90=2x3x3x5</span></span><br><span class="line"><span class="string">num = int(input(&quot;请输入质因数:&quot;))</span></span><br><span class="line"><span class="string">i = 2</span></span><br><span class="line"><span class="string">while num != 0 and num != 1:</span></span><br><span class="line"><span class="string">    if num % i == 0:</span></span><br><span class="line"><span class="string">        print(i)</span></span><br><span class="line"><span class="string">        num //= i</span></span><br><span class="line"><span class="string">    else:</span></span><br><span class="line"><span class="string">        i += 1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;从控制台输入字符串，返回这个字符串中有多少个单词</span></span><br><span class="line"><span class="string">str1 = input(&quot;请输入一行字符串:&quot;)</span></span><br><span class="line"><span class="string">str2 = str1.strip()</span></span><br><span class="line"><span class="string">index = 0</span></span><br><span class="line"><span class="string">count = 0</span></span><br><span class="line"><span class="string">while index &lt; len(str2):</span></span><br><span class="line"><span class="string">    while str2[index] != &quot; &quot;:</span></span><br><span class="line"><span class="string">        index += 1</span></span><br><span class="line"><span class="string">        if index == len(str2):</span></span><br><span class="line"><span class="string">            break</span></span><br><span class="line"><span class="string">    count += 1</span></span><br><span class="line"><span class="string">    if index == len(str2):</span></span><br><span class="line"><span class="string">       break</span></span><br><span class="line"><span class="string">    while str2[index] == &quot; &quot;:</span></span><br><span class="line"><span class="string">        index += 1</span></span><br><span class="line"><span class="string">print(count)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;输入五个数，找出第二大的值</span></span><br><span class="line"><span class="string">listNum = []</span></span><br><span class="line"><span class="string">num = 0</span></span><br><span class="line"><span class="string">while num &lt; 5:</span></span><br><span class="line"><span class="string">    val = int(input(&quot;请输入五次除了浮点数以外的数字:&quot;))</span></span><br><span class="line"><span class="string">    listNum.append(val)       # 将val的值追加到list列表里</span></span><br><span class="line"><span class="string">    num += 1</span></span><br><span class="line"><span class="string">print(listNum)</span></span><br><span class="line"><span class="string">listNum.sort()    # 升序排序</span></span><br><span class="line"><span class="string">count = listNum.count(listNum[len(listNum) - 1])</span></span><br><span class="line"><span class="string">c = 0</span></span><br><span class="line"><span class="string">while c &lt; count:</span></span><br><span class="line"><span class="string">    listNum.pop()</span></span><br><span class="line"><span class="string">    c += 1</span></span><br><span class="line"><span class="string">print(listNum[len(listNum) -1])</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="For-循环语句"><a href="#For-循环语句" class="headerlink" title="For 循环语句"></a>For 循环语句</h2><h3 id="一、for-语句格式"><a href="#一、for-语句格式" class="headerlink" title="一、for 语句格式"></a>一、for 语句格式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#格式</span></span><br><span class="line"><span class="keyword">for</span> 变量名 <span class="keyword">in</span> 集合:</span><br><span class="line">    语句</span><br><span class="line"></span><br><span class="line"><span class="comment">#逻辑：</span></span><br><span class="line">按顺序取“集合”中的每个元素赋值给“变量”，再去执行语句。如此反复循环，直到取完“集合”中的元素截止。</span><br><span class="line"></span><br><span class="line"><span class="comment">#例如：</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]:</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、range-函数方法"><a href="#二、range-函数方法" class="headerlink" title="二、range 函数方法"></a>二、range 函数方法</h3><blockquote>
+<p><strong>功能：</strong>生成数列</p>
+<p><strong>格式：</strong>range([start], [end], [step])</p>
+<p><strong>解释：</strong>start 默认是 0、step 默认是1，这两个是可有可无的，但是end是必须有的 ！！</p>
+<p><strong>示例：</strong></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#例1：</span></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line"> <span class="built_in">print</span>(<span class="string">&quot;t = %d&quot;</span> % (t))</span><br><span class="line"></span><br><span class="line"><span class="comment">#例2：</span></span><br><span class="line"><span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="number">10</span> + <span class="number">1</span>, <span class="number">2</span>):</span><br><span class="line"> <span class="built_in">print</span>(<span class="string">&quot;y = %d&quot;</span> % (y))</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、enumerate-函数方法"><a href="#三、enumerate-函数方法" class="headerlink" title="三、enumerate 函数方法"></a>三、enumerate 函数方法</h3><blockquote>
+<p><strong>功能：</strong>同时生成下标和元素值</p>
+<p><strong>格式：</strong>enumerate([list])</p>
+<p><strong>示例：</strong></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> index, i <span class="keyword">in</span> <span class="built_in">enumerate</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]):         <span class="comment">#index, i = 下标, 元素</span></span><br><span class="line"> <span class="built_in">print</span>(<span class="string">&quot;index = %d&quot;</span> % (index), <span class="string">&quot;i = %d&quot;</span> % (i))</span><br></pre></td></tr></table></figure>
+
+<h3 id="四、for-语句简单示例"><a href="#四、for-语句简单示例" class="headerlink" title="四、for 语句简单示例"></a>四、for 语句简单示例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;用for计算1+2+3+......+100的总核数</span></span><br><span class="line"><span class="string">sum = 0</span></span><br><span class="line"><span class="string">for i in range(1,100 + 1):</span></span><br><span class="line"><span class="string">    sum += i</span></span><br><span class="line"><span class="string">print(&quot;总核数 = %d&quot; % (sum))     # 总核数 = 5050</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;从控制台输入一个数，判断是否是质数；质数：只能被1和自身整除的就是质数，其中，2就是质数，1则不是</span></span><br><span class="line"><span class="string"># 用户输入数字</span></span><br><span class="line"><span class="string">num = int(input(&quot;请输入一个数字: &quot;))</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 质数大于 1</span></span><br><span class="line"><span class="string">if num &gt; 1:</span></span><br><span class="line"><span class="string">    # 查看因子</span></span><br><span class="line"><span class="string">    for i in range(2, num):</span></span><br><span class="line"><span class="string">        if (num % i) == 0:</span></span><br><span class="line"><span class="string">            print(num, &quot;不是质数&quot;)</span></span><br><span class="line"><span class="string">            print(i, &quot;乘于&quot;, num // i, &quot;是&quot;, num)</span></span><br><span class="line"><span class="string">            break</span></span><br><span class="line"><span class="string">    else:</span></span><br><span class="line"><span class="string">        print(num, &quot;是质数&quot;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 如果输入的数字小于或等于 1，不是质数</span></span><br><span class="line"><span class="string">else:</span></span><br><span class="line"><span class="string">    print(num, &quot;不是质数&quot;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="break-amp-continue-控制语句"><a href="#break-amp-continue-控制语句" class="headerlink" title="break &amp; continue 控制语句"></a>break &amp; continue 控制语句</h2><h3 id="一、break-语句"><a href="#一、break-语句" class="headerlink" title="一、break 语句"></a>一、break 语句</h3><blockquote>
+<p><strong>作用：</strong>跳出while和for的循环</p>
+<p><strong>注意：</strong>只能跳出距离他最近的那一层循环</p>
+<p><strong>示例：</strong></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 例如：while</span></span><br><span class="line"><span class="built_in">list</span> = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="string">&quot;lemon&quot;</span>]</span><br><span class="line">index = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> index &lt; <span class="number">5</span>:</span><br><span class="line"> <span class="built_in">print</span>(<span class="built_in">list</span>[index])    <span class="comment"># index为list列表的下标</span></span><br><span class="line"> index += <span class="number">1</span></span><br><span class="line"> <span class="keyword">if</span> index == <span class="number">4</span>:</span><br><span class="line">     <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 例如：for</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line"> <span class="built_in">print</span>(i)</span><br><span class="line"> <span class="keyword">if</span> i == <span class="number">5</span>:</span><br><span class="line">     <span class="keyword">break</span>            <span class="comment"># 结束这个循环</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="二、continue-语句"><a href="#二、continue-语句" class="headerlink" title="二、continue 语句"></a>二、continue 语句</h3><blockquote>
+<p><strong>作用：</strong>跳过当前循环中的剩余语句，然后继续下一次循环</p>
+<p><strong>注意：</strong>只能跳过距离他最近的那一层循环</p>
+<p><strong>示例：</strong></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 例如：while</span></span><br><span class="line">num = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> num &lt; <span class="number">5</span>:</span><br><span class="line"> num += <span class="number">1</span></span><br><span class="line"> <span class="built_in">print</span>(num)</span><br><span class="line"> <span class="keyword">if</span> num == <span class="number">3</span>:</span><br><span class="line">     <span class="keyword">continue</span></span><br><span class="line"> <span class="built_in">print</span>(<span class="string">&quot;@&quot;</span>)</span><br><span class="line"> <span class="built_in">print</span>(<span class="string">&quot;*&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 例如：for</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line"> <span class="built_in">print</span>(i)</span><br><span class="line"> <span class="keyword">if</span> i == <span class="number">3</span>:</span><br><span class="line">     <span class="keyword">continue</span></span><br><span class="line"> <span class="built_in">print</span>(<span class="string">&quot;@&quot;</span>)</span><br><span class="line"> <span class="built_in">print</span>(<span class="string">&quot;*&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+      </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/py/" rel="tag"># py</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/06/Python%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E5%8F%8A%E6%A8%A1%E5%9D%97/" rel="prev" title="Python常用方法及模块">
+      <i class="fa fa-chevron-left"></i> Python常用方法及模块
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pyhton-%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5"><span class="nav-text">pyhton 控制语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#if-%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5"><span class="nav-text">if 控制语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81if-%E8%AF%AD%E5%8F%A5%E6%A0%BC%E5%BC%8F"><span class="nav-text">一、if 语句格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81if-else-%E8%AF%AD%E5%8F%A5%E6%A0%BC%E5%BC%8F"><span class="nav-text">二、if-else 语句格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81if-elif-else-%E8%AF%AD%E5%8F%A5%E6%A0%BC%E5%BC%8F"><span class="nav-text">三、if-elif-else 语句格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81if-%E8%AF%AD%E5%8F%A5%E7%A4%BA%E4%BE%8B"><span class="nav-text">四、if 语句示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#While%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="nav-text">While循环语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81while-%E5%BE%AA%E7%8E%AF%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">一、while 循环使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81while-%E8%AF%AD%E5%8F%A5%E6%A0%BC%E5%BC%8F"><span class="nav-text">二、while 语句格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81while-else-%E8%AF%AD%E5%8F%A5%E6%A0%BC%E5%BC%8F"><span class="nav-text">三、while-else 语句格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81while-%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B"><span class="nav-text">四、while 简单示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81while-%E8%AF%AD%E5%8F%A5%E7%BB%83%E4%B9%A0"><span class="nav-text">五、while 语句练习</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#For-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="nav-text">For 循环语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81for-%E8%AF%AD%E5%8F%A5%E6%A0%BC%E5%BC%8F"><span class="nav-text">一、for 语句格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81range-%E5%87%BD%E6%95%B0%E6%96%B9%E6%B3%95"><span class="nav-text">二、range 函数方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81enumerate-%E5%87%BD%E6%95%B0%E6%96%B9%E6%B3%95"><span class="nav-text">三、enumerate 函数方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81for-%E8%AF%AD%E5%8F%A5%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B"><span class="nav-text">四、for 语句简单示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#break-amp-continue-%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5"><span class="nav-text">break &amp; continue 控制语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81break-%E8%AF%AD%E5%8F%A5"><span class="nav-text">一、break 语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81continue-%E8%AF%AD%E5%8F%A5"><span class="nav-text">二、continue 语句</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Armin"
+      src="/uploads/armin.png">
+  <p class="site-author-name" itemprop="name">Armin</p>
+  <div class="site-description" itemprop="description">记录生活中的点点滴滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/" title="GitHub → https:&#x2F;&#x2F;github.com" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://aws.amazon.com/cn/" title="AWS → https:&#x2F;&#x2F;aws.amazon.com&#x2F;cn&#x2F;" rel="noopener" target="_blank"><i class="fab fa-aws fa-fw"></i>AWS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.processon.com/" title="processon → https:&#x2F;&#x2F;www.processon.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-accusoft fa-fw"></i>processon</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cn-ki.net/" title="知识库 → https:&#x2F;&#x2F;www.cn-ki.net&#x2F;" rel="noopener" target="_blank"><i class="fas fa-book-open fa-fw"></i>知识库</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tophub.today/" title="看新闻 → https:&#x2F;&#x2F;tophub.today&#x2F;" rel="noopener" target="_blank"><i class="far fa-newspaper fa-fw"></i>看新闻</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://m.zxjsq.net/" title="计算器 → http:&#x2F;&#x2F;m.zxjsq.net" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计算器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://shijisuishu.bmcx.com/20010314__shijisuishu/" title="计龄器 → https:&#x2F;&#x2F;shijisuishu.bmcx.com&#x2F;20010314__shijisuishu&#x2F;" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计龄器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tool.oschina.net/hexconvert" title="进制转换 → https:&#x2F;&#x2F;tool.oschina.net&#x2F;hexconvert" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>进制转换</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.sojson.com/convert/subnetmask.html" title="子网计算 → https:&#x2F;&#x2F;www.sojson.com&#x2F;convert&#x2F;subnetmask.html" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>子网计算</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.baidu.com/" title="百度一下 → https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank"><i class="fas fa-search fa-fw"></i>百度一下</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Armin</span>
+</div>
+
+<div class="powered-by">
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
