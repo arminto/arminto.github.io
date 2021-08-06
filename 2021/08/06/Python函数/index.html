@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Python函数">
+<meta property="og:url" content="http://example.com/2021/08/06/Python%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="LEMON">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-06T09:10:18.000Z">
+<meta property="article:modified_time" content="2021-08-06T09:11:03.255Z">
+<meta property="article:author" content="Armin">
+<meta property="article:tag" content="py">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/08/06/Python%E5%87%BD%E6%95%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Python函数 | LEMON</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LEMON</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录站</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/06/Python%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/armin.png">
+      <meta itemprop="name" content="Armin">
+      <meta itemprop="description" content="记录生活中的点点滴滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LEMON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python函数
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+        <!--toc-->
+<span id="more"></span>
+
+<h1 id="Python-函数（九）"><a href="#Python-函数（九）" class="headerlink" title="Python 函数（九）"></a>Python 函数（九）</h1><blockquote>
+<p>在一个完整的项目中，某些功能会反复地使用。将功能封装成函数 ，当要使用某功能时，直接调用函数即可。</p>
+</blockquote>
+<h2 id="一、基础函数"><a href="#一、基础函数" class="headerlink" title="一、基础函数"></a>一、基础函数</h2><blockquote>
+<p>函数的本质：函数就是对功能的封装</p>
+</blockquote>
+<p><strong>函数的优点</strong></p>
+<ol>
+<li><p>简化代码结构，减少了用户写代码的工作量以及重复性</p>
+</li>
+<li><p>如果想修改某些功能或者调试某个bug，只需要修改对应的函数即可</p>
+</li>
+</ol>
+<p><strong>定义函数</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> 函数名(<span class="params">参数列表</span>):</span>                   <span class="comment">#参数列表(参数1， 参数2， 参数3，....., 参数n)</span></span><br><span class="line">    语句</span><br><span class="line">    <span class="keyword">return</span> 表达式</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">解释：</span></span><br><span class="line"><span class="string">def：函数代码块以def关键字开始</span></span><br><span class="line"><span class="string">函数名：遵循标识符规则</span></span><br><span class="line"><span class="string">()：是参数列表的开始~结束</span></span><br><span class="line"><span class="string">参数列表：任何传入函数的参数和变量必须放在圆括号之间，用逗号分隔。函数从函数调用者那里获取的信息</span></span><br><span class="line"><span class="string">冒号：函数内容(封装的功能)以冒号开始，并且缩进</span></span><br><span class="line"><span class="string">语句：函数封装的功能</span></span><br><span class="line"><span class="string">return：一般用于结束函数的，并返回信息给函数的调用者</span></span><br><span class="line"><span class="string">表达式：即为要返回给函数调用者的信息，</span></span><br><span class="line"><span class="string">注意：最后的return表达式，可以不写，那return默认返回的就是None</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>函数的调用</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">格式：函数名(参数列表)</span></span><br><span class="line"><span class="string">函数名：是在使用这个函数功能时的参数</span></span><br><span class="line"><span class="string">参数列表：函数的调用者给函数传递的信息，可以没有参数，但是小括号不能省略！</span></span><br><span class="line"><span class="string">函数调用的本质：实参给形参赋值的过程</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个无参数无返回值的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_Mprint</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;lemon is very cool&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;lemon is very handsome&quot;</span>)</span><br><span class="line"></span><br><span class="line">a_Mprint()    <span class="comment">#这就可以理解函数的调用者</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>函数的参数</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义一个有参数、返回值的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_print</span>(<span class="params">name, age</span>):</span> <span class="comment"># 形参(形式参数)：定义函数时小括号中的参数，本质是变量</span></span><br><span class="line">    <span class="keyword">return</span> name, age      <span class="comment"># 将age变量的值返回给函数调用者那里</span></span><br><span class="line">r = get_print(<span class="string">&quot;at&quot;</span>, <span class="number">18</span>)   <span class="comment"># 实参(实际参数)：调用函数时给函数传递的数据，本质是值，并且将return返回的值赋值到r变量里</span></span><br><span class="line"><span class="built_in">print</span>(r, <span class="built_in">type</span>(r))         <span class="comment"># (&#x27;at&#x27;, 18) &lt;class &#x27;tuple&#x27;&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>函数的返回值</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编写函数，实现功能，给函数两个数，返回这两个数的和</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_num</span>(<span class="params">num1, num2</span>):</span></span><br><span class="line">    <span class="keyword">return</span> num1 + num2         <span class="comment"># 将结果返回给函数的调用者,执行完return语句后该函数就会结束，return后面的代码不执行</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;lemon is very cool&quot;</span>)</span><br><span class="line"></span><br><span class="line">res = get_num(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(res)</span><br></pre></td></tr></table></figure>
+
+<p><strong>传递参数</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1、值传递：传递不可变的类型，比如&#123;number、string、tuple&#125;是不可变的，意思就是只改变函数内部，不会改变函数外部</span></span><br><span class="line">例如：</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func1</span>(<span class="params">num</span>):</span></span><br><span class="line">    num = num + <span class="number">10</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">id</span>(num), num)      <span class="comment"># 140709658482624  30</span></span><br><span class="line"></span><br><span class="line">temp = <span class="number">20</span></span><br><span class="line">func1(temp)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(temp), temp)        <span class="comment"># 140709658482304  20</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2、引用传递：传递可变的类型，比如&#123;list、dict、set&#125;是可变的，意思就是不管是函数内部还是外部全都一并改变</span></span><br><span class="line">例如：</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func2</span>(<span class="params">list1</span>):</span></span><br><span class="line">    list1[<span class="number">0</span>] = <span class="number">100</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">id</span>(list1), list1)         <span class="comment"># 2010828005960  [100, 2, 3, 4, 5]</span></span><br><span class="line"></span><br><span class="line">list2 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">func2(list2)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(list2), list2)             <span class="comment"># 2010828005960  [100, 2, 3, 4, 5]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>关键字参数</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 概念：允许函数调用时参数的顺序与定义不一致</span></span><br><span class="line"><span class="comment"># 例如：</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_print</span>(<span class="params">name, age</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(name, age)                   <span class="comment"># lemon 18</span></span><br><span class="line"></span><br><span class="line">get_print(age = <span class="number">18</span>, name = <span class="string">&quot;lemon&quot;</span>)    <span class="comment">#使用关键字参数</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>默认参数</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 概念：调用函数是，如果没有传递参数，则使用默认参数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_Mprint</span>(<span class="params">name = <span class="string">&quot;lemon&quot;</span>, age = <span class="number">18</span></span>):</span></span><br><span class="line">    <span class="built_in">print</span>(name, age)          <span class="comment"># lemon 18</span></span><br><span class="line"></span><br><span class="line">a_Mprint()     <span class="comment"># 如果实参里有数据则优先使用实参参数，如若不然，使用默认参数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"><span class="comment"># 注意：以后如果要使用默认参数，必须将默认参数放到最后面，否则会报错</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_Mprint</span>(<span class="params">name, age = <span class="number">18</span></span>):</span></span><br><span class="line">    <span class="built_in">print</span>(name, age)          <span class="comment"># lemon 18</span></span><br><span class="line"></span><br><span class="line">a_Mprint(<span class="string">&quot;lemon&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>不定长参数–&gt;也叫多值参数</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 概念：能处理比定义时更多的参数</span></span><br><span class="line"><span class="comment"># 加了星号(*)的变量存放所有未命名的变量参数，如果在函数调用时没有指定参数，他就是一个空元组</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">u_good</span>(<span class="params">name, *args</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(name)                <span class="comment"># lemon</span></span><br><span class="line">    <span class="built_in">print</span>(args, <span class="built_in">type</span>(args))    <span class="comment"># (&#x27;good&#x27;, &#x27;gool&#x27;, &#x27;handsome&#x27;) &lt;class &#x27;tuple&#x27;&gt;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> args:</span><br><span class="line">        <span class="built_in">print</span>(i)</span><br><span class="line">        <span class="comment"># 返回值：</span></span><br><span class="line">        <span class="comment"># good</span></span><br><span class="line">        <span class="comment"># gool</span></span><br><span class="line">        <span class="comment"># handsome</span></span><br><span class="line"></span><br><span class="line">u_good(<span class="string">&quot;lemon&quot;</span>, <span class="string">&quot;good&quot;</span>, <span class="string">&quot;gool&quot;</span>, <span class="string">&quot;handsome&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># **代表着键值对的参数字典，和*所代表的意义类似</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">u_nice</span>(<span class="params">name, **kwargs</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(name)</span><br><span class="line">    <span class="built_in">print</span>(kwargs, <span class="built_in">type</span>(kwargs))         <span class="comment"># &#123;&#x27;age&#x27;: 18, &#x27;height&#x27;: 1.75, &#x27;weight&#x27;: &#x27;112&#x27;&#125; &lt;class &#x27;dict&#x27;&gt;</span></span><br><span class="line">    <span class="keyword">return</span> kwargs</span><br><span class="line"></span><br><span class="line">res = u_nice(<span class="string">&quot;lemon&quot;</span>, age=<span class="number">18</span>, height=<span class="number">1.75</span>, weight=<span class="string">&quot;112&quot;</span>)     <span class="comment"># **必须是关键字参数</span></span><br><span class="line"><span class="built_in">print</span>(res[<span class="string">&quot;age&quot;</span>])                         <span class="comment"># 18</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 用函数不定长参数方法统计1~5的总核   1+2+3+4+5 = 15</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">i_jbk</span>(<span class="params">*fet</span>):</span>          <span class="comment"># (1, 2, 3, 4, 5) &lt;class &#x27;tuple&#x27;&gt;</span></span><br><span class="line">    <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> fet:</span><br><span class="line">        <span class="built_in">sum</span> += i</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span></span><br><span class="line"></span><br><span class="line">a_Num = i_jbk(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span>(a_Num)              <span class="comment"># 15</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>匿名函数</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 概念：不使用def关键字这样的语句定义函数，使用lambda来创建匿名函数</span></span><br><span class="line"><span class="comment"># 特点：</span></span><br><span class="line"><span class="comment"># 1、lambda只是一个表达式，函数体比def简单</span></span><br><span class="line"><span class="comment"># 2、lambda的主体是一个表达式，而不是代码块，仅仅只能在lambad表达式中封装简单的逻辑</span></span><br><span class="line"><span class="comment"># 3、lambda函数有自己的命名空间，且不能访问自由参数列表之外的或全局命名空间的参数</span></span><br><span class="line"><span class="comment"># 4、虽然lambda是一个表达式且看起来只能写一行，与C和C++内联函数不同</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 格式：lambda 参数1， 参数2，......, 参数n: expression(表达式)</span></span><br><span class="line"><span class="comment">#例如：</span></span><br><span class="line">u_sum = <span class="keyword">lambda</span> num1, num2: num1 * num2</span><br><span class="line">net = u_sum(<span class="number">2</span>, <span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span>(net)          <span class="comment"># 10</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="二、装饰器及偏函数"><a href="#二、装饰器及偏函数" class="headerlink" title="二、装饰器及偏函数"></a>二、装饰器及偏函数</h2><h3 id="1、装饰器"><a href="#1、装饰器" class="headerlink" title="1、装饰器"></a>1、装饰器</h3><blockquote>
+<p>概念：是一个闭包，比一个函数当作参数返回一个替代般的函数，本质上就是一个返回函数的函数</p>
+<p>作用：装饰器就是给函数增加一些功能的</p>
+</blockquote>
+<p><strong>闭包案例</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test1</span>(<span class="params">a, b</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test2</span>(<span class="params">x</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(a * b + x)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> test2</span><br><span class="line"></span><br><span class="line">line1 = test1(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">line2 = test1(<span class="number">2</span>, <span class="number">5</span>)</span><br><span class="line">line1(<span class="number">4</span>)</span><br><span class="line">line2(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>简单的装饰器</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func1</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;lemon is very handsome&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span>():</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;**********************&quot;</span>)</span><br><span class="line">        func()</span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line"><span class="comment"># f 是函数func1的升级版本</span></span><br><span class="line">f = outer(func1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># f()就是引用了inner函数</span></span><br><span class="line">f()</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂一点的装饰器</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span>(<span class="params">age</span>):</span></span><br><span class="line">        <span class="keyword">if</span> age &lt; <span class="number">0</span>:</span><br><span class="line">            age = <span class="number">0</span></span><br><span class="line">        func(age)</span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用@符号将装饰器应用到函数</span></span><br><span class="line"><span class="comment">#从python2.4就开始支持使用@符号</span></span><br><span class="line"><span class="meta">@outer    </span><span class="comment">#相当于say = outer(say)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">say</span>(<span class="params">age</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;lemon is %d years old&quot;</span> % (age))</span><br><span class="line"></span><br><span class="line"><span class="comment"># say = outer(say)</span></span><br><span class="line">say(-<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>通用装饰器（常用）</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 上面的两个装饰器都是有缺陷的及不通用的！</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">        <span class="comment">#添加修改的功能</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&quot;</span>)</span><br><span class="line">        func(*args, **kwargs)</span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line"><span class="meta">@outer</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">say</span>(<span class="params">name, age</span>):</span>     <span class="comment">#函数的参数理论上是无限制的，但实际上最好不要超过6~7个</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;my name is %s, I am %d years old&quot;</span> % (name, age))</span><br><span class="line"></span><br><span class="line">say(<span class="string">&quot;lemon&quot;</span>, <span class="number">18</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、偏函数"><a href="#2、偏函数" class="headerlink" title="2、偏函数"></a>2、偏函数</h3><blockquote>
+<p>把一个参数固定住，形成一个新的函数</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> functools</span><br><span class="line">ints1 = functools.partial(<span class="built_in">int</span>, base = <span class="number">2</span>)     <span class="comment"># base按照二进制运算</span></span><br><span class="line"><span class="built_in">print</span>(ints1(<span class="string">&quot;1010&quot;</span>))          <span class="comment"># 10</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#偏函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ints2</span>(<span class="params"><span class="built_in">str</span>, base = <span class="number">10</span></span>):</span>    <span class="comment"># base按照十进制运算</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">int</span>(<span class="built_in">str</span>, base)</span><br><span class="line"></span><br><span class="line">res = ints2(<span class="string">&quot;1010&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(res)                    <span class="comment"># 1010</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="三、高阶函数"><a href="#三、高阶函数" class="headerlink" title="三、高阶函数"></a>三、高阶函数</h2><h3 id="1、filter"><a href="#1、filter" class="headerlink" title="1、filter"></a>1、filter</h3><blockquote>
+<p>功能: 用于过滤序列的，意思就是把传入的函数依次作用于序列的每个元素，根据返回的是True还是False来决定是否保留该元素</p>
+</blockquote>
+<p><strong>filter()</strong></p>
+<p>原型:  filter(fn, lsd)</p>
+<p>参数fn:    是函数</p>
+<p>参数lsd:   是序列或列表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">list1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>]</span><br><span class="line"><span class="comment"># 筛选条件</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lem</span>(<span class="params">num</span>):</span></span><br><span class="line">    <span class="comment">#偶数保留</span></span><br><span class="line">    <span class="keyword">if</span> num % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="comment"># 基数剔除</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">t = <span class="built_in">filter</span>(lem, list1)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(t))</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、map-与-reduce"><a href="#2、map-与-reduce" class="headerlink" title="2、map 与 reduce"></a>2、map 与 reduce</h3><blockquote>
+<p>Google 文章 map reduce，python内置了map()和reduce()函数。</p>
+</blockquote>
+<p><strong>map()</strong></p>
+<p>功能: 将传入的函数依次作用在序列中的每一个元素，并把结果作为新的Iterator返回</p>
+<p>原型:       map(fn, lsd)</p>
+<p>参数fn:    是函数</p>
+<p>参数lsd:   是序列或列表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将所有单个字符转成对应的字面量整数；[&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;]   --&gt;   [1, 2, 3, 4]</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">chr2int</span>(<span class="params"><span class="built_in">chr</span></span>):</span></span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;0&quot;</span>:<span class="number">0</span>, <span class="string">&quot;1&quot;</span>:<span class="number">1</span>, <span class="string">&quot;2&quot;</span>:<span class="number">2</span>, <span class="string">&quot;3&quot;</span>:<span class="number">3</span>, <span class="string">&quot;4&quot;</span>:<span class="number">4</span>, <span class="string">&quot;5&quot;</span>:<span class="number">5</span>, <span class="string">&quot;6&quot;</span>:<span class="number">6</span>, <span class="string">&quot;7&quot;</span>:<span class="number">7</span>, <span class="string">&quot;8&quot;</span>:<span class="number">8</span>, <span class="string">&quot;9&quot;</span>:<span class="number">9</span>&#125;[<span class="built_in">chr</span>]</span><br><span class="line"></span><br><span class="line">list1 = [<span class="string">&quot;2&quot;</span>, <span class="string">&quot;1&quot;</span>, <span class="string">&quot;6&quot;</span>, <span class="string">&quot;5&quot;</span>]</span><br><span class="line">res = <span class="built_in">map</span>(chr2int, list1)             <span class="comment"># 相当于： [chr2int(&quot;2&quot;), chr2int(&quot;1&quot;), chr2int(&quot;6&quot;), chr2int(&quot;5&quot;)]</span></span><br><span class="line"><span class="built_in">print</span>(res)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(res))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将整数元素的序列，转为字符串类型；[1, 2, 3, 4]   --&gt;   [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;]</span></span><br><span class="line">n = <span class="built_in">map</span>(<span class="built_in">str</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(n))</span><br></pre></td></tr></table></figure>
+
+<p><strong>reduce()</strong></p>
+<p>功能: 一个函数作用在序列上，这个函数必须接受两个参数，reduce把结果继续和序列的下一个元素累计运算，知道序列为空为止。</p>
+<ul>
+<li>比如：reduce(f, [a, b, c, d ])</li>
+<li>相当于： a+b=ab   ab+c=abc   abc+d=abcd</li>
+</ul>
+<p>原型:      reduce(fn, lsd)</p>
+<p>参数fn:    是函数</p>
+<p>参数lsd:   是序列或列表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 求一个序列的和</span></span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line">list2 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="comment"># 1 + 2</span></span><br><span class="line"><span class="comment"># 1 + 2 + 3</span></span><br><span class="line"><span class="comment"># 1 + 2 + 3 + 4</span></span><br><span class="line"><span class="comment"># 1 + 2 + 3 + 4 + 5 = 15</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mySum</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line"></span><br><span class="line">r = reduce(mySum, list2)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;r = <span class="subst">&#123;r&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>map-reduce联合使用，将字符串转成对应字面量数字；不用int()</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">str2int</span>(<span class="params"><span class="built_in">str</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fc</span>(<span class="params">x, y</span>):</span></span><br><span class="line">        <span class="keyword">return</span> x * <span class="number">10</span> + y</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fs</span>(<span class="params"><span class="built_in">chr</span></span>):</span></span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="string">&quot;0&quot;</span>: <span class="number">0</span>, <span class="string">&quot;1&quot;</span>: <span class="number">1</span>, <span class="string">&quot;2&quot;</span>: <span class="number">2</span>, <span class="string">&quot;3&quot;</span>: <span class="number">3</span>, <span class="string">&quot;4&quot;</span>: <span class="number">4</span>, <span class="string">&quot;5&quot;</span>: <span class="number">5</span>, <span class="string">&quot;6&quot;</span>: <span class="number">6</span>, <span class="string">&quot;7&quot;</span>: <span class="number">7</span>, <span class="string">&quot;8&quot;</span>: <span class="number">8</span>, <span class="string">&quot;9&quot;</span>: <span class="number">9</span>&#125;[<span class="built_in">chr</span>]</span><br><span class="line">    <span class="keyword">return</span> reduce(fc, <span class="built_in">map</span>(fs, <span class="built_in">list</span>(<span class="built_in">str</span>)))</span><br><span class="line"></span><br><span class="line">a = str2int(<span class="string">&quot;1230&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(a, <span class="built_in">type</span>(a))</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+      </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/py/" rel="tag"># py</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/06/Python%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%8F%8Awith%E8%AF%AD%E5%8F%A5/" rel="prev" title="Python文件处理及with语句（八）">
+      <i class="fa fa-chevron-left"></i> Python文件处理及with语句（八）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/08/06/Python%E9%80%92%E5%BD%92%E5%8F%8A%E8%BF%AD%E4%BB%A3%E5%99%A8/" rel="next" title="Prthon递归及迭代器">
+      Prthon递归及迭代器 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-%E5%87%BD%E6%95%B0%EF%BC%88%E4%B9%9D%EF%BC%89"><span class="nav-text">Python 函数（九）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0"><span class="nav-text">一、基础函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E8%A3%85%E9%A5%B0%E5%99%A8%E5%8F%8A%E5%81%8F%E5%87%BD%E6%95%B0"><span class="nav-text">二、装饰器及偏函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="nav-text">1、装饰器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%81%8F%E5%87%BD%E6%95%B0"><span class="nav-text">2、偏函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="nav-text">三、高阶函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81filter"><span class="nav-text">1、filter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81map-%E4%B8%8E-reduce"><span class="nav-text">2、map 与 reduce</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Armin"
+      src="/uploads/armin.png">
+  <p class="site-author-name" itemprop="name">Armin</p>
+  <div class="site-description" itemprop="description">记录生活中的点点滴滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/" title="GitHub → https:&#x2F;&#x2F;github.com" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://aws.amazon.com/cn/" title="AWS → https:&#x2F;&#x2F;aws.amazon.com&#x2F;cn&#x2F;" rel="noopener" target="_blank"><i class="fab fa-aws fa-fw"></i>AWS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.processon.com/" title="processon → https:&#x2F;&#x2F;www.processon.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-accusoft fa-fw"></i>processon</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cn-ki.net/" title="知识库 → https:&#x2F;&#x2F;www.cn-ki.net&#x2F;" rel="noopener" target="_blank"><i class="fas fa-book-open fa-fw"></i>知识库</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tophub.today/" title="看新闻 → https:&#x2F;&#x2F;tophub.today&#x2F;" rel="noopener" target="_blank"><i class="far fa-newspaper fa-fw"></i>看新闻</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://m.zxjsq.net/" title="计算器 → http:&#x2F;&#x2F;m.zxjsq.net" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计算器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://shijisuishu.bmcx.com/20010314__shijisuishu/" title="计龄器 → https:&#x2F;&#x2F;shijisuishu.bmcx.com&#x2F;20010314__shijisuishu&#x2F;" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计龄器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tool.oschina.net/hexconvert" title="进制转换 → https:&#x2F;&#x2F;tool.oschina.net&#x2F;hexconvert" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>进制转换</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.sojson.com/convert/subnetmask.html" title="子网计算 → https:&#x2F;&#x2F;www.sojson.com&#x2F;convert&#x2F;subnetmask.html" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>子网计算</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.baidu.com/" title="百度一下 → https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank"><i class="fas fa-search fa-fw"></i>百度一下</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Armin</span>
+</div>
+
+<div class="powered-by">
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
