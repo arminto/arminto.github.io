@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="LEMON">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-24T09:21:06.000Z">
-<meta property="article:modified_time" content="2021-08-24T09:21:37.811Z">
+<meta property="article:modified_time" content="2021-08-24T13:05:50.480Z">
 <meta property="article:author" content="Armin">
 <meta name="twitter:card" content="summary">
 
@@ -182,33 +182,40 @@
         <!--toc-->
 <span id="more"></span>
 
-<h2 id="linux-面试题"><a href="#linux-面试题" class="headerlink" title="linux 面试题"></a>linux 面试题</h2><p>1、如何看当前Linux系统有几颗物理CPU和每颗CPU的核数？<br>答：在/proc（puoruake）/cpuinfo文件中查看</p>
-<p>2、查看系统负载有哪些？后面的三个数值表示什么含义呢？<br>答：top、w、uptime；  其中load average即系统负载，三个数值分别表示一分钟、五分钟、十五分钟内系统的平均负载，即平均任务数。</p>
-<p>3、如何以交互式的方法将其文件中的所有abc字符串更换为ABC？<br>答：tr 或 sed</p>
-<p>4、简述下linux系统里的buffer和cache区别？<br>答：Buffer 是对磁盘（块）数据的缓存，而 Cache 是对文件（block）数据的缓存，他们既会用在读请求中，也会用的写请求中。</p>
-<p>5、如何实时查看网卡流量为多少？如何查看历史网卡流量？<br>答：安装sysstat包，使用sar命令查看。（sar -n DEV 1 10 #一秒显示一次，一共显示10次；sar -n DEV -f /var/log/sa/sa22 #查看指定日期的流量日志）</p>
-<p>6、如何查看当前系统都有哪些进程？<br>答：ps -aux 或者ps -ef</p>
-<p>7、ps 查看系统进程时，有一列为STAT， 如果当前进程的stat为Ss 表示什么含义？如果为Z表示什么含义？<br>答：S表示正在休眠；s表示主进程；Z表示僵尸进程。</p>
-<p>8、僵尸进程对系统有害吗？如何杀掉僵尸进程？<br>答：重启服务器电脑、找到该defunct僵尸进程的父进程，将该进程的父进程杀掉（ps -ef | grep defunct_process_pid）</p>
-<p>9、如何查看某个网卡是否连接着交换机？<br>答：mii-tool eth0 或者 mii-tool eth1</p>
-<p>10、linxu下设置DNS需要修改哪个配置文件？<br>答：（1）在文件 /etc/resolv.conf 中设置DNS；（2）在文件 /etc/sysconfig/network-scripts/ifcfg-eth0 中设置DNS</p>
-<p>11、iptables四表五链都有哪些？简述下filter、nat表的作用。<br>答：四表=filter（fliute）【过滤数据包】、nat【网络地址转换】、managle（mannige）、raw（rou），默认是filter表；五链：PREROUTING（perrui） 、INPUT、FORWARD（fuo）、OUTPUT、POSTROUTING</p>
-<p>12、把iptable的规则保存到一个文件中如何做？如何恢复？<br>答：使用iptables-save重定向到文件中；使用iptables-restore（weisituoer）反重定向回来</p>
-<p>13、如何备份某个用户的任务计划？<br>答：将/var/spool/cron/目录下指定用户的任务计划拷贝到备份目录cron_bak/下即可</p>
-<p>14、任务计划格式中，前面5个数字分表表示什么含义？<br>答：依次表示：分、时、日、月、周</p>
-<p>15、某个账号登陆linux后，系统会在哪些日志文件中记录相关信息？<br>答：用户身份验证过程记录在/var/log/secure（sekuer）中，登录成功的信息记录在/var/log/wtmp。</p>
-<p>16、网卡或者硬盘有问题时，可以通过使用哪个命令查看相关信息？<br>答：使用命令dmesg</p>
-<p>17、shell中什么时候会用到break和continue命令？并且这两个命令的作用是什么？<br>答：在循环过程中，有时候需要在未达到循环结束条件时强制跳出循环，Shell使用 break 和 continue 来跳出循环。break命令 允许跳出所有循环（终止执行后面的所有循环）。continue命令 不会跳出所有循环，仅仅跳出当前符合条件的循环。</p>
-<p>18、如何查看当前系统有几块盘？磁盘的使用率和磁盘io的读写使用情况用什么工具可以查看？<br>答：lsblk 、df -Th 、iostat -xdm 1 # 一般会有个经验值，比如，ioutil要小于80%， svctm要小于2ms。</p>
-<p>19、自定义解析域名的时候，我们可以编辑哪个文件？是否可以一个ip对应多个域名？是否可以一个域名对应多个ip？<br>答：编辑 /etc/hosts ,可以一个ip对应多个域名，不可以一个域名对多个ip</p>
-<p>20、有一天你突然发现公司网站访问速度变的很慢很慢，你该怎么办呢？（服务器可以登陆，提示：你可以从系统负载和网卡流量入手）<br>答：可以从两个方面入手分析：分析系统负载，使用w命令或者uptime命令查看系统负载，如果负载很高，则使用top命令查看CPU，MEM等占用情况，要么是CPU繁忙，要么是内存不够，如果这二者都正常，再去使用sar命令分析网卡流量，分析是不是遭到了攻击。一旦分析出问题的原因，采取对应的措施解决，如决定要不要杀死一些进程，或者禁止一些访问等。</p>
-<h2 id="docker-容器"><a href="#docker-容器" class="headerlink" title="docker 容器"></a><a target="_blank" rel="noopener" href="https://arminto.github.io/2021/06/15/Docker/">docker 容器</a></h2><p>1、容器隔离及限制的底层技术是什么？<br>答：cgroup 和 namespace 是最重要的两种技术。cgroup 实现系统资源限额， namespace 实现资源隔离。</p>
-<p>2、namespace 分别对应六种资源有什么？<br>答：Mount（文件系统）、UTS（主机名称）、IPC（内存）、PID（进程）、Network（网络） 和 User（用户）</p>
-<p>3、Docker 安装时会自动在 host 上创建三个网桥模式，都叫什么？并简述下这几个不同的网络模式。<br>答：bridge、host、none</p>
-<p>4、Docker架构简单描述下</p>
+<h2 id="linux-面试题"><a href="#linux-面试题" class="headerlink" title="linux 面试题"></a>linux 面试题</h2><p><strong>1、如何看当前Linux系统有几颗物理CPU和每颗CPU的核数？</strong><br>答：在/proc（puoruake）/cpuinfo文件中查看</p>
+<p><strong>2、查看系统负载有哪些？后面的三个数值表示什么含义呢？</strong><br>答：top、w、uptime；  其中load average即系统负载，三个数值分别表示一分钟、五分钟、十五分钟内系统的平均负载，即平均任务数。</p>
+<p><strong>3、如何以交互式的方法将其文件中的所有abc字符串更换为ABC？</strong><br>答：tr 或 sed</p>
+<p><strong>4、简述下linux系统里的buffer和cache区别？</strong><br>答：Buffer 是对磁盘（块）数据的缓存，而 Cache 是对文件（block）数据的缓存，他们既会用在读请求中，也会用的写请求中。</p>
+<p><strong>5、如何实时查看网卡流量为多少？如何查看历史网卡流量？</strong><br>答：安装sysstat包，使用sar命令查看。（sar -n DEV 1 10 #一秒显示一次，一共显示10次；sar -n DEV -f /var/log/sa/sa22 #查看指定日期的流量日志）</p>
+<p><strong>6、如何查看当前系统都有哪些进程？</strong><br>答：ps -aux 或者ps -ef</p>
+<p><strong>7、ps 查看系统进程时，有一列为STAT， 如果当前进程的stat为Ss 表示什么含义？如果为Z表示什么含义？</strong><br>答：S表示正在休眠；s表示主进程；Z表示僵尸进程。</p>
+<p><strong>8、僵尸进程对系统有害吗？如何杀掉僵尸进程？</strong><br>答：重启服务器电脑、找到该defunct僵尸进程的父进程，将该进程的父进程杀掉（ps -ef | grep defunct_process_pid）</p>
+<p><strong>9、如何查看某个网卡是否连接着交换机？</strong><br>答：mii-tool eth0 或者 mii-tool eth1</p>
+<p><strong>10、linxu下设置DNS需要修改哪个配置文件？</strong><br>答：（1）在文件 /etc/resolv.conf 中设置DNS；（2）在文件 /etc/sysconfig/network-scripts/ifcfg-eth0 中设置DNS</p>
+<p><strong>11、iptables四表五链都有哪些？简述下filter、nat表的作用。</strong><br>答：四表=filter（fliute）【过滤数据包】、nat【网络地址转换】、managle（mannige）、raw（rou），默认是filter表；五链：PREROUTING（perrui） 、INPUT、FORWARD（fuo）、OUTPUT、POSTROUTING</p>
+<p><strong>12、把iptable的规则保存到一个文件中如何做？如何恢复？</strong><br>答：使用iptables-save重定向到文件中；使用iptables-restore（weisituoer）反重定向回来</p>
+<p><strong>13、如何备份某个用户的任务计划？</strong><br>答：将/var/spool/cron/目录下指定用户的任务计划拷贝到备份目录cron_bak/下即可</p>
+<p><strong>14、任务计划格式中，前面5个数字分表表示什么含义？</strong><br>答：依次表示：分、时、日、月、周</p>
+<p><strong>15、某个账号登陆linux后，系统会在哪些日志文件中记录相关信息？</strong><br>答：用户身份验证过程记录在/var/log/secure（sekuer）中，登录成功的信息记录在/var/log/wtmp。</p>
+<p><strong>16、网卡或者硬盘有问题时，可以通过使用哪个命令查看相关信息？</strong><br>答：使用命令dmesg</p>
+<p><strong>17、shell中什么时候会用到break和continue命令？并且这两个命令的作用是什么？</strong><br>答：在循环过程中，有时候需要在未达到循环结束条件时强制跳出循环，Shell使用 break 和 continue 来跳出循环。break命令 允许跳出所有循环（终止执行后面的所有循环）。continue命令 不会跳出所有循环，仅仅跳出当前符合条件的循环。</p>
+<p><strong>18、如何查看当前系统有几块盘？磁盘的使用率和磁盘io的读写使用情况用什么工具可以查看？</strong><br>答：lsblk 、df -Th 、iostat -xdm 1 # 一般会有个经验值，比如，ioutil要小于80%， svctm要小于2ms。</p>
+<p><strong>19、自定义解析域名的时候，我们可以编辑哪个文件？是否可以一个ip对应多个域名？是否可以一个域名对应多个ip？</strong><br>答：编辑 /etc/hosts ,可以一个ip对应多个域名，不可以一个域名对多个ip</p>
+<p><strong>20、有一天你突然发现公司网站访问速度变的很慢很慢，你该怎么办呢？（服务器可以登陆，提示：你可以从系统负载和网卡流量入手）</strong><br>答：可以从两个方面入手分析：分析系统负载，使用w命令或者uptime命令查看系统负载，如果负载很高，则使用top命令查看CPU，MEM等占用情况，要么是CPU繁忙，要么是内存不够，如果这二者都正常，再去使用sar命令分析网卡流量，分析是不是遭到了攻击。一旦分析出问题的原因，采取对应的措施解决，如决定要不要杀死一些进程，或者禁止一些访问等。</p>
+<p><strong>21、LVM新增磁盘扩容过程</strong></p>
+<p>答：</p>
+<p>   1、创建物理卷并添加卷组<br>   2、添加到逻辑卷<br>   3、现在，逻辑卷已经扩展，你需要调整文件系统的大小以扩展逻辑卷内的空间</p>
+<p><strong>22、如何在出现异常时退出shell脚本？</strong></p>
+<p>答：使用 $? ，进行判断</p>
+<p><strong>23、简述什么是中间件？</strong></p>
+<p>答：中间件是一种独立的系统软件或服务程序，分布式应用软件借助这种软件在不同的技术之间共享资源。通常位于客户机/ 服务器的操作系统中间，是连接两个独立应用程序或独立系统的软件。</p>
+<h2 id="docker-容器"><a href="#docker-容器" class="headerlink" title="docker 容器"></a><a target="_blank" rel="noopener" href="https://arminto.github.io/2021/06/15/Docker/">docker 容器</a></h2><p><strong>1、容器隔离及限制的底层技术是什么？</strong><br>答：cgroup 和 namespace 是最重要的两种技术。cgroup 实现系统资源限额， namespace 实现资源隔离。</p>
+<p><strong>2、namespace 分别对应六种资源有什么？</strong><br>答：Mount（文件系统）、UTS（主机名称）、IPC（内存）、PID（进程）、Network（网络） 和 User（用户）</p>
+<p><strong>3、Docker 安装时会自动在 host 上创建三个网桥模式，都叫什么？并简述下这几个不同的网络模式。</strong><br>答：bridge、host、none</p>
+<p><strong>4、Docker架构简单描述下</strong></p>
 <p>答：docker采用的是c/s架构。客户端向服务端发送请求，服务端负责构建、运行和分发容器。并且客户端和服务端可以运行在同一个宿主机上，客户端也可以通过socket与远程的服务端通信。</p>
-<p>5、Docker 的核心组件都有什么？<br>答：Docker 客户端 - Client 、Docker 服务器 - Docker daemon 、Docker 镜像 - Image、 Registry 仓库 – Registry、Docker 容器 - Container</p>
-<p>6、创建容器的过程docker都做了哪些事情，简单描述下</p>
+<p><strong>5、Docker 的核心组件都有什么？</strong><br>答：Docker 客户端 - Client 、Docker 服务器 - Docker daemon 、Docker 镜像 - Image、 Registry 仓库 – Registry、Docker 容器 - Container</p>
+<p><strong>6、创建容器的过程docker都做了哪些事情，简单描述下</strong></p>
 <p>答：</p>
 <ol>
 <li><p>Docker 客户端执行 docker run 命令。</p>
@@ -222,63 +229,127 @@
 <li><p>Docker daemon 启动容器。</p>
 </li>
 </ol>
-<p>7、为什么 base 镜像 都很小？就比如centos在docker这里就很小，200M左右。</p>
+<p><strong>7、为什么 base 镜像 都很小？就比如centos在docker这里就很小，200M左右。</strong></p>
 <p>答：Linux系统的组成，Linux 操作系统由Bootfs（内核空间）和 Rootfs（用户空间）组成，因为对于 base 镜像来说，底层直接用宿主机的 kernel，自己只需要提供 rootfs 。</p>
-<p>8、简述容器中copy-on-Write的特性</p>
+<p><strong>8、简述容器中copy-on-Write的特性</strong></p>
 <p>答：当用某个镜像创建了一个容器，在容器中只有当需要修改时才复制一份数据在容器层，这种特性被称作 Copy-on-Write。</p>
-<h2 id="编排k8s"><a href="#编排k8s" class="headerlink" title="编排k8s"></a><a target="_blank" rel="noopener" href="https://arminto.github.io/2021/06/06/Kubernetes/">编排k8s</a></h2><p>1.说下k8s的核心组件都有哪些，并简述下他们各自的作用</p>
+<h2 id="编排k8s"><a href="#编排k8s" class="headerlink" title="编排k8s"></a><a target="_blank" rel="noopener" href="https://arminto.github.io/2021/06/06/Kubernetes/">编排k8s</a></h2><p><strong>1.说下k8s的核心组件都有哪些，并简述下他们各自的作用</strong></p>
 <p>答：APIServer、Scheduler、Controller manager、ETCD、Kube-proxy、continue</p>
-<p>2、k8s中都有哪些对象资源？</p>
+<p><strong>2、k8s中都有哪些对象资源？</strong></p>
 <p>答：namespace、controller、pod、pv、pvc、configmap、secret、service、ingress</p>
-<p>3、labels 的本质是什么？他的作用又是什么？</p>
+<p><strong>3、labels 的本质是什么？他的作用又是什么？</strong></p>
 <p>答：Label其实就一对 key/value ，被关联到对象上。他可以起到服务发现和集群调度的作用。</p>
-<p>4、Service 在 K8s 中有哪几种类型？</p>
+<p><strong>4、Service 在 K8s 中有哪几种类型？</strong></p>
 <p>答：ClusterIp、NodePort、LoadBalancer</p>
-<p>5、Secret 在k8s中的作用？</p>
+<p><strong>5、Secret 在k8s中的作用？</strong></p>
 <p>答：Secret 解决了密码、token、密钥等敏感数据的配置问题，而不需要把这些敏感数据暴露到镜像或者 Pod Spec中。</p>
 <p>PS : 只有与 apiserver 组件进行交互的 pod 才会有如下的 证书、命名空间、tekon密钥。</p>
-<p>6、简述下PV 和 PVC是什么</p>
-<p>答：PV 可以看作可用的存储资源，PVC则是对存储资源的需求</p>
-<h2 id="ansible自动化"><a href="#ansible自动化" class="headerlink" title="ansible自动化"></a>ansible自动化</h2><p>1、Ansible常用模块及左右</p>
+<p><strong>6、简述下PV 和 PVC是什么</strong></p>
+<p>答：PV 可以看作可用的存储资源，PVC则是对存储资源的申请需求</p>
+<p><strong>7、简述Kubernetes Replica Set 和 Replication Controller 之间有什么区别？</strong></p>
+<p>答：两者几乎一样，都是确保在任何给定时间运行指定数量的 Pod 副本。不同之处在于RS 使用基于集合的选择器，而 Replication Controller 使用基于权限的选择器。</p>
+<p><strong>8、一般Kubernetes是如何进行优雅的节点关机维护？</strong></p>
+<p>答：由于Kubernetes节点运行大量Pod，因此在进行关机维护之前，建议先使用kubectl drain将该节点的Pod进行驱逐，然后进行关机维护。</p>
+<h2 id="ansible自动化"><a href="#ansible自动化" class="headerlink" title="ansible自动化"></a>ansible自动化</h2><p><strong>1、Ansible常用模块及左右</strong></p>
 <p>答：command ping yum copy service shell file replace user group</p>
-<p>2、什么是Playbooks？简答讲下</p>
+<p><strong>2、什么是Playbooks？简答讲下</strong></p>
 <p>答：Playbooks 可以理解为一个编排文件，基于YAML语言编写的。用于描述远程系统实施的过程，或者描述流程中的一系列步骤。</p>
-<p>3、shell模块与command模块的区别？</p>
+<p><strong>3、shell模块与command模块的区别？</strong></p>
 <p>答：command只能识别一些简单的linux命令，shell能识别一点复杂性命令。</p>
-<p>4、要对1000台机器收集内核版本，如何让ansible以面向过程的方式执行收集这些信息？</p>
+<p><strong>4、要对1000台机器收集内核版本，如何让ansible以面向过程的方式执行收集这些信息？</strong></p>
 <p>答：将其配置文件中的 forks 参数改为1就好。</p>
-<h2 id="web网站"><a href="#web网站" class="headerlink" title="web网站"></a><a target="_blank" rel="noopener" href="https://arminto.github.io/2021/08/02/WEB-HTTP/">web网站</a></h2><p>1、一个网站的形成都有哪些东西？</p>
+<h2 id="web网站"><a href="#web网站" class="headerlink" title="web网站"></a><a target="_blank" rel="noopener" href="https://arminto.github.io/2021/08/02/WEB-HTTP/">web网站</a></h2><p><strong>1、一个网站的形成都有哪些东西？</strong></p>
 <p>答：域名、网页、主页；HTTP、URL、HTML、超链接</p>
-<p>2、简述下静态页面与动态页面的差别</p>
+<p><strong>2、简述下静态页面与动态页面的差别</strong></p>
 <p>答：静态页面内容几乎是固定的, 而动态页面的内容会因用户、浏览器、时间等而发生变化。</p>
-<p>3、URL的组成部分都有哪些？</p>
+<p><strong>3、URL的组成部分都有哪些？</strong></p>
 <p>答：协议、域名、端口、URL文件资源、参数(query)、片段(fragment)</p>
-<p>4、简单介绍下HTTP协议</p>
+<p><strong>4、简单介绍下HTTP协议</strong></p>
 <p>答：HTTP就是一个超文本传输协议，定义了客户端与服务器端之间文本传输的规范。</p>
-<p>5、返回码 200、301、302、404 的含义是什么？</p>
+<p><strong>5、返回码 200、301、302、404 的含义是什么？</strong></p>
 <p>答：200 服务器成功返回内容，301/2 永久/临时重定向，404 请求的页面不存在</p>
-<h2 id="Nginx服务"><a href="#Nginx服务" class="headerlink" title="Nginx服务"></a><a target="_blank" rel="noopener" href="https://arminto.github.io/2021/06/15/Nginx/">Nginx服务</a></h2><p>1、什么是正向代理和反向代理？</p>
+<p><strong>6、简述DNS进行域名解析的过程</strong></p>
+<p>答：</p>
+<ol>
+<li><p>浏览器缓存：浏览器会按照一定的频率缓存DNS记录。</p>
+</li>
+<li><p>操作系统缓存：如果浏览器缓存中找不到需要的DNS记录，那就去操作系统中找。</p>
+</li>
+<li><p>路由缓存：路由器也有DNS缓存。</p>
+</li>
+<li><p>缓存代理：国内代理的DNS服务器，有点类似于阿里云的CDN。</p>
+</li>
+<li><p>dns根服务器：ISP是互联网服务提供商(Internet Service Provider)的简称，ISP有专门的DNS服务器应对DNS查询请求。</p>
+</li>
+</ol>
+<h2 id="Nginx服务"><a href="#Nginx服务" class="headerlink" title="Nginx服务"></a><a target="_blank" rel="noopener" href="https://arminto.github.io/2021/06/15/Nginx/">Nginx服务</a></h2><p><strong>1、什么是正向代理和反向代理？</strong></p>
 <p>答：正向代理就是一个人发送一个请求直接就到达了目标的服务器；反方代理就是请求统一被Nginx接收，nginx反向代理服务器接收到之后，按照一定的规 则分发给了后端的业务处理服务器进行处理了</p>
-<p>2、nginx中的location主要作用是什么？</p>
+<p><strong>2、nginx中的location主要作用是什么？</strong></p>
 <p>答：location就是根据用户请求的URI来执行不同的应用，也就是根据用户请求的网站URL进行匹配，匹配成功即进行相关的操作。</p>
-<p>3、什么是动静分离？</p>
+<p><strong>3、什么是动静分离？</strong></p>
 <p>答：将动态请求和静态请求区分访问，静态由Nginx处理, 动态由PHP处理或Tomcat处理。</p>
-<p>4、Nginx负载均衡是基于那个模块来实现的？</p>
+<p><strong>4、Nginx负载均衡是基于那个模块来实现的？</strong></p>
 <p>答：upstream</p>
-<p>5、Nginx中负载均衡算法策略里常用的都有哪些？</p>
+<p><strong>5、Nginx中负载均衡算法策略里常用的都有哪些？</strong></p>
 <p>答：轮询、权重、ip_hash</p>
-<h2 id="Mysql服务"><a href="#Mysql服务" class="headerlink" title="Mysql服务"></a><a target="_blank" rel="noopener" href="https://arminto.github.io/2021/06/06/MySQL/">Mysql服务</a></h2><p>1、查看当前库和表的命令</p>
-<p>2、mysql的增删查改的命令</p>
-<p>3、索引的作用是什么？</p>
+<h2 id="Mysql服务"><a href="#Mysql服务" class="headerlink" title="Mysql服务"></a><a target="_blank" rel="noopener" href="https://arminto.github.io/2021/06/06/MySQL/">Mysql服务</a></h2><p><strong>1、查看当前库和表的命令</strong></p>
+<p><strong>2、mysql的增删查改的命令</strong></p>
+<p><strong>3、索引的作用是什么？</strong></p>
 <p>答：加快查询的速度。</p>
-<p>4、简述下MysQL中的事物</p>
+<p><strong>4、简述下MysQL中的事物</strong></p>
 <p>答：事务就是由一组SQL语句组成的，保证一组SQL语句要么全部执行成功，要么全部执行失败，以此维护数据的完整性。</p>
-<p>5、事务中的四个特性都是什么？</p>
+<p><strong>5、事务中的四个特性都是什么？</strong></p>
 <p>答： (Atomicity) 原子性、(Consistency) 一致性、 (Isolation) 隔离性、 (Durability) 持久性</p>
-<h2 id="Redis服务"><a href="#Redis服务" class="headerlink" title="Redis服务"></a><a target="_blank" rel="noopener" href="https://arminto.github.io/2021/06/15/Redis/">Redis服务</a></h2><h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a><a target="_blank" rel="noopener" href="https://arminto.github.io/tags/network/">网络</a></h2><p>1、tcp与udp的区别？</p>
+<h2 id="Redis服务"><a href="#Redis服务" class="headerlink" title="Redis服务"></a><a target="_blank" rel="noopener" href="https://arminto.github.io/2021/06/15/Redis/">Redis服务</a></h2><p><strong>1、简述下什么是redis?</strong></p>
+<p>答：Redis 是一个基于内存的高性能key-value数据库。 </p>
+<p><strong>2、Redis五大数据类型是什么</strong></p>
+<p>答：String、list、set、zset、hash</p>
+<p><strong>Redis持久化有几种方式？他们的区别又是什么？</strong></p>
+<p>答：RDB持久化（类似于快照功能）、AOF持久化（近似实时性）</p>
+<ul>
+<li><em><strong>RDB</strong></em>持久化是指在指定的时间间隔内将内存中的数据集快照写入磁盘，实际操作过程是fork一个子进程，先将数据集写入临时文件，写入成功后，再替换之前的文件，用二进制压缩存储。</li>
+<li><em><strong>AOF</strong></em>持久化是以日志的形式记录服务器所处理的每一个写、删除操作，查询操作不会记录，以文本的方式记录，可以打开文件看到详细的操作记录。</li>
+</ul>
+<p><strong>4、Redis 为什么单线程还这么快？</strong></p>
+<p>答：redis 是将所有的数据全部放在内存中的，所以说使用单线程去操作效率就是最高的，多线程（CPU上下文会切换：耗时的操作），对于内存系统来说，如果没有上下文切换效率就是最高的！多次读写都是在一个CPU上的，在内存情况下，这个就是最佳的方案！</p>
+<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a><a target="_blank" rel="noopener" href="https://arminto.github.io/tags/network/">网络</a></h2><p><strong>1、tcp与udp的区别？</strong></p>
 <p>答：他俩都是传输协议，基于连接与无连接；对系统资源的要求（TCP较多，UDP少）；TCP保证数据完整性，UDP可能丢包；</p>
-<p>2、讲下网络7层模型OSI都有哪些？</p>
+<p><strong>2、讲下网络7层模型OSI都有哪些？</strong></p>
 <p>答：<a target="_blank" rel="noopener" href="https://arminto.github.io/2021/07/15/OSI%E4%B8%83%E5%B1%82%E5%8D%8F%E8%AE%AE/">OSI 七层模型架构图</a></p>
+<p><strong>3、简述下路由的过程</strong></p>
+<p>答：当路由器收到一个报文时，会找出目的IP地址，通过目的IP与自己的路由表进行匹配，根据路由条目的指示决定出接口及下一跳IP。</p>
+<p><strong>4、路由表的组成部分有哪些？</strong></p>
+<p>答：目的IP、掩码、路由协议、优先级、开销，下一跳IP及下一跳出接口。</p>
+<p><strong>5、怎么查看路由表？</strong></p>
+<p>答：dis ip routing</p>
+<h2 id="keeplived-amp-LVS"><a href="#keeplived-amp-LVS" class="headerlink" title="keeplived &amp; LVS"></a>keeplived &amp; LVS</h2><p><strong>1、keeplived 有哪些模块？并说下他们各自的作用</strong></p>
+<p>答：keepalived主要有三个模块，分别是core、check和vrrp</p>
+<ol>
+<li><p>core模块为keepalived的核心，负责主进程的启动、维护及全局配置文件的加载和解析。</p>
+</li>
+<li><p>vrrp模块是来实现VRRP协议的。</p>
+</li>
+<li><p>check负责健康检查，常见的方式有端口检查及URL检查。</p>
+</li>
+</ol>
+<p><strong>2、解释一下vrrp 协议</strong></p>
+<p>答：虚拟路由冗余协议，可以认为是实现路由器高可用的协议，即将N台提供相同功能的路由器组成一个路由器组，这个组里面有一个master和多个backup，master上面有一个对外提供服务的vip（该路由器所在局域网内其他机器的默认路由为该vip），master会发组播，当backup收不到vrrp包时就认为master宕掉了，这时就需要根据VRRP的优先级来选举一个backup当master。这样的话就可以保证路由器的高可用了。</p>
+<p><strong>3、简述LVS的工作模式及其工作过程？</strong></p>
+<p>答：LVS 有三种负载均衡的模式，分别是VS/NAT（nat 模式）、VS/DR（路由模式）、VS/TUN（隧道模式）。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">NAT模式（VS-NAT）</span><br><span class="line"></span><br><span class="line">原理：首先负载均衡器接收到客户的请求数据包时，根据调度算法决定将请求发送给哪个后端的真实服务器（RS）。然后负载均衡器就把客户端发送的请求数据包的目标IP地址及端口改成后端真实服务器的IP地址（RIP）。真实服务器响应完请求后，查看默认路由，把响应后的数据包发送给负载均衡器，负载均衡器在接收到响应包后，把包的源地址改成虚拟地址（VIP）然后发送回给客户端。</span><br><span class="line"></span><br><span class="line">优点：集群中的服务器可以使用任何支持TCP/IP的操作系统，只要负载均衡器有一个合法的IP地址。</span><br><span class="line"></span><br><span class="line">缺点：扩展性有限，当服务器节点增长过多时，由于所有的请求和应答都需要经过负载均衡器，因此负载均衡器将成为整个系统的瓶颈。</span><br><span class="line"></span><br><span class="line">IP隧道模式（VS-TUN）</span><br><span class="line"></span><br><span class="line">原理：首先负载均衡器接收到客户的请求数据包时，根据调度算法决定将请求发送给哪个后端的真实服务器（RS）。然后负载均衡器就把客户端发送的请求报文封装一层IP隧道（T-IP）转发到真实服务器（RS）。真实服务器响应完请求后，查看默认路由，把响应后的数据包直接发送给客户端，不需要经过负载均衡器。</span><br><span class="line"></span><br><span class="line">优点：负载均衡器只负责将请求包分发给后端节点服务器，而RS将应答包直接发给用户。所以，减少了负载均衡器的大量数据流动，负载均衡器不再是系统的瓶颈，也能处理很巨大的请求量。</span><br><span class="line"></span><br><span class="line">缺点：隧道模式的RS节点需要合法IP，这种方式需要所有的服务器支持“IP Tunneling”。</span><br><span class="line"></span><br><span class="line">直接路由模式（VS-DR）</span><br><span class="line"></span><br><span class="line">原理：首先负载均衡器接收到客户的请求数据包时，根据调度算法决定将请求发送给哪个后端的真实服务器（RS）。然后负载均衡器就把客户端发送的请求数据包的目标MAC地址改成后端真实服务器的MAC地址（R-MAC）。真实服务器响应完请求后，查看默认路由，把响应后的数据包直接发送给客户端，不需要经过负载均衡器。</span><br><span class="line"></span><br><span class="line">优点：负载均衡器只负责将请求包分发给后端节点服务器，而RS将应答包直接发给用户。所以，减少了负载均衡器的大量数据流动，负载均衡器不再是系统的瓶颈，也能处理很巨大的请求量。</span><br><span class="line"></span><br><span class="line">缺点：需要负载均衡器与真实服务器RS都有一块网卡连接到同一物理网段上，必须在同一个局域网环境。</span><br></pre></td></tr></table></figure>
+
+<h2 id="KVM虚拟化"><a href="#KVM虚拟化" class="headerlink" title="KVM虚拟化"></a>KVM虚拟化</h2><p><strong>1、什么是虚拟化？</strong></p>
+<p>答：就是将一台物理机虚拟成多台虚拟机，虚拟机之间互不干扰。</p>
+<p><strong>2、常见的虚拟化软件都有哪些？</strong></p>
+<p>答：vmware、kvm</p>
+<p><strong>3、怎么查看当前系统是使用哪家的虚拟化？</strong></p>
+<p>答：lscpu</p>
+<p><strong>4、kvm的三个组件及作用</strong></p>
+<p>答：libvirt（用来管理虚拟机）、virt（安装和克隆虚拟机）、qemu（管理虚拟机磁盘的）</p>
+<p><strong>5、如何查看正在运行的虚拟机</strong></p>
+<p>答：virsh list</p>
+<p><strong>6、kvm如何进行子机的开机关机操作</strong></p>
+<p>virsh start centos7 开机 virsh shutdown centos7 关机</p>
 
     </div>
 
@@ -367,7 +438,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#linux-%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="nav-text">linux 面试题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-%E5%AE%B9%E5%99%A8"><span class="nav-text">docker 容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E6%8E%92k8s"><span class="nav-text">编排k8s</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ansible%E8%87%AA%E5%8A%A8%E5%8C%96"><span class="nav-text">ansible自动化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web%E7%BD%91%E7%AB%99"><span class="nav-text">web网站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx%E6%9C%8D%E5%8A%A1"><span class="nav-text">Nginx服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql%E6%9C%8D%E5%8A%A1"><span class="nav-text">Mysql服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E6%9C%8D%E5%8A%A1"><span class="nav-text">Redis服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C"><span class="nav-text">网络</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#linux-%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="nav-text">linux 面试题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-%E5%AE%B9%E5%99%A8"><span class="nav-text">docker 容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E6%8E%92k8s"><span class="nav-text">编排k8s</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ansible%E8%87%AA%E5%8A%A8%E5%8C%96"><span class="nav-text">ansible自动化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web%E7%BD%91%E7%AB%99"><span class="nav-text">web网站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx%E6%9C%8D%E5%8A%A1"><span class="nav-text">Nginx服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql%E6%9C%8D%E5%8A%A1"><span class="nav-text">Mysql服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E6%9C%8D%E5%8A%A1"><span class="nav-text">Redis服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C"><span class="nav-text">网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#keeplived-amp-LVS"><span class="nav-text">keeplived &amp; LVS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KVM%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="nav-text">KVM虚拟化</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
