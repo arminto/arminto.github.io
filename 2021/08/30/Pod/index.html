@@ -21,13 +21,13 @@
   </script>
 
   <meta property="og:type" content="article">
-<meta property="og:title" content="Pod">
+<meta property="og:title" content="Pod生命周期（四）">
 <meta property="og:url" content="http://example.com/2021/08/30/Pod/index.html">
 <meta property="og:site_name" content="LEMON">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/008i3skNly1gr7v1p27o3j30xd0g70u2.jpg">
 <meta property="article:published_time" content="2021-08-30T06:27:52.000Z">
-<meta property="article:modified_time" content="2021-08-30T06:29:07.203Z">
+<meta property="article:modified_time" content="2021-08-30T06:30:17.277Z">
 <meta property="article:author" content="Armin">
 <meta property="article:tag" content="编排">
 <meta name="twitter:card" content="summary">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>Pod | LEMON</title>
+  <title>Pod生命周期（四） | LEMON</title>
   
 
 
@@ -160,7 +160,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Pod
+          Pod生命周期（四）
         </h1>
 
         <div class="post-meta">
@@ -185,7 +185,7 @@
         <!--toc-->
 <span id="more"></span>
 
-<h1 id="Pod（生命周期）"><a href="#Pod（生命周期）" class="headerlink" title="Pod（生命周期）"></a>Pod（生命周期）</h1><blockquote>
+<h1 id="Pod-生命周期"><a href="#Pod-生命周期" class="headerlink" title="Pod 生命周期"></a>Pod 生命周期</h1><blockquote>
 <p>pod对象自从创建开始至终止退出的时间范围称为生命周期，在这段时间中，pod会处于多种不同的状态，并执行一些操作；其中，创建主容器为必须的操作，其他可选的操作还包括运行初始化容器（init container）、容器启动后钩子（start hook）、容器的存活性探测（liveness probe）、就绪性探测（readiness probe）以及容器终止前狗子（pre stop hook）等，这些操作是否执行则取决于pod的定义。</p>
 </blockquote>
 <p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/008i3skNly1gr7v1p27o3j30xd0g70u2.jpg"></p>
@@ -331,8 +331,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/08/30/Kubernetes%E8%B5%84%E6%BA%90%E6%B8%85%E5%8D%95/" rel="prev" title="Kubernetes资源清单">
-      <i class="fa fa-chevron-left"></i> Kubernetes资源清单
+    <a href="/2021/08/30/Kubernetes%E8%B5%84%E6%BA%90%E6%B8%85%E5%8D%95/" rel="prev" title="Kubernetes资源清单（三）">
+      <i class="fa fa-chevron-left"></i> Kubernetes资源清单（三）
     </a></div>
       <div class="post-nav-item"></div>
     </div>
@@ -393,7 +393,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pod%EF%BC%88%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%89"><span class="nav-text">Pod（生命周期）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81Init-C"><span class="nav-text">1、Init C</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%AE%B9%E5%99%A8%E6%8E%A2%E9%92%88"><span class="nav-text">2、容器探针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81Pod-hook"><span class="nav-text">3、Pod hook</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81Init-C-amp-%E6%8E%A2%E9%92%88-%E6%95%B4%E5%90%88%E4%BD%BF%E7%94%A8"><span class="nav-text">4、Init C &amp; 探针 整合使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81Pod%E7%9A%84%E7%9B%B8%E4%BD%8D"><span class="nav-text">5、Pod的相位</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pod-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-text">Pod 生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81Init-C"><span class="nav-text">1、Init C</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%AE%B9%E5%99%A8%E6%8E%A2%E9%92%88"><span class="nav-text">2、容器探针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81Pod-hook"><span class="nav-text">3、Pod hook</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81Init-C-amp-%E6%8E%A2%E9%92%88-%E6%95%B4%E5%90%88%E4%BD%BF%E7%94%A8"><span class="nav-text">4、Init C &amp; 探针 整合使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81Pod%E7%9A%84%E7%9B%B8%E4%BD%8D"><span class="nav-text">5、Pod的相位</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
