@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Controllers控制器">
+<meta property="og:url" content="http://example.com/2021/08/30/Controllers%E6%8E%A7%E5%88%B6%E5%99%A8/index.html">
+<meta property="og:site_name" content="LEMON">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-30T06:44:20.000Z">
+<meta property="article:modified_time" content="2021-08-30T06:45:31.160Z">
+<meta property="article:author" content="Armin">
+<meta property="article:tag" content="编排">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/08/30/Controllers%E6%8E%A7%E5%88%B6%E5%99%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Controllers控制器 | LEMON</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LEMON</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录站</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/30/Controllers%E6%8E%A7%E5%88%B6%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/armin.png">
+      <meta itemprop="name" content="Armin">
+      <meta itemprop="description" content="记录生活中的点点滴滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LEMON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Controllers控制器
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+        <!--toc-->
+<span id="more"></span>
+
+<h1 id="Controllers-控制器"><a href="#Controllers-控制器" class="headerlink" title="Controllers 控制器"></a>Controllers 控制器</h1><blockquote>
+<p>kubernetes不会直接创建pod，而是通过controller来管理pod的，所以controller负责维护集群的状态，比如故障检测、自动扩展、滚动更新。</p>
+<p>Kubernetes中会有很多的controller（控制器），这些就相当于一个状态机（快照），用来控制Pod的具体状态和行为。</p>
+</blockquote>
+<h2 id="1-ReplicationController"><a href="#1-ReplicationController" class="headerlink" title="1. ReplicationController"></a>1. ReplicationController</h2><p>ReplicationController（RC）用来确保容器应用的副本数始终保持在用户定义的副本数，即如果有容器异常退出，会自动创建新的 Pod 来替代；而如果异常多出来的容器也会自动回收；</p>
+<h2 id="2-ReplicaSet"><a href="#2-ReplicaSet" class="headerlink" title="2. ReplicaSet"></a>2. ReplicaSet</h2><p>在新版本的 Kubernetes 中建议使用 ReplicaSet来取代 ReplicationController 。ReplicaSet 跟ReplicationController 没有本质的不同，只是名字不一样，并且 ReplicaSet 支持集合式的 selector；</p>
+<p><strong>创建 ReplicaSet.yaml</strong></p>
+<p>在新版本的 Kubernetes 中建议使用 ReplicaSet来取代 ReplicationController 。ReplicaSet 跟ReplicationController 没有本质的不同，只是名字不一样，并且 ReplicaSet 支持集合式的 selector；</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ReplicaSet</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">frontend</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">3</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">tier:</span> <span class="string">web</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">tier:</span> <span class="string">web</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">nginx:latest</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">GET_HOSTS_FROM</span></span><br><span class="line">          <span class="attr">value:</span> <span class="string">dns</span></span><br><span class="line">        <span class="attr">ports:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">80</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>简单使用下</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get pod --show-labels</span><br><span class="line">NAME             READY   STATUS    RESTARTS   AGE   LABELS</span><br><span class="line">frontend-d8rs5   1/1     Running   0          29s   tier=web</span><br><span class="line">frontend-gczvb   1/1     Running   0          29s   tier=web</span><br><span class="line">frontend-twj7z   1/1     Running   0          29s   tier=web</span><br><span class="line"></span><br><span class="line">$ kubectl label pod frontend-d8rs5 tier=lemon --overwrite=<span class="literal">true</span></span><br><span class="line">pod/frontend-d8rs5 labeled</span><br><span class="line">$ kubectl get pod --show-labels</span><br><span class="line">NAME             READY   STATUS    RESTARTS   AGE    LABELS</span><br><span class="line">frontend-d8rs5   1/1     Running   0          3m3s   tier=lemon</span><br><span class="line">frontend-gczvb   1/1     Running   0          3m3s   tier=web</span><br><span class="line">frontend-mrm8n   1/1     Running   0          10s    tier=web</span><br><span class="line">frontend-twj7z   1/1     Running   0          3m3s   tier=web</span><br><span class="line"></span><br><span class="line">$ kubectl delete pod --all</span><br><span class="line">pod <span class="string">&quot;frontend-d8rs5&quot;</span> deleted</span><br><span class="line">pod <span class="string">&quot;frontend-gczvb&quot;</span> deleted</span><br><span class="line">pod <span class="string">&quot;frontend-mrm8n&quot;</span> deleted</span><br><span class="line">pod <span class="string">&quot;frontend-twj7z&quot;</span> deleted</span><br><span class="line">$ kubectl get pod --show-labels</span><br><span class="line">NAME             READY   STATUS    RESTARTS   AGE   LABELS</span><br><span class="line">frontend-26xlj   1/1     Running   0          11s   tier=web</span><br><span class="line">frontend-m4vhl   1/1     Running   0          11s   tier=web</span><br><span class="line">frontend-zs9tk   1/1     Running   0          11s   tier=web</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除 RS</span></span><br><span class="line">$ kubectl delete rs frontend -n default</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Deployment"><a href="#3-Deployment" class="headerlink" title="3. Deployment"></a>3. Deployment</h2><p>Deployments（无状态，守护进程类，只关注群体不关注个体）</p>
+<ul>
+<li>一个 <em>Deployment</em> 控制器为 Pods和 ReplicaSets 提供声明式的更新能力。</li>
+<li>虽然 ReplicaSet可以独立使用，但一般还是建议使用 Deployment来自动管理ReplicaSe，这样就无需担心跟其他机制的不兼容问题（比如 ReplicaSe不支持rolling-update 但 Deployment支持）。</li>
+</ul>
+<p>Deployment 为 Pod 和 ReplicaSet 提供了一个声明式定义 (declarative) 方法，用来替代以前的ReplicationController 来方便的管理应用。典型的应用场景包括；</p>
+<ul>
+<li>定义 Deployment 来创建 Pod 和 ReplicaSet</li>
+<li>应用扩容和缩容</li>
+<li>滚动升级和回滚</li>
+<li>暂停和继续 Deployment</li>
+</ul>
+<h3 id="3-1-创建一个-deployment-对象"><a href="#3-1-创建一个-deployment-对象" class="headerlink" title="3.1 创建一个 deployment 对象"></a>3.1 创建一个 deployment 对象</h3><p><strong>Deployment.yaml</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nginx-deployment</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">3</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">web</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">nginx:1.7.9</span></span><br><span class="line">        <span class="attr">ports:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">80</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>检查应用状态</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get deploy</span><br><span class="line">NAME               READY   UP-TO-DATE   AVAILABLE   AGE</span><br><span class="line">nginx-deployment   3/3     3            3           62s</span><br><span class="line"></span><br><span class="line">$ kubectl get rs</span><br><span class="line">NAME                          DESIRED   CURRENT   READY   AGE</span><br><span class="line">nginx-deployment-687dc75df7   3         3         3       65s</span><br><span class="line"></span><br><span class="line">$ kubectl get pod</span><br><span class="line">NAME                                READY   STATUS    RESTARTS   AGE</span><br><span class="line">nginx-deployment-687dc75df7-88tkk   1/1     Running   0          68s</span><br><span class="line">nginx-deployment-687dc75df7-b6whp   1/1     Running   0          68s</span><br><span class="line">nginx-deployment-687dc75df7-ljh46   1/1     Running   0          68s</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-Deployment-扩容缩"><a href="#3-2-Deployment-扩容缩" class="headerlink" title="3.2 Deployment 扩容缩"></a>3.2 Deployment 扩容缩</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl scale deployment nginx-deployment --replicas=5</span><br><span class="line">deployment.extensions/nginx-deployment scaled</span><br><span class="line">$ kubectl get pod</span><br><span class="line">NAME                                READY   STATUS    RESTARTS   AGE</span><br><span class="line">nginx-deployment-687dc75df7-88tkk   1/1     Running   0          7m22s</span><br><span class="line">nginx-deployment-687dc75df7-b6whp   1/1     Running   0          7m22s</span><br><span class="line">nginx-deployment-687dc75df7-ljh46   1/1     Running   0          7m22s</span><br><span class="line">nginx-deployment-687dc75df7-rnjzt   1/1     Running   0          8s</span><br><span class="line">nginx-deployment-687dc75df7-wfx74   1/1     Running   0          8s</span><br><span class="line"></span><br><span class="line">$ kubectl scale deployment nginx-deployment --replicas=2</span><br><span class="line">deployment.extensions/nginx-deployment scaled</span><br><span class="line">$ kubectl get pod</span><br><span class="line">NAME                                READY   STATUS    RESTARTS   AGE</span><br><span class="line">nginx-deployment-687dc75df7-88tkk   1/1     Running   0          8m18s</span><br><span class="line">nginx-deployment-687dc75df7-ljh46   1/1     Running   0          8m18s</span><br></pre></td></tr></table></figure>
+
+<p>如果集群支持 horizontal pod autoscaling 的话，还可以为Deployment设置自动扩展</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl autoscale deployment nginx-deployment --min=10--max=15--cpu-percent=80</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-滚动升级和回滚"><a href="#3-3-滚动升级和回滚" class="headerlink" title="3.3 滚动升级和回滚"></a>3.3 滚动升级和回滚</h3><blockquote>
+<p>Deployment 更新策略</p>
+</blockquote>
+<p>Deployment 可以保证在升级时只有一定数量的 Pod 是 down 的。默认的，它会确保至少有比期望的Pod数量少一个是up状态（最多一个不可用）。</p>
+<p>Deployment 同时也可以确保只创建出超过期望数量的一定数量的 Pod。默认的，它会确保最多比期望的Pod数量多一个的 Pod 是 up 的（最多1个 surge ）。</p>
+<p>未来的 Kuberentes 版本中，将从1-1变成25%-25% 。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 滚动升级</span></span><br><span class="line">$ kubectl <span class="built_in">set</span> image deployment/nginx-deployment nginx=nginx:1.9.1</span><br><span class="line">$ kubectl describe deploy nginx-deployment | grep -i <span class="string">&#x27;image&#x27;</span></span><br><span class="line">    Image:        nginx:1.9.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 回滚</span></span><br><span class="line">$ kubectl rollout undo deployment/nginx-deployment</span><br><span class="line">$ kubectl describe deploy nginx-deployment | grep -i <span class="string">&#x27;image&#x27;</span></span><br><span class="line">    Image:        nginx:1.7.9</span><br><span class="line"></span><br><span class="line"><span class="comment"># 也可以使用edit命令来编辑 Deployment</span></span><br><span class="line">$ kubectl edit deployment nginx-deployment</span><br><span class="line">     40       - image: nginx:latest</span><br><span class="line">deployment.extensions/nginx-deployment edited</span><br><span class="line">$ kubectl describe deploy nginx-deployment | grep -i <span class="string">&#x27;image&#x27;</span></span><br><span class="line">    Image:        nginx:latest</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新镜像实际上就是重新创建了一个rs</span></span><br><span class="line">$ kubectl get rs</span><br><span class="line">NAME                          DESIRED   CURRENT   READY   AGE</span><br><span class="line">nginx-deployment-5458686b99   2         2         2       23s</span><br><span class="line">nginx-deployment-687dc75df7   0         0         0       18m</span><br><span class="line">nginx-deployment-6df444bb79   0         0         0       5m55s</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Rollover（多个rollout并行）</p>
+</blockquote>
+<p>假如您创建了一个有5个niginx:1.7.9 replica的 Deployment，但是当还只有3个nginx:1.7.9的 replica 创建出来的时候您就开始更新含有5个nginx:1.9.1 replica 的 Deployment。在这种情况下，Deployment 会立即杀掉已创建的3个nginx:1.7.9的 Pod，并开始创建nginx:1.9.1的 Pod。它不会等到所有的5个nginx:1.7.9的Pod 都创建完成后才开始改变航道。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl rollout <span class="built_in">history</span> deployment nginx-deployment</span><br><span class="line">deployment.extensions/nginx-deployment </span><br><span class="line">REVISION  CHANGE-CAUSE</span><br><span class="line">2         &lt;none&gt;</span><br><span class="line">3         &lt;none&gt;</span><br><span class="line">4         &lt;none&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以使用 --revision参数指定某个历史版本</span></span><br><span class="line">$ kubectl rollout undo deployment nginx-deployment --to-revision=2</span><br><span class="line">deployment.extensions/nginx-deployment rolled back</span><br><span class="line">$ kubectl describe deploy nginx-deployment | grep -i <span class="string">&#x27;image&#x27;</span></span><br><span class="line">    Image:        nginx:1.9.1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ ps: kubectl rollout pause deployment nginx-deployment    <span class="comment">## 暂停 deployment 的更新</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除DeployMent</span></span><br><span class="line">$ kubectl delete deployment nginx-deployment -n default</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>清理 Policy</p>
+</blockquote>
+<p>可以通过设置.spec.revisonHistoryLimit项来指定 deployment 最多保留多少 revision 历史记录。默认的会保留所有的 revision；如果将该项设置为0，Deployment 就不允许回退了</p>
+<h2 id="4-DaemonSet"><a href="#4-DaemonSet" class="headerlink" title="4. DaemonSet"></a>4. DaemonSet</h2><p>DaemonSet 确保全部（或者一些）Node 上运行一个 Pod 的副本。当有 Node 加入集群时，也会为他们新增一个Pod 。当有 Node 从集群移除时，这些 Pod 也会被回收。删除 DaemonSet 将会删除它创建的所有 Pod</p>
+<p>使用 DaemonSet 的一些典型用法：</p>
+<ul>
+<li>运行集群存储 daemon，例如在每个 Node 上运行glusterd、ceph</li>
+<li>在每个 Node 上运行日志收集 daemon，例如fluentd、logstash</li>
+<li>在每个 Node 上运行监控 daemon，例如Prometheus Node Exporter、collectd、Datadog 代理、New Relic 代理，或 Ganglia gmond</li>
+</ul>
+<p><strong>创建DaemonSet.yaml</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">DaemonSet</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">deamonset-example</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">daemonset</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">deamonset-example</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">deamonset-example</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">daemonset-example</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">nginx:latest</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>看下是不是在所有node节点上都运行了</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get pod -owide</span><br><span class="line">NAME                      READY   STATUS    RESTARTS   AGE</span><br><span class="line">deamonset-example-tqmfx   1/1     Running   0          94s</span><br><span class="line">deamonset-example-wqvsm   1/1     Running   0          94s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除 DaemonSet</span></span><br><span class="line">$ kubectl delete daemonset deamonset-example -n default</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-Jobs-一次性任务"><a href="#5-Jobs-一次性任务" class="headerlink" title="5. Jobs 一次性任务"></a>5. Jobs 一次性任务</h2><p>一次性任务，运行完成后pod销毁，不再重新启动新容器。还可以任务定时运行。</p>
+<p>Job 负责批处理任务，即仅执行一次的任务，它保证批处理任务的一个或多个 Pod 成功结束</p>
+<p>特殊说明:</p>
+<ul>
+<li>spec.template 格式同 Pod</li>
+<li>RestartPolicy 仅支持 Never 或 OnFailure</li>
+<li>单个Pod时，默认 Pod 成功运行后 Job 即结束</li>
+<li>spec.completions 标志 Job 结束需要成功运行的 Pod 个数，默认为1</li>
+<li>spec.parallelism 标志并行运行的 Pod 的个数，默认为1</li>
+<li>spec.activeDeadlineSeconds 标志失败Pod的重试最大时间，超过这个时间不会继续重试</li>
+</ul>
+<p><strong>创建 Job.yaml</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">batch/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Job</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">pi</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">pi</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">pi</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">perl</span></span><br><span class="line">        <span class="attr">command:</span> [<span class="string">&quot;perl&quot;</span>,<span class="string">&quot;-Mbignum=bpi&quot;</span>,<span class="string">&quot;-wle&quot;</span>,<span class="string">&quot;print bpi(2000)&quot;</span>]</span><br><span class="line">      <span class="attr">restartPolicy:</span> <span class="string">Never</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>简单使用</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get job</span><br><span class="line">NAME   COMPLETIONS   DURATION   AGE</span><br><span class="line">pi     1/1           3m26s      8m54s</span><br><span class="line"></span><br><span class="line">$ kubectl get pod</span><br><span class="line">NAME                      READY   STATUS      RESTARTS   AGE</span><br><span class="line">pi-bfmq8                  0/1     Completed   0          9m1s</span><br><span class="line"></span><br><span class="line">$ kubectl <span class="built_in">log</span> -f pi-bfmq8</span><br><span class="line"><span class="built_in">log</span> is DEPRECATED and will be removed <span class="keyword">in</span> a future version. Use logs instead.</span><br><span class="line">3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091456485669234603486104543266482133936072602491412737245870066063155881748815209209628292540917153643678925903600113305305488204665213841469519415116094330572703657595919530921861173819326117931051185480744623799627495673518857527248912279381830119491298336733624406566430860213949463952247371907021798609437027705392171762931767523846748184676694051320005681271452635608277857713427577896091736371787214684409012249534301465495853710507922796892589235420199561121290219608640344181598136297747713099605187072113499999983729780499510597317328160963185950244594553469083026425223082533446850352619311881710100031378387528865875332083814206171776691473035982534904287554687311595628638823537875937519577818577805321712268066130019278766111959092164201989380952572010654858632788659361533818279682303019520353018529689957736225994138912497217752834791315155748572424541506959508295331168617278558890750983817546374649393192550604009277016711390098488240128583616035637076601047101819429555961989467678374494482553797747268471040475346462080466842590694912933136770289891521047521620569660240580381501935112533824300355876402474964732639141992726042699227967823547816360093417216412199245863150302861829745557067498385054945885869269956909272107975093029553211653449872027559602364806654991198818347977535663698074265425278625518184175746728909777727938000816470600161452491921732172147723501414419735685481613611573525521334757418494684385233239073941433345477624168625189835694855620992192221842725502542568876717904946016534668049886272327917860857843838279679766814541009538837863609506800642251252051173929848960841284886269456042419652850222106611863067442786220391949450471237137869609563643719172874677646575739624138908658326459958133904780275905</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除 Job</span></span><br><span class="line">$ kubectl delete job pi -n default</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-CronJob-定时任务"><a href="#6-CronJob-定时任务" class="headerlink" title="6. CronJob 定时任务"></a>6. CronJob 定时任务</h3><p>cronjob 其实就是在job的基础上加上了时间调度，可以：在给定的时间点运行一个任务，也可以周期性的在给定时间点运行。（与linux中的crontab类似）</p>
+<p>Cron Job管理基于时间的 Job，即：</p>
+<ul>
+<li>在给定时间点只运行一次</li>
+<li>周期性地在给定时间点运行</li>
+</ul>
+<p>使用前提条件：当前使用的Kubernetes集群，版本 &gt;= 1.8(对 CronJob)。对于先前版本的集群，版本 &lt;1.8，启动 API Server时，通过传递选项–runtime-config=batch/v2alpha1=true可以开启 batch/v2alpha1API。</p>
+<p>典型的用法如下所示：</p>
+<ul>
+<li>在给定的时间点调度 Job 运行</li>
+<li>创建周期性运行的 Job，例如：数据库备份、发送邮件</li>
+</ul>
+<p>特殊说明：</p>
+<ul>
+<li><p>spec.template 格式同 Pod</p>
+</li>
+<li><p>RestartPolicy 仅支持 Never 或 OnFailure</p>
+</li>
+<li><p>单个 Pod 时，默认 Pod 成功运行后 Job 即结束</p>
+</li>
+<li><p>spec.completions 标志 Job 结束需要成功运行的 Pod 个数，默认为1</p>
+</li>
+<li><p>spec.parallelism 标志并行运行的 Pod 的个数，默认为1</p>
+</li>
+<li><p>spec.activeDeadlineSeconds 标志失败 Pod 的重试最大时间，超过这个时间不会继续重试</p>
+</li>
+<li><p>spec.schedule：调度，必需字段，指定任务运行周期，格式同 Cron</p>
+</li>
+<li><p>spec.jobTemplate：Job 模板，必需字段，指定需要运行的任务，格式同 Job</p>
+</li>
+<li><p>spec.startingDeadlineSeconds：启动 Job 的期限（秒级别），该字段是可选的。如果因为任何原因而错过了被调度的时间，那么错过执行时间的 Job 将被认为是失败的。如果没有指定，则没有期限</p>
+</li>
+<li><p>spec.concurrencyPolicy：并发策略，该字段也是可选的。它指定了如何处理被 Cron Job 创建的 Job 的并发执行。只允许指定下面策略中的一种：</p>
+<ul>
+<li><p>Allow（默认）：允许并发运行 Job</p>
+</li>
+<li><p>Forbid：禁止并发运行，如果前一个还没有完成，则直接跳过下一个</p>
+</li>
+<li><p>Replace：取消当前正在运行的 Job，用一个新的来替换</p>
+<p>注意, 当前策略只能应用于同一个Cron Job创建的Job。如果存在多个Cron Job, 它们创建的 Job 之间总是允许并发运行。</p>
+</li>
+</ul>
+</li>
+<li><p>spec.suspend：挂起，该字段也是可选的。如果设置为true，后续所有执行都会被挂起。它对已经开始执行的 Job 不起作用。默认值为false。</p>
+</li>
+<li><p>spec.successfulJobsHistoryLimit和.spec.failedJobsHistoryLimit：历史限制，是可选的字段。它们指定了可以保留多少完成和失败的 Job。默认情况下，它们分别设置为3和1。设置限制的值为0，相关类型的 Job 完成后将不会被保留。</p>
+</li>
+</ul>
+<p><strong>创建CronJob.yaml</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">batch/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">CronJob</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">hello</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">schedule:</span> <span class="string">&quot;*/1 * * * *&quot;</span></span><br><span class="line">  <span class="attr">jobTemplate:</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">template:</span></span><br><span class="line">        <span class="attr">spec:</span></span><br><span class="line">          <span class="attr">containers:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">hello</span></span><br><span class="line">            <span class="attr">image:</span> <span class="string">busybox</span></span><br><span class="line">            <span class="attr">args:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">/bin/sh</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">-c</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">date;</span> <span class="string">echo</span> <span class="string">Hello</span> <span class="string">from</span> <span class="string">the</span> <span class="string">Kubernetes</span> <span class="string">cluster</span></span><br><span class="line">          <span class="attr">restartPolicy:</span> <span class="string">OnFailure</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>简单使用</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get cronjob</span><br><span class="line">NAME    SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE</span><br><span class="line">hello   */1 * * * *   False     1        10s             22s</span><br><span class="line"></span><br><span class="line">$ kubectl get job</span><br><span class="line">NAME               COMPLETIONS   DURATION   AGE</span><br><span class="line">hello-1614322500   1/1           3s         62s</span><br><span class="line">hello-1614322560   0/1           2s         2s</span><br><span class="line"></span><br><span class="line">$ kubectl get pod</span><br><span class="line">NAME                     READY   STATUS      RESTARTS   AGE</span><br><span class="line">hello-1614322500-p7wmh   0/1     Completed   0          6s</span><br><span class="line">hello-1614322560-vsz58   0/1     Completed   0          27s</span><br><span class="line"></span><br><span class="line">$ kubectl logs -f hello-1614322500-p7wmh</span><br><span class="line">Sat Mar 20 13:03:17 UTC 2021</span><br><span class="line">Hello from the Kubernetes cluster</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除 cronjob</span></span><br><span class="line">$ kubectl delete cronjob hello -n default</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-StateFulSet"><a href="#7-StateFulSet" class="headerlink" title="7. StateFulSet"></a>7. StateFulSet</h3><p>StatefulSets（管理有状态应用） 作为 Controller 为 Pod 提供唯一的标识。它可以保证部署和 scale 的顺序StatefulSet是为了解决有状态服务的问题（对应Deployments和ReplicaSets是为无状态服务而设计），其应用场景包括：</p>
+<ul>
+<li>稳定的持久化存储，即Pod重新调度后还是能访问到相同的持久化数据，基于PVC来实现。</li>
+<li>稳定的网络标志，即Pod重新调度后其PodName和HostName不变，基于Headless Service（即没有Cluster IP的Service）来实现。</li>
+<li>有序部署，有序扩展，即Pod是有顺序的，在部署或者扩展的时候要依据定义的顺序依次依次进行（即从0到N-1，在下一个Pod运行之前所有之前的Pod必须都是Running和Ready状态），基于init containers来实现。</li>
+<li>有序收缩，有序删除（即从N-1到0）。</li>
+</ul>
+<p><strong>Ps 该控制器会在PV章节讲到。</strong></p>
+<h3 id="8-Horizontal-Pod-Autoscaler"><a href="#8-Horizontal-Pod-Autoscaler" class="headerlink" title="8. Horizontal Pod Autoscaler"></a>8. Horizontal Pod Autoscaler</h3><p>Horizontal Pod Autoscaler 应用的资源使用率通常都有高峰和低谷的时候，如何削峰填谷，提高集群的整体资源利用率，让service中的Pod个数自动调整呢？这就有赖于Horizontal Pod Autoscaler了，顾名思义，使Pod水平自动缩放。</p>
+
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+      </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BC%96%E6%8E%92/" rel="tag"># 编排</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/30/Pod/" rel="prev" title="Pod生命周期（四）">
+      <i class="fa fa-chevron-left"></i> Pod生命周期（四）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/08/30/Service/" rel="next" title="Service">
+      Service <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Controllers-%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="nav-text">Controllers 控制器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-ReplicationController"><span class="nav-text">1. ReplicationController</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-ReplicaSet"><span class="nav-text">2. ReplicaSet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Deployment"><span class="nav-text">3. Deployment</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA-deployment-%E5%AF%B9%E8%B1%A1"><span class="nav-text">3.1 创建一个 deployment 对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Deployment-%E6%89%A9%E5%AE%B9%E7%BC%A9"><span class="nav-text">3.2 Deployment 扩容缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E6%BB%9A%E5%8A%A8%E5%8D%87%E7%BA%A7%E5%92%8C%E5%9B%9E%E6%BB%9A"><span class="nav-text">3.3 滚动升级和回滚</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-DaemonSet"><span class="nav-text">4. DaemonSet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Jobs-%E4%B8%80%E6%AC%A1%E6%80%A7%E4%BB%BB%E5%8A%A1"><span class="nav-text">5. Jobs 一次性任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-CronJob-%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="nav-text">6. CronJob 定时任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-StateFulSet"><span class="nav-text">7. StateFulSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Horizontal-Pod-Autoscaler"><span class="nav-text">8. Horizontal Pod Autoscaler</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Armin"
+      src="/uploads/armin.png">
+  <p class="site-author-name" itemprop="name">Armin</p>
+  <div class="site-description" itemprop="description">记录生活中的点点滴滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/" title="GitHub → https:&#x2F;&#x2F;github.com" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://aws.amazon.com/cn/" title="AWS → https:&#x2F;&#x2F;aws.amazon.com&#x2F;cn&#x2F;" rel="noopener" target="_blank"><i class="fab fa-aws fa-fw"></i>AWS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.processon.com/" title="processon → https:&#x2F;&#x2F;www.processon.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-accusoft fa-fw"></i>processon</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cn-ki.net/" title="知识库 → https:&#x2F;&#x2F;www.cn-ki.net&#x2F;" rel="noopener" target="_blank"><i class="fas fa-book-open fa-fw"></i>知识库</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tophub.today/" title="看新闻 → https:&#x2F;&#x2F;tophub.today&#x2F;" rel="noopener" target="_blank"><i class="far fa-newspaper fa-fw"></i>看新闻</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://m.zxjsq.net/" title="计算器 → http:&#x2F;&#x2F;m.zxjsq.net" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计算器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://shijisuishu.bmcx.com/20010314__shijisuishu/" title="计龄器 → https:&#x2F;&#x2F;shijisuishu.bmcx.com&#x2F;20010314__shijisuishu&#x2F;" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计龄器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tool.oschina.net/hexconvert" title="进制转换 → https:&#x2F;&#x2F;tool.oschina.net&#x2F;hexconvert" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>进制转换</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.sojson.com/convert/subnetmask.html" title="子网计算 → https:&#x2F;&#x2F;www.sojson.com&#x2F;convert&#x2F;subnetmask.html" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>子网计算</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.baidu.com/" title="百度一下 → https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank"><i class="fas fa-search fa-fw"></i>百度一下</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Armin</span>
+</div>
+
+<div class="powered-by">
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
