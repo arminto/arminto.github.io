@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Kubernetes资源清单">
+<meta property="og:url" content="http://example.com/2021/08/30/Kubernetes%E8%B5%84%E6%BA%90%E6%B8%85%E5%8D%95/index.html">
+<meta property="og:site_name" content="LEMON">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-30T06:25:19.000Z">
+<meta property="article:modified_time" content="2021-08-30T06:26:55.575Z">
+<meta property="article:author" content="Armin">
+<meta property="article:tag" content="编排">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/08/30/Kubernetes%E8%B5%84%E6%BA%90%E6%B8%85%E5%8D%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Kubernetes资源清单 | LEMON</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LEMON</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录站</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/30/Kubernetes%E8%B5%84%E6%BA%90%E6%B8%85%E5%8D%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/armin.png">
+      <meta itemprop="name" content="Armin">
+      <meta itemprop="description" content="记录生活中的点点滴滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LEMON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kubernetes资源清单
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+        <!--toc-->
+<span id="more"></span>
+
+<h1 id="Kubernetes资源清单"><a href="#Kubernetes资源清单" class="headerlink" title="Kubernetes资源清单"></a>Kubernetes资源清单</h1><h2 id="1-资源类型"><a href="#1-资源类型" class="headerlink" title="1. 资源类型"></a>1. 资源类型</h2><blockquote>
+<p><strong>k8s中所有的资源都会抽象为资源，资源实例化之后，叫做对象。</strong></p>
+</blockquote>
+<p><em><strong>分为以下三种：</strong></em></p>
+<ul>
+<li>名称空间级别</li>
+<li>集群级别</li>
+<li>元数据型级别</li>
+</ul>
+<h3 id="1-1-名称空间级别"><a href="#1-1-名称空间级别" class="headerlink" title="1.1 名称空间级别"></a>1.1 名称空间级别</h3><ul>
+<li><p><strong>服务发现及负载均衡型资源（ ServiceDiscovery LoadBalance）：</strong> Service(SVC)、Ingress、……</p>
+</li>
+<li><p><strong>配置与存储型资源：</strong> Volume（存储卷）、CSI（容器存储接口，可以扩展各种各样的第三方存储卷）</p>
+</li>
+<li><p><strong>特殊类型的存储卷：</strong> ConfigMap（当配置中心来使用的资源类型）、Secret（保存敏感数据）、DownwardAPI（把外部环境中的信息输出给容器）</p>
+</li>
+<li><p><strong>工作负载型资源（workload）：</strong> Pod（pause）、Replicase、 Deployment、StatefulSet、DaemonSet、Job、Cron Job（Replication Controller在v1.11版本被废弃）</p>
+</li>
+</ul>
+<h3 id="1-2-集群级资源级别"><a href="#1-2-集群级资源级别" class="headerlink" title="1.2 集群级资源级别"></a>1.2 集群级资源级别</h3><ul>
+<li>Namespace</li>
+<li>Node</li>
+<li>Role</li>
+<li>Clusterrole</li>
+<li>RoleBinding</li>
+<li>ClusterRoleBinding</li>
+</ul>
+<h3 id="1-3-元数据型资源"><a href="#1-3-元数据型资源" class="headerlink" title="1.3 元数据型资源"></a>1.3 元数据型资源</h3><ul>
+<li><p>HPA</p>
+</li>
+<li><p>PodTemplate</p>
+</li>
+<li><p>Limi tRange</p>
+</li>
+</ul>
+<h2 id="2-资源清单"><a href="#2-资源清单" class="headerlink" title="2. 资源清单"></a>2. 资源清单</h2><blockquote>
+<p><strong>在k8s中，一般使用yaml格式的文件来创建符合我们预期期望的pod，这样的yaml文件我们一般称为资源清单</strong></p>
+</blockquote>
+<h3 id="2-1-yaml语法格式"><a href="#2-1-yaml语法格式" class="headerlink" title="2.1 yaml语法格式"></a>2.1 yaml语法格式</h3><blockquote>
+<p>是一个可读性高，用来表达数据序列的格式。YAML 的意思其实是：仍是一种标记语言，但为了强调这种语言以数据做为中心，而不是以标记语言为重点。</p>
+</blockquote>
+<p><strong>基本语法</strong></p>
+<ul>
+<li>缩进时不允许使用Tab键，只允许使用空格</li>
+<li>缩进的空格数目不重要，只要相同层级的元素左侧对齐即可</li>
+<li># 标识注释，从这个字符一直到行尾，都会被解释器忽略</li>
+</ul>
+<p><strong>YAML 支持的数据结构</strong></p>
+<ul>
+<li>对象：键值对的集合，又称为映射（mapping）、哈希（hashes）、字典（dictionary）</li>
+<li>数组：一组按次序排列的值，又称为序列（sequence）、列表（list）</li>
+<li>纯量（scalars）：单个的、不可再分的值</li>
+</ul>
+<p><strong>对象类型：对象的一组键值对，使用冒号结构表示</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Steve</span></span><br><span class="line"><span class="attr">age:</span> <span class="number">18</span></span><br></pre></td></tr></table></figure>
+
+<p>Yaml 也允许另一种写法，将所有键值对写成一个行内对象</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hash:</span> &#123; <span class="attr">name:</span> <span class="string">Steve</span>, <span class="attr">age:</span> <span class="number">18</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>数组类型：一组连词线开头的行，构成一个数组</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">animal</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">Cat</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">Dog</span></span><br></pre></td></tr></table></figure>
+
+<p>数组也可以采用行内表示法</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">animal:</span> [<span class="string">Cat</span>, <span class="string">Dog</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>复合结构：对象和数组可以结合使用，形成复合结构</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">languages:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">Ruby</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">Perl</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">Python</span></span><br><span class="line"><span class="attr">websites:</span></span><br><span class="line"><span class="attr">YAML:</span> <span class="string">yaml.org</span></span><br><span class="line"><span class="attr">Ruby:</span> <span class="string">ruby-lang.org</span></span><br><span class="line"><span class="attr">Python:</span> <span class="string">python.org</span></span><br><span class="line"><span class="attr">Perl:</span> <span class="string">use.perl.org</span>  </span><br></pre></td></tr></table></figure>
+
+<p><strong>纯量：纯量是最基本的、不可再分的值。以下数据类型都属于纯量</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="string">字符串布尔值整数浮点数</span> <span class="literal">Null</span></span><br><span class="line"><span class="number">2</span> <span class="string">时间</span> <span class="string">日期</span></span><br><span class="line"></span><br><span class="line"><span class="string">数值直接以字面量的形式表示</span></span><br><span class="line"><span class="attr">number:</span> <span class="number">12.30</span></span><br><span class="line"></span><br><span class="line"><span class="string">布尔值用true和false表示</span></span><br><span class="line"><span class="attr">isSet:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="literal">null</span><span class="string">用</span> <span class="string">~</span> <span class="string">表示</span></span><br><span class="line"><span class="attr">parent:</span> <span class="string">~</span></span><br><span class="line"></span><br><span class="line"><span class="string">时间采用</span> <span class="string">ISO8601</span> <span class="string">格式</span></span><br><span class="line"><span class="attr">iso8601:</span> <span class="number">2001-12-14t21:59:43.10-05:00</span></span><br><span class="line"></span><br><span class="line"><span class="string">日期采用复合</span> <span class="string">iso8601</span> <span class="string">格式的年、月、日表示</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">1976-07-31</span></span><br><span class="line"></span><br><span class="line"><span class="string">YAML允许使用两个感叹号，强制转换数据类型</span></span><br><span class="line"><span class="attr">e:</span> <span class="type">!!str</span> <span class="number">123</span></span><br><span class="line"><span class="attr">f:</span> <span class="type">!!str</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>字符串</strong></p>
+<p>字符串默认不使用引号表示</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">str:</span> <span class="string">这是一行字符串</span></span><br></pre></td></tr></table></figure>
+
+<p>如果字符串之中包含空格或特殊字符，需要放在引号之中</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">str:</span> <span class="string">&#x27;内容：字符串&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>单引号和双引号都可以使用，双引号不会对特殊字符转义</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">s1:</span> <span class="string">&#x27;内容\n字符串&#x27;</span><span class="attr">s2:</span> <span class="string">&quot;内容\n字符串&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>单引号之中如果还有单引号，必须连续使用两个单引号转义</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">str:</span> <span class="string">&#x27;labor&#x27;</span><span class="string">&#x27;s day&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>字符串可以写成多行，从第二行开始，必须有一个单空格缩进。换行符会被转为空格</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">str:</span> <span class="string">这是一段</span>   <span class="string">多行</span>   <span class="string">字符串</span></span><br></pre></td></tr></table></figure>
+
+<p>多行字符串可以使用|保留换行符，也可以使用&gt;折叠换行</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">this:</span> <span class="string">|FooBarthat:</span> <span class="string">&gt;FooBar</span></span><br></pre></td></tr></table></figure>
+
+<p>+ 表示保留文字块末尾的换行，- 表示删除字符串末尾的换行</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">s1:</span> <span class="string">|</span>  <span class="attr">Foos2:</span> <span class="string">|+</span>  <span class="attr">Foos3:</span> <span class="string">|-</span>  <span class="string">Foo</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-k8s剧本的常用字段"><a href="#2-2-k8s剧本的常用字段" class="headerlink" title="2.2 k8s剧本的常用字段"></a>2.2 k8s剧本的常用字段</h3><blockquote>
+<p>必须存在的属性</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th align="center">字段类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>apiVersion</td>
+<td align="center">String</td>
+<td>K8S API 的版本，目前基本是v1，可以用 kubectl api-version 命令查询</td>
+</tr>
+<tr>
+<td>kind</td>
+<td align="center">String</td>
+<td>这里指的是 yaml 文件定义的资源类型和角色, 比如: Pod</td>
+</tr>
+<tr>
+<td>metadata</td>
+<td align="center">Object</td>
+<td>元数据对象，固定值写 metadata</td>
+</tr>
+<tr>
+<td>metadata.name</td>
+<td align="center">String</td>
+<td>元数据对象的名字，这里由我们编写，比如命名Pod的名字</td>
+</tr>
+<tr>
+<td>metadata.namespace</td>
+<td align="center">String</td>
+<td>元数据对象的命名空间，由我们自身定义</td>
+</tr>
+<tr>
+<td>Spec</td>
+<td align="center">Object</td>
+<td>详细定义对象，固定值写Spec</td>
+</tr>
+<tr>
+<td>spec.containers[]</td>
+<td align="center">list</td>
+<td>这里是Spec对象的容器列表定义，是个列表</td>
+</tr>
+<tr>
+<td>spec.containers[].name</td>
+<td align="center">String</td>
+<td>这里定义容器的名字</td>
+</tr>
+<tr>
+<td>spec.containers[].image</td>
+<td align="center">String</td>
+<td>这里定义要用到的镜像名称</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>主要属性【这些属性比较重要，如果不指定的话系统会自动补充默认值】</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>字段类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>spec.containers[].name</td>
+<td>String</td>
+<td>这里定义容器的名字</td>
+</tr>
+<tr>
+<td>spec.containers[].image</td>
+<td>String</td>
+<td>这里定义要用到的镜像名称</td>
+</tr>
+<tr>
+<td>spec.containers[].imagePullPolicy</td>
+<td>String</td>
+<td>定义镜像拉取策略，有Always、Never、IfNotPresent三个值可选（1）Always:意思是每次都尝试重新拉取镜像（2）Never:表示仅使用本地镜像（3）lfNotPresent:如果本地有镜像就使用本地镜像，没有就拉取在线镜像。上面三个值都没设置的话，默认是Always。</td>
+</tr>
+<tr>
+<td>spec.containers[].command[]</td>
+<td>List</td>
+<td>指定容器启动命令，因为是数组可以指定多个，不指定则使用镜像打包时使用的启动命令。</td>
+</tr>
+<tr>
+<td>spec.containers[].args[]</td>
+<td>List</td>
+<td>指定容器启动命令参数，因为是数组可以指定多个。</td>
+</tr>
+<tr>
+<td>spec.containers[].workingDir</td>
+<td>String</td>
+<td>指定容器的工作目录，进入容器时默认所在的目录</td>
+</tr>
+<tr>
+<td>spec.containers[].volumeMounts[]</td>
+<td>List</td>
+<td>指定容器内部的存储卷配置</td>
+</tr>
+<tr>
+<td>spec.containers[].volumeMounts[].name</td>
+<td>String</td>
+<td>指定可以被容器挂载的存储卷的名称</td>
+</tr>
+<tr>
+<td>spec.containers[].volumeMounts[].mountPath</td>
+<td>String</td>
+<td>指定可以被容器挂载的存储卷的路径</td>
+</tr>
+<tr>
+<td>spec.containers[].volumeMounts[].readOnly</td>
+<td>String</td>
+<td>设置存储卷路经的读写模式，true或者false，默认为读写模式</td>
+</tr>
+<tr>
+<td>spec.containers[].ports[]</td>
+<td>List</td>
+<td>指定容器需要用到的端口列表</td>
+</tr>
+<tr>
+<td>spec.containers[].ports[].name</td>
+<td>String</td>
+<td>指定端口名称</td>
+</tr>
+<tr>
+<td>spec.containers[].ports[].containerPort</td>
+<td>String</td>
+<td>指定容器需要监听的端口号</td>
+</tr>
+<tr>
+<td>spec.containers[].ports[].hostPort</td>
+<td>String</td>
+<td>指定容器所在主机需要监听的端口号，默认跟上面containerPort相同，注意设置了hostPort同一台主机无法启动该容器的相同副本（因为主机的端口号不能相同，这样会冲突)</td>
+</tr>
+<tr>
+<td>spec.containers[].ports[].protocol</td>
+<td>String</td>
+<td>指定端口协议，支持TCP和UDP，默认值为 TCP</td>
+</tr>
+<tr>
+<td>spec.containers[].env[]</td>
+<td>List</td>
+<td>指定容器运行前需设置的环境变量列表</td>
+</tr>
+<tr>
+<td>spec.containers[].env[].name</td>
+<td>String</td>
+<td>指定环境变量名称</td>
+</tr>
+<tr>
+<td>spec.containers[].env[].value</td>
+<td>String</td>
+<td>指定环境变量值</td>
+</tr>
+<tr>
+<td>spec.containers[].resources</td>
+<td>Object</td>
+<td>指定资源限制和资源请求的值（这里开始就是设置容器的资源上限）</td>
+</tr>
+<tr>
+<td>spec.containers[].resources.limits</td>
+<td>Object</td>
+<td>指定设置容器运行时资源的运行上限</td>
+</tr>
+<tr>
+<td>spec.containers[].resources.limits.cpu</td>
+<td>String</td>
+<td>指定CPU的限制，单位为core数，将用于docker run –cpu-shares参数这里前面文章 Pod资源限制有讲过）</td>
+</tr>
+<tr>
+<td>spec.containers[].resources.limits.memory</td>
+<td>String</td>
+<td>指定MEM内存的限制，单位为MlB、GiB</td>
+</tr>
+<tr>
+<td>spec.containers[].resources.requests</td>
+<td>Object</td>
+<td>指定容器启动和调度时的限制设置</td>
+</tr>
+<tr>
+<td>spec.containers[].resources.requests.cpu</td>
+<td>String</td>
+<td>CPU请求，单位为core数，容器启动时初始化可用数量</td>
+</tr>
+<tr>
+<td>spec.containers[].resources.requests.memory</td>
+<td>String</td>
+<td>内存请求，单位为MIB、GiB，容器启动的初始化可用数量</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>额外的参数项</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>字段类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>spec.restartPolicy</td>
+<td>String</td>
+<td>定义Pod的重启策略，可选值为Always、OnFailure，默认值为Always。1.Always:Pod一旦终止运行，则无论容器是如何终止的，kubelet服务都将重启它。2.OnFailure:只有Pod以非零退出码终止时，kubelet才会重启该容器。如果容器正常结束（退出码为0），则kubelet将不会重启它。3.Never:Pod终止后，kubelet将退出码报告给Master，不会重启该Pod。</td>
+</tr>
+<tr>
+<td>spec.nodeSelector</td>
+<td>Object</td>
+<td>定义Node的Label过滤标签，以key:value格式指定，选择node节点去运行</td>
+</tr>
+<tr>
+<td>spec.imagePullSecrets</td>
+<td>Object</td>
+<td>定义pull镜像时使用secret名称，以name:secretkey格式指定</td>
+</tr>
+<tr>
+<td>spec.hostNetwork</td>
+<td>Boolean</td>
+<td>定义是否使用主机网络模式，默认值为false。设置true表示使用宿主机网络，不使用docker网桥，同时设置了true将无法在同一台宿主机上启动第二个副本。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>查看资源有那些资源清单属性，使用以下命令</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl explain pod</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>查看属性说明，使用以下命令</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl explain pod.apiVersion</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>资源清单格式</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">group/apiversion</span>     <span class="comment"># 如果没有给定group名称，那么默认为core，可以使用kubectlapi-versions命令获取当前k8s版本上所有的apiversion版本信息（每个版本可能不同）kind:          # 资源类别metadata:      # 资源元数据 name:  namespace:  lables:  annotations:  # 主要目的是方便用户阅读查找spec:          # 期望的状态（disired state)status:        # 当前状态，本字段由Kubernetes自身维护，用户不能去定义</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>资源清单的常用命令</p>
+</blockquote>
+<p>1.获取apiVersion版本信息</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl api-versions</span><br></pre></td></tr></table></figure>
+
+<p>2.获取资源的apiVersion的版本信息(以pod为例)，该命令同时输出属性设置帮助文档</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl explain pod</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>字段配置格式</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">apiVersion</span> <span class="string">&lt;string&gt;</span>            <span class="comment"># 表示字符串类型 metadata &lt;Object&gt;              # 表示需要嵌套多层字段 labels &lt;map[string]string&gt;     # 表示由k：v组成的映射 finalizers &lt;[]string&gt;          # 表示字串列表 ownerReferences &lt;[]Object&gt;     # 表示对象列表 hostPID &lt;boolean&gt;              # 布尔类型 priority &lt;integer&gt;             # 整型 name &lt;string&gt; -required-       # 如果类型后面接-required-，表示为必填字段</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>示例：通过定义清单文件创建Pod</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 当前K8S API 的版本apiVersion: v1# 资源类型kind: Pod# 元数据metadata:  # pod名称  name: k8s-apache-pod  # pod的名称空间  namespace: default  # pod的标签  labels:    app: httpd# 对象的详细信息spec:  # 容器信息  containers:    # 容器名称    - name: web01      # 这个容器使用的镜像      image: hub.lemon.com/library/httpd:v1</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>通过yaml文件创建pod</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f xxx.yaml</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>获取资源的资源配置文件</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 -o 参数 加 yaml，可以将资源的配置以yaml的格式输出出来，也可以使用json，输出为json格式kubectl get pod &#123;podName&#125; -o yaml</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+      </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BC%96%E6%8E%92/" rel="tag"># 编排</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/30/Kubernetes%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" rel="prev" title="Kubernetes集群搭建（二）">
+      <i class="fa fa-chevron-left"></i> Kubernetes集群搭建（二）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/08/30/Pod/" rel="next" title="Pod">
+      Pod <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kubernetes%E8%B5%84%E6%BA%90%E6%B8%85%E5%8D%95"><span class="nav-text">Kubernetes资源清单</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%B5%84%E6%BA%90%E7%B1%BB%E5%9E%8B"><span class="nav-text">1. 资源类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4%E7%BA%A7%E5%88%AB"><span class="nav-text">1.1 名称空间级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E9%9B%86%E7%BE%A4%E7%BA%A7%E8%B5%84%E6%BA%90%E7%BA%A7%E5%88%AB"><span class="nav-text">1.2 集群级资源级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E5%85%83%E6%95%B0%E6%8D%AE%E5%9E%8B%E8%B5%84%E6%BA%90"><span class="nav-text">1.3 元数据型资源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%B5%84%E6%BA%90%E6%B8%85%E5%8D%95"><span class="nav-text">2. 资源清单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-yaml%E8%AF%AD%E6%B3%95%E6%A0%BC%E5%BC%8F"><span class="nav-text">2.1 yaml语法格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-k8s%E5%89%A7%E6%9C%AC%E7%9A%84%E5%B8%B8%E7%94%A8%E5%AD%97%E6%AE%B5"><span class="nav-text">2.2 k8s剧本的常用字段</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Armin"
+      src="/uploads/armin.png">
+  <p class="site-author-name" itemprop="name">Armin</p>
+  <div class="site-description" itemprop="description">记录生活中的点点滴滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/" title="GitHub → https:&#x2F;&#x2F;github.com" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://aws.amazon.com/cn/" title="AWS → https:&#x2F;&#x2F;aws.amazon.com&#x2F;cn&#x2F;" rel="noopener" target="_blank"><i class="fab fa-aws fa-fw"></i>AWS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.processon.com/" title="processon → https:&#x2F;&#x2F;www.processon.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-accusoft fa-fw"></i>processon</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cn-ki.net/" title="知识库 → https:&#x2F;&#x2F;www.cn-ki.net&#x2F;" rel="noopener" target="_blank"><i class="fas fa-book-open fa-fw"></i>知识库</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tophub.today/" title="看新闻 → https:&#x2F;&#x2F;tophub.today&#x2F;" rel="noopener" target="_blank"><i class="far fa-newspaper fa-fw"></i>看新闻</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://m.zxjsq.net/" title="计算器 → http:&#x2F;&#x2F;m.zxjsq.net" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计算器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://shijisuishu.bmcx.com/20010314__shijisuishu/" title="计龄器 → https:&#x2F;&#x2F;shijisuishu.bmcx.com&#x2F;20010314__shijisuishu&#x2F;" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计龄器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tool.oschina.net/hexconvert" title="进制转换 → https:&#x2F;&#x2F;tool.oschina.net&#x2F;hexconvert" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>进制转换</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.sojson.com/convert/subnetmask.html" title="子网计算 → https:&#x2F;&#x2F;www.sojson.com&#x2F;convert&#x2F;subnetmask.html" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>子网计算</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.baidu.com/" title="百度一下 → https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank"><i class="fas fa-search fa-fw"></i>百度一下</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Armin</span>
+</div>
+
+<div class="powered-by">
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
