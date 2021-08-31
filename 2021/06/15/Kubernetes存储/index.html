@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="K8S 存储（八）">
+<meta property="og:url" content="http://example.com/2021/06/15/Kubernetes%E5%AD%98%E5%82%A8/index.html">
+<meta property="og:site_name" content="LEMON">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/008i3skNly1gr7v3b92l4j31720loh4b.jpg">
+<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/008i3skNly1gr7v3j0i4cj31on0u0e81.jpg">
+<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/008i3skNly1gr7v3mu4rwj31ny0u0e81.jpg">
+<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/008i3skNly1gr7v3vm0fdj31cu0p2n3w.jpg">
+<meta property="article:published_time" content="2021-06-14T17:30:00.000Z">
+<meta property="article:modified_time" content="2021-08-31T02:24:53.153Z">
+<meta property="article:author" content="Armin">
+<meta property="article:tag" content="编排">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/008i3skNly1gr7v3b92l4j31720loh4b.jpg">
+
+<link rel="canonical" href="http://example.com/2021/06/15/Kubernetes%E5%AD%98%E5%82%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>K8S 存储（八） | LEMON</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LEMON</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录站</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/15/Kubernetes%E5%AD%98%E5%82%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/armin.png">
+      <meta itemprop="name" content="Armin">
+      <meta itemprop="description" content="记录生活中的点点滴滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LEMON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          K8S 存储（八）
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+        <!--toc-->
+<span id="more"></span>
+
+<h1 id="K8S-存储"><a href="#K8S-存储" class="headerlink" title="K8S 存储"></a>K8S 存储</h1><ul>
+<li>ConfigMap</li>
+<li>Secret</li>
+<li>volume</li>
+<li>Persistent Volume（PV）</li>
+</ul>
+<h2 id="ConfigMap"><a href="#ConfigMap" class="headerlink" title="ConfigMap"></a>ConfigMap</h2><blockquote>
+<p>ConfigMap 功能在 Kubernetes1.2 版本中引入，许多应用程序会从配置文件、命令行参数或环境变量中读取配置信息。ConfigMap API 给我们提供了向容器中注入配置信息的机制，ConfigMap 可以被用来保存单个属性，也可以用来保存整个配置文件或者 JSON 二进制大对象。</p>
+</blockquote>
+<h3 id="ConfigMap-的创建"><a href="#ConfigMap-的创建" class="headerlink" title="ConfigMap 的创建"></a>ConfigMap 的创建</h3><ul>
+<li>目录创建</li>
+<li>文件创建</li>
+<li>字面值创建</li>
+</ul>
+<p><strong>使用目录创建</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">$ ll /etc/kubernetes/configmap-dir/</span><br><span class="line">game.properties</span><br><span class="line">ui.properties</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ cat /etc/kubernetes/configmap-dir/game.properties</span><br><span class="line">enemies=aliens</span><br><span class="line">lives=3</span><br><span class="line">enemies.cheat=<span class="literal">true</span></span><br><span class="line">enemies.cheat.level=noGoodRotten</span><br><span class="line">secret.code.passphrase=UUDDLRLRBABAS</span><br><span class="line">secret.code.allowed=<span class="literal">true</span></span><br><span class="line">secret.code.lives=30</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ cat /etc/kubernetes/configmap-dir/ui.properties</span><br><span class="line">color.good=purple</span><br><span class="line">color.bad=yellow</span><br><span class="line">allow.textmode=<span class="literal">true</span></span><br><span class="line">how.nice.to.look=fairlyNice</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># --from-file 指定在目录下的所有文件都会被用在 ConfigMap 里面创建一个键值对，键的名字就是文件名，值就是文件的内容。</span></span><br><span class="line">$ kubectl create configmap game-config-1 --from-file=/etc/kubernetes/configmap-dir</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ kubectl get configmap -n default -owide</span><br><span class="line">NAME            DATA   AGE</span><br><span class="line">game-config-1   2      &lt;invalid&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ kubectl get configmap -n default -o yaml</span><br><span class="line">apiVersion: v1</span><br><span class="line">items:</span><br><span class="line">- apiVersion: v1</span><br><span class="line">  data:</span><br><span class="line">    game.properties: |</span><br><span class="line">      enemies=aliens</span><br><span class="line">      lives=3</span><br><span class="line">      enemies.cheat=<span class="literal">true</span></span><br><span class="line">      enemies.cheat.level=noGoodRotten</span><br><span class="line">      secret.code.passphrase=UUDDLRLRBABAS</span><br><span class="line">      secret.code.allowed=<span class="literal">true</span></span><br><span class="line">      secret.code.lives=30</span><br><span class="line">    ui.properties: |</span><br><span class="line">      color.good=purple</span><br><span class="line">      color.bad=yellow</span><br><span class="line">      allow.textmode=<span class="literal">true</span></span><br><span class="line">      how.nice.to.look=fairlyNice</span><br><span class="line">  kind: ConfigMap</span><br><span class="line">  metadata:</span><br><span class="line">    creationTimestamp: <span class="string">&quot;2021-03-08T11:54:57Z&quot;</span></span><br><span class="line">    name: game-config-1</span><br><span class="line">    namespace: default</span><br><span class="line">    resourceVersion: <span class="string">&quot;15839&quot;</span></span><br><span class="line">    selfLink: /api/v1/namespaces/default/configmaps/game-config-1</span><br><span class="line">    uid: cb84c4f5-e509-4ecb-8513-68184b8b57af</span><br><span class="line">kind: List</span><br><span class="line">metadata:</span><br><span class="line">  resourceVersion: <span class="string">&quot;&quot;</span></span><br><span class="line">  selfLink: <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ kubectl describe configmap game-config-1 -n default</span><br><span class="line">Name:         game-config-1</span><br><span class="line">Namespace:    default</span><br><span class="line">Labels:       &lt;none&gt;</span><br><span class="line">Annotations:  &lt;none&gt;</span><br><span class="line"></span><br><span class="line">Data</span><br><span class="line">====</span><br><span class="line">ui.properties:</span><br><span class="line">----</span><br><span class="line">color.good=purple</span><br><span class="line">color.bad=yellow</span><br><span class="line">allow.textmode=<span class="literal">true</span></span><br><span class="line">how.nice.to.look=fairlyNice</span><br><span class="line"></span><br><span class="line">game.properties:</span><br><span class="line">----</span><br><span class="line">enemies=aliens</span><br><span class="line">lives=3</span><br><span class="line">enemies.cheat=<span class="literal">true</span></span><br><span class="line">enemies.cheat.level=noGoodRotten</span><br><span class="line">secret.code.passphrase=UUDDLRLRBABAS</span><br><span class="line">secret.code.allowed=<span class="literal">true</span></span><br><span class="line">secret.code.lives=30</span><br><span class="line"></span><br><span class="line">Events:  &lt;none&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用文件创建</strong></p>
+<p>只要指定为一个文件就可以从单个文件中创建 ConfigMap</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl create configmap game-config-2 --from-file=/etc/kubernetes/configmap-dir/game.properties</span><br><span class="line">$ kubectl get configmaps game-config-2 -o yaml</span><br><span class="line"><span class="comment"># --from-file这个参数可以使用多次，你可以使用两次分别指定上个实例中的那两个配置文件，效果就跟指定整个目录是一样的。</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>使用字面值创建</strong></p>
+<p>使用文字值创建，利用–from-literal参数传递配置信息，该参数可以使用多次</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl create configmap game-config-3 --from-literal=k1.how=v1 --from-literal=k2.how=v2</span><br><span class="line">$ kubectl get configmaps game-config-3 -o yaml</span><br><span class="line">apiVersion: v1</span><br><span class="line">data:</span><br><span class="line">  k1.how: v1</span><br><span class="line">  k2.how: v2</span><br><span class="line">kind: ConfigMap</span><br><span class="line">metadata:</span><br><span class="line">  creationTimestamp: <span class="string">&quot;2021-03-08T12:01:19Z&quot;</span></span><br><span class="line">  name: game-config-3</span><br><span class="line">  namespace: default</span><br><span class="line">  resourceVersion: <span class="string">&quot;16388&quot;</span></span><br><span class="line">  selfLink: /api/v1/namespaces/default/configmaps/game-config-3</span><br><span class="line">  uid: b9e048f3-a17d-4517-bfe5-311c51377aaa</span><br></pre></td></tr></table></figure>
+
+<h3 id="Pod-中使用-ConfigMap"><a href="#Pod-中使用-ConfigMap" class="headerlink" title="Pod 中使用 ConfigMap"></a>Pod 中使用 ConfigMap</h3><p><strong>使用 ConfigMap 来替代环境变量</strong></p>
+<ul>
+<li>env: 指定导入k/v</li>
+<li>envFrom: 全部导入</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat cm-test-01.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ConfigMap</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">special-config</span>  </span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">default</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="attr">special.how:</span> <span class="string">very</span></span><br><span class="line">  <span class="attr">special.sam:</span> <span class="string">charm</span></span><br><span class="line">  <span class="attr">special.lep:</span> <span class="string">value</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ConfigMap</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">env-config</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">default</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="attr">log_level:</span> <span class="string">INFO</span></span><br><span class="line">  <span class="attr">log_level:</span> <span class="string">DEBUG</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">cm-test-pod-01</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">test-container</span></span><br><span class="line">      <span class="attr">image:</span> <span class="string">arminto/my_nginx:v1</span></span><br><span class="line">      <span class="attr">command:</span> [ <span class="string">&quot;/bin/sh&quot;</span>, <span class="string">&quot;-c&quot;</span>, <span class="string">&quot;env&quot;</span> ]</span><br><span class="line">      <span class="attr">env:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">SPECIAL_HOW_KEY</span></span><br><span class="line">          <span class="attr">valueFrom:</span></span><br><span class="line">            <span class="attr">configMapKeyRef:</span></span><br><span class="line">              <span class="attr">name:</span> <span class="string">special-config</span></span><br><span class="line">              <span class="attr">key:</span> <span class="string">special.how</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">SPECIAL_SAM_KEY</span></span><br><span class="line">          <span class="attr">valueFrom:</span></span><br><span class="line">            <span class="attr">configMapKeyRef:</span></span><br><span class="line">              <span class="attr">name:</span> <span class="string">special-config</span></span><br><span class="line">              <span class="attr">key:</span> <span class="string">special.sam</span></span><br><span class="line">      <span class="attr">envFrom:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">configMapRef:</span></span><br><span class="line">            <span class="attr">name:</span> <span class="string">env-config</span></span><br><span class="line">  <span class="attr">restartPolicy:</span> <span class="string">Never</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl apply -f cm-test-01.yaml</span><br><span class="line">$ kubectl logs cm-test-pod-01 | grep SPECIAL</span><br><span class="line">SPECIAL_HOW_KEY=very</span><br><span class="line">SPECIAL_SAM_KEY=charm</span><br></pre></td></tr></table></figure>
+
+<p><strong>用 ConfigMap 设置命令行参数</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat cm-test-02.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ConfigMap</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">config-01</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">default</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="attr">a:</span> <span class="string">b</span></span><br><span class="line">  <span class="attr">c:</span> <span class="string">d</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">cm-test-pod-02</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">test-container</span></span><br><span class="line">      <span class="attr">image:</span> <span class="string">arminto/my_nginx:v1</span></span><br><span class="line">      <span class="attr">command:</span> [<span class="string">&quot;/bin/sh&quot;</span>,<span class="string">&quot;-c&quot;</span>,<span class="string">&quot;echo $(KEY-01) $(KEY-02)&quot;</span>]</span><br><span class="line">      <span class="attr">env:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">KEY-01</span></span><br><span class="line">          <span class="attr">valueFrom:</span></span><br><span class="line">            <span class="attr">configMapKeyRef:</span></span><br><span class="line">              <span class="attr">name:</span> <span class="string">config-01</span></span><br><span class="line">              <span class="attr">key:</span> <span class="string">a</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">KEY-02</span></span><br><span class="line">          <span class="attr">valueFrom:</span></span><br><span class="line">            <span class="attr">configMapKeyRef:</span></span><br><span class="line">              <span class="attr">name:</span> <span class="string">config-01</span></span><br><span class="line">              <span class="attr">key:</span> <span class="string">c</span></span><br><span class="line">  <span class="attr">restartPolicy:</span> <span class="string">Never</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl logs cm-test-pod-02</span><br><span class="line">b d</span><br></pre></td></tr></table></figure>
+
+<p><strong>通过数据卷插件使用ConfigMap</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat cm-test-03.yaml </span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ConfigMap</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">config-02</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">default</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="attr">how:</span> <span class="string">HOW</span></span><br><span class="line">  <span class="attr">sam:</span> <span class="string">SAM</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="comment"># 在数据卷里面使用这个 ConfigMap,有不同的选项。最基本的就是将文件填入数据卷,在这个文件中,键就是文件名,键值就是文件内容。</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">test-pod-02</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">test-container</span></span><br><span class="line">      <span class="attr">image:</span> <span class="string">arminto/my_nginx:v1</span></span><br><span class="line">      <span class="attr">command:</span> [<span class="string">&quot;/bin/sh&quot;</span>,<span class="string">&quot;-c&quot;</span>,<span class="string">&quot;sleep 36000&quot;</span>]</span><br><span class="line">      <span class="attr">volumeMounts:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">config-volume</span></span><br><span class="line">          <span class="attr">mountPath:</span> <span class="string">/etc/config</span></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">config-volume</span></span><br><span class="line">      <span class="attr">configMap:</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">config-02</span></span><br><span class="line">  <span class="attr">restartPolicy:</span> <span class="string">Never</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl <span class="built_in">exec</span> -it test-pod-02 -- ls -lh /etc/config</span><br><span class="line">total 0</span><br><span class="line">lrwxrwxrwx    1 root     root          10 Mar  9 08:44 how -&gt; ..data/how</span><br><span class="line">lrwxrwxrwx    1 root     root          10 Mar  9 08:44 sam -&gt; ..data/sam</span><br><span class="line"></span><br><span class="line">$ kubectl <span class="built_in">exec</span> -it test-pod-02 -- cat /etc/config/how</span><br><span class="line">HOW</span><br><span class="line"></span><br><span class="line">$ kubectl <span class="built_in">exec</span> -it test-pod-02 -- cat /etc/config/sam</span><br><span class="line">SAM</span><br></pre></td></tr></table></figure>
+
+<h3 id="ConfigMap-的热更新"><a href="#ConfigMap-的热更新" class="headerlink" title="ConfigMap 的热更新"></a>ConfigMap 的热更新</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ConfigMap</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">log-config</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">default</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="attr">log_level:</span> <span class="string">INFO</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">my-nginx</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">my-nginx</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">my-nginx</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">arminto/my_nginx:v1</span></span><br><span class="line">        <span class="attr">ports:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">80</span></span><br><span class="line">        <span class="attr">volumeMounts:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">config-volume</span></span><br><span class="line">            <span class="attr">mountPath:</span> <span class="string">/etc/config</span></span><br><span class="line">      <span class="attr">volumes:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">config-volume</span></span><br><span class="line">          <span class="attr">configMap:</span></span><br><span class="line">            <span class="attr">name:</span> <span class="string">log-config</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl <span class="built_in">exec</span> -it my-nginx-7b6584d96d-hpbml -- cat /etc/config/log_level</span><br><span class="line">INFO</span><br></pre></td></tr></table></figure>
+
+<p>修改 ConfigMap，将其INFO改为DEBUG</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl edit configmap log-config</span><br><span class="line"><span class="comment"># Please edit the object below. Lines beginning with a &#x27;#&#x27; will be ignored,</span></span><br><span class="line"><span class="comment"># and an empty file will abort the edit. If an error occurs while saving this file will be</span></span><br><span class="line"><span class="comment"># reopened with the relevant failures.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">apiVersion: v1</span><br><span class="line">data:</span><br><span class="line">  log_level: DEBUG</span><br><span class="line">kind: ConfigMap</span><br><span class="line">metadata:</span><br><span class="line">  annotations:</span><br><span class="line">    kubectl.kubernetes.io/last-applied-configuration: |</span><br><span class="line">      &#123;<span class="string">&quot;apiVersion&quot;</span>:<span class="string">&quot;v1&quot;</span>,<span class="string">&quot;data&quot;</span>:&#123;<span class="string">&quot;log_level&quot;</span>:<span class="string">&quot;DEBUG&quot;</span>&#125;,<span class="string">&quot;kind&quot;</span>:<span class="string">&quot;ConfigMap&quot;</span>,<span class="string">&quot;metadata&quot;</span>:&#123;<span class="string">&quot;annotations&quot;</span>:&#123;&#125;,<span class="string">&quot;name&quot;</span>:<span class="string">&quot;log-config&quot;</span>,<span class="string">&quot;namespace&quot;</span>:<span class="string">&quot;default&quot;</span>&#125;&#125;</span><br><span class="line">  creationTimestamp: <span class="string">&quot;2021-03-09T09:04:08Z&quot;</span></span><br><span class="line">  name: log-config</span><br><span class="line">  namespace: default</span><br><span class="line">  resourceVersion: <span class="string">&quot;36210&quot;</span></span><br><span class="line">  selfLink: /api/v1/namespaces/default/configmaps/log-config</span><br><span class="line">  uid: 8e2f15fc-cc05-414b-ad2f-9597cacf7c9a</span><br></pre></td></tr></table></figure>
+
+<p>修改log_level的值为DEBUG等待大概 10 秒钟时间，再次查看环境变量的值</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl <span class="built_in">exec</span> -it my-nginx-7b6584d96d-hpbml -- cat /etc/config/log_level</span><br><span class="line">DEBUG</span><br></pre></td></tr></table></figure>
+
+<h2 id="Secret"><a href="#Secret" class="headerlink" title="Secret"></a>Secret</h2><blockquote>
+<p>Secret 解决了密码、token、密钥等敏感数据的配置问题，而不需要把这些敏感数据暴露到镜像或者 Pod Spec中。</p>
+<p>并且，Secret 可以以 Volume 或者 环境变量的方式使用。</p>
+</blockquote>
+<p>Secret 有三种类型</p>
+<ul>
+<li>Service Account</li>
+<li>Opaque</li>
+<li>kubernetes.io/dockerconfigjson</li>
+</ul>
+<h3 id="Service-Account"><a href="#Service-Account" class="headerlink" title="Service Account"></a>Service Account</h3><blockquote>
+<p>大致了解一下即可，Service Account 用来访问 Kubernetes API，由 Kubernetes 自动创建，并且会自动挂载到 Pod的/run/secrets/kubernetes.io/serviceaccount目录中。</p>
+<p>PS : 只有与 apiserver 组件进行交互的 pod 才会有如下的 证书、命名空间、tekon密钥。</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl <span class="built_in">exec</span> -it kube-proxy-2x7r8 -n kube-system -- ls -lh /run/secrets/kubernetes.io/serviceaccount</span><br><span class="line">total 0</span><br><span class="line">lrwxrwxrwx 1 root root 13 Mar 10 02:50 ca.crt -&gt; ..data/ca.crt</span><br><span class="line">lrwxrwxrwx 1 root root 16 Mar 10 02:50 namespace -&gt; ..data/namespace</span><br><span class="line">lrwxrwxrwx 1 root root 12 Mar 10 02:50 token -&gt; ..data/token</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这几个文件是 default-token 提供的，而 default-token 是 k8s 默认为每一个namespace 创建的，用于Service Account</span></span><br><span class="line">$ kubectl get secret</span><br><span class="line">NAME                  TYPE                                  DATA   AGE</span><br><span class="line">default-token-c6vqw   kubernetes.io/service-account-token   3      46d</span><br><span class="line"></span><br><span class="line">$ kubectl describe secret default-token-c6vqw</span><br><span class="line">…………………………………………………………………………</span><br><span class="line">Data</span><br><span class="line">====</span><br><span class="line">ca.crt:     1025 bytes</span><br><span class="line">namespace:  7 bytes</span><br><span class="line">token:      eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRlZmF1bHQtdG9rZW4tYzZ2cXciLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVmYXVsdCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjJjNjlmMjkzLTcwNTQtNDY4My05ODNmLTljYmQyNTBlZTQ1ZiIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlZmF1bHQifQ.WdQ32P2ndcKUNbyrsKouTgBEVQf8Smq1mSd9zRpBou1KN2DUJ6UPWHvMdDlqwvN2CACOWZcri0eN8NABvNEW6cQMv7O7-GoVsuv5HLDxmO1IC1tTVUr8d-uBxULiSiQZ_Mj2LK1QKYNAHzVYRlEozzI3wZAOWBDqA7ZFVpXRQMES0lzlRc9ETZqQmxIHgF_hyTzpsRaLkR480vppOTORejZGrm_wiSvYVKKvNe3H35TRtHARCZDlGv7DAickld2rnYuKSyLdZz29CmDiE6L0ZyzTCMgPalNkmjcuij28XG19I4GLio7IiS5ZMDrQsmr_4t3G449PPSiH_0C78LICuA</span><br></pre></td></tr></table></figure>
+
+<h3 id="Opaque-Secret"><a href="#Opaque-Secret" class="headerlink" title="Opaque Secret"></a>Opaque Secret</h3><blockquote>
+<p>base64编码格式的Secret，用来存储密码、密钥等。</p>
+<p>Opaque 类型的数据是一个 map 类型，要求 value 是 base64 编码格式。</p>
+</blockquote>
+<p>1、创建 Opaque-Secret</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># base64 -d 选项为解密</span></span><br><span class="line">$ <span class="built_in">echo</span> -n <span class="string">&quot;admin&quot;</span> | base64</span><br><span class="line">YWRtaW4=</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> -n <span class="string">&quot;1f2d1e2e67df&quot;</span> | base64</span><br><span class="line">MWYyZDFlMmU2N2Rm</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat opaque-secret.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Secret</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">op-secret</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">Opaque</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="attr">username:</span> <span class="string">YWRtaW4=</span></span><br><span class="line">  <span class="attr">password:</span> <span class="string">MWYyZDFlMmU2N2Rm</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get secret</span><br><span class="line">NAME                  TYPE                                  DATA   AGE</span><br><span class="line">default-token-c6vqw   kubernetes.io/service-account-token   3      46d</span><br><span class="line">op-secret             Opaque                                2      11s</span><br><span class="line"></span><br><span class="line">$ kubectl describe secret op-secret</span><br><span class="line">…………………………………………………………………………</span><br><span class="line">Data</span><br><span class="line">====</span><br><span class="line">password:  12 bytes</span><br><span class="line">username:  5 bytes</span><br></pre></td></tr></table></figure>
+
+<p>2、使用方式</p>
+<ul>
+<li>将 Secret 挂载到 Volume 中</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat volume-secret.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">seret-test</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">seret-test</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">secrets</span></span><br><span class="line">    <span class="attr">secret:</span></span><br><span class="line">      <span class="attr">secretName:</span> <span class="string">op-secret</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">image:</span> <span class="string">arminto/my_nginx:v1</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">db</span></span><br><span class="line">    <span class="attr">volumeMounts:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">secrets</span></span><br><span class="line">      <span class="attr">mountPath:</span> <span class="string">&#x27;/etc/secrets&#x27;</span></span><br><span class="line">      <span class="attr">readOnly:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl <span class="built_in">exec</span> -it seret-test -- ls -l /etc/secrets</span><br><span class="line">total 0</span><br><span class="line">lrwxrwxrwx    1 root     root            15 Mar 10 03:25 password -&gt; ..data/password</span><br><span class="line">lrwxrwxrwx    1 root     root            15 Mar 10 03:25 username -&gt; ..data/username</span><br><span class="line"></span><br><span class="line"><span class="comment"># 并且 secret 是会自己进行解密的</span></span><br><span class="line">$ kubectl <span class="built_in">exec</span> -it seret-test -- cat /etc/secrets/password</span><br><span class="line">1f2d1e2e67df</span><br><span class="line"></span><br><span class="line">$ kubectl <span class="built_in">exec</span> -it seret-test -- cat /etc/secrets/username</span><br><span class="line">admin</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将 Secret 导出到环境变量中</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat env-secret.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">pod-deployment</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">2</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">pod-deployment</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">pod-1</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">arminto/my_nginx:v1</span></span><br><span class="line">        <span class="attr">ports:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">80</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">TEST_USER</span></span><br><span class="line">          <span class="attr">valueFrom:</span></span><br><span class="line">            <span class="attr">secretKeyRef:</span></span><br><span class="line">              <span class="attr">name:</span> <span class="string">op-secret</span></span><br><span class="line">              <span class="attr">key:</span> <span class="string">username</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">TEST_PASSWORD</span></span><br><span class="line">          <span class="attr">valueFrom:</span></span><br><span class="line">            <span class="attr">secretKeyRef:</span></span><br><span class="line">              <span class="attr">name:</span> <span class="string">op-secret</span></span><br><span class="line">              <span class="attr">key:</span> <span class="string">password</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl <span class="built_in">exec</span> -it pod-deployment-7cfd69dcf7-222q2 -- /bin/sh</span><br><span class="line">/ <span class="comment"># echo $TEST_USER</span></span><br><span class="line">admin</span><br><span class="line">/ <span class="comment"># echo $TEST_PASSWORD</span></span><br><span class="line">1f2d1e2e67df</span><br></pre></td></tr></table></figure>
+
+<h3 id="dockerconfigjson"><a href="#dockerconfigjson" class="headerlink" title="dockerconfigjson"></a>dockerconfigjson</h3><blockquote>
+<p>用来存储私有 docker registry 的认证信息。</p>
+</blockquote>
+<p>1、使用 Kuberctl 创建 docker registry 认证的 secret（注：针对私有仓库）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl create secret docker-registry myregistrykey --docker-server=DOCKER_REGISTRY_SERVER --docker-username=DOCKER_USER --docker-password=DOCKER_PASSWORD</span><br><span class="line"></span><br><span class="line"><span class="comment"># --docker-server      仓库地址</span></span><br><span class="line"><span class="comment"># --docker-username    仓库用户</span></span><br><span class="line"><span class="comment"># --docker-password    仓库密码</span></span><br></pre></td></tr></table></figure>
+
+<p>2、在创建 Pod 的时候，通过 imagePullSecrets 来引用刚创建的 myregistrykey</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat key-secret.yaml </span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">foo</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">foo</span></span><br><span class="line">      <span class="attr">image:</span> <span class="string">hub.lemon.com/library/my_nginx:v1</span></span><br><span class="line">  <span class="attr">imagePullSecrets:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">myregistrykey</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Volume"><a href="#Volume" class="headerlink" title="Volume"></a>Volume</h2><blockquote>
+<p>容器磁盘上的文件的生命周期是短暂的，这就使得在容器中运行重要应用时会出现一些问题。首先，当容器崩溃时，kubelet 会重启它，但是容器中的文件将丢失——容器以干净的状态（镜像最初的状态）重新启动。其次，在Pod中同时运行多个容器时，这些容器之间通常需要共享文件。Kubernetes 中的Volume抽象就很好的解决了这些问题。</p>
+<p>Kubernetes 中的卷有明确的寿命 —— 与封装它的 Pod 相同。所f以，卷的生命比 Pod 中的所有容器都长，当这个容器重启时数据仍然得以保存。当然，当 Pod 不再存在时，卷也将不复存在。也许更重要的是，Kubernetes支持多种类型的卷，Pod 可以同时使用任意数量的卷。</p>
+</blockquote>
+<p><strong>Kubernetes 支持以下类型的卷：</strong></p>
+<ul>
+<li>awsElasticBlockStore、azureDisk、azureFile、cephfs、csi、downwardAPI、emptyDir</li>
+<li>fc、flocker、gcePersistentDisk、gitRepo、glusterfs、hostPath、iscsi、local、nfs</li>
+<li>persistentVolumeClaim、projected、portworxVolume、quobyte、rbd、scaleIO、secret</li>
+<li>storageos、vsphereVolume</li>
+</ul>
+<p><strong>比较常用的两类 emptyDir、hostPath</strong></p>
+<h3 id="emptyDir"><a href="#emptyDir" class="headerlink" title="emptyDir"></a>emptyDir</h3><blockquote>
+<p>当 Pod 被分配给节点时，首先创建emptyDir卷，并且只要该 Pod 在该节点上运行，该卷就会存在。正如卷的名字所述，它最初是空的。Pod 中的容器可以读取和写入emptyDir卷中的相同文件，尽管该卷可以挂载到每个容器中的相同或不同路径上。当出于任何原因从节点中删除 Pod 时，emptyDir中的数据将被永久删除。</p>
+</blockquote>
+<p><strong>emptyDir的用法有：</strong></p>
+<ul>
+<li>暂存空间，例如用于基于磁盘的合并排序</li>
+<li>用作长时间计算崩溃恢复时的检查点</li>
+<li>Web服务器容器提供数据时，保存内容管理器容器提取的文件</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat emptyDir.yaml </span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">test-pd</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">test-container01</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">arminto/my_nginx:v1</span></span><br><span class="line">    <span class="attr">volumeMounts:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/cache01</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">cache-volume</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">test-container02</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">tomcat:latest</span></span><br><span class="line">    <span class="attr">volumeMounts:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/cache02</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">cache-volume</span></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">cache-volume</span></span><br><span class="line">    <span class="attr">emptyDir:</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl <span class="built_in">exec</span> -it test-pd -c test-container01 -- /bin/sh</span><br><span class="line">/ <span class="comment"># cd /cache01</span></span><br><span class="line">/cache01 <span class="comment"># hostname &gt;&gt; test.log</span></span><br><span class="line">/cache01 <span class="comment"># cat test.log </span></span><br><span class="line">test-pd</span><br><span class="line"></span><br><span class="line">$ kubectl <span class="built_in">exec</span> -it test-pd -c test-container02 -- /bin/sh</span><br><span class="line"><span class="comment"># cd /cache02</span></span><br><span class="line"><span class="comment"># ls</span></span><br><span class="line">test.log</span><br><span class="line"><span class="comment"># cat test.log</span></span><br><span class="line">test-pd</span><br></pre></td></tr></table></figure>
+
+<h3 id="hostPath"><a href="#hostPath" class="headerlink" title="hostPath"></a>hostPath</h3><blockquote>
+<p>hostPath卷将主机节点的文件系统中的文件或目录挂载到集群中。</p>
+</blockquote>
+<p><strong>hostPath 的用途如下：</strong></p>
+<ul>
+<li>运行需要访问 Docker 内部的容器；使用 /var/lib/docker 的 hostPath</li>
+<li>在容器中运行 cAdvisor；使用 /dev/cgroups 的 hostPath</li>
+<li>允许 pod 指定给定的 hostPath 是否应该在 pod 运行之前存在，是否应该创建，以及它应该以什么形式存在</li>
+</ul>
+<p><strong>除了所需的path属性之外，用户还可以为hostPath卷指定type</strong></p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>空字符串（默认）用于向后兼容，这意味着在挂载 hostPath 卷之前不会执行任何检查。</td>
+</tr>
+<tr>
+<td>DirectoryOrCreate</td>
+<td>如果在给定的路径上没有任何东西存在，那么将根据需要在那里创建一个空目录，权限设置为 0755，与 Kubelet 具有相同的组和所有权。</td>
+</tr>
+<tr>
+<td>Directory</td>
+<td>给定的路径下必须存在目录。</td>
+</tr>
+<tr>
+<td>FileOrCreate</td>
+<td>如果在给定的路径上没有任何东西存在，那么会根据需要创建一个空文件，权限设置为 0644，与 Kubelet 具有相同的组和所有权。</td>
+</tr>
+<tr>
+<td>File</td>
+<td>给定的路径下必须存在文件。</td>
+</tr>
+<tr>
+<td>Socket</td>
+<td>给定的路径下必须存在 UNIX 套接字。</td>
+</tr>
+<tr>
+<td>CharDevice</td>
+<td>给定的路径下必须存在字符设备。</td>
+</tr>
+<tr>
+<td>BlockDevice</td>
+<td>给定的路径下必须存在块设备。</td>
+</tr>
+</tbody></table>
+<p><strong>使用这种卷类型是请注意，因为：</strong></p>
+<ul>
+<li>由于每个节点上的文件都不同，具有相同配置（例如从 podTemplate 创建的）的 pod 在不同节点上的行为可能会有所不同。</li>
+<li>当 Kubernetes 按照计划添加资源感知调度时，将无法考虑hostPath使用的资源。</li>
+<li>在底层主机上创建的文件或目录只能由 root 写入。您需要在特权容器中以 root 身份运行进程，或修改主机上的文件权限以便写入hostPath卷。</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat hostpath.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">h-pod</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">image:</span> <span class="string">arminto/my_nginx:v1</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">test-container</span></span><br><span class="line">    <span class="attr">volumeMounts:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/hv</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">test-volume</span></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">test-volume</span></span><br><span class="line">    <span class="attr">hostPath:</span></span><br><span class="line">      <span class="comment"># directory location on host</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/data</span></span><br><span class="line">      <span class="comment"># this field is optional</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">Directory</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get pod -owide</span><br><span class="line">NAME    READY   STATUS              RESTARTS   AGE   IP       NODE                 </span><br><span class="line">h-pod   0/1     ContainerCreating   0          7s    &lt;none&gt;   k8s-node-192.168.2.22</span><br><span class="line"></span><br><span class="line">$ hostname</span><br><span class="line">k8s-node-192.168.2.22</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&#x27;hv test&#x27;</span> &gt; /data/h-test.log</span><br><span class="line"></span><br><span class="line">$ kubectl <span class="built_in">exec</span> -it h-pod -- cat /hv/h-test.log</span><br><span class="line">hv <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Persistent-Volume（PV）"><a href="#Persistent-Volume（PV）" class="headerlink" title="Persistent Volume（PV）"></a>Persistent Volume（PV）</h2><blockquote>
+<p>PersistentVolume（简称PV） 是 Volume 之类的卷插件，也是集群中的资源，但独立于Pod的生命周期（即不会因Pod删除而被删除），不归属于某个Namespace。</p>
+<p>PersistentVolumeClaim（简称PVC）是用户存储的请求，PVC消耗PV的资源，可以请求特定的大小和访问模式，需要指定归属于某个Namespace，在同一个Namespace 的 Pod才可以指定对应的PVC。</p>
+</blockquote>
+<p>PV (持久化卷)，是对底层的共享存储的一种抽象，PV 由管理员进行创建和配置, 它和具体的底层的共享存储技术的实现方式有关，比如Ceph、GlusterFS、NFS等，都是通过插件机制完成与共享存储的对接。</p>
+<p>PVC (持久化卷声明)，PVC 是用户存储的一种声明，PVC 和 Pod 比较类型，Pod 是消耗节点，PVC 消耗的是 PV 资源，Pod 可以请求 CPU 的内存，而 PVC 可以请求特定的存储空间和访问模式。对于真正存储的用户不需要关心底层的存储实现细节，只需要直接使用PVC即可。</p>
+<p>但是通过PVC请求一定的存储空间也很有可能不足以满足对于存储设备的各种需求，而且不同的应用程序对于存储性能的要求也能也不尽相同，比如读写速度、并发性能等，为了解决这一问题，Kubernetes又为我们引入了一个新的资源对象: StorageClass,通过StorageClass的定义，管理员可以将存储资源定义为某种类型的资源，比如快速存储、慢速存储等，用户根据StorageClass的描述就可以非常直观的知道各种存储资源特性了，这样就可以根据应用的特性去申请合适的存储资源了。</p>
+<h3 id="PV-和-PVC的生命周期"><a href="#PV-和-PVC的生命周期" class="headerlink" title="PV 和 PVC的生命周期"></a>PV 和 PVC的生命周期</h3><blockquote>
+<p>PV 可以看作可用的存储资源，PVC则是对存储资源的需求，PV 和 PVC的互相关系遵循如下图</p>
+</blockquote>
+<p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/008i3skNly1gr7v3b92l4j31720loh4b.jpg"></p>
+<h3 id="资源供应-Provisioning"><a href="#资源供应-Provisioning" class="headerlink" title="资源供应 (Provisioning)"></a>资源供应 (Provisioning)</h3><blockquote>
+<p>Kubernetes支持两种资源的供应模式：静态模式(Staic)和动态模式(Dynamic)。资源供应的结果就是创建好的PV。</p>
+</blockquote>
+<ul>
+<li>静态模式：集群管理员手工创建许多 PV，在定义 PV 时需要将后端存储的特性进行设置。</li>
+<li>动态模式：集群管理员无须手工创建 PV，而是通过 StorageClass 的设置对后端存储进行描述，标记为某种 “类型(Class)”。此时要求 PVC 对存储的类型进行声明，系统将自动完成 PV 的创建及 PVC 的绑定。<ul>
+<li>PVC 可以声明 Class 为””，说明该 PVC 禁止使用动态模式。</li>
+</ul>
+</li>
+</ul>
+<p>1、静态资源下，通过PV和PVC完成绑定，并供Pod使用的存储管理机制</p>
+<p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/008i3skNly1gr7v3j0i4cj31on0u0e81.jpg"></p>
+<p>2.动态资源下，通过StorageClass和PVC完成资源动态绑定 (系统自动生成PV，并供Pod使用的存储管理机制)</p>
+<p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/008i3skNly1gr7v3mu4rwj31ny0u0e81.jpg"></p>
+<h3 id="资源绑定-Binding"><a href="#资源绑定-Binding" class="headerlink" title="资源绑定 (Binding)"></a>资源绑定 (Binding)</h3><p>在用户定义好PVC后，系统将根据PVC对存储资源的请求 (存储空间和访问模式)在已存在的PV中选择一个满足PVC要求的PV，一旦找到，就将该PV与用户定义的PVC进行绑定，然后用户的应用就可以使用这个PVC了。如果系统中没有满足PVC要求的PV，PVC则会无限期处于Pending状态，直到等到系统管理员创建了一个符合要求的PV。PV一旦绑定在某个PVC上，就被这个PVC独占，不能再与其他PVC进行绑定了。在这种情况下，当PVC申请的存储空间比PV的少时，整个PV的空间都能够为PVC所用，可能会造成资源的浪费。如果资源供应使用的是动态模式，则系统在PVC找到合适的StorageClass后，将会自动创建PV并完成PVC的绑定。</p>
+<h3 id="资源使用-Using"><a href="#资源使用-Using" class="headerlink" title="资源使用 (Using)"></a>资源使用 (Using)</h3><p>Pod 使用volume的定义, 将 PVC 挂载到容器内的某个路径进行使用。volume 的类型为 persistentVoulumeClaim , 在容器应用挂载了一个 PVC 后, 就能被持续独占使用。</p>
+<p>不过, 多个Pod可以挂载同一个PVC, 应用程序需要考虑多个实例共同访问一块存储空间的问题。</p>
+<h3 id="资源释放-Releasing"><a href="#资源释放-Releasing" class="headerlink" title="资源释放 (Releasing)"></a>资源释放 (Releasing)</h3><p>当用户对存储资源使用哪个完毕后，用户可以删除PVC，与该PVC绑定的PV将会被标记为已释放，但还不能立刻与其他PVC进行绑定。通过之前PVC写入的数据可能还留在存储设备上，只有在清除之后该PV才能继续使用。</p>
+<h3 id="资源回收-Reclaiming"><a href="#资源回收-Reclaiming" class="headerlink" title="资源回收 (Reclaiming)"></a>资源回收 (Reclaiming)</h3><p>对于PV，管理员可以设定回收策略(Reclaim Policy)用于设置与之绑定的PVC释放资源之后，对于遗留数据如何处理。只有PV的存储空间完成回收，才能供新的PVC绑定和使用。</p>
+<h3 id="持久化卷声明的保护"><a href="#持久化卷声明的保护" class="headerlink" title="持久化卷声明的保护"></a>持久化卷声明的保护</h3><p>PVC 保护的目的是确保由 pod 正在使用的 PVC 不会从系统中移除，因为如果被移除的话可能会导致数据丢失，当启用 PVC 保护 alpha 功能时，如果用户删除了一个 pod 正在使用的 PVC，则该 PVC 不会被立即删除。PVC 的删除将被推迟，直到 PVC 不再被任何 pod 使用。</p>
+<h3 id="PV-的类型-及-访问模式"><a href="#PV-的类型-及-访问模式" class="headerlink" title="PV 的类型 及 访问模式"></a>PV 的类型 及 访问模式</h3><blockquote>
+<p>PersistentVolume 类型以插件形式实现。以下仅列部分常用类型：</p>
+</blockquote>
+<ul>
+<li>GCEPersistentDisk</li>
+<li>AWSElasticBlockStore</li>
+<li>NFS</li>
+<li>RBD (Ceph Block Device)</li>
+<li>CephFS、Glusterfs</li>
+</ul>
+<blockquote>
+<p>PV 的访问模式 有三种 ReadWriteOnce 、 ReadOnlyMany 、 ReadWriteMany</p>
+</blockquote>
+<p>PersistentVolume 可以以资源提供者支持的任何方式挂载到主机上。如下表所示，供应商具有不同的功能，每个PV 的访问模式都将被设置为该卷支持的特定模式。例如，NFS 可以支持多个读/写客户端，但特定的 NFS PV 可能以只读方式导出到服务器上。每个 PV 都有一套自己的用来描述特定功能的访问模式。</p>
+<ul>
+<li>ReadWriteOnce——该卷可以被单个节点以读/写模式挂载（命令行缩写：RWO）</li>
+<li>ReadOnlyMany——该卷可以被多个节点以只读模式挂载（命令行缩写：ROX）</li>
+<li>ReadWriteMany——该卷可以被多个节点以读/写模式挂载（命令行缩写：RWX）</li>
+</ul>
+<p>一个卷一次只能使用一种访问模式挂载，即使它支持很多访问模式。以下只列举部分常用插件</p>
+<table>
+<thead>
+<tr>
+<th align="left">Volume 插件</th>
+<th align="left">ReadWriteOnce</th>
+<th align="left">ReadOnlyMany</th>
+<th align="left">ReadWriteMany</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">AWSElasticBlockStore</td>
+<td align="left">✓</td>
+<td align="left">-</td>
+<td align="left">-</td>
+</tr>
+<tr>
+<td align="left">CephFS</td>
+<td align="left">✓</td>
+<td align="left">✓</td>
+<td align="left">✓</td>
+</tr>
+<tr>
+<td align="left">GCEPersistentDisk</td>
+<td align="left">✓</td>
+<td align="left">✓</td>
+<td align="left">-</td>
+</tr>
+<tr>
+<td align="left">Glusterfs</td>
+<td align="left">✓</td>
+<td align="left">✓</td>
+<td align="left">✓</td>
+</tr>
+<tr>
+<td align="left">HostPath</td>
+<td align="left">✓</td>
+<td align="left">-</td>
+<td align="left">-</td>
+</tr>
+<tr>
+<td align="left">NFS</td>
+<td align="left">✓</td>
+<td align="left">✓</td>
+<td align="left">✓</td>
+</tr>
+<tr>
+<td align="left">RBD</td>
+<td align="left">✓</td>
+<td align="left">✓</td>
+<td align="left">-</td>
+</tr>
+</tbody></table>
+<h3 id="PV-的回收策略-及-阶段状态"><a href="#PV-的回收策略-及-阶段状态" class="headerlink" title="PV 的回收策略 及 阶段状态"></a>PV 的回收策略 及 阶段状态</h3><blockquote>
+<p>回收策略包括</p>
+</blockquote>
+<ul>
+<li>Retain（保留）——手动回收</li>
+<li>Recycle（回收）——基本擦除（ rm -rf /thevolume/* ）【ps 在新版本中该策略已被弃用】</li>
+<li>Delete（删除）——关联的存储资产（例如 AWS EBS、GCE PD、Azure Disk 和 OpenStack Cinder 卷）将被删除。</li>
+</ul>
+<p>当前，只有 NFS 和 HostPath 支持回收策略。AWS EBS、GCE PD、Azure Disk 和 Cinder 卷支持删除策略。</p>
+<blockquote>
+<p>PV 可以处于以下的某种状态</p>
+</blockquote>
+<ul>
+<li>Available（可用）——一块空闲资源还没有被任何声明绑定</li>
+<li>Bound（已绑定）——卷已经被声明绑定</li>
+<li>Released（已释放）——声明被删除，但是资源还未被集群重新声明</li>
+<li>Failed（失败）——该卷的自动回收失败</li>
+</ul>
+<p>命令行会显示绑定到 PV 的 PVC 的名称。</p>
+<h3 id="PV-的实验演练-NFS"><a href="#PV-的实验演练-NFS" class="headerlink" title="PV 的实验演练 - NFS"></a>PV 的实验演练 - NFS</h3><h4 id="部署-NFS-服务器"><a href="#部署-NFS-服务器" class="headerlink" title="部署 NFS 服务器"></a>部署 NFS 服务器</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 所有的节点都需要安装 nfs-utils 和 rpcbind</span></span><br><span class="line">$ yum install -y nfs-common nfs-utils  rpcbind</span><br><span class="line">$ mkdir -p /nfs01 /nfs02 /nfs03 /nfs04</span><br><span class="line">$ chmod 777 /nfs01 /nfs02 /nfs03 /nfs04</span><br><span class="line">$ chown nfsnobody /nfs01 /nfs02 /nfs03 /nfs04</span><br><span class="line">$ cat /etc/exports</span><br><span class="line">/nfs01 *(rw,no_root_squash,no_all_squash,sync)</span><br><span class="line">/nfs02 *(rw,no_root_squash,no_all_squash,sync)</span><br><span class="line">/nfs03 *(rw,no_root_squash,no_all_squash,sync)</span><br><span class="line">/nfs04 *(rw,no_root_squash,no_all_squash,sync)</span><br><span class="line">$ systemctl start rpcbind nfs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 登陆k8s任意一台节点上测试下nfs</span></span><br><span class="line">$ showmount -e 192.168.245.44</span><br><span class="line">Export list <span class="keyword">for</span> 192.168.245.44:</span><br><span class="line">/nfs01 *</span><br><span class="line">/nfs02 *</span><br><span class="line">/nfs03 *</span><br><span class="line">/nfs04 *</span><br><span class="line">$ mkdir /<span class="built_in">test</span></span><br><span class="line">$ mount -t nfs 192.168.245.44:/nfs01 /<span class="built_in">test</span>/</span><br><span class="line">$ <span class="built_in">cd</span> /<span class="built_in">test</span>/</span><br><span class="line">$ touch tset.txt</span><br><span class="line">$ <span class="built_in">echo</span> lemon &gt; test.txt</span><br><span class="line">$ cat test.txt </span><br><span class="line">lemon</span><br><span class="line">$ umount /<span class="built_in">test</span></span><br><span class="line">$ rm -rf /<span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="部署-PV-卷"><a href="#部署-PV-卷" class="headerlink" title="部署 PV 卷"></a>部署 PV 卷</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat pv.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolume</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nfspv1</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">capacity:</span></span><br><span class="line">    <span class="attr">storage:</span> <span class="string">1Gi</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteOnce</span></span><br><span class="line">  <span class="attr">persistentVolumeReclaimPolicy:</span> <span class="string">Retain</span></span><br><span class="line">  <span class="attr">storageClassName:</span> <span class="string">nfs</span></span><br><span class="line">  <span class="attr">nfs:</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/nfs01</span></span><br><span class="line">    <span class="attr">server:</span> <span class="number">192.168</span><span class="number">.245</span><span class="number">.44</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolume</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nfspv2</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">capacity:</span></span><br><span class="line">    <span class="attr">storage:</span> <span class="string">10Gi</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteOnce</span></span><br><span class="line">  <span class="attr">persistentVolumeReclaimPolicy:</span> <span class="string">Retain</span></span><br><span class="line">  <span class="attr">storageClassName:</span> <span class="string">nfs</span></span><br><span class="line">  <span class="attr">nfs:</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/nfs02</span></span><br><span class="line">    <span class="attr">server:</span> <span class="number">192.168</span><span class="number">.245</span><span class="number">.44</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolume</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nfspv3</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">capacity:</span></span><br><span class="line">    <span class="attr">storage:</span> <span class="string">20Gi</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteOnce</span></span><br><span class="line">  <span class="attr">persistentVolumeReclaimPolicy:</span> <span class="string">Retain</span></span><br><span class="line">  <span class="attr">storageClassName:</span> <span class="string">nfs</span></span><br><span class="line">  <span class="attr">nfs:</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/nfs03</span></span><br><span class="line">    <span class="attr">server:</span> <span class="number">192.168</span><span class="number">.245</span><span class="number">.44</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolume</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nfspv4</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">capacity:</span></span><br><span class="line">    <span class="attr">storage:</span> <span class="string">30Gi</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteMany</span></span><br><span class="line">  <span class="attr">persistentVolumeReclaimPolicy:</span> <span class="string">Retain</span></span><br><span class="line">  <span class="attr">storageClassName:</span> <span class="string">static</span></span><br><span class="line">  <span class="attr">nfs:</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/nfs04</span></span><br><span class="line">    <span class="attr">server:</span> <span class="number">192.168</span><span class="number">.245</span><span class="number">.44</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="创建服务并使用-PVC"><a href="#创建服务并使用-PVC" class="headerlink" title="创建服务并使用 PVC"></a>创建服务并使用 PVC</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat pvc.yaml </span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">nginx</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">port:</span> <span class="number">80</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">web</span></span><br><span class="line">  <span class="attr">clusterIP:</span> <span class="string">None</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">nginx</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">StatefulSet</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">web</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">app:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">serviceName:</span> <span class="string">&quot;nginx&quot;</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">3</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">arminto/my_nginx:v1</span></span><br><span class="line">        <span class="attr">ports:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">80</span></span><br><span class="line">          <span class="attr">name:</span> <span class="string">web</span></span><br><span class="line">        <span class="attr">volumeMounts:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">www</span></span><br><span class="line">          <span class="attr">mountPath:</span> <span class="string">/usr/share/nginx/html</span></span><br><span class="line">  <span class="attr">volumeClaimTemplates:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">www</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">accessModes:</span> [<span class="string">&quot;ReadWriteOnce&quot;</span>]</span><br><span class="line">      <span class="attr">storageClassName:</span> <span class="string">&quot;nfs&quot;</span></span><br><span class="line">      <span class="attr">resources:</span></span><br><span class="line">        <span class="attr">requests:</span></span><br><span class="line">          <span class="attr">storage:</span> <span class="string">1Gi</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/008i3skNly1gr7v3vm0fdj31cu0p2n3w.jpg"></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">&#x27;web-0&#x27;</span> &gt; /nfs01/index.html</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&#x27;web-1&#x27;</span> &gt; /nfs02/index.html</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&#x27;web-2&#x27;</span> &gt; /nfs03/index.html</span><br><span class="line"></span><br><span class="line">$ curl 10.244.2.24</span><br><span class="line">web-0</span><br><span class="line">$ curl 10.244.1.26</span><br><span class="line">web-1</span><br><span class="line">$ curl 10.244.1.27</span><br><span class="line">web-2</span><br></pre></td></tr></table></figure>
+
+<h4 id="关于-StatefulSet-的说明"><a href="#关于-StatefulSet-的说明" class="headerlink" title="关于 StatefulSet 的说明"></a>关于 StatefulSet 的说明</h4><ul>
+<li>匹配 Pod name ( 网络标识 ) 的模式为：$(statefulset名称)-$(序号)，比如上面的示例：web-0，web-1，web-2 。</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get pod </span><br><span class="line">NAME    READY   STATUS    RESTARTS   AGE</span><br><span class="line">h-pod   1/1     Running   0          23h</span><br><span class="line">web-0   1/1     Running   0          48m</span><br><span class="line">web-1   1/1     Running   0          48m</span><br><span class="line">web-2   1/1     Running   0          48m</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>StatefulSet 为每个 Pod 副本创建了一个 DNS 域名，这个域名的格式为： $(podname).(headless servername)，也就意味着服务间是通过Pod域名来通信而非 Pod IP，因为当Pod所在Node发生故障时， Pod 会被飘移到其它 Node 上，Pod IP 会发生变化，但是 Pod 域名不会有变化。</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl <span class="built_in">exec</span> -it h-pod -- /bin/sh</span><br><span class="line"></span><br><span class="line">/ <span class="comment"># ping -c 3 web-0.nginx</span></span><br><span class="line">PING web-0.nginx (10.244.2.24): 56 data bytes</span><br><span class="line">64 bytes from 10.244.2.24: seq=0 ttl=64 time=0.137 ms</span><br><span class="line">64 bytes from 10.244.2.24: seq=1 ttl=64 time=0.056 ms</span><br><span class="line">64 bytes from 10.244.2.24: seq=2 ttl=64 time=0.076 ms</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>StatefulSet 使用 Headless 服务来控制 Pod 的域名，这个域名的 FQDN 为：$(servicename).$(namespace).svc.cluster.local，其中，“cluster.local” 指的是集群的域名。</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get pod -owide -n kube-system | grep coredns</span><br><span class="line">coredns-5c98db65d4-4v4kd                            1/1     Running   13         47d   10.244.1.17</span><br><span class="line">coredns-5c98db65d4-9k5xw                            1/1     Running   7          47d   10.244.0.9</span><br><span class="line"></span><br><span class="line">$ dig -t A nginx.default.svc.cluster.local. @10.244.0.9</span><br><span class="line">;; ANSWER SECTION:</span><br><span class="line">nginx.default.svc.cluster.local. 11 IN  A       10.244.2.24</span><br><span class="line">nginx.default.svc.cluster.local. 11 IN  A       10.244.1.26</span><br><span class="line">nginx.default.svc.cluster.local. 11 IN  A       10.244.1.27</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>根据 volumeClaimTemplates，为每个 Pod 创建一个 pvc，pvc 的命名规则匹配模式：(volumeClaimTemplates.name)-(pod_name)，比如上面的 volumeMounts.name=www， Podname=web-[0-2]，因此创建出来的 PVC 是 www-web-0、www-web-1、www-web-2 。</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get pvc</span><br><span class="line">NAME        STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE</span><br><span class="line">www-web-0   Bound    nfspv1   1Gi        RWO            nfs            173m</span><br><span class="line">www-web-1   Bound    nfspv2   10Gi       RWO            nfs            172m</span><br><span class="line">www-web-2   Bound    nfspv3   20Gi       RWO            nfs            172m</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除 Pod 不会删除其 pvc，手动删除 pvc 将自动释放 pv</li>
+</ul>
+<p><strong>Statefulset的启停顺序</strong></p>
+<ul>
+<li>有序部署：部署StatefulSet时，如果有多个Pod副本，它们会被顺序地创建（从0到N-1）并且，在下一个Pod运行之前所有之前的Pod必须都是Running和Ready状态。</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get pv </span><br><span class="line">NAME     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS</span><br><span class="line">nfspv1   1Gi        RWO            Retain           Available           nfs         </span><br><span class="line">nfspv2   10Gi       RWO            Retain           Available           static      </span><br><span class="line">nfspv3   20Gi       RWO            Retain           Available           slow</span><br><span class="line"></span><br><span class="line">$ kubectl apply -f pvc.yaml</span><br><span class="line">service/nginx created</span><br><span class="line">statefulset.apps/web created</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里可以看到第二个 pod 一直处于 pending 状态，导致第三个 pod 都没有创建出来</span></span><br><span class="line">$ kubectl get pod</span><br><span class="line">NAME    READY   STATUS    RESTARTS   AGE</span><br><span class="line">web-0   1/1     Running   0          19s</span><br><span class="line">web-1   0/1     Pending   0          16s</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>有序删除：当Pod被删除时，它们被终止的顺序是从N-1到0。</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get pod -owide -n default -w</span><br><span class="line">$ kubectl delete statefulset web -n default</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>有序扩展：当对 Pod 执行扩展操作时，与部署一样，它前面的Pod必须都处于Running和Ready状态。</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl scale statefulset/web --replicas=4</span><br></pre></td></tr></table></figure>
+
+<p><strong>StatefulSet使用场景</strong></p>
+<ul>
+<li>稳定的持久化存储，即Pod重新调度后还是能访问到相同的持久化数据，基于 PVC 来实现。</li>
+<li>稳定的网络标识符，即 Pod 重新调度后其 PodName 和 HostName 不变。</li>
+<li>有序部署，有序扩展，基于 init containers 来实现。</li>
+<li>有序收缩。</li>
+</ul>
+<h4 id="PV卷-的资源释放流程"><a href="#PV卷-的资源释放流程" class="headerlink" title="PV卷 的资源释放流程"></a>PV卷 的资源释放流程</h4><blockquote>
+<p>生产环境下要再三确认后才可以进行如下操作</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># statefulset &gt; svc &gt; pvc &gt; 使用 edit 删除 pv 卷上的 pvc 记录</span></span><br><span class="line">$ kubectl delete -f pvc.yaml</span><br><span class="line">$ kubectl delete pvc www-web-0 www-web-1 www-web-2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 虽然已经删除了 pvc，但实际上还并没有释放 pv，因为在pv的记录信息里面还是有使用者信息的，需要手工删除后才会释放</span></span><br><span class="line">$ kubectl get pv</span><br><span class="line">NAME     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM               STORAGECLASS</span><br><span class="line">nfspv1   1Gi        RWO            Retain           Released    default/www-web-0   nfs</span><br><span class="line">nfspv2   10Gi       RWO            Retain           Released    default/www-web-1   nfs</span><br><span class="line">nfspv3   20Gi       RWO            Retain           Released    default/www-web-2   nfs</span><br><span class="line">nfspv4   30Gi       RWX            Retain           Available                       static</span><br><span class="line"></span><br><span class="line"><span class="comment"># 手动删除这一段，pv 就会释放资源了, 其他的 pod 也就可以继续使用这些 pv 卷了</span></span><br><span class="line">$ kubectl get pv nfspv1 -o yaml</span><br><span class="line">  claimRef:</span><br><span class="line">    apiVersion: v1</span><br><span class="line">    kind: PersistentVolumeClaim</span><br><span class="line">    name: www-web-0</span><br><span class="line">    namespace: default</span><br><span class="line">    resourceVersion: <span class="string">&quot;69260&quot;</span></span><br><span class="line">    uid: e175a86b-aa2c-4900-a7c4-faa1865315ab</span><br><span class="line"></span><br><span class="line">$ kubectl get pv</span><br><span class="line">NAME     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS</span><br><span class="line">nfspv1   1Gi        RWO            Retain           Available           nfs         </span><br><span class="line">nfspv2   10Gi       RWO            Retain           Available           nfs         </span><br><span class="line">nfspv3   20Gi       RWO            Retain           Available           nfs         </span><br><span class="line">nfspv4   30Gi       RWX            Retain           Available           static     </span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果这些卷及数据都不想要了的话，直接在对应的nfs机器上删除挂在点上的数据，并在master上删除pv卷 kubectl delete pv xx</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+      </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BC%96%E6%8E%92/" rel="tag"># 编排</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/15/Docker/" rel="prev" title="Docker">
+      <i class="fa fa-chevron-left"></i> Docker
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/15/Keepalived/" rel="next" title="Keepalived">
+      Keepalived <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#K8S-%E5%AD%98%E5%82%A8"><span class="nav-text">K8S 存储</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ConfigMap"><span class="nav-text">ConfigMap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ConfigMap-%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="nav-text">ConfigMap 的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pod-%E4%B8%AD%E4%BD%BF%E7%94%A8-ConfigMap"><span class="nav-text">Pod 中使用 ConfigMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConfigMap-%E7%9A%84%E7%83%AD%E6%9B%B4%E6%96%B0"><span class="nav-text">ConfigMap 的热更新</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Secret"><span class="nav-text">Secret</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Service-Account"><span class="nav-text">Service Account</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Opaque-Secret"><span class="nav-text">Opaque Secret</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dockerconfigjson"><span class="nav-text">dockerconfigjson</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Volume"><span class="nav-text">Volume</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#emptyDir"><span class="nav-text">emptyDir</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hostPath"><span class="nav-text">hostPath</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Persistent-Volume%EF%BC%88PV%EF%BC%89"><span class="nav-text">Persistent Volume（PV）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PV-%E5%92%8C-PVC%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-text">PV 和 PVC的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E4%BE%9B%E5%BA%94-Provisioning"><span class="nav-text">资源供应 (Provisioning)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E7%BB%91%E5%AE%9A-Binding"><span class="nav-text">资源绑定 (Binding)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8-Using"><span class="nav-text">资源使用 (Using)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E9%87%8A%E6%94%BE-Releasing"><span class="nav-text">资源释放 (Releasing)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E5%9B%9E%E6%94%B6-Reclaiming"><span class="nav-text">资源回收 (Reclaiming)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96%E5%8D%B7%E5%A3%B0%E6%98%8E%E7%9A%84%E4%BF%9D%E6%8A%A4"><span class="nav-text">持久化卷声明的保护</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PV-%E7%9A%84%E7%B1%BB%E5%9E%8B-%E5%8F%8A-%E8%AE%BF%E9%97%AE%E6%A8%A1%E5%BC%8F"><span class="nav-text">PV 的类型 及 访问模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PV-%E7%9A%84%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5-%E5%8F%8A-%E9%98%B6%E6%AE%B5%E7%8A%B6%E6%80%81"><span class="nav-text">PV 的回收策略 及 阶段状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PV-%E7%9A%84%E5%AE%9E%E9%AA%8C%E6%BC%94%E7%BB%83-NFS"><span class="nav-text">PV 的实验演练 - NFS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2-NFS-%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">部署 NFS 服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2-PV-%E5%8D%B7"><span class="nav-text">部署 PV 卷</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%B9%B6%E4%BD%BF%E7%94%A8-PVC"><span class="nav-text">创建服务并使用 PVC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E-StatefulSet-%E7%9A%84%E8%AF%B4%E6%98%8E"><span class="nav-text">关于 StatefulSet 的说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PV%E5%8D%B7-%E7%9A%84%E8%B5%84%E6%BA%90%E9%87%8A%E6%94%BE%E6%B5%81%E7%A8%8B"><span class="nav-text">PV卷 的资源释放流程</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Armin"
+      src="/uploads/armin.png">
+  <p class="site-author-name" itemprop="name">Armin</p>
+  <div class="site-description" itemprop="description">记录生活中的点点滴滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/" title="GitHub → https:&#x2F;&#x2F;github.com" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://aws.amazon.com/cn/" title="AWS → https:&#x2F;&#x2F;aws.amazon.com&#x2F;cn&#x2F;" rel="noopener" target="_blank"><i class="fab fa-aws fa-fw"></i>AWS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.processon.com/" title="processon → https:&#x2F;&#x2F;www.processon.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-accusoft fa-fw"></i>processon</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cn-ki.net/" title="知识库 → https:&#x2F;&#x2F;www.cn-ki.net&#x2F;" rel="noopener" target="_blank"><i class="fas fa-book-open fa-fw"></i>知识库</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tophub.today/" title="看新闻 → https:&#x2F;&#x2F;tophub.today&#x2F;" rel="noopener" target="_blank"><i class="far fa-newspaper fa-fw"></i>看新闻</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://m.zxjsq.net/" title="计算器 → http:&#x2F;&#x2F;m.zxjsq.net" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计算器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://shijisuishu.bmcx.com/20010314__shijisuishu/" title="计龄器 → https:&#x2F;&#x2F;shijisuishu.bmcx.com&#x2F;20010314__shijisuishu&#x2F;" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>计龄器</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://tool.oschina.net/hexconvert" title="进制转换 → https:&#x2F;&#x2F;tool.oschina.net&#x2F;hexconvert" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>进制转换</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.sojson.com/convert/subnetmask.html" title="子网计算 → https:&#x2F;&#x2F;www.sojson.com&#x2F;convert&#x2F;subnetmask.html" rel="noopener" target="_blank"><i class="fas fa-calculator fa-fw"></i>子网计算</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.baidu.com/" title="百度一下 → https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank"><i class="fas fa-search fa-fw"></i>百度一下</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Armin</span>
+</div>
+
+<div class="powered-by">
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
