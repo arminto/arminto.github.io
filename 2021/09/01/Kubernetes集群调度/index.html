@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="五、K8S集群调度 Scheduler 是 kubernetes 的调度器，主要任务是把定义的 pod 分配到集群的节点上。有四点需要考虑：   公平：如何保证每个节点都能被分配资源 资源高效利用：集群所有资源最大化被使用 灵活：允许用户根据自己的需求控制调度的逻辑 效率：调度的性能要好，能够尽快地对大批量的 pod 完成调度工作  Sheduler 是作为单独的程序运行的，启动之后会一直监听 A">
+  <meta name="description" content="K8S集群调度 Scheduler 是 kubernetes 的调度器，主要任务是把定义的 pod 分配到集群的节点上。有四点需要考虑：   公平：如何保证每个节点都能被分配资源 资源高效利用：集群所有资源最大化被使用 灵活：允许用户根据自己的需求控制调度的逻辑 效率：调度的性能要好，能够尽快地对大批量的 pod 完成调度工作  Sheduler 是作为单独的程序运行的，启动之后会一直监听 API">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kubernetes集群调度（九）">
 <meta property="og:url" content="http://example.com/2021/09/01/Kubernetes%E9%9B%86%E7%BE%A4%E8%B0%83%E5%BA%A6/index.html">
 <meta property="og:site_name" content="LEMON">
-<meta property="og:description" content="五、K8S集群调度 Scheduler 是 kubernetes 的调度器，主要任务是把定义的 pod 分配到集群的节点上。有四点需要考虑：   公平：如何保证每个节点都能被分配资源 资源高效利用：集群所有资源最大化被使用 灵活：允许用户根据自己的需求控制调度的逻辑 效率：调度的性能要好，能够尽快地对大批量的 pod 完成调度工作  Sheduler 是作为单独的程序运行的，启动之后会一直监听 A">
+<meta property="og:description" content="K8S集群调度 Scheduler 是 kubernetes 的调度器，主要任务是把定义的 pod 分配到集群的节点上。有四点需要考虑：   公平：如何保证每个节点都能被分配资源 资源高效利用：集群所有资源最大化被使用 灵活：允许用户根据自己的需求控制调度的逻辑 效率：调度的性能要好，能够尽快地对大批量的 pod 完成调度工作  Sheduler 是作为单独的程序运行的，启动之后会一直监听 API">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-01T08:09:18.000Z">
-<meta property="article:modified_time" content="2021-09-01T08:11:35.523Z">
+<meta property="article:modified_time" content="2021-09-01T08:15:13.504Z">
 <meta property="article:author" content="Armin">
 <meta property="article:tag" content="编排">
 <meta name="twitter:card" content="summary">
@@ -182,7 +182,7 @@
     
     <div class="post-body" itemprop="articleBody">
       
-        <h1 id="五、K8S集群调度"><a href="#五、K8S集群调度" class="headerlink" title="五、K8S集群调度"></a>五、K8S集群调度</h1><blockquote>
+        <h1 id="K8S集群调度"><a href="#K8S集群调度" class="headerlink" title="K8S集群调度"></a>K8S集群调度</h1><blockquote>
 <p>Scheduler 是 kubernetes 的调度器，主要任务是把定义的 pod 分配到集群的节点上。有四点需要考虑：</p>
 </blockquote>
 <ul>
@@ -365,7 +365,10 @@
     <a href="/2021/08/31/Kubernetes%E5%AD%98%E5%82%A8/" rel="prev" title="K8S 存储（八）">
       <i class="fa fa-chevron-left"></i> K8S 存储（八）
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/09/01/Kubernetes%E9%9B%86%E7%BE%A4%E5%AE%89%E5%85%A8/" rel="next" title="Kubernetes集群安全（十）">
+      Kubernetes集群安全（十） <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -424,7 +427,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81K8S%E9%9B%86%E7%BE%A4%E8%B0%83%E5%BA%A6"><span class="nav-text">五、K8S集群调度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E8%B0%83%E5%BA%A6%E8%AF%B4%E6%98%8E"><span class="nav-text">1、调度说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E5%BA%A6%E8%BF%87%E7%A8%8B"><span class="nav-text">调度过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B0%83%E5%BA%A6%E5%99%A8"><span class="nav-text">自定义调度器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E8%B0%83%E5%BA%A6%E4%BA%B2%E5%92%8C%E6%80%A7"><span class="nav-text">2、调度亲和性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E4%BA%B2%E5%92%8C%E6%80%A7%EF%BC%88nodeAffinity%EF%BC%89"><span class="nav-text">节点亲和性（nodeAffinity）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pod-%E4%BA%B2%E5%92%8C%E6%80%A7%EF%BC%88podAffinity%EF%BC%89"><span class="nav-text">Pod 亲和性（podAffinity）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E8%B0%83%E5%BA%A6%E6%B1%A1%E7%82%B9"><span class="nav-text">3、调度污点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%A1%E7%82%B9-Taint"><span class="nav-text">污点(Taint)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%BF%8D-Tolerations"><span class="nav-text">容忍(Tolerations)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E5%9B%BA%E5%AE%9A%E8%8A%82%E7%82%B9"><span class="nav-text">4、固定节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E8%B0%83%E5%BA%A6%E8%8A%82%E7%82%B9"><span class="nav-text">指定调度节点</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#K8S%E9%9B%86%E7%BE%A4%E8%B0%83%E5%BA%A6"><span class="nav-text">K8S集群调度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E8%B0%83%E5%BA%A6%E8%AF%B4%E6%98%8E"><span class="nav-text">1、调度说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E5%BA%A6%E8%BF%87%E7%A8%8B"><span class="nav-text">调度过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B0%83%E5%BA%A6%E5%99%A8"><span class="nav-text">自定义调度器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E8%B0%83%E5%BA%A6%E4%BA%B2%E5%92%8C%E6%80%A7"><span class="nav-text">2、调度亲和性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E4%BA%B2%E5%92%8C%E6%80%A7%EF%BC%88nodeAffinity%EF%BC%89"><span class="nav-text">节点亲和性（nodeAffinity）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pod-%E4%BA%B2%E5%92%8C%E6%80%A7%EF%BC%88podAffinity%EF%BC%89"><span class="nav-text">Pod 亲和性（podAffinity）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E8%B0%83%E5%BA%A6%E6%B1%A1%E7%82%B9"><span class="nav-text">3、调度污点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%A1%E7%82%B9-Taint"><span class="nav-text">污点(Taint)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%BF%8D-Tolerations"><span class="nav-text">容忍(Tolerations)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E5%9B%BA%E5%AE%9A%E8%8A%82%E7%82%B9"><span class="nav-text">4、固定节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E8%B0%83%E5%BA%A6%E8%8A%82%E7%82%B9"><span class="nav-text">指定调度节点</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -439,7 +442,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
