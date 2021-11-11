@@ -25,26 +25,26 @@
 <meta property="og:url" content="http://example.com/2021/07/21/Vsftpd-%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1/index.html">
 <meta property="og:site_name" content="LEMON">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/gdkJ5l.jpg">
-<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/f1T6VZ.jpg">
-<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/IfE64D.jpg">
-<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/aD0iMx.jpg">
-<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/onHgAV.jpg">
-<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/zMviWE.jpg">
-<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/wJOZyN.jpg">
-<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/mfKtGv.jpg">
-<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/ed9mFt.jpg">
-<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/fZ2VVY.jpg">
-<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/zHYpcX.jpg">
-<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/F8Aw12.jpg">
-<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/YzTc2T.jpg">
-<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/sR7zBW.jpg">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/gdkJ5l.jpg">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/f1T6VZ.jpg">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/IfE64D.jpg">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/aD0iMx.jpg">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/onHgAV.jpg">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/zMviWE.jpg">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/wJOZyN.jpg">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/mfKtGv.jpg">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/ed9mFt.jpg">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/fZ2VVY.jpg">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/zHYpcX.jpg">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/F8Aw12.jpg">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/YzTc2T.jpg">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/sR7zBW.jpg">
 <meta property="article:published_time" content="2021-07-21T10:21:01.000Z">
-<meta property="article:modified_time" content="2021-08-06T01:22:31.369Z">
+<meta property="article:modified_time" content="2021-11-11T11:12:58.994Z">
 <meta property="article:author" content="Armin">
 <meta property="article:tag" content="ftp">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/gdkJ5l.jpg">
+<meta name="twitter:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/gdkJ5l.jpg">
 
 <link rel="canonical" href="http://example.com/2021/07/21/Vsftpd-%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1/">
 
@@ -214,13 +214,13 @@
 <p>首先由客户端向服务端的21端口建立ftp控制连接，当需要传送数据时，服务端从 20 端口主动向客户端发起连接。</p>
 </blockquote>
 <p>在主动模式下, FTP客户端从任意端口5150（端口号&gt;1023）发起一个FTP请求, 并携带自己监听的端口号5151（发送的端口号+1=监听端口号）；随后服务器返回确认, 然后从服务器本地的20端口主动发起连接请求到客户端的监听端口5151, 最后客户端返回确认。</p>
-<p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/gdkJ5l.jpg" alt="gdkJ5l"></p>
+<p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/gdkJ5l.jpg" alt="gdkJ5l"></p>
 <h3 id="2、被动模式"><a href="#2、被动模式" class="headerlink" title="2、被动模式"></a>2、被动模式</h3><blockquote>
 <p>首先由客户端向服务端的21端口建立ftp控制连接，当需要传送数据时，客户端向服务端的非20端口发送请求并建立连接数据</p>
 </blockquote>
 <p>在被动模式中，命令连接和数据连接都由客户端来发起，如上图所示，客户端用随机命令端口5150向服务器的21命令端口发送一个PASV请求，然后服务器返回数据端口3267，告诉客户端我在哪个端口监听数据连接。然后客户端向服务器的监听端口3268发起数据连接，最后服务器回复确认。</p>
 <p><strong>vsftpd默认是被动模式。</strong>所以客户端要设置被动模式连接，如果到现在还没连接成功的看客户端有没有设置被动传输模式。</p>
-<p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/f1T6VZ.jpg" alt="f1T6VZ"></p>
+<p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/f1T6VZ.jpg" alt="f1T6VZ"></p>
 <h2 id="三、FTP-常见的服务端及客户端"><a href="#三、FTP-常见的服务端及客户端" class="headerlink" title="三、FTP 常见的服务端及客户端"></a>三、FTP 常见的服务端及客户端</h2><h3 id="1、常见的服务端程序"><a href="#1、常见的服务端程序" class="headerlink" title="1、常见的服务端程序"></a>1、常见的服务端程序</h3><ul>
 <li>IIS、Serv-U</li>
 <li>wu-ftpd、Proftpd</li>
@@ -241,22 +241,22 @@
 
 <h3 id="2、修改配置文件"><a href="#2、修改配置文件" class="headerlink" title="2、修改配置文件"></a>2、修改配置文件</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">anonymous_enable=YES</span><br><span class="line">anon_upload_enable=YES</span><br><span class="line">anon_other_write_enable=YES</span><br><span class="line">anon_mkdir_write_enable=YES</span><br><span class="line">local_enable=YES</span><br><span class="line">write_enable=YES</span><br><span class="line">local_umask=022</span><br><span class="line">dirmessage_enable=YES</span><br><span class="line">xferlog_enable=YES</span><br><span class="line">connect_from_port_20=YES</span><br><span class="line">xferlog_std_format=YES</span><br><span class="line">listen=YES</span><br><span class="line">pam_service_name=vsftpd</span><br><span class="line">userlist_enable=YES</span><br><span class="line">tcp_wrappers=YES</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/IfE64D.jpg" alt="IfE64D"></p>
+<p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/IfE64D.jpg" alt="IfE64D"></p>
 <h3 id="3、给予数据根目录写权限"><a href="#3、给予数据根目录写权限" class="headerlink" title="3、给予数据根目录写权限"></a>3、给予数据根目录写权限</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /var/ftp</span><br><span class="line">chmod o+w pub</span><br></pre></td></tr></table></figure>
 
 <p>4、启动服务</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start vsftpd</span><br><span class="line">systemctl <span class="built_in">enable</span> vsftpd</span><br></pre></td></tr></table></figure>
 
 <p>5、<a href="ftp://ip可匿名登录访问/">ftp://IP可匿名登录访问</a></p>
-<p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/aD0iMx.jpg" alt="aD0iMx"></p>
-<p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/onHgAV.jpg" alt="onHgAV"></p>
+<p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/aD0iMx.jpg" alt="aD0iMx"></p>
+<p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/onHgAV.jpg" alt="onHgAV"></p>
 <h2 id="六、user-list文件限制用户登录"><a href="#六、user-list文件限制用户登录" class="headerlink" title="六、user_list文件限制用户登录"></a>六、user_list文件限制用户登录</h2><p>1、编辑/etc/vsdtpd/user_list文件，把允许登录服务的用户添加进文件</p>
-<p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/zMviWE.jpg" alt="zMviWE"></p>
+<p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/zMviWE.jpg" alt="zMviWE"></p>
 <p>Ps 此 ftpusers 文件中的所有用户都将禁止登陆，不管 user_list 文件中是否出现。</p>
-<p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/wJOZyN.jpg" alt="wJOZyN"></p>
-<p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/mfKtGv.jpg" alt="mfKtGv"></p>
+<p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/wJOZyN.jpg" alt="wJOZyN"></p>
+<p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/mfKtGv.jpg" alt="mfKtGv"></p>
 <p>2、添加用户赋予密码</p>
-<p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/ed9mFt.jpg" alt="ed9mFt"></p>
+<p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/ed9mFt.jpg" alt="ed9mFt"></p>
 <p>3、编辑配置文件追加以下内容（记得把 <code>anonymous_enable</code> 配置改为 NO）</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim vsftpd.conf</span><br><span class="line">userlist_enable=YES        <span class="comment"># 启用 user_list 用户列表文件</span></span><br><span class="line">userlist_deny=NO           <span class="comment"># 不禁用 user_list 列表中用户登陆</span></span><br></pre></td></tr></table></figure>
 
@@ -264,9 +264,9 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart vsftpd</span><br></pre></td></tr></table></figure>
 
 <p>5、测试 nlemon 用户不可以登陆访问</p>
-<p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/fZ2VVY.jpg" alt="fZ2VVY"></p>
+<p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/fZ2VVY.jpg" alt="fZ2VVY"></p>
 <p>6、验证 ylemon 用户可以登陆访问</p>
-<p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/zHYpcX.jpg" alt="zHYpcX"></p>
+<p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/zHYpcX.jpg" alt="zHYpcX"></p>
 <h2 id="七、虚拟用户登录（常用）"><a href="#七、虚拟用户登录（常用）" class="headerlink" title="七、虚拟用户登录（常用）"></a>七、虚拟用户登录（常用）</h2><blockquote>
 <p>vsftpd提供了三种认证方式，分别是：匿名用户认证、本地用户认证和虚拟用户认证。从安全的角度来说，虚拟用户最安全也是最常用的认证方式，下面开始配置虚拟用户。</p>
 </blockquote>
@@ -294,9 +294,9 @@
 <li>使用Tom虚拟用户登录服务,Tom可以登录、浏览、下载、上传、创建、删除</li>
 <li>Jerry用户只能登录、浏览、下载、但无法上传</li>
 </ul>
-<h2 id="八、Vsftpd的常用配置项"><a href="#八、Vsftpd的常用配置项" class="headerlink" title="八、Vsftpd的常用配置项"></a>八、Vsftpd的常用配置项</h2><h3 id="1、修改-vsftpd-服务的监听地址、端口"><a href="#1、修改-vsftpd-服务的监听地址、端口" class="headerlink" title="1、修改 vsftpd 服务的监听地址、端口"></a>1、修改 vsftpd 服务的监听地址、端口</h3><p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/F8Aw12.jpg" alt="F8Aw12"></p>
-<h3 id="2、允许使用-FTP-服务器的被动模式"><a href="#2、允许使用-FTP-服务器的被动模式" class="headerlink" title="2、允许使用 FTP 服务器的被动模式"></a>2、允许使用 FTP 服务器的被动模式</h3><p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/YzTc2T.jpg" alt="YzTc2T"></p>
-<h3 id="3、限制-FTP-连接的并发数、传输速率"><a href="#3、限制-FTP-连接的并发数、传输速率" class="headerlink" title="3、限制 FTP 连接的并发数、传输速率"></a>3、限制 FTP 连接的并发数、传输速率</h3><p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/sR7zBW.jpg" alt="sR7zBW"></p>
+<h2 id="八、Vsftpd的常用配置项"><a href="#八、Vsftpd的常用配置项" class="headerlink" title="八、Vsftpd的常用配置项"></a>八、Vsftpd的常用配置项</h2><h3 id="1、修改-vsftpd-服务的监听地址、端口"><a href="#1、修改-vsftpd-服务的监听地址、端口" class="headerlink" title="1、修改 vsftpd 服务的监听地址、端口"></a>1、修改 vsftpd 服务的监听地址、端口</h3><p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/F8Aw12.jpg" alt="F8Aw12"></p>
+<h3 id="2、允许使用-FTP-服务器的被动模式"><a href="#2、允许使用-FTP-服务器的被动模式" class="headerlink" title="2、允许使用 FTP 服务器的被动模式"></a>2、允许使用 FTP 服务器的被动模式</h3><p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/YzTc2T.jpg" alt="YzTc2T"></p>
+<h3 id="3、限制-FTP-连接的并发数、传输速率"><a href="#3、限制-FTP-连接的并发数、传输速率" class="headerlink" title="3、限制 FTP 连接的并发数、传输速率"></a>3、限制 FTP 连接的并发数、传输速率</h3><p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/sR7zBW.jpg" alt="sR7zBW"></p>
 
     </div>
 

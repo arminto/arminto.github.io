@@ -25,19 +25,19 @@
 <meta property="og:url" content="http://example.com/2021/07/23/%E8%87%AA%E5%BB%BAES%E9%9B%86%E7%BE%A4CVM-IO%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="LEMON">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/UNjNnK.jpg">
-<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/QQxqjw.jpg">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/UNjNnK.jpg">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/QQxqjw.jpg">
 <meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/itEmVo.jpg">
-<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/pX6yGU.jpg">
-<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/LfVvIO.jpg">
-<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/2LCIhM.jpg">
-<meta property="og:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/G9VaA0.jpg">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/pX6yGU.jpg">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/LfVvIO.jpg">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/2LCIhM.jpg">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/G9VaA0.jpg">
 <meta property="article:published_time" content="2021-07-23T10:18:32.000Z">
-<meta property="article:modified_time" content="2021-08-06T01:28:26.557Z">
+<meta property="article:modified_time" content="2021-11-02T09:48:18.400Z">
 <meta property="article:author" content="Armin">
 <meta property="article:tag" content="企业故障">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/UNjNnK.jpg">
+<meta name="twitter:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/UNjNnK.jpg">
 
 <link rel="canonical" href="http://example.com/2021/07/23/%E8%87%AA%E5%BB%BAES%E9%9B%86%E7%BE%A4CVM-IO%E9%97%AE%E9%A2%98/">
 
@@ -195,14 +195,14 @@
 <p><strong>永辉自建ES集群CVM 出现IO Hang的情况，子机无法登陆，进程也无法kill掉，需要进行节点重启切换来恢复业务。</strong></p>
 </blockquote>
 <p><strong>问题背景：</strong>2021-05-31日客户侧TKE三台子机的io Await很高，使用的都是本地nvme盘子机，这边登陆了一台机器上面检查发现cpu使用率和io的等待时间都很大，检查进程发现有一个java程序占用了大半（ES的程序），起初步定论就是因为这个ES，把磁盘写死了，cpu负载和io等待时间一直下不去，最终导致磁盘hang死。</p>
-<p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/UNjNnK.jpg" alt="UNjNnK"></p>
+<p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/UNjNnK.jpg" alt="UNjNnK"></p>
 <p><strong>问题难点：</strong>客户侧那边已经将其ES容器副本关闭，但事实上该容器依然在node节点上正常运行，并且无法正常删除退出，后续在宿主机上找到对应的容器任务kill -9 杀掉之后，但该进程又自动拉起，且成为了僵尸进程，这边最初给客户的建议是重启node节点，彻底关闭ES的容器进程，在观察该node节点还会不会io hang，但客户还是不同意重启，想要先查清楚原因，到底是客户侧自身pod程序问题，还是我方的母机nvme本地盘问题（形成了我方怀疑客户侧代码程序有问题，客户方怀疑是我方产品或机器硬件问题的形式～～）。</p>
-<p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/QQxqjw.jpg" alt="QQxqjw"></p>
+<p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/QQxqjw.jpg" alt="QQxqjw"></p>
 <p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/itEmVo.jpg" alt="itEmVo"></p>
 <p>后面又检查了磁盘io的情况发现await也并不高，但就是会直接导致系统hang死，继续进一步的调查。</p>
-<p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/pX6yGU.jpg" alt="pX6yGU"></p>
+<p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/pX6yGU.jpg" alt="pX6yGU"></p>
 <p>后面又和腾讯的TKE研发协助进行检查syslog是昨天 2021-05-3 07:48 的时候es落下的数据太大，引起xfs_buf崩掉，导致io hang死，所以这边觉得应该是文件系统的问题，这边是打算推荐让客户用ext4试试的，但后面据了解，客户这个集群有15个节点，配置和这三个节点都是一样的xfs，也都是nvme盘，但实际上却只有这三台节点io出了问题，另外12台机器现在也是正常的，所以客户不认同。而且现在的io 等待时间依然很大，es也停不掉。</p>
-<p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/LfVvIO.jpg" alt="LfVvIO"></p>
+<p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/LfVvIO.jpg" alt="LfVvIO"></p>
 <p>由于业务一直受到影响，这边也不好再跟客户继续扯皮，直接更换排查思路：开启kdump，当节点hang 死之后让其重启生成 vmcore 内核事件进行分析。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.安装相应依赖 sudo apt-get install linux-crashdump</span><br><span class="line">2.这个文件里面将 /etc/default/kdump-tools   将USE_KDUMP=1</span><br><span class="line">3. /etc/init.d/kdump-tools start </span><br><span class="line">4.kdump-config load</span><br><span class="line">5.重启节点生效配置 init 6</span><br><span class="line">6.检查是否生效 kdump-config  show</span><br><span class="line">7.sysctl -w kernel.hung_task_panic=1</span><br><span class="line">8.sysctl -p</span><br></pre></td></tr></table></figure>
 
@@ -220,8 +220,8 @@
 <p><a target="_blank" rel="noopener" href="https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1805693">Bug #1805693 “User reports a hang on 18.04 LTS(4.15.18) under a …” : Bugs : linux package : Ubuntu</a></p>
 <p>社区在 4.15 内核后续也修复了多个 wbt 的缺陷， 可通过 git log block/blk-wbt.c 查看。</p>
 <p>4）与永辉团队确认，之前ucloud上面使用的是4.19版本，而当前容器化部署的使用的是4.15内核版本，其中4.19内核修复了wbt的bug：</p>
-<p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/2LCIhM.jpg" alt="2LCIhM"></p>
-<p><img src="https://bucket-1301203199.cos.ap-shanghai.myqcloud.com/armin/G9VaA0.jpg" alt="G9VaA0"></p>
+<p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/2LCIhM.jpg" alt="2LCIhM"></p>
+<p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/G9VaA0.jpg" alt="G9VaA0"></p>
 <h2 id="3、问题原因"><a href="#3、问题原因" class="headerlink" title="3、问题原因"></a>3、问题原因</h2><p>Linux 内核 bug 导致 IO 无法下发，引起 hung task </p>
 <h2 id="4、规避建议"><a href="#4、规避建议" class="headerlink" title="4、规避建议"></a>4、规避建议</h2><blockquote>
 <p><strong>建议使用之前业务已经大量使用的稳定版本内核，或最新的 ubuntu 内核</strong></p>
