@@ -25,16 +25,15 @@
 <meta property="og:url" content="http://example.com/2021/09/01/Kubernetes%E9%9B%86%E7%BE%A4%E5%AE%89%E5%85%A8/index.html">
 <meta property="og:site_name" content="LEMON">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/008i3skNly1gr7v47gg29j31mc0qeqhz-20211111201622211.jpg">
-<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/008i3skNly1gr7v4bw64tj31720s0jw1-20211111201626460.jpg">
-<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/008i3skNly1gr7v4fnrinj311o0okn8s-20211111201631000.jpg">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/WxXOmJ.png">
+<meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/dOTPIX.jpg">
 <meta property="og:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/008i3skNly1gr7v4kfopij31jw0cgq6z-20211111201635037.jpg">
 <meta property="article:published_time" content="2021-09-01T08:15:36.000Z">
-<meta property="article:modified_time" content="2021-11-11T12:16:38.150Z">
+<meta property="article:modified_time" content="2022-03-07T10:55:15.695Z">
 <meta property="article:author" content="Armin">
 <meta property="article:tag" content="编排">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/008i3skNly1gr7v47gg29j31mc0qeqhz-20211111201622211.jpg">
+<meta name="twitter:image" content="https://gitee.com/arminto/chuangtu/raw/master/uPic/WxXOmJ.png">
 
 <link rel="canonical" href="http://example.com/2021/09/01/Kubernetes%E9%9B%86%E7%BE%A4%E5%AE%89%E5%85%A8/">
 
@@ -191,7 +190,7 @@
 <h1 id="K8S-集群安全"><a href="#K8S-集群安全" class="headerlink" title="K8S 集群安全"></a>K8S 集群安全</h1><blockquote>
 <p>机制说明：Kubernetes 作为一个分布式集群的管理工具，保证集群的安全性是其一个重要的任务。API Server 是集群内部各个组件通信的中介，也是外部控制的入口。所以 Kubernetes 的安全机制基本就是围绕保护 API Server 来设计的。Kubernetes 使用了认证（Authentication）、鉴权（Authorization）、准入控制（AdmissionControl）三步来保证API Server的安全。</p>
 </blockquote>
-<p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/008i3skNly1gr7v47gg29j31mc0qeqhz-20211111201622211.jpg"></p>
+<p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/WxXOmJ.png" alt="WxXOmJ"></p>
 <h2 id="1、集群认证"><a href="#1、集群认证" class="headerlink" title="1、集群认证"></a>1、集群认证</h2><h3 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h3><ul>
 <li>HTTP Token 认证：通过一个 Token 来识别合法用户<ul>
 <li>HTTP Token 的认证是用一个很长的特殊编码方式的并且难以被模仿的字符串 - Token 来表达客户的一种方式。Token 是一个很长的很复杂的字符串，每一个 Token 对应一个用户名存储在 API Server 能访问的文件中。当客户端发起 API 调用请求时，需要在 HTTP Header 里放入 Token。</li>
@@ -203,9 +202,8 @@
 </li>
 <li>最严格的 HTTPS 证书认证：基于 CA 根证书签名的客户端身份认证方式</li>
 </ul>
-<h3 id="HTTPS-证书认证"><a href="#HTTPS-证书认证" class="headerlink" title="HTTPS 证书认证"></a>HTTPS 证书认证</h3><p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/008i3skNly1gr7v4bw64tj31720s0jw1-20211111201626460.jpg"></p>
-<h3 id="需要认证的节点"><a href="#需要认证的节点" class="headerlink" title="需要认证的节点"></a>需要认证的节点</h3><p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/008i3skNly1gr7v4fnrinj311o0okn8s-20211111201631000.jpg"></p>
-<p><strong>两种类型</strong></p>
+<h3 id="HTTPS-证书认证"><a href="#HTTPS-证书认证" class="headerlink" title="HTTPS 证书认证"></a>HTTPS 证书认证</h3><p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/dOTPIX.jpg" alt="dOTPIX"></p>
+<h3 id="需要认证的节点"><a href="#需要认证的节点" class="headerlink" title="需要认证的节点"></a>需要认证的节点</h3><p><strong>两种类型</strong></p>
 <ul>
 <li>两种类型Kubenetes 组件对 API Server 的访问：kubectl、Controller Manager、Scheduler、kubelet、kube-proxy</li>
 <li>Kubernetes 管理的 Pod 对容器的访问：Pod（dashborad 也是以 Pod 形式运行）</li>
@@ -213,14 +211,16 @@
 <p><strong>安全性说明</strong></p>
 <ul>
 <li>Controller Manager、Scheduler 与 API Server 在同一台机器，所以直接使用 API Server 的非安全端口访问，<code>--insecure-bind-address=127.0.0.1</code></li>
-<li>kubectl、kubelet、kube-proxy 访问 API Server 就都需要证书进行 HTTPS 双向认证</li>
+<li>kubectl、kubelet、kube-proxy 组件，在不同的机器节点上，访问 API Server 就都需要证书进行 HTTPS 双向认证</li>
 </ul>
 <p><strong>证书颁发</strong></p>
 <ul>
-<li>手动签发：通过 k8s 集群的跟 ca 进行签发 HTTPS 证书</li>
-<li>自动签发：kubelet 首次访问 API Server 时，使用 token 做认证，通过后，Controller Manager 会为kubelet 生成一个证书，以后的访问都是用证书做认证了</li>
+<li>手动签发：通过 k8s 集群的跟 ca 进行签发 HTTPS 证书（源码安装）</li>
+<li>自动签发：kubelet 首次访问 API Server 时，使用 token 做认证，通过后，Controller Manager 会为kubelet 生成一个证书，以后的访问都是用证书做认证了（kubeadm自动安装）</li>
 </ul>
 <h3 id="kubeconfig"><a href="#kubeconfig" class="headerlink" title="kubeconfig"></a>kubeconfig</h3><p>kubeconfig 文件包含集群参数（CA证书、API Server地址），客户端参数（上面生成的证书和私钥），集群context 信息（集群名称、用户名）。Kubenetes 组件通过启动时指定不同的 kubeconfig 文件可以切换到不同的集群。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">cat .kube/config </span><br><span class="line">apiVersion: v1</span><br><span class="line">clusters:</span><br><span class="line">- cluster:</span><br><span class="line">    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN5RENDQWJDZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1ETXlNREUzTkRBd05Gb1hEVE14TURNeE9ERTNOREF3TkZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTmRoCjZuMTM5a0cwRGxjSjUxanpsMTFLRDV4YjdMTWxvNENNTTZYVFJJMTZaZStTQ3pWei9ydGE2KzUvdmVtVkkwNWIKcVU1dlIzRjlsS3JhcWhxTkU4bytzZHRNMEVqSm04VmdMUU5RcDZWM0pwWkZQeFU5RXM0dk41M2J5Z2t2ZjI1VAo5bTZvNGFuNUU4dXg1ZkRnNXI4RzJiQmpjMDZWR1RmbWVzSmFOZUlFOTdZbU5RVERtWm5DczZtblhpenRiVDBECjVWQS9telRHcFdmRGkyaHdCOVdqZk5yZGx2Q3JpcFYrUDNDOUdnTHRLcS8wdlVnZG5lSWhVWHJ5UHR3cDM0YjMKUXJ3bkZmK05DSW8wUWd5dGRwOXdWOGNRb0d2SDJrdFBuemkwUFp1RUREQ0NEdVB6NWtRZEduZ3MzMVJTa1g1eAo2My9FZU8wd2Z5MXplS1RjVVdFQ0F3RUFBYU1qTUNFd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFEbm11dENJOWlBS2h6YXk0RTFrSUpUemQwbzkKNUNSSzRrSnlxUUk2aDB0bVhXR0RLd0lVbzd5QzFmSnJUZHRaQndiK2F3QVFPdThXd1VsUzlnSWZaNFpUZkduMQpKQUxLMG0vSWt4TC9GWW11bjZSYzd2elJsTGw3aVU1eXByWWFuVHVTcUM5N3JhWlRLckY0OE0zSUlGYzViUHNjClVMa1Q1TVUraFZVeEcyMitLVFlULzQ2YnhjMklQS2J0bWE2S3gxUGFCOGE0ZzIwSDR2N0hqbXMyeGVCeHFXNGMKUWR2UG1zR2hOdUg4cVdiWU1NSWVCZzJJUVdySmZ4dUpmRnFaOW9DUTNOTkdWZm91Mll1eDFQc0xVQWowTnFYLwo2a1gyNzU2SmVLUmQ4Ti9rb3BXRmpKeVZreUpKVFlYWnVPV0VjTFQ1RkQrTXFnUWhiV3JPMHdySEdSVT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=</span><br><span class="line">    server: https://192.168.2.11:6443</span><br><span class="line">  name: kubernetes</span><br><span class="line">contexts:</span><br><span class="line">- context:</span><br><span class="line">    cluster: kubernetes</span><br><span class="line">    user: kubernetes-admin</span><br><span class="line">  name: kubernetes-admin@kubernetes</span><br><span class="line">current-context: kubernetes-admin@kubernetes</span><br><span class="line">kind: Config</span><br><span class="line">preferences: &#123;&#125;</span><br><span class="line">users:</span><br><span class="line">- name: kubernetes-admin</span><br><span class="line">  user:</span><br><span class="line">    client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM4akNDQWRxZ0F3SUJBZ0lJVmw0UjFvbHdJT3N3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TVRBek1qQXhOelF3TURSYUZ3MHlNakF6TWpBeE56UXdNRGRhTURReApGekFWQmdOVkJBb1REbk41YzNSbGJUcHRZWE4wWlhKek1Sa3dGd1lEVlFRREV4QnJkV0psY201bGRHVnpMV0ZrCmJXbHVNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQTFianJ0dUJTaWZOb3dGQk0KRjZaeW5PZDIyei9PR1UzeHgxZnVZNjV3d3JKL0Q2RldVL3VqYU9CcHJjRWljQ2dwdXhoQy9mbXJyaExvMjJrbgpid0t1R0kvc01zNldoYi96Qk9JNUVEbjhNMXhaZk5HcSsyS0xSbmtmNGtMMk45cXUxU0FkY3p1WGV0YVdwR1ZLCjl1cGQrSEhBYmhSWU41Q1kxeDY3ejBxTENNbHZkcU5makU5M1dvQUhTb0RaU2Q2VjViREpDTi9NRXFZWHg4TUcKeDBPcERhdFhGTGFoL21UTzgzY0hWUlJ6NDFyM2RZSWJnTDl0TU5NVlAzQ3lDSmNaNTNSdUZHeWc4OG9QeEtSYgpDNEl0VnkvK0x2SjdMR0JKdmdlajM2eXg5aWp3ejlMODhFK3VvMHZNdHBPdXRSa3ZqZ2pObG5hYTQ1Uzd4MkJtCmE3S2EwUUlEQVFBQm95Y3dKVEFPQmdOVkhROEJBZjhFQkFNQ0JhQXdFd1lEVlIwbEJBd3dDZ1lJS3dZQkJRVUgKQXdJd0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFMSy80S2F0QVBZeVN0S1hFRFo5WlFRRm9MR1dnTFlzOE05OQpvNDB4TnZhajZQalBxanJENWZJSDd0QVVEMmoyOEhEb244VEpoZ29RWlZPVks0dE5PTm85bDFndU5BU3ArTjk1ClE0NzlzZEN4QjQvNkFQckJIekluOThwUmVzSVlUZGJpYjBKWG91YnM0ejFTVEx2blhxOEZyR2t2eFdkLzJsc2EKTUlpYjZZRGpIUzdwUzBXYWdlRVBSQlY5VGZ6clBFVFU2TnFBbFhUcHFwcTVvMnlLMzY4aVd4MUx4d2t1dG5ESwpaWlBoQzdRQnNOc0JUWC9aRzVYOWMvSDJ5eWFIQW9EMnRDT05aUkhBN1lseDh1VXc4MUUvaUFrY0wyd1k4Zm1MCjVZZHBkQ0FkUE5ldjBPdUFyVjJrZUNNUzZBa2FUQ1BEazFkRnN5OCt6bVlmOTdyVGswYz0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=</span><br><span class="line">    client-key-data: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBMWJqcnR1QlNpZk5vd0ZCTUY2WnluT2QyMnovT0dVM3h4MWZ1WTY1d3dySi9ENkZXClUvdWphT0JwcmNFaWNDZ3B1eGhDL2ZtcnJoTG8yMmtuYndLdUdJL3NNczZXaGIvekJPSTVFRG44TTF4WmZOR3EKKzJLTFJua2Y0a0wyTjlxdTFTQWRjenVYZXRhV3BHVks5dXBkK0hIQWJoUllONUNZMXg2N3owcUxDTWx2ZHFOZgpqRTkzV29BSFNvRFpTZDZWNWJESkNOL01FcVlYeDhNR3gwT3BEYXRYRkxhaC9tVE84M2NIVlJSejQxcjNkWUliCmdMOXRNTk1WUDNDeUNKY1o1M1J1Rkd5Zzg4b1B4S1JiQzRJdFZ5LytMdko3TEdCSnZnZWozNnl4OWlqd3o5TDgKOEUrdW8wdk10cE91dFJrdmpnak5sbmFhNDVTN3gyQm1hN0thMFFJREFRQUJBb0lCQVFDMlhFTkVsOFBWMGN2Zgp6S1FneWZXaHpCNnVsWkxXSkp2WTdENk03NXRuaGNiRkgzVDUxQTFxdjVGc29ROHhoQk9YZ093b3FaRER4MzdKCk9NQmRDSHhrbU9tQnNLVGZHeG5SWVBZdjBrcFB5TXpTcEZTd2l6VXJ2TTVuMFpzbHJZTGdkN2FwVEgvRVlMWEoKTUdUMnFxUGtDYXVZUWVQRUJhMWtZT1QveXlzM0lwcXZET1Z1UEJFOXIyQU1SZEJKV0NyRGl3QXVXa0FoV1QrdwpSTDdCNXI3ZXNvR3B0WDlNNTRYQVFCaFBKK1VaY1NuZktYRFc1OUpCMS9XZTBkb2wwR1ppbW5Hd2Q0QmhLVkhVCjRzc2FtSnpDOHZJUk9iRWNvdFRWd01Qa3hJRzQ1ZnllRTRRWjNkYU5oUXIzS3NiK2M5UHJEVXJJcUdyNzlHWTgKMDlkSlN6N0JBb0dCQU8zQndsNGtDNHFzMnRxd0Y0RXFJUzhVeDE5UzdxS1dMQU1PbWREYzlxT1ZsaXRqdUhxQwpkcXRGVDdJTTJjaUljZEJLaWpxb3BGWmhIZ1RXeEE5V2pyV0t4cWJMRDRNUk16MEdkUHkvTWtUVFhPSXExWlBBCmR6SkRwbTRMcW5nVHcwVzdMNkQ4RWNBWmFPWFE1eU1yeGo5Q2pqZGRmYzBWbnZ6NnNhbzhiN2U3QW9HQkFPWWYKRFplN3dyZmxQTHZTYTBPeEdQRXpRYnQ4UDUzNFM2TWxab1h4dnpYdkdvUWVVWXE1TlFmaVIzTVk2UTFhcVk4YQp3L0loQlVycldScTBxOG5yeHRwWm1UL2dFS1I1YjBHQVY4MFBiU3h2aVZPRXdVSzdjSEpFQVNOOXIwZTljZkxZCk5WVGNiWGV0M3ZzaGZhelNZQnpDM2VJNTZORzlhS2tjMTZsZmhSRGpBb0dBVWlVV3RaWDRrdUlqLzFqRjFpK3IKSld3bGNpN2lHalNPWWtRQ0t1S2RLR20vWjZCZGxaNUx4K0w3cFFYQm5RSmZhRnJJcFhtc3hkZHFHcnZsSTNPQgpmUUhFbnM0YnZ1b0xiUE0xS2pvWThTU2h1OWFXMGlTMlNoeUxmUXYweXVYeEdyK1F0aXRCS3NEY3VFSlVDWmZQCk4vNFR5dGMzWnNzb2tqay9keFRJZUk4Q2dZRUF4WXpnK1dKcHJiN3duWGp0Tm9aaEdDZGRoWnNMYmd5S3VqclEKUWFxZjhLZ2NCbEdVeE5kc0RDR1lIdG5Dc0FFbDBNRTBkN2NiT1E3RFJxYlZWeG0rY3hJNStsamJVS2NpK0lNNgpYTUtpZ1dRYTZ3VHJkK003akF5UFFhMlMvSzVJbFNaQTJtSUU0NW55ODNuenpwb25nbWxUVy9ORXlGR20rSTdYCklRTHNVK3NDZ1lBZm85WXpYa0ZyMW00dzNvVVJZOFRCeEU0R2FXRTRCazZlSS83UHU0SjRKQWdKUmdHRGNUS00KUWd6YTBPUWp1RzNPOWFCNzhScVlFYW5wLzN3RGpUV1ZPdnd6MWVsbWhLWEkvaHllY0VQM2gySDVKejRCUXhzQgptTFVnWVhFRVRLdE5EMWk2Zjc2S3hqbUk4ak5yYVEvdnZGai9nWTI0bkFWWU9xZlNsUFk1WFE9PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=</span><br></pre></td></tr></table></figure>
+
 <h3 id="ServiceAccount"><a href="#ServiceAccount" class="headerlink" title="ServiceAccount"></a>ServiceAccount</h3><p>Pod中的容器访问API Server。因为Pod的创建、销毁是动态的，所以要为它手动生成证书就不可行了。Kubenetes使用了Service Account解决Pod 访问API Server的认证问题。</p>
 <h3 id="Secret-与-SA-的关系"><a href="#Secret-与-SA-的关系" class="headerlink" title="Secret 与 SA 的关系"></a>Secret 与 SA 的关系</h3><p>Kubernetes 设计了一种资源对象叫做 Secret，分为两类，一种是用于 ServiceAccount 的 service-account-token，另一种是用于保存用户自定义保密信息的 Opaque。ServiceAccount 中用到包含三个部分：Token、ca.crt、namespace。</p>
 <ul>
@@ -232,7 +232,8 @@
 
 <p>默认情况下，每个 namespace 都会有一个 ServiceAccount，如果 Pod 在创建时没有指定 ServiceAccount，就会使用 Pod 所属的 namespace 的 ServiceAccount。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><img src="https://gitee.com/arminto/chuangtu/raw/master/uPic/008i3skNly1gr7v4kfopij31jw0cgq6z-20211111201635037.jpg"></p>
-<h2 id="2、集群鉴权"><a href="#2、集群鉴权" class="headerlink" title="2、集群鉴权"></a>2、集群鉴权</h2><h2 id="3、准入控制"><a href="#3、准入控制" class="headerlink" title="3、准入控制"></a>3、准入控制</h2><p>准入控制是API Server的插件集合，通过添加不同的插件，实现额外的准入控制规则。甚至于API Server的一些主要的功能都需要通过 Admission Controllers 实现，比如 ServiceAccount。</p>
+<h2 id="2、集群鉴权"><a href="#2、集群鉴权" class="headerlink" title="2、集群鉴权"></a>2、集群鉴权</h2><p>service-account</p>
+<h2 id="3、准入控制"><a href="#3、准入控制" class="headerlink" title="3、准入控制"></a>3、准入控制</h2><p>准入控制是API Server的插件集合，通过添加不同的插件，实现额外的准入控制规则。甚至于API Server的一些主要的功能都需要通过 Admission Controllers 实现，比如 ServiceAccount。</p>
 <p>官方文档上有一份针对不同版本的准入控制器推荐列表，其中最新的 1.14 的推荐列表是：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota</span><br></pre></td></tr></table></figure>
 
